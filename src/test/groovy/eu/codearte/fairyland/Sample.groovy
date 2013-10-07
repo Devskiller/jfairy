@@ -2,15 +2,15 @@ package eu.codearte.fairyland
 
 import static eu.codearte.fairyland.Hook.director
 
-// 1.
+// Case 1
 
 println director().person().firstName()
 // Alice
 println director().person().firstName()
 // Bob
 
-// 2
-println director().person().fistName()
-//Alice
+// Case 2
 println director().person().firstName()
+//Alice
+println director().person().lastName()
 //Alice surname

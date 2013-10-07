@@ -4,6 +4,7 @@ apply plugin: 'maven'
 group 'eu.codearte'
 version '0.1.0-SNAPSHOT'
 
+
 repositories {
   mavenCentral()
 }
