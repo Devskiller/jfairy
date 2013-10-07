@@ -1,5 +1,8 @@
 package eu.codearte.fairyland
 
-import static eu.codearte.fairyland.Hook.director
+import static eu.codearte.fairyland.Hook.create
 
-println director().person().firstName()
+20.times {
+def person = create().person()
+  println person.email() + " " + person.fullName()
+}

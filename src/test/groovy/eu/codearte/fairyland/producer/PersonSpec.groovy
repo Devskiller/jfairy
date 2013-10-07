@@ -4,7 +4,7 @@ import eu.codearte.fairyland.Hook
 import spock.lang.Specification
 
 /**
- * @author jkubrynski@gmail.com
+ * @author Codearte
  * @since 2013-10-07
  */
 class PersonSpec extends Specification {
@@ -17,8 +17,18 @@ class PersonSpec extends Specification {
 
   def "should instantiate Person producer with person()"() {
     when:
-    def person = Hook.director().person()
+    def person = Hook.create().person()
     then:
     person instanceof Person
+  }
+
+  def "should be sure that data exists"() {
+    when:
+    def person = Hook.create().person()
+    then:
+    person.firstName()
+    person.lastName()
+    person.fullName()
+    person.email()
   }
 }

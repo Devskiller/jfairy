@@ -1,16 +1,16 @@
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.DataHolder;
+import eu.codearte.fairyland.DataMaster;
 
 /**
- * @author jkubrynski@gmail.com
+ * @author Codearte
  * @since 2013-10-07
  */
 public abstract class HookProducer {
 
-  protected DataHolder dataHolder;
+  protected DataMaster dataMaster;
 
-  public HookProducer(DataHolder dataHolder) {
-    this.dataHolder = dataHolder;
+  public HookProducer(DataMaster dataMaster) {
+    this.dataMaster = dataMaster;
   }
 }
