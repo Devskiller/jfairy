@@ -1,7 +1,6 @@
-package eu.codearte.fairyland
+package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Hook
-import eu.codearte.fairyland.Person
 import spock.lang.Specification
 
 /**
@@ -11,7 +10,7 @@ import spock.lang.Specification
 class PersonSpec extends Specification {
   def "should instantiate Person producer"() {
     when:
-    def person = Hook.director().produce(Person)
+    def person = Hook.director().produce(Person.class)
     then:
     person instanceof Person
   }
