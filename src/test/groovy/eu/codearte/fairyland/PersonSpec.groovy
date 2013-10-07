@@ -1,4 +1,4 @@
-package eu.codearte.fairyland.producer
+package eu.codearte.fairyland
 
 import eu.codearte.fairyland.Hook
 import eu.codearte.fairyland.Person
