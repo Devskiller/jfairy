@@ -1,3 +1,15 @@
+### Gradle ###
+# Exclude Folder List #
+.gradle/
+build/
+
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
+
+### Java ###
 *.class
 
 # Package Files #
