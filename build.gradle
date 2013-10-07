@@ -10,4 +10,5 @@ repositories {
 
 dependencies {
   compile 'org.yaml:snakeyaml:1.13'
+  testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 }
