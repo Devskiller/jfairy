@@ -5,7 +5,6 @@ import eu.codearte.fairyland.producer.Person;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.Enumeration;
@@ -23,10 +22,10 @@ public class Hook {
 
   private DataHolder dataHolder;
 
-  private Hook(Locale locale) {
+  private Hook(Locale locale, String filePrefix) {
     try {
       Enumeration<URL> resources =
-          getClass().getClassLoader().getResources(DATA_FILE_PREFIX + locale.getLanguage() + ".yml");
+          getClass().getClassLoader().getResources(filePrefix + locale.getLanguage() + ".yml");
       dataHolder = new DataHolder();
       Yaml yaml = new Yaml();
       while (resources.hasMoreElements()) {
@@ -42,7 +41,17 @@ public class Hook {
   }
 
   public static Hook director(Locale locale) {
-    return new Hook(locale);
+    return director(locale, DATA_FILE_PREFIX);
+  }
+
+  /**
+   * Use this factory method to create your own dataset overriding bundled one
+   * @param locale will be used to assess langCode for data file
+   * @param dataFilePrefix prefix of the data file - final pattern will be dataFilePrefix_{langCode}.yml
+   * @return
+   */
+  public static Hook director(Locale locale, String dataFilePrefix) {
+    return new Hook(locale, dataFilePrefix);
   }
 
   public <T extends HookProducer> T produce(Class<T> producer) {
