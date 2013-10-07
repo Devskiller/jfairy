@@ -7,4 +7,5 @@ package eu.codearte.fairyland;
  */
 public class Hook {
 
+
 }
