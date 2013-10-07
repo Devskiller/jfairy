@@ -5,7 +5,10 @@ package eu.codearte.fairyland;
  * @since 2013-10-07
  */
 public class Person extends HookProducer {
-  Person() {
+  Person() { }
 
+  public String firstName() {
+    return "Helena";
   }
+
 }
