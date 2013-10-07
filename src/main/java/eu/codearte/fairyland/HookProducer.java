@@ -1,4 +1,4 @@
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland;
 
 /**
  * @author jkubrynski@gmail.com
@@ -6,4 +6,7 @@ package eu.codearte.fairyland.producer;
  */
 public abstract class HookProducer {
 
+  HookProducer() {
+
+  }
 }

@@ -1,7 +1,5 @@
 package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.producer.HookProducer;
-
 import java.util.Locale;
 
 /**
@@ -29,6 +27,10 @@ public class Hook {
     } catch (InstantiationException | IllegalAccessException e) {
       throw new IllegalArgumentException(e);
     }
+  }
+
+  public Person person() {
+    return new Person();
   }
 
 }
