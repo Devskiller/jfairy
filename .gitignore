@@ -2,6 +2,7 @@
 # Exclude Folder List #
 .gradle/
 build/
+classes/
 
 ### IntelliJ ###
 *.iml
