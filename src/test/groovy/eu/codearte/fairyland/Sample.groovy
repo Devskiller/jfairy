@@ -1,8 +1,18 @@
 package eu.codearte.fairyland
 
+import static eu.codearte.fairyland.Hook.anyPerson
 import static eu.codearte.fairyland.Hook.create
 
-20.times {
-def person = create().person()
-  println person.email() + " " + person.fullName()
+println "\n * With context"
+3.times {
+    def person = create().person()
+
+    println "${person.fullName()} <${person.email()}>"
+
+}
+
+println "\n * Without context"
+3.times {
+    println "${anyPerson().fullName()} <${anyPerson().email()}>"
+
 }

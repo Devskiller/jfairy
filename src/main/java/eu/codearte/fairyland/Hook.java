@@ -1,5 +1,6 @@
 package eu.codearte.fairyland;
 
+import eu.codearte.fairyland.annotations.Alpha;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.HookProducer;
 import eu.codearte.fairyland.producer.Person;
@@ -69,6 +70,11 @@ public class Hook {
 
   public Person person() {
     return new Person(dataMaster);
+  }
+
+  @Alpha
+  public static Person anyPerson() {
+    return create().person();
   }
 
   public Company company() {
