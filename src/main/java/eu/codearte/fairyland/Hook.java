@@ -3,38 +3,45 @@
  */
 package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.annotations.Alpha;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.HookProducer;
 import eu.codearte.fairyland.producer.Person;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Locale;
 
 /**
  * Entry class
  *
+ * @author Codearte
+ * @since 2013-10-07
  */
 public class Hook {
 
   private static final String DATA_FILE_PREFIX = "fairyland_";
 
-  private static ThreadLocal<DataMaster> dataMaster = new ThreadLocal<DataMaster>();
+  private DataMaster dataMaster;
 
-  static DataMaster threadSafely() {
-    if (dataMaster.get() == null) {
-      dataMaster.set(new DataMaster());
-      dataMaster.get().loadData(Locale.ENGLISH, DATA_FILE_PREFIX);
+  private Hook(Locale locale, String filePrefix) {
+    try {
+      Enumeration<URL> resources =
+          getClass().getClassLoader().getResources(filePrefix + locale.getLanguage() + ".yml");
+      dataMaster = new DataMaster();
+      Yaml yaml = new Yaml();
+      while (resources.hasMoreElements()) {
+        dataMaster.appendData(yaml.loadAs(resources.nextElement().openStream(), DataMaster.class));
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
     }
-    return dataMaster.get();
-  }
-
-  private Hook() {
-
   }
 
   public static Hook create() {
-    return new Hook();
+    return create(Locale.ENGLISH);
   }
 
   public static Hook create(Locale locale) {
@@ -49,8 +56,7 @@ public class Hook {
    * @return
    */
   public static Hook create(Locale locale, String dataFilePrefix) {
-    threadSafely().loadData(locale, dataFilePrefix);
-    return new Hook();
+    return new Hook(locale, dataFilePrefix);
   }
 
   public <T extends HookProducer> T produce(Class<T> producer) {
@@ -66,15 +72,10 @@ public class Hook {
   }
 
   public Person person() {
-    return new Person(threadSafely());
-  }
-
-  @Alpha
-  public static Person anyPerson() {
-    return create().person();
+    return new Person(dataMaster);
   }
 
   public Company company() {
-    return new Company(threadSafely());
+    return new Company(dataMaster);
   }
 }
