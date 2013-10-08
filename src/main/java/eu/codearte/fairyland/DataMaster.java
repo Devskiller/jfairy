@@ -1,5 +1,11 @@
 package eu.codearte.fairyland;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -7,6 +13,8 @@ import java.util.*;
  * @since 2013-10-07
  */
 public class DataMaster {
+  private static final Logger LOG = LoggerFactory.getLogger(DataMaster.class);
+  private static final String DATA_FILE_PREFIX = "fairyland_";
 
   public static final String FIRST_NAME = "firstNames";
   public static final String LAST_NAME = "lastNames";
@@ -23,12 +31,28 @@ public class DataMaster {
   DataMaster() {
   }
 
+  public void loadData(Locale locale, String filePrefix) {
+    try {
+      Enumeration<URL> resources =
+          getClass().getClassLoader().getResources(filePrefix + locale.getLanguage() + ".yml");
+      Yaml yaml = new Yaml();
+      while (resources.hasMoreElements()) {
+        appendData(yaml.loadAs(resources.nextElement().openStream(), DataMaster.class));
+      }
+    } catch (IOException e) {
+      throw new IllegalStateException(e);
+    }
+  }
+
   void appendData(DataMaster dataMaster) {
+
+    LOG.debug("appendData {}", this.hashCode());
     data.putAll(dataMaster.data);
   }
 
   /**
    * This method is used by Yaml decoder
+   *
    * @param data
    */
   @SuppressWarnings("unused")

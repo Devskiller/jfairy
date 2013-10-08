@@ -16,3 +16,8 @@ println "\n * Without context"
     println "${anyPerson().fullName()} <${anyPerson().email()}>"
 
 }
+println "\n * Without context in EN"
+3.times {
+    println "${create(Locale.ENGLISH).person().fullName()} <${anyPerson().email()}>"
+
+}
