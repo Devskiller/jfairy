@@ -1,12 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 group 'eu.codearte'
-version '0.1'
-
-repositories {
-    mavenCentral()
-}
+version '0.0.1'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -18,11 +15,11 @@ dependencies {
     testCompile 'ch.qos.logback:logback-classic:1.0.13'
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 }
-task javadocJar (type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
-task sourceJar (type : Jar) {
+task sourceJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
@@ -31,3 +28,31 @@ artifacts {
     archives sourceJar
     archives javadocJar
 }
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourceJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "https://api.bintray.com/maven/codearte/public/fairyland"
+            credentials {
+                username = bintrayUserName
+                password = bintrayApiKey
+            }
+        }
+    }
+}
+
