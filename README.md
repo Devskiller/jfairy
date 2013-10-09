@@ -15,7 +15,7 @@ Installation
 
 Installation into [maven](maven.apache.org) local repository
 
-    ./gradlew install
+    ./gradlew publishToMavenLocal
 
 Usage
 -----
@@ -35,7 +35,7 @@ In maven projects:
                 <groupId>eu.codearte</groupId>
                 <artifactId>fairyland</artifactId>
                 <version>0.0.1</version>
-            <dependency>
+            </dependency>
         </dependencies>
         ...
     </pom>

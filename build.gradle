@@ -35,15 +35,33 @@ repositories {
     mavenCentral()
 }
 
+def pomConfig = {
+    url 'https://github.com/Codearte/fairyland'
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+}
+
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        mavenCustom(MavenPublication) {
             from components.java
+
             artifact sourceJar {
                 classifier "sources"
             }
             artifact javadocJar {
                 classifier "javadoc"
+            }
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', description)
+                root.children().last() + pomConfig
             }
         }
     }
