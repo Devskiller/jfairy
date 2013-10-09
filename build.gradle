@@ -8,10 +8,26 @@ repositories {
     mavenCentral()
 }
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 dependencies {
     compile 'org.yaml:snakeyaml:1.13'
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'org.slf4j:slf4j-api:1.7.5'
     testCompile 'ch.qos.logback:logback-classic:1.0.13'
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+}
+task javadocJar (type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+task sourceJar (type : Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javadocJar
 }
