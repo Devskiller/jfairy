@@ -4,4 +4,5 @@ jdk:
  - oraclejdk7
  - openjdk7
 
-script: ./gradle check
+install: ./gradlew assemble
+script: ./gradlew check
