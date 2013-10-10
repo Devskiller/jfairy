@@ -10,12 +10,12 @@ import spock.lang.Specification
 class PersonSpec extends Specification {
   def "should instantiate Person producer"() {
     when:
-    def person = Hook.director().produce(Person.class)
+    def person = Hook.create().produce(Person.class)
     then:
     person instanceof Person
   }
 
-  def "should instantiate Person producer with person()"() {
+  def "should instantiate Person producer with person"() {
     when:
     def person = Hook.create().person()
     then:
