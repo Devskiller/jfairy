@@ -35,6 +35,19 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": "Fairyland",
+                "Implementation-Version": version,
+                "Implementation-Vendor": 'Codearte',
+                'Built-Date': new Date(),
+                'Built-JDK': System.properties['java.version'],
+                'Built-Gradle': gradle.gradleVersion,
+                "Built-By": System.properties['user.name'])
+    }
+}
+
 def pomConfig = {
     url 'https://github.com/Codearte/fairyland'
     licenses {
