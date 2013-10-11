@@ -10,3 +10,7 @@ println "\n * With context"
     println "${person.fullName()} <${person.email()}>"
 
 }
+
+// Print words
+println create().text().words(3)
+println create().text().sentence(5)

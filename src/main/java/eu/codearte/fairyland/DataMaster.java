@@ -1,6 +1,14 @@
 package eu.codearte.fairyland;
 
-import java.util.*;
+import com.google.common.base.Joiner;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import static com.google.common.base.Joiner.on;
+import static java.util.Collections.shuffle;
 
 /**
  * @author Codearte
@@ -29,6 +37,7 @@ public class DataMaster {
 
   /**
    * This method is used by Yaml decoder
+   *
    * @param data
    */
   @SuppressWarnings("unused")
@@ -36,12 +45,26 @@ public class DataMaster {
     this.data = data;
   }
 
+  public String getAsOne(String key) {
+    return on(" ").join(data.get(key));
+  }
+
   public String getData(String key) {
     List<String> elements = data.get(key);
     if (elements != null) {
-      return elements.get(random.nextInt(elements.size()));
+      return randomElement(elements);
     }
     throw new IllegalArgumentException("No such key: " + key);
+  }
+
+  //FIXME: Move to other class
+  public String randomElement(List<String> elements) {
+    return elements.get(random.nextInt(elements.size()));
+  }
+
+  public List<String> randomElements(List<String> elements, int count) {
+    shuffle(elements);
+    return elements.subList(0, count);
   }
 
   public boolean getBoolean() {

@@ -6,6 +6,7 @@ package eu.codearte.fairyland;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.HookProducer;
 import eu.codearte.fairyland.producer.Person;
+import eu.codearte.fairyland.producer.Text;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -69,6 +70,10 @@ public class Hook {
     } catch (ReflectiveOperationException e) {
       throw new IllegalArgumentException(e);
     }
+  }
+
+  public Text text() {
+    return new Text(dataMaster);
   }
 
   public Person person() {

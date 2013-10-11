@@ -31,4 +31,12 @@ class PersonSpec extends Specification {
     person.fullName()
     person.email()
   }
+
+    def "should be sure that fullName is proper"() {
+        when:
+        def person = Hook.create().person()
+        then:
+        person.email()
+        "${person.firstName()} ${person.lastName()}" == person.fullName()
+    }
 }
