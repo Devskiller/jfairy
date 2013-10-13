@@ -10,9 +10,8 @@ println text.words(190)
 println "* Sentences"
 println text.sentence()
 println text.sentence(3)
-println text.sentence(5)
-println text.sentence(9)
-println text.sentence(15)
-println text.sentence(19)
 println text.sentence(190)
+println "* Paragraph *"
+println text.paragraph()
+println text.paragraph(190)
 

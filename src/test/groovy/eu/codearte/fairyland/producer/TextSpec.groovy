@@ -28,6 +28,8 @@ class TextSpec extends Specification {
         text.words(100)
         text.sentence()
         text.sentence(100)
+        text.paragraph()
+        text.paragraph(100)
     }
 
 }

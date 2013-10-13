@@ -76,10 +76,28 @@ public class Text extends HookProducer {
     for (String sentence : Splitter.on(". ").split(randomWords)) {
       sentences.add(capitalize(sentence));
     }
-    String sentence = capitalize(Joiner.on(". ").join(sentences) + ".");
-    if (!(endsWith(sentence, ".") || endsWith(sentence, ","))) {
+    String sentence = capitalize(Joiner.on(". ").join(sentences));
+    sentence = removeEnd(sentence, ",");
+    if (!endsWith(sentence, ".")) {
       sentence += ".";
     }
     return sentence;
   }
+
+  public List<String> sentences(int sentenceCount) {
+    List<String> sentences = new ArrayList<String>(sentenceCount);
+    for (int i = 0; i < sentenceCount; i++) {
+      sentences.add(sentence());
+    }
+    return sentences;
+  }
+
+  public String paragraph(int sentenceCount) {
+    return on(" ").join(sentences(sentenceCount + random.nextInt(3)));
+  }
+
+  public String paragraph() {
+    return paragraph(3);
+  }
+
 }
