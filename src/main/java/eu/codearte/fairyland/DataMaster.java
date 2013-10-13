@@ -1,7 +1,5 @@
 package eu.codearte.fairyland;
 
-import com.google.common.base.Joiner;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +44,7 @@ public class DataMaster {
   }
 
   public String getAsOne(String key) {
-    return on(" ").join(data.get(key));
+    return on(", ").join(data.get(key));
   }
 
   public String getData(String key) {
@@ -64,7 +62,7 @@ public class DataMaster {
 
   public List<String> randomElements(List<String> elements, int count) {
     shuffle(elements);
-    return elements.subList(0, count);
+    return elements.subList(0, count % elements.size());
   }
 
   public boolean getBoolean() {

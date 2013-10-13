@@ -24,9 +24,10 @@ class TextSpec extends Specification {
         then:
         text.loremIpsum
         text.loremIpsum(10).length() == 10
-        text.word()
-        text.words(3)
-        text.sentence(3)
+        text.words()
+        text.words(100)
+        text.sentence()
+        text.sentence(100)
     }
 
 }
