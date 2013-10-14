@@ -6,9 +6,9 @@ import spock.lang.Specification
 class TextSpec extends Specification {
     def "should instantiate Text producer"() {
         when:
-        def text = Hook.create().produce(Text.class)
+        def text = Hook.create().produce(TextProducer.class)
         then:
-        text instanceof Text
+        text instanceof TextProducer
     }
 
     def "should instantiate Text producer with person"() {
@@ -23,8 +23,8 @@ class TextSpec extends Specification {
         def text = Hook.create().text()
         then:
         text.loremIpsum()
-        text.words()
-        text.words(100)
+        text.word()
+        text.word(100)
         text.sentence()
         text.sentence(100)
         text.paragraph()
@@ -36,7 +36,7 @@ class TextSpec extends Specification {
         def text = Hook.create().text().limit(10)
         then:
         text.loremIpsum().length() == 10
-        text.words(100).length() == 10
+        text.word(100).length() == 10
         text.sentence(100).length() == 10
         text.paragraph(100).length() == 10
     }

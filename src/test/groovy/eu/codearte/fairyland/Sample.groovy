@@ -11,6 +11,6 @@ println "\n * With context"
 
 }
 
-// Print words
-println create().text().words(3)
+// Print word
+println create().text().word(3)
 println create().text().sentence(5)

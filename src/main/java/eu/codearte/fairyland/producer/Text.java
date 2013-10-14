@@ -11,24 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.google.common.base.Joiner.on;
-import static java.util.Arrays.asList;
+import static eu.codearte.fairyland.producer.TextUtils.joinWithSpace;
 import static org.apache.commons.lang3.StringUtils.*;
 
-public class Text extends HookProducer {
+public class Text {
 
-  private static final String DATA = "text";
   private static Random random = new Random();
 
-  private final String loremIpsum;
-  private final List<String> words;
+  private final TextProducer textProducer;
 
   private int limit = 0;
 
   public Text(DataMaster dataMaster) {
-    super(dataMaster);
-    loremIpsum = dataMaster.getAsOne(DATA);
-    words = asList(split(loremIpsum, ' '));
+    this.textProducer = new TextProducer(dataMaster);
   }
 
   public Text limit(int limit) {
@@ -44,32 +39,15 @@ public class Text extends HookProducer {
   }
 
   public String loremIpsum() {
-    return result(loremIpsum);
+    return result(textProducer.getLoremIpsum());
   }
 
-  public String words() {
-    return result(words(3));
+  public String word() {
+    return result(word(3));
   }
 
-  public String words(int count) {
-    return result(cleanWords(count));
-  }
-
-  private List<String> readRawWords(int count) {
-    return dataMaster.randomElements(words, count);
-  }
-
-  private String rawWords(int count) {
-    List<String> result = readRawWords(count);
-    return on(" ").join(result);
-  }
-
-  private String cleanWords(int count) {
-    List<String> result = new ArrayList<>();
-    for (String part : readRawWords(count)) {
-      result.add(uncapitalize(replaceChars(part, "., ", "")));
-    }
-    return on(" ").join(result);
+  public String word(int count) {
+    return result(textProducer.cleanWords(count));
   }
 
   public String sentence() {
@@ -77,7 +55,7 @@ public class Text extends HookProducer {
   }
 
   public String sentence(int wordCount) {
-    String randomWords = rawWords(wordCount + random.nextInt(6));
+    String randomWords = textProducer.rawWords(wordCount + random.nextInt(6));
     List<String> sentences = new ArrayList<>();
     for (String sentence : Splitter.on(". ").split(randomWords)) {
       sentences.add(capitalize(sentence));
@@ -99,7 +77,7 @@ public class Text extends HookProducer {
   }
 
   public String paragraph(int sentenceCount) {
-    return result(on(" ").join(sentences(sentenceCount + random.nextInt(3))));
+    return result(joinWithSpace(sentences(sentenceCount + random.nextInt(3))));
   }
 
   public String paragraph() {
