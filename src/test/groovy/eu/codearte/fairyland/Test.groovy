@@ -14,4 +14,5 @@ println text.sentence(190)
 println "* Paragraph *"
 println text.paragraph()
 println text.paragraph(190)
+println text.limit(10).paragraph(190)
 

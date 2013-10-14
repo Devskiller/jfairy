@@ -23,42 +23,48 @@ public class Text extends HookProducer {
   private final String loremIpsum;
   private final List<String> words;
 
+  private int limit = 0;
+
   public Text(DataMaster dataMaster) {
     super(dataMaster);
     loremIpsum = dataMaster.getAsOne(DATA);
     words = asList(split(loremIpsum, ' '));
   }
 
-  public String loremIpsum() {
-    return loremIpsum;
+  public Text limit(int limit) {
+    this.limit = limit;
+    return this;
   }
 
-  public String loremIpsum(int length) {
-    if (loremIpsum.length() > length) {
-      return loremIpsum.substring(0, length);
-    } else {
-      return loremIpsum;
-    }
+  public String result(String result) {
+    if (limit > 0)
+      return left(result, limit);
+    else
+      return result;
+  }
+
+  public String loremIpsum() {
+    return result(loremIpsum);
   }
 
   public String words() {
-    return words(3);
+    return result(words(3));
   }
 
   public String words(int count) {
-    return cleanWords(count);
+    return result(cleanWords(count));
   }
 
   private List<String> readRawWords(int count) {
     return dataMaster.randomElements(words, count);
   }
 
-  String rawWords(int count) {
+  private String rawWords(int count) {
     List<String> result = readRawWords(count);
     return on(" ").join(result);
   }
 
-  String cleanWords(int count) {
+  private String cleanWords(int count) {
     List<String> result = new ArrayList<>();
     for (String part : readRawWords(count)) {
       result.add(uncapitalize(replaceChars(part, "., ", "")));
@@ -67,7 +73,7 @@ public class Text extends HookProducer {
   }
 
   public String sentence() {
-    return sentence(3);
+    return result(sentence(3));
   }
 
   public String sentence(int wordCount) {
@@ -81,10 +87,10 @@ public class Text extends HookProducer {
     if (!endsWith(sentence, ".")) {
       sentence += ".";
     }
-    return sentence;
+    return result(sentence);
   }
 
-  public List<String> sentences(int sentenceCount) {
+  private List<String> sentences(int sentenceCount) {
     List<String> sentences = new ArrayList<String>(sentenceCount);
     for (int i = 0; i < sentenceCount; i++) {
       sentences.add(sentence());
@@ -93,11 +99,11 @@ public class Text extends HookProducer {
   }
 
   public String paragraph(int sentenceCount) {
-    return on(" ").join(sentences(sentenceCount + random.nextInt(3)));
+    return result(on(" ").join(sentences(sentenceCount + random.nextInt(3))));
   }
 
   public String paragraph() {
-    return paragraph(3);
+    return result(paragraph(3));
   }
 
 }

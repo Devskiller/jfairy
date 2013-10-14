@@ -22,14 +22,23 @@ class TextSpec extends Specification {
         when:
         def text = Hook.create().text()
         then:
-        text.loremIpsum
-        text.loremIpsum(10).length() == 10
+        text.loremIpsum()
         text.words()
         text.words(100)
         text.sentence()
         text.sentence(100)
         text.paragraph()
         text.paragraph(100)
+    }
+
+    def "should limit generated text"() {
+        when:
+        def text = Hook.create().text().limit(10)
+        then:
+        text.loremIpsum().length() == 10
+        text.words(100).length() == 10
+        text.sentence(100).length() == 10
+        text.paragraph(100).length() == 10
     }
 
 }
