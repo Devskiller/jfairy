@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Codearte
  * @since 2013-10-07
  */
-public class Company extends HookProducer {
+public class Company extends FairyProducer {
 
   private String name;
   private final String domain;
@@ -15,13 +15,13 @@ public class Company extends HookProducer {
 
   public Company(DataMaster dataMaster) {
     super(dataMaster);
-    name = dataMaster.getData(DataMaster.COMPANY_NAME);
-    if (dataMaster.getBoolean()) {
+    name = getData(DataMaster.COMPANY_NAME);
+    if (random().getBoolean()) {
       name += " " + dataMaster.getData(DataMaster.COMPANY_SUFFIX);
     }
     domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
         + "." + dataMaster.getData(DataMaster.DOMAIN);
-    email = dataMaster.getData(DataMaster.COMPANY_EMAIL);
+    email = getData(DataMaster.COMPANY_EMAIL);
   }
 
   public String name() {

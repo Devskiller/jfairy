@@ -1,6 +1,8 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
+import eu.codearte.fairyland.producer.text.Text
+import eu.codearte.fairyland.producer.text.TextProducer
 import spock.lang.Specification
 
 class TextSpec extends Specification {

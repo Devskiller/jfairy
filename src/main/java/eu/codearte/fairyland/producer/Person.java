@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Codearte
  * @since 2013-10-07
  */
-public class Person extends HookProducer {
+public class Person extends FairyProducer {
 
   private final String firstName;
   private final String lastName;
@@ -15,16 +15,16 @@ public class Person extends HookProducer {
 
   public Person(DataMaster dataMaster) {
     super(dataMaster);
-    firstName = dataMaster.getData(DataMaster.FIRST_NAME);
-    lastName = dataMaster.getData(DataMaster.LAST_NAME);
+    firstName = getData(DataMaster.FIRST_NAME);
+    lastName = getData(DataMaster.LAST_NAME);
     email = generateEmail(dataMaster);
   }
 
   private String generateEmail(DataMaster dataMaster) {
     String temp = "";
-    if (dataMaster.getBoolean()) {
+    if (random().getBoolean()) {
       temp = firstName;
-      if (dataMaster.getBoolean()) {
+      if (random().getBoolean()) {
         temp += ".";
       }
     }

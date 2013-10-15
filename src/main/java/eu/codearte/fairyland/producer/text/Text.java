@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 Codearte
  */
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland.producer.text;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static eu.codearte.fairyland.producer.TextUtils.joinWithSpace;
+import static eu.codearte.fairyland.TextUtils.joinWithSpace;
 import static org.apache.commons.lang3.StringUtils.*;
 
 public class Text {

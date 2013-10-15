@@ -1,18 +1,19 @@
 /*
  * Copyright (c) 2013. Codearte
  */
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland.producer.text;
 
 import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.producer.FairyProducer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static eu.codearte.fairyland.producer.TextUtils.joinWithSpace;
+import static eu.codearte.fairyland.TextUtils.joinWithSpace;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.*;
 
-public class TextProducer extends HookProducer {
+public class TextProducer extends FairyProducer {
 
   private static final String DATA = "text";
 
@@ -43,7 +44,7 @@ public class TextProducer extends HookProducer {
   }
 
   private List<String> readRawWords(int count) {
-    return dataMaster.randomElements(words, count);
+    return random().randomElements(words, count);
   }
 
 

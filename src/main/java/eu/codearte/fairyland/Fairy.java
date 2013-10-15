@@ -4,9 +4,9 @@
 package eu.codearte.fairyland;
 
 import eu.codearte.fairyland.producer.Company;
-import eu.codearte.fairyland.producer.HookProducer;
+import eu.codearte.fairyland.producer.FairyProducer;
 import eu.codearte.fairyland.producer.Person;
-import eu.codearte.fairyland.producer.Text;
+import eu.codearte.fairyland.producer.text.Text;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -17,9 +17,6 @@ import java.util.Locale;
 
 /**
  * Entry class
- *
- * @author Codearte
- * @since 2013-10-07
  */
 public class Fairy {
 
@@ -28,6 +25,7 @@ public class Fairy {
   private DataMaster dataMaster;
 
   private Fairy(Locale locale, String filePrefix) {
+
     try {
       Enumeration<URL> resources =
           getClass().getClassLoader().getResources(filePrefix + locale.getLanguage() + ".yml");
@@ -60,7 +58,7 @@ public class Fairy {
     return new Fairy(locale, dataFilePrefix);
   }
 
-  public <T extends HookProducer> T produce(Class<T> producer) {
+  public <T extends FairyProducer> T produce(Class<T> producer) {
     if (producer == null) {
 
     }
