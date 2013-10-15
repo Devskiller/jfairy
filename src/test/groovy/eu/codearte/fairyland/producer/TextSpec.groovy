@@ -33,7 +33,7 @@ class TextSpec extends Specification {
 
     def "should limit generated text"() {
         when:
-        def text = Fairy.create().text().limit(10)
+        def text = Fairy.create().text().limitedTo(10)
         then:
         text.loremIpsum().length() == 10
         text.word(100).length() == 10

@@ -26,7 +26,7 @@ public class Text {
     this.textProducer = new TextProducer(dataMaster);
   }
 
-  public Text limit(int limit) {
+  public Text limitedTo(int limit) {
     this.limit = limit;
     return this;
   }
