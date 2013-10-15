@@ -1,4 +1,4 @@
-package eu.codearte.fairyland
+package snippets
 
 import static eu.codearte.fairyland.Hook.anyPerson
 import static eu.codearte.fairyland.Hook.create

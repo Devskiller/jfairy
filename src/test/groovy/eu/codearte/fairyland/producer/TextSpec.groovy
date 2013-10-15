@@ -11,7 +11,7 @@ class TextSpec extends Specification {
         text instanceof TextProducer
     }
 
-    def "should instantiate Text producer with person"() {
+    def "should instantiate Text producer with Text object"() {
         when:
         def text = Hook.create().text()
         then:

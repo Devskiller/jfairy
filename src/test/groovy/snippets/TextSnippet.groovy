@@ -1,16 +1,21 @@
-package eu.codearte.fairyland
+package snippets
 
-
+import eu.codearte.fairyland.Hook
 def text = Hook.create().text()
-println text.loremIpsum
-println "* Words "
+
+println "* Lorem ipsum *"
+println text.loremIpsum()
+
+println "* Words *"
 println text.word(1)
 println text.word()
 println text.word(190)
-println "* Sentences"
+
+println "* Sentences *"
 println text.sentence()
 println text.sentence(3)
 println text.sentence(190)
+
 println "* Paragraph *"
 println text.paragraph()
 println text.paragraph(190)
