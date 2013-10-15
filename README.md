@@ -39,3 +39,8 @@ In maven projects:
         </dependencies>
         ...
     </pom>
+
+Sample
+------
+
+Look into [code sample](snippets/)
