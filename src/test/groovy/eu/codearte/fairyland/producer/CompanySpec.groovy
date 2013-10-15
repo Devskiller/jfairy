@@ -1,6 +1,6 @@
 package eu.codearte.fairyland.producer
 
-import eu.codearte.fairyland.Hook
+import eu.codearte.fairyland.Fairy
 import spock.lang.Specification
 
 /**
@@ -10,14 +10,14 @@ import spock.lang.Specification
 class CompanySpec extends Specification {
   def "should instantiate Company producer"() {
     when:
-    def company = Hook.create().company()
+    def company = Fairy.create().company()
     then:
     company instanceof Company
   }
 
   def "should be sure that data exists"() {
     when:
-    def company = Hook.create().company()
+    def company = Fairy.create().company()
     then:
     company.name()
     company.email()

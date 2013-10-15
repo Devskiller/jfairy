@@ -1,7 +1,6 @@
 package snippets
 
-import static eu.codearte.fairyland.Hook.anyPerson
-import static eu.codearte.fairyland.Hook.create
+import static eu.codearte.fairyland.Fairy.create
 
 println "\n * With context"
 3.times {

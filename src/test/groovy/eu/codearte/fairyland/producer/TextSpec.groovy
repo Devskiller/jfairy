@@ -1,26 +1,26 @@
 package eu.codearte.fairyland.producer
 
-import eu.codearte.fairyland.Hook
+import eu.codearte.fairyland.Fairy
 import spock.lang.Specification
 
 class TextSpec extends Specification {
     def "should instantiate Text producer"() {
         when:
-        def text = Hook.create().produce(TextProducer.class)
+        def text = Fairy.create().produce(TextProducer.class)
         then:
         text instanceof TextProducer
     }
 
     def "should instantiate Text producer with Text object"() {
         when:
-        def text = Hook.create().text()
+        def text = Fairy.create().text()
         then:
         text instanceof Text
     }
 
     def "should be sure that data exists"() {
         when:
-        def text = Hook.create().text()
+        def text = Fairy.create().text()
         then:
         text.loremIpsum()
         text.word()
@@ -33,7 +33,7 @@ class TextSpec extends Specification {
 
     def "should limit generated text"() {
         when:
-        def text = Hook.create().text().limit(10)
+        def text = Fairy.create().text().limit(10)
         then:
         text.loremIpsum().length() == 10
         text.word(100).length() == 10

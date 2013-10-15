@@ -1,6 +1,6 @@
 package eu.codearte.fairyland.producer
 
-import eu.codearte.fairyland.Hook
+import eu.codearte.fairyland.Fairy
 import spock.lang.Specification
 
 /**
@@ -10,21 +10,21 @@ import spock.lang.Specification
 class PersonSpec extends Specification {
   def "should instantiate Person producer"() {
     when:
-    def person = Hook.create().produce(Person.class)
+    def person = Fairy.create().produce(Person.class)
     then:
     person instanceof Person
   }
 
   def "should instantiate Person producer with person"() {
     when:
-    def person = Hook.create().person()
+    def person = Fairy.create().person()
     then:
     person instanceof Person
   }
 
   def "should be sure that data exists"() {
     when:
-    def person = Hook.create().person()
+    def person = Fairy.create().person()
     then:
     person.firstName()
     person.lastName()
@@ -34,7 +34,7 @@ class PersonSpec extends Specification {
 
     def "should be sure that fullName is proper"() {
         when:
-        def person = Hook.create().person()
+        def person = Fairy.create().person()
         then:
         person.email()
         "${person.firstName()} ${person.lastName()}" == person.fullName()

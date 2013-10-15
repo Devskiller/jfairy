@@ -1,7 +1,7 @@
 package snippets
 
-import eu.codearte.fairyland.Hook
-def text = Hook.create().text()
+import eu.codearte.fairyland.Fairy
+def text = Fairy.create().text()
 
 println "* Lorem ipsum *"
 println text.loremIpsum()

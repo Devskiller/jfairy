@@ -21,13 +21,13 @@ import java.util.Locale;
  * @author Codearte
  * @since 2013-10-07
  */
-public class Hook {
+public class Fairy {
 
   private static final String DATA_FILE_PREFIX = "fairyland_";
 
   private DataMaster dataMaster;
 
-  private Hook(Locale locale, String filePrefix) {
+  private Fairy(Locale locale, String filePrefix) {
     try {
       Enumeration<URL> resources =
           getClass().getClassLoader().getResources(filePrefix + locale.getLanguage() + ".yml");
@@ -41,11 +41,11 @@ public class Hook {
     }
   }
 
-  public static Hook create() {
+  public static Fairy create() {
     return create(Locale.ENGLISH);
   }
 
-  public static Hook create(Locale locale) {
+  public static Fairy create(Locale locale) {
     return create(locale, DATA_FILE_PREFIX);
   }
 
@@ -56,8 +56,8 @@ public class Hook {
    * @param dataFilePrefix prefix of the data file - final pattern will be dataFilePrefix_{langCode}.yml
    * @return
    */
-  public static Hook create(Locale locale, String dataFilePrefix) {
-    return new Hook(locale, dataFilePrefix);
+  public static Fairy create(Locale locale, String dataFilePrefix) {
+    return new Fairy(locale, dataFilePrefix);
   }
 
   public <T extends HookProducer> T produce(Class<T> producer) {
