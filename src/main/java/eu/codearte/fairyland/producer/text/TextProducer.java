@@ -44,7 +44,7 @@ public class TextProducer extends FairyProducer {
   }
 
   private List<String> readRawWords(int count) {
-    return random().randomElements(words, count);
+    return generator.randomElements(words, count);
   }
 
 

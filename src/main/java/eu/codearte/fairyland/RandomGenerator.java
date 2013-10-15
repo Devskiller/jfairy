@@ -21,8 +21,4 @@ public class RandomGenerator {
     return elements.get(RandomGenerator.random.nextInt(elements.size()));
   }
 
-  public List<String> randomElements(List<String> elements, int count) {
-    shuffle(elements);
-    return elements.subList(0, count % elements.size());
-  }
 }

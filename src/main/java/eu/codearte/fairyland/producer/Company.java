@@ -15,13 +15,13 @@ public class Company extends FairyProducer {
 
   public Company(DataMaster dataMaster) {
     super(dataMaster);
-    name = getData(DataMaster.COMPANY_NAME);
-    if (random().getBoolean()) {
+    name = generator.getData(DataMaster.COMPANY_NAME);
+    if (generator.trueOrFalse()) {
       name += " " + dataMaster.getData(DataMaster.COMPANY_SUFFIX);
     }
     domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
         + "." + dataMaster.getData(DataMaster.DOMAIN);
-    email = getData(DataMaster.COMPANY_EMAIL);
+    email = generator.getData(DataMaster.COMPANY_EMAIL);
   }
 
   public String name() {
