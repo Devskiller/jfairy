@@ -20,19 +20,20 @@ public class FairyFactory {
 
   public static Text createText(DataMaster dataMaster) {
     RandomGenerator randomGenerator = createRandomGenerator();
-    RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
-    return new Text(new TextProducer(randomDataGenerator, randomGenerator), randomGenerator);
+    return new Text(createTextProducer(dataMaster, randomGenerator), randomGenerator);
+  }
+
+  private static TextProducer createTextProducer(DataMaster dataMaster, RandomGenerator randomGenerator) {
+    return new TextProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
   }
 
   public static Person createPerson(DataMaster dataMaster) {
     RandomGenerator randomGenerator = createRandomGenerator();
-    RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
-    return new Person(randomDataGenerator, randomGenerator);
+    return new Person(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
   }
 
   public static Company createCompany(DataMaster dataMaster) {
     RandomGenerator randomGenerator = createRandomGenerator();
-    RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
-    return new Company(randomDataGenerator, randomGenerator);
+    return new Company(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
   }
 }
