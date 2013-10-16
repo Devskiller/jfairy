@@ -1,19 +1,16 @@
+/*
+ * Copyright (c) 2013. Codearte
+ */
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.DataMaster;
-import eu.codearte.fairyland.RandomDataGenerator;
-import eu.codearte.fairyland.RandomGenerator;
-
-/**
- * @author Codearte
- * @since 2013-10-07
- */
 public abstract class FairyProducer {
 
   protected final RandomDataGenerator generator;
+  protected final RandomGenerator random;
 
-  public FairyProducer(DataMaster dataMaster) {
-    generator = new RandomDataGenerator(dataMaster, new RandomGenerator());
+  public FairyProducer(RandomDataGenerator generator, RandomGenerator random) {
+    this.generator = generator;
+    this.random = random;
   }
 
 }

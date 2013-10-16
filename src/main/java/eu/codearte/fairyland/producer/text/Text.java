@@ -6,24 +6,25 @@ package eu.codearte.fairyland.producer.text;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.producer.RandomGenerator;
+import eu.codearte.fairyland.producer.TextProducer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static eu.codearte.fairyland.TextUtils.joinWithSpace;
 import static org.apache.commons.lang3.StringUtils.*;
 
 public class Text {
 
-  private static Random random = new Random();
-
   private final TextProducer textProducer;
 
   private int limit = 0;
+  private final RandomGenerator random;
 
-  public Text(DataMaster dataMaster) {
-    this.textProducer = new TextProducer(dataMaster);
+  public Text(TextProducer textProducer, RandomGenerator random) {
+    this.random = random;
+    this.textProducer = textProducer;
   }
 
   public Text limitedTo(int limit) {
@@ -55,7 +56,7 @@ public class Text {
   }
 
   public String sentence(int wordCount) {
-    String randomWords = textProducer.rawWords(wordCount + random.nextInt(6));
+    String randomWords = textProducer.rawWords(wordCount, 6);
     List<String> sentences = new ArrayList<>();
     for (String sentence : Splitter.on(". ").split(randomWords)) {
       sentences.add(capitalize(sentence));
@@ -77,7 +78,7 @@ public class Text {
   }
 
   public String paragraph(int sentenceCount) {
-    return result(joinWithSpace(sentences(sentenceCount + random.nextInt(3))));
+    return result(joinWithSpace(sentences(sentenceCount + random.randomInt(3))));
   }
 
   public String paragraph() {

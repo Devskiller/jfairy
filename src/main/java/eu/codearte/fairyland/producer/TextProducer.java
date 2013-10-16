@@ -1,10 +1,7 @@
 /*
  * Copyright (c) 2013. Codearte
  */
-package eu.codearte.fairyland.producer.text;
-
-import eu.codearte.fairyland.DataMaster;
-import eu.codearte.fairyland.producer.FairyProducer;
+package eu.codearte.fairyland.producer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +17,9 @@ public class TextProducer extends FairyProducer {
   private final String loremIpsum;
   private final List<String> words;
 
-  public TextProducer(DataMaster dataMaster) {
-    super(dataMaster);
-    loremIpsum = dataMaster.getString(DATA);
+  public TextProducer(RandomDataGenerator generator, RandomGenerator random) {
+    super(generator, random);
+    loremIpsum = generator.getValue(DATA);
     words = asList(split(loremIpsum, ' '));
   }
 
@@ -30,22 +27,22 @@ public class TextProducer extends FairyProducer {
     return loremIpsum;
   }
 
-  public String rawWords(int count) {
-    List<String> result = readRawWords(count);
+  public String rawWords(int count, int precision) {
+    List<String> result = readRawWords(count, precision);
     return joinWithSpace(result);
   }
 
   public String cleanWords(int count) {
     List<String> result = new ArrayList<>();
-    for (String part : readRawWords(count)) {
+    for (String part : readRawWords(count, 0)) {
       result.add(uncapitalize(replaceChars(part, "., ", "")));
     }
     return joinWithSpace(result);
   }
 
-  private List<String> readRawWords(int count) {
-    return generator.randomElements(words, count);
+  private List<String> readRawWords(int count, int precision) {
+    System.out.println(this);
+    return generator.randomElements(words, count + random.randomInt(precision));
   }
-
 
 }

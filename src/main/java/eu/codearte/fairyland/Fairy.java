@@ -3,9 +3,7 @@
  */
 package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.producer.Company;
-import eu.codearte.fairyland.producer.FairyProducer;
-import eu.codearte.fairyland.producer.Person;
+import eu.codearte.fairyland.producer.*;
 import eu.codearte.fairyland.producer.text.Text;
 import org.yaml.snakeyaml.Yaml;
 
@@ -14,6 +12,8 @@ import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Locale;
+
+import static eu.codearte.fairyland.FairyFactory.*;
 
 /**
  * Entry class
@@ -63,22 +63,24 @@ public class Fairy {
 
     }
     try {
-      Constructor<T> constructor = producer.getConstructor(DataMaster.class);
-      return constructor.newInstance(dataMaster);
+      Constructor<T> constructor = producer.getConstructor(RandomDataGenerator.class, RandomGenerator.class);
+      RandomGenerator randomGenerator = createRandomGenerator();
+      RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
+      return constructor.newInstance(randomDataGenerator, randomGenerator);
     } catch (ReflectiveOperationException e) {
       throw new IllegalArgumentException(e);
     }
   }
 
   public Text text() {
-    return new Text(dataMaster);
+    return createText(dataMaster);
   }
 
   public Person person() {
-    return new Person(dataMaster);
+    return createPerson(dataMaster);
   }
 
   public Company company() {
-    return new Company(dataMaster);
+    return createCompany(dataMaster);
   }
 }

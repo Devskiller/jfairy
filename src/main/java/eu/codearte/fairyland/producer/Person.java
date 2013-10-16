@@ -1,35 +1,34 @@
+/*
+ * Copyright (c) 2013 Codearte
+ */
 package eu.codearte.fairyland.producer;
 
 import eu.codearte.fairyland.DataMaster;
 
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
-/**
- * @author Codearte
- * @since 2013-10-07
- */
 public class Person extends FairyProducer {
 
   private final String firstName;
   private final String lastName;
   private final String email;
 
-  public Person(DataMaster dataMaster) {
-    super(dataMaster);
-    firstName = generator.getData(DataMaster.FIRST_NAME);
-    lastName = generator.getData(DataMaster.LAST_NAME);
-    email = generateEmail(dataMaster);
+  public Person(RandomDataGenerator generator, RandomGenerator random) {
+    super(generator, random);
+    firstName = generator.getValues(DataMaster.FIRST_NAME);
+    lastName = generator.getValues(DataMaster.LAST_NAME);
+    email = generateEmail();
   }
 
-  private String generateEmail(DataMaster dataMaster) {
+  private String generateEmail() {
     String temp = "";
-    if (generator.trueOrFalse()) {
+    if (random.trueOrFalse()) {
       temp = firstName;
-      if (generator.trueOrFalse()) {
+      if (random.trueOrFalse()) {
         temp += ".";
       }
     }
-    return lowerCase(temp + lastName + "@" + dataMaster.getStringList(DataMaster.PERSONAL_EMAIL));
+    return lowerCase(temp + lastName + "@" + generator.getValues(DataMaster.PERSONAL_EMAIL));
   }
 
   public String firstName() {
