@@ -22,7 +22,7 @@ public class TextProducer extends FairyProducer {
 
   public TextProducer(DataMaster dataMaster) {
     super(dataMaster);
-    loremIpsum = dataMaster.getAsOne(DATA);
+    loremIpsum = dataMaster.getString(DATA);
     words = asList(split(loremIpsum, ' '));
   }
 

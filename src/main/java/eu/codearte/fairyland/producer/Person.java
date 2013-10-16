@@ -29,7 +29,7 @@ public class Person extends FairyProducer {
         temp += ".";
       }
     }
-    return lowerCase(temp + lastName + "@" + dataMaster.getData(DataMaster.PERSONAL_EMAIL));
+    return lowerCase(temp + lastName + "@" + dataMaster.getStringList(DataMaster.PERSONAL_EMAIL));
   }
 
   public String firstName() {

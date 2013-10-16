@@ -17,10 +17,10 @@ public class Company extends FairyProducer {
     super(dataMaster);
     name = generator.getData(DataMaster.COMPANY_NAME);
     if (generator.trueOrFalse()) {
-      name += " " + dataMaster.getData(DataMaster.COMPANY_SUFFIX);
+      name += " " + dataMaster.getStringList(DataMaster.COMPANY_SUFFIX);
     }
     domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
-        + "." + dataMaster.getData(DataMaster.DOMAIN);
+        + "." + dataMaster.getStringList(DataMaster.DOMAIN);
     email = generator.getData(DataMaster.COMPANY_EMAIL);
   }
 

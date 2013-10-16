@@ -39,18 +39,20 @@ public class DataMaster {
     this.data = data;
   }
 
-  public List<String> getData(String key) {
-    List<String> elements = data.get(key);
-    if (elements != null) {
-      return elements;
+  public List<String> getStringList(String key) {
+    return (List<String>) getData(key);
+  }
+
+  public String getString(String key) {
+    return (String) getData(key);
+  }
+
+  private Object getData(String key) {
+    Object element = data.get(key);
+    if (element != null) {
+      return element;
     }
     throw new IllegalArgumentException("No such key: " + key);
   }
-
-  public String getAsOne(String key) {
-    return on(", ").join(data.get(key));
-  }
-
-
 
 }
