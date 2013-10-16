@@ -24,10 +24,7 @@ public class RandomDataGenerator {
 
   public String getValues(String key) {
     List<String> elements = data.getStringList(key);
-    if (elements != null) {
-      return random.randomElement(elements);
-    }
-    throw new IllegalArgumentException("No such key: " + key);
+    return random.randomElement(elements);
   }
 
   public String getValue(String data) {
