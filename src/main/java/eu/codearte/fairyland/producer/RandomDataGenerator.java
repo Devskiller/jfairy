@@ -23,8 +23,7 @@ public class RandomDataGenerator {
   }
 
   public String getValues(String key) {
-    List<String> elements = data.getStringList(key);
-    return random.randomElement(elements);
+    return random.randomElement(data.getStringList(key));
   }
 
   public String getValue(String data) {
