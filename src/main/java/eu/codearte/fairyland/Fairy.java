@@ -39,10 +39,23 @@ public class Fairy {
     }
   }
 
+  /**
+   * Use this factory method to create dataset containing default fairyland_{langCode}.yml files
+   * merged with custom files with the same name
+   *
+   * @return Fairy instance
+   */
   public static Fairy create() {
     return create(Locale.ENGLISH);
   }
 
+  /**
+   * Use this factory method to create dataset containing default fairyland_{langCode}.yml files
+   * merged with custom files with the same name
+   *
+   * @param locale will be used to assess langCode for data file
+   * @return Fairy instance
+   */
   public static Fairy create(Locale locale) {
     return create(locale, DATA_FILE_PREFIX);
   }
@@ -52,7 +65,7 @@ public class Fairy {
    *
    * @param locale         will be used to assess langCode for data file
    * @param dataFilePrefix prefix of the data file - final pattern will be dataFilePrefix_{langCode}.yml
-   * @return
+   * @return Fairy instance
    */
   public static Fairy create(Locale locale, String dataFilePrefix) {
     return new Fairy(locale, dataFilePrefix);
