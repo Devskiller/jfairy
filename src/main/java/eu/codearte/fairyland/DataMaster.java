@@ -30,7 +30,7 @@ public class DataMaster {
   }
 
   /**
-   * This method is used by Yaml decoder
+   * This method is used by YAML decoder
    *
    * @param data
    */
@@ -39,10 +39,22 @@ public class DataMaster {
     this.data = data;
   }
 
+  /**
+   * Returns list (null safe) of elements for desired key from data files
+   * @param key desired node key
+   * @return list of elements for desired key
+   * @throws IllegalArgumentException if no element for key has been found
+   */
   public List<String> getStringList(String key) {
     return (List<String>) getData(key);
   }
 
+  /**
+   * Returns element (null safe) for desired key from data files
+   * @param key desired node key
+   * @return string element for desired key
+   * @throws IllegalArgumentException if no element for key has been found
+   */
   public String getString(String key) {
     return (String) getData(key);
   }
