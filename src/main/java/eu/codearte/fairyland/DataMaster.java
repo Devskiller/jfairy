@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.base.Joiner.on;
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class DataMaster {
 
@@ -61,10 +61,8 @@ public class DataMaster {
 
   private Object getData(String key) {
     Object element = data.get(key);
-    if (element != null) {
-      return element;
-    }
-    throw new IllegalArgumentException("No such key: " + key);
+    checkArgument(element != null, "No such key: %s", key);
+    return element;
   }
 
 }
