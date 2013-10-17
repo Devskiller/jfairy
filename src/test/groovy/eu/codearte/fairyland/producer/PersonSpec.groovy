@@ -1,6 +1,7 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
+import spock.lang.Ignore
 import spock.lang.Specification
 
 class PersonSpec extends Specification {
@@ -18,6 +19,22 @@ class PersonSpec extends Specification {
         person instanceof Person
     }
 
+    def "should be sure that fullName is proper"() {
+        when:
+        def person = Fairy.create().person()
+        then:
+        person.email()
+        "${person.firstName()} ${person.lastName()}" == person.fullName()
+    }
+
+    @Ignore
+    def "second generated name should be different"() {
+        setup:
+        def fairy = Fairy.create()
+        expect:
+        fairy.person().firstName() != fairy.person().firstName()
+    }
+
     def "should be sure that data exists"() {
         when:
         def person = Fairy.create().person()
@@ -30,18 +47,4 @@ class PersonSpec extends Specification {
         person.isMale() || person.isFemale()
     }
 
-    def "should be sure that fullName is proper"() {
-        when:
-        def person = Fairy.create().person()
-        then:
-        person.email()
-        "${person.firstName()} ${person.lastName()}" == person.fullName()
-    }
-
-    def "second generated name should be different"() {
-        setup:
-        def fairy = Fairy.create()
-        expect:
-        fairy.person().firstName() != fairy.person().firstName()
-    }
 }
