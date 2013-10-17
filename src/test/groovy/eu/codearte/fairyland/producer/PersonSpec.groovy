@@ -26,6 +26,8 @@ class PersonSpec extends Specification {
         person.lastName()
         person.fullName()
         person.email()
+        person.sex()
+        person.isMale() || person.isFemale()
     }
 
     def "should be sure that fullName is proper"() {

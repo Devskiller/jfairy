@@ -3,8 +3,8 @@ data:
   firstNames: {
      Ana: female,
      Bart: male,
-     Charles: female,
-     Donna: male
+     Charles: male,
+     Donna: female
     }
   lastNames: [Smith, Johns, Johnson, Berry, King, Abrams, Nick, Perry, Kelly, Thomas, Wilkinson, Lottar, Charle, Whitman, Procter]
   personalEmails: [gmail.com, yahoo.com, mail.com]

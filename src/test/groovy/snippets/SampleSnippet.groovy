@@ -19,3 +19,9 @@ println create().text().sentence(5)
 def fairy = Fairy.create()
 println fairy.person().firstName();
 println fairy.person().firstName();
+
+def person = fairy.person()
+println person.firstName();
+println person.sex();
+println person.isMale();
+println person.isFemale();

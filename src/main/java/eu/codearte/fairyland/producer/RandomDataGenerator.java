@@ -35,14 +35,14 @@ public class RandomDataGenerator {
   }
 
   public String getValuesOfType(String dataKey, final String type) {
-    LOG.debug("getValuesOfType(dataKey={}, type={})", dataKey, type);
+    LOG.trace("getValuesOfType(dataKey={}, type={})", dataKey, type);
     Map<String, String> stringMap = data.getStringMap(dataKey);
 
     ImmutableList<String> entries = from(stringMap.entrySet())
         .filter(ofType(type))
         .transform(toKeys())
         .toList();
-    LOG.debug("Selected entries {}", entries);
+    LOG.trace("Selected entries {}", entries);
     return random.randomElement(entries);
   }
 
