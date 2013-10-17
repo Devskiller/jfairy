@@ -3,7 +3,10 @@
  */
 package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.producer.*;
+import eu.codearte.fairyland.producer.Company;
+import eu.codearte.fairyland.producer.FairyProducer;
+import eu.codearte.fairyland.producer.RandomDataGenerator;
+import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.text.Text;
 
@@ -84,6 +87,14 @@ public class Fairy {
 
   public Person person() {
     return createPerson(dataMaster, randomGenerator).generate();
+  }
+
+  public Person women() {
+    return createPerson(dataMaster, randomGenerator).generate("female");
+  }
+
+  public Person men() {
+    return createPerson(dataMaster, randomGenerator).generate("male");
   }
 
   public Company company() {

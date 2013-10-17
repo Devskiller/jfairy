@@ -11,14 +11,16 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class PersonProducer extends FairyProducer {
 
-  private String selectedSex = "";
-
   public PersonProducer(RandomDataGenerator generator, RandomGenerator random) {
     super(generator, random);
     generate();
   }
 
   public Person generate() {
+    return generate("");
+  }
+
+  public Person generate(String selectedSex) {
     String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, selectedSex);
     String sex = generator.getTypeOfValue(DataMaster.FIRST_NAME, firstName);
     String lastName = generator.getValues(DataMaster.LAST_NAME);

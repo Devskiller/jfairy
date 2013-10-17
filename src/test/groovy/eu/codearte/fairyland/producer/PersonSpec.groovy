@@ -48,4 +48,19 @@ class PersonSpec extends Specification {
         person.isMale() || person.isFemale()
     }
 
+    def "should create female"() {
+        when:
+        def person = Fairy.create().women()
+        println person.firstName()
+        println person.sex()
+        then:
+        person.isFemale()
+    }
+
+    def "should create male"() {
+        when:
+        def person = Fairy.create().men()
+        then:
+        person.isMale()
+    }
 }
