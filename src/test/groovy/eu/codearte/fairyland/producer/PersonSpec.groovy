@@ -1,15 +1,16 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
+import eu.codearte.fairyland.producer.person.Person
 import spock.lang.Ignore
 import spock.lang.Specification
 
 class PersonSpec extends Specification {
     def "should instantiate Person producer"() {
         when:
-        def person = Fairy.create().produce(Person.class)
+        def person = Fairy.create().produce(PersonProducer.class)
         then:
-        person instanceof Person
+        person instanceof PersonProducer
     }
 
     def "should instantiate Person producer with person"() {

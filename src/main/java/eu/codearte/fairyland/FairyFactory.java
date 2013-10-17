@@ -26,8 +26,8 @@ public class FairyFactory {
     return new TextProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
   }
 
-  public static Person createPerson(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new Person(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
+  public static PersonProducer createPerson(DataMaster dataMaster, RandomGenerator randomGenerator) {
+    return new PersonProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
   }
 
   public static Company createCompany(DataMaster dataMaster, RandomGenerator randomGenerator) {

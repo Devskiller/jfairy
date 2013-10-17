@@ -4,6 +4,7 @@
 package eu.codearte.fairyland;
 
 import eu.codearte.fairyland.producer.*;
+import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.text.Text;
 
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class Fairy {
   }
 
   public Person person() {
-    return createPerson(dataMaster, randomGenerator);
+    return createPerson(dataMaster, randomGenerator).generate();
   }
 
   public Company company() {
