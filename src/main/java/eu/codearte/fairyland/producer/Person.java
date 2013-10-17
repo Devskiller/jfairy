@@ -15,7 +15,8 @@ public class Person extends FairyProducer {
 
   public Person(RandomDataGenerator generator, RandomGenerator random) {
     super(generator, random);
-    firstName = generator.getValues(DataMaster.FIRST_NAME);
+    String sex = random.trueOrFalse() ? "male" : "female";
+    firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex);
     lastName = generator.getValues(DataMaster.LAST_NAME);
     email = generateEmail();
   }

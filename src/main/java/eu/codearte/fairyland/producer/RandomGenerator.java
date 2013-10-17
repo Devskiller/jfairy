@@ -21,7 +21,7 @@ public class RandomGenerator {
   }
 
   public String randomElement(List<String> elements) {
-    return elements.get(random.nextInt(elements.size()));
+    return elements.get(randomInt(elements.size()));
   }
 
   public List<String> randomElements(List<String> elements, int count) {

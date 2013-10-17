@@ -4,6 +4,11 @@
 
 package eu.codearte.fairyland;
 
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +46,7 @@ public class DataMaster {
 
   /**
    * Returns list (null safe) of elements for desired key from data files
+   *
    * @param key desired node key
    * @return list of elements for desired key
    * @throws IllegalArgumentException if no element for key has been found
@@ -49,8 +55,13 @@ public class DataMaster {
     return (List<String>) getData(key);
   }
 
+  public Map<String, String> getStringMap(String key) {
+    return (Map<String, String>) getData(key);
+  }
+
   /**
    * Returns element (null safe) for desired key from data files
+   *
    * @param key desired node key
    * @return string element for desired key
    * @throws IllegalArgumentException if no element for key has been found
@@ -65,4 +76,13 @@ public class DataMaster {
     return element;
   }
 
+  void readResources(String path) throws IOException {
+    Enumeration<URL> resources =
+        getClass().getClassLoader().getResources(path);
+
+    Yaml yaml = new Yaml();
+    while (resources.hasMoreElements()) {
+      appendData(yaml.loadAs(resources.nextElement().openStream(), DataMaster.class));
+    }
+  }
 }

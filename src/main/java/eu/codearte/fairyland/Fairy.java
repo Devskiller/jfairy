@@ -5,12 +5,9 @@ package eu.codearte.fairyland;
 
 import eu.codearte.fairyland.producer.*;
 import eu.codearte.fairyland.producer.text.Text;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.Locale;
 
 import static eu.codearte.fairyland.FairyFactory.*;
@@ -23,17 +20,13 @@ public class Fairy {
   private static final String DATA_FILE_PREFIX = "fairyland_";
 
   private DataMaster dataMaster;
+  private RandomGenerator randomGenerator = createRandomGenerator();
 
   private Fairy(Locale locale, String filePrefix) {
 
     try {
-      Enumeration<URL> resources =
-          getClass().getClassLoader().getResources(filePrefix + locale.getLanguage() + ".yml");
       dataMaster = new DataMaster();
-      Yaml yaml = new Yaml();
-      while (resources.hasMoreElements()) {
-        dataMaster.appendData(yaml.loadAs(resources.nextElement().openStream(), DataMaster.class));
-      }
+      dataMaster.readResources(filePrefix + locale.getLanguage() + ".yml");
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
@@ -77,7 +70,6 @@ public class Fairy {
     }
     try {
       Constructor<T> constructor = producer.getConstructor(RandomDataGenerator.class, RandomGenerator.class);
-      RandomGenerator randomGenerator = createRandomGenerator();
       RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
       return constructor.newInstance(randomDataGenerator, randomGenerator);
     } catch (ReflectiveOperationException e) {
@@ -86,14 +78,14 @@ public class Fairy {
   }
 
   public Text text() {
-    return createText(dataMaster);
+    return createText(dataMaster, randomGenerator);
   }
 
   public Person person() {
-    return createPerson(dataMaster);
+    return createPerson(dataMaster, randomGenerator);
   }
 
   public Company company() {
-    return createCompany(dataMaster);
+    return createCompany(dataMaster, randomGenerator);
   }
 }
