@@ -51,10 +51,12 @@ public class DataMaster {
    * @return list of elements for desired key
    * @throws IllegalArgumentException if no element for key has been found
    */
+  @SuppressWarnings("unchecked")
   public List<String> getStringList(String key) {
     return (List<String>) getData(key);
   }
 
+  @SuppressWarnings("unchecked")
   public Map<String, List<String>> getStringMap(String key) {
     return (Map<String, List<String>>) getData(key);
   }

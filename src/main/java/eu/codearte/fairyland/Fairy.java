@@ -90,11 +90,11 @@ public class Fairy {
   }
 
   public Person women() {
-    return createPerson(dataMaster, randomGenerator).generate("female");
+    return createPerson(dataMaster, randomGenerator).generate(Person.Sex.female);
   }
 
   public Person men() {
-    return createPerson(dataMaster, randomGenerator).generate("male");
+    return createPerson(dataMaster, randomGenerator).generate(Person.Sex.male);
   }
 
   public Company company() {

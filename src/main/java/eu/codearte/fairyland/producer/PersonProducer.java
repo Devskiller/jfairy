@@ -17,12 +17,12 @@ public class PersonProducer extends FairyProducer {
   }
 
   public Person generate() {
-    return generate("male");
+    return generate(Person.Sex.male);
   }
 
-  public Person generate(String selectedSex) {
-    String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, selectedSex);
-    String sex = selectedSex;
+  public Person generate(Person.Sex selectedSex) {
+    String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, selectedSex.name());
+    Person.Sex sex = selectedSex;
     String lastName = generator.getValues(DataMaster.LAST_NAME);
     String email = generateEmail(firstName, lastName);
     return new Person(firstName, lastName, email, sex);

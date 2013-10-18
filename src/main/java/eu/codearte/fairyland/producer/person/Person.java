@@ -9,13 +9,13 @@ public class Person {
   private final String firstName;
   private final String lastName;
   private final String email;
-  private final String sex;
+  private final Sex sex;
 
   public enum Sex {
-    male, female, both
+    male, female
   }
 
-  public Person(String firstName, String lastName, String email, String sex) {
+  public Person(String firstName, String lastName, String email, Sex sex) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -34,7 +34,7 @@ public class Person {
     return email;
   }
 
-  public String sex() {
+  public Sex sex() {
     return sex;
   }
 
@@ -43,10 +43,10 @@ public class Person {
   }
 
   public boolean isMale() {
-    return sex.equals(Sex.male.name());
+    return sex == Sex.male;
   }
 
   public boolean isFemale() {
-    return sex.equals(Sex.female.name());
+    return sex == Sex.female;
   }
 }
