@@ -55,8 +55,8 @@ public class DataMaster {
     return (List<String>) getData(key);
   }
 
-  public Map<String, String> getStringMap(String key) {
-    return (Map<String, String>) getData(key);
+  public Map<String, List<String>> getStringMap(String key) {
+    return (Map<String, List<String>>) getData(key);
   }
 
   /**

@@ -1,11 +1,9 @@
 data:
   domains: [com, eu, biz]
   firstNames: {
-     Ana: female,
-     Bart: male,
-     Charles: male,
-     Donna: female
-    }
+    male: [Bart, Charles],
+    female: [Ana, Donna]
+  }
   lastNames: [Smith, Johns, Johnson, Berry, King, Abrams, Nick, Perry, Kelly, Thomas, Wilkinson, Lottar, Charle, Whitman, Procter]
   personalEmails: [gmail.com, yahoo.com, mail.com]
   companyNames: [Alist, Beans, Klein, Felics, Adapt, MemorTech, Porta, SuperMemo, Nonos, Vitae, Woods, Quisuc, Quicker, Interdem, Morsem, Datastore, Linger, Buapel, Terson, Gualas, Yrsa, Warst, Erntogra, Robutenia, QuickLink, Furba, Hostes, FlyHigh]

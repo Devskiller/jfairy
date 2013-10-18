@@ -14,7 +14,7 @@ class RandomDataGeneratorSpec extends Specification {
 
     def "should return men"() {
         setup:
-        data.getStringMap(DataMaster.FIRST_NAME) >> [Ana: 'female', Mark: 'male', Ivon: 'female']
+        data.getStringMap(DataMaster.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
         when:
         RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator);
@@ -26,7 +26,7 @@ class RandomDataGeneratorSpec extends Specification {
 
     def "should return one of women"() {
         setup:
-        data.getStringMap(DataMaster.FIRST_NAME) >> [Ana: 'female', Mark: 'male', Ivon: 'female']
+        data.getStringMap(DataMaster.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
         when:
         RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator);
@@ -36,27 +36,4 @@ class RandomDataGeneratorSpec extends Specification {
         female == "Ana" || "Ivon"
     }
 
-    def "should return sex of Ana"() {
-        setup:
-        data.getStringMap(DataMaster.FIRST_NAME) >> [Ana: 'female']
-
-        when:
-        RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator);
-        def sex = generator.getTypeOfValue(DataMaster.FIRST_NAME, "Ana");
-
-        then:
-        sex == "female"
-    }
-
-    def "should return sex of Mark"() {
-        setup:
-        data.getStringMap(DataMaster.FIRST_NAME) >> [Mark: 'male']
-
-        when:
-        RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator);
-        def sex = generator.getTypeOfValue(DataMaster.FIRST_NAME, "Mark");
-
-        then:
-        sex == "male"
-    }
 }

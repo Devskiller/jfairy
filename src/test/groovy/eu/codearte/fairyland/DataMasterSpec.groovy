@@ -17,6 +17,5 @@ class DataMasterSpec extends Specification {
         then:
         firstNames.size() > 0
         firstNames.keySet().size() > 0
-        firstNames.get("Ana") == "female"
     }
 }

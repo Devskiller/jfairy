@@ -39,41 +39,12 @@ public class RandomDataGenerator {
   public String getValuesOfType(String dataKey, final String type) {
     LOG.trace("getValuesOfType(dataKey={}, type={})", dataKey, type);
 
-    Map<String, String> stringMap = data.getStringMap(dataKey);
+    Map<String, List<String>> stringMap = data.getStringMap(dataKey);
 
-    ImmutableList<String> entries = from(stringMap.entrySet())
-        .filter(ofType(type))
-        .transform(toKeys())
-        .toList();
+    List<String> entries = stringMap.get(type);
 
     LOG.trace("Selected entries {}", entries);
     return random.randomElement(entries);
-  }
-
-  public String getTypeOfValue(String dataKey, String key) {
-
-    Map<String, String> stringMap = data.getStringMap(dataKey);
-
-    return stringMap.get(key);
-  }
-
-  private Predicate<Map.Entry<String, String>> ofType(final String type) {
-    return new Predicate<Map.Entry<String, String>>() {
-      @Override
-      public boolean apply(Map.Entry<String, String> input) {
-        LOG.trace("Matching '{}' with '{}'", input.getValue(), type);
-        return isNullOrEmpty(type) || input.getValue().equals(type);
-      }
-    };
-  }
-
-  private Function<Map.Entry<String, String>, String> toKeys() {
-    return new Function<Map.Entry<String, String>, String>() {
-      @Override
-      public String apply(Map.Entry<String, String> input) {
-        return input.getKey();
-      }
-    };
   }
 
   public String getValues(String key) {
