@@ -4,55 +4,37 @@
 
 package eu.codearte.fairyland.producer.person;
 
-class Person {
+import eu.codearte.fairyland.producer.RandomDataGenerator;
+import eu.codearte.fairyland.producer.RandomGenerator;
+import eu.codearte.fairyland.producer.text.StringifyUtil;
 
-  private final String firstName;
-  private final String lastName;
-  private final String email;
-  private final Sex sex;
-  private final String telephoneNumber;
+import static eu.codearte.fairyland.producer.person.PersonHolder.Sex.*;
 
-  enum Sex {
-    male, female
+public class Person extends PersonProducer {
+
+  private PersonHolder.Sex sex = randomSex();
+
+  public Person(RandomDataGenerator generator, RandomGenerator random, StringifyUtil stringifyUtil1) {
+    super(generator, random, stringifyUtil1);
   }
 
-  public Person(String firstName, String lastName, String email, Sex sex, String telephoneNumber) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.sex = sex;
-    this.telephoneNumber = telephoneNumber;
-  }
-
-  public String firstName() {
-    return firstName;
-  }
-
-  public String lastName() {
-    return lastName;
-  }
-
-  public String email() {
-    return email;
-  }
-
-  public Sex sex() {
+  @Override
+  PersonHolder.Sex getSex() {
     return sex;
   }
 
-  public String fullName() {
-    return firstName + " " + lastName;
+  private PersonHolder.Sex randomSex() {
+    return random.trueOrFalse() ? male : female;
   }
 
-  public boolean isMale() {
-    return sex == Sex.male;
+  public Person male() {
+    sex = PersonHolder.Sex.male;
+    return this;
   }
 
-  public boolean isFemale() {
-    return sex == Sex.female;
+  public Person female() {
+    sex = PersonHolder.Sex.female;
+    return this;
   }
 
-  public String telephoneNumber() {
-    return telephoneNumber;
-  }
 }

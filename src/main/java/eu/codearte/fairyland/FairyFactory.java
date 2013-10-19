@@ -6,9 +6,9 @@ package eu.codearte.fairyland;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.person.MenProducer;
-import eu.codearte.fairyland.producer.person.PersonProducer;
-import eu.codearte.fairyland.producer.person.WomenProducer;
+import eu.codearte.fairyland.producer.person.Men;
+import eu.codearte.fairyland.producer.person.Person;
+import eu.codearte.fairyland.producer.person.Women;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.text.TextProducer;
@@ -46,22 +46,22 @@ public class FairyFactory {
     return new StringifyUtil(randomGenerator);
   }
 
-  public static PersonProducer createPerson(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
-    return new PersonProducer(
+  public static Person createPerson(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new Person(
         createRandomDataGenerator(dataMaster, randomGenerator),
         randomGenerator,
         stringifyUtil);
   }
 
-  public static WomenProducer createWomen(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
-    return new WomenProducer(
+  public static Women createWomen(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new Women(
         createRandomDataGenerator(dataMaster, randomGenerator),
         randomGenerator,
         stringifyUtil);
   }
 
-  public static MenProducer createMen(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
-    return new MenProducer(
+  public static Men createMen(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new Men(
         createRandomDataGenerator(dataMaster, randomGenerator),
         randomGenerator,
         stringifyUtil);
