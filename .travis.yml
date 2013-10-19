@@ -4,5 +4,5 @@ jdk:
  - oraclejdk7
  - openjdk7
 
-install: gradle assemble
-script: gradle check
+install: ./gradlew assemble
+script: ./gradlew check --stacktrace --info
