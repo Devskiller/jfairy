@@ -5,9 +5,9 @@ package eu.codearte.fairyland.producer.text;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
-import eu.codearte.fairyland.DataMaster;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.TextProducer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,18 @@ public class Text {
   public Text(TextProducer textProducer, RandomGenerator random) {
     this.random = random;
     this.textProducer = textProducer;
+  }
+
+  public String numerify(String numberString) {
+    throw new NotImplementedException();
+  }
+
+  public String letterify(String letterString) {
+    throw new NotImplementedException();
+  }
+
+  public String bothify(String string) {
+    return letterify(numerify(string));
   }
 
   public Text limitedTo(int limit) {
