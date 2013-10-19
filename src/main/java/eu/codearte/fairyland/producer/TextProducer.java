@@ -3,6 +3,8 @@
  */
 package eu.codearte.fairyland.producer;
 
+import eu.codearte.fairyland.producer.text.StringifyUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class TextProducer extends FairyProducer {
   private final String loremIpsum;
   private final List<String> words;
 
-  public TextProducer(RandomDataGenerator generator, RandomGenerator random) {
-    super(generator, random);
+  public TextProducer(RandomDataGenerator generator, RandomGenerator random, StringifyUtil stringifyUtil1) {
+    super(generator, random, stringifyUtil1);
     loremIpsum = generator.getValue(DATA);
     words = asList(split(loremIpsum, ' '));
   }

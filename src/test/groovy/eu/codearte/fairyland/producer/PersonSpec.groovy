@@ -63,4 +63,11 @@ class PersonSpec extends Specification {
         then:
         person.isMale()
     }
+
+    def "should create telephone number"() {
+        when:
+        def person = Fairy.create().person()
+        then:
+        person.telephoneNumber()
+    }
 }

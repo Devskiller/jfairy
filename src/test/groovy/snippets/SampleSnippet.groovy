@@ -26,6 +26,7 @@ println person.firstName();
 println person.sex();
 println person.isMale();
 println person.isFemale();
+println person.telephoneNumber();
 
 def text = create().text()
 println text.numerify("dupa###")

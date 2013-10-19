@@ -10,16 +10,18 @@ public class Person {
   private final String lastName;
   private final String email;
   private final Sex sex;
+  private final String telephoneNumber;
 
   public enum Sex {
     male, female
   }
 
-  public Person(String firstName, String lastName, String email, Sex sex) {
+  public Person(String firstName, String lastName, String email, Sex sex, String telephoneNumber) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.sex = sex;
+    this.telephoneNumber = telephoneNumber;
   }
 
   public String firstName() {
@@ -48,5 +50,9 @@ public class Person {
 
   public boolean isFemale() {
     return sex == Sex.female;
+  }
+
+  public String telephoneNumber() {
+    return telephoneNumber;
   }
 }

@@ -24,6 +24,8 @@ public class DataMaster {
   public static final String COMPANY_NAME = "companyNames";
   public static final String COMPANY_SUFFIX = "companySuffixes";
   public static final String COMPANY_EMAIL = "companyEmails";
+  public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
+
 
   private Map<String, List<String>> data = new HashMap<>();
 

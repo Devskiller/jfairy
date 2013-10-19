@@ -8,6 +8,7 @@ import eu.codearte.fairyland.producer.FairyProducer;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.Person;
+import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
 
 import java.io.IOException;
@@ -73,9 +74,11 @@ public class Fairy {
 
     }
     try {
-      Constructor<T> constructor = producer.getConstructor(RandomDataGenerator.class, RandomGenerator.class);
+      Constructor<T> constructor = producer.getConstructor(RandomDataGenerator.class, RandomGenerator.class,
+          StringifyUtil.class);
       RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
-      return constructor.newInstance(randomDataGenerator, randomGenerator);
+      StringifyUtil stringifyUtil = createStringifyUtil(randomGenerator);
+      return constructor.newInstance(randomDataGenerator, randomGenerator, stringifyUtil);
     } catch (ReflectiveOperationException e) {
       throw new IllegalArgumentException(e);
     }

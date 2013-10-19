@@ -24,19 +24,26 @@ public class FairyFactory {
         createStringifyUtil(randomGenerator));
   }
 
-  private static StringifyUtil createStringifyUtil(RandomGenerator randomGenerator) {
-    return new StringifyUtil(randomGenerator);
+  public static StringifyUtil createStringifyUtil(RandomGenerator randomGenerator) {
+    return createStringifyUtil1(randomGenerator);
   }
 
   private static TextProducer createTextProducer(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new TextProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
+    return new TextProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator,
+        createStringifyUtil1(randomGenerator));
+  }
+
+  private static StringifyUtil createStringifyUtil1(RandomGenerator randomGenerator) {
+    return new StringifyUtil(randomGenerator);
   }
 
   public static PersonProducer createPerson(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new PersonProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
+    return new PersonProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator,
+        createStringifyUtil1(randomGenerator));
   }
 
   public static Company createCompany(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new Company(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator);
+    return new Company(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator,
+        createStringifyUtil1(randomGenerator));
   }
 }
