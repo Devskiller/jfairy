@@ -7,7 +7,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.TextProducer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +27,27 @@ public class Text {
   }
 
   public String numerify(String numberString) {
-    throw new NotImplementedException();
+    return getString(numberString, '#', '0', '9');
   }
 
   public String letterify(String letterString) {
-    throw new NotImplementedException();
+    return getString(letterString, '?', 'a', 'z');
   }
 
   public String bothify(String string) {
     return letterify(numerify(string));
+  }
+
+  private String getString(String numberString, char hash, char from, char to) {
+    String result = "";
+    for (char aChar : numberString.toCharArray()) {
+      if (aChar == hash) {
+        result += (char) (from + random.randomInt(to - from + 1));
+      } else {
+        result += aChar;
+      }
+    }
+    return result;
   }
 
   public Text limitedTo(int limit) {

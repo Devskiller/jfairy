@@ -59,4 +59,16 @@ class TextSpec extends Specification {
         expect:
         text.paragraph() == "Est. Congue, pellentesque a, mi. Interdum Praesent Proin purus turpis. Nisi. Lorem. Interdum. In, pellentesque congue. Congue erat. Vulputate elit. Leo Etiam dolor, congue."
     }
+
+    def "should numerify hashed string"() {
+        expect:
+        text.numerify("Test#") != "Test#";
+        text.numerify("Test#").length() == "Test#".length();
+    }
+
+    def "should letterify hashed string"() {
+        expect:
+        text.letterify("Test?") != "Test?";
+        text.letterify("Test?").length() == "Test?".length();
+    }
 }

@@ -25,3 +25,8 @@ println person.firstName();
 println person.sex();
 println person.isMale();
 println person.isFemale();
+
+def text = create().text()
+println text.numerify("dupa###")
+println text.letterify("letter???")
+println text.bothify("?? ###-###")
