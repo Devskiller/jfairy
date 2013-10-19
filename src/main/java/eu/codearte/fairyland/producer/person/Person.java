@@ -13,7 +13,7 @@ class Person {
   private final String telephoneNumber;
 
   enum Sex {
-    male, female, undefined
+    male, female
   }
 
   public Person(String firstName, String lastName, String email, Sex sex, String telephoneNumber) {
