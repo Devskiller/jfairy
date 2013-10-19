@@ -18,14 +18,12 @@ public class Text {
 
   private final TextProducer textProducer;
   private final RandomGenerator random;
-  private final StringifyUtil stringifyUtil;
 
   private int limit = 0;
 
-  public Text(TextProducer textProducer, RandomGenerator random, StringifyUtil stringifyUtil) {
+  public Text(TextProducer textProducer, RandomGenerator random) {
     this.random = random;
     this.textProducer = textProducer;
-    this.stringifyUtil = stringifyUtil;
   }
 
   public Text limitedTo(int limit) {

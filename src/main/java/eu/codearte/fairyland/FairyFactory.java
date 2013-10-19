@@ -21,18 +21,19 @@ public class FairyFactory {
 
   public static Text createText(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
     return new Text(
-        createTextProducer(dataMaster, randomGenerator),
-        randomGenerator,
-        stringifyUtil);
+        createTextProducer(dataMaster, randomGenerator, stringifyUtil),
+        randomGenerator);
   }
 
   public static StringifyUtil createStringifyUtil(RandomGenerator randomGenerator) {
     return createStringifyUtil1(randomGenerator);
   }
 
-  private static TextProducer createTextProducer(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new TextProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator,
-        createStringifyUtil1(randomGenerator));
+  private static TextProducer createTextProducer(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new TextProducer(
+        createRandomDataGenerator(dataMaster, randomGenerator),
+        randomGenerator,
+        stringifyUtil);
   }
 
   private static StringifyUtil createStringifyUtil1(RandomGenerator randomGenerator) {
