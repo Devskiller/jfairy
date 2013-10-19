@@ -6,7 +6,6 @@ package eu.codearte.fairyland.producer.text;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.TextProducer;
 
 import java.util.ArrayList;
 import java.util.List;

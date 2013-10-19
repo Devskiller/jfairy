@@ -1,7 +1,7 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
-import eu.codearte.fairyland.producer.person.Person
+import eu.codearte.fairyland.producer.person.PersonProducer
 import spock.lang.Ignore
 import spock.lang.Specification
 
@@ -13,11 +13,11 @@ class PersonSpec extends Specification {
         person instanceof PersonProducer
     }
 
-    def "should instantiate Person producer with person"() {
+    def "should instantiate PersonProducer producer with person"() {
         when:
         def person = Fairy.create().person()
         then:
-        person instanceof Person
+        person instanceof PersonProducer
     }
 
     def "should be sure that fullName is proper"() {
@@ -44,22 +44,33 @@ class PersonSpec extends Specification {
         person.lastName()
         person.fullName()
         person.email()
-        person.sex()
         person.isMale() || person.isFemale()
+    }
+
+    def "should create women"() {
+        when:
+        def person = Fairy.create().women()
+        then:
+        person.isFemale()
+    }
+
+    def "should create men"() {
+        when:
+        def person = Fairy.create().men()
+        then:
+        person.isMale()
     }
 
     def "should create female"() {
         when:
-        def person = Fairy.create().women()
-        println person.firstName()
-        println person.sex()
+        def person = Fairy.create().person().female()
         then:
         person.isFemale()
     }
 
     def "should create male"() {
         when:
-        def person = Fairy.create().men()
+        def person = Fairy.create().person().male()
         then:
         person.isMale()
     }
@@ -69,5 +80,12 @@ class PersonSpec extends Specification {
         def person = Fairy.create().person()
         then:
         person.telephoneNumber()
+    }
+
+    def "should create telephone number in defined format"() {
+        when:
+        def person = Fairy.create().person().telephoneNumberFormat("###--###")
+        then:
+        person.telephoneNumber() ==~ /\d\d\d--\d\d\d/
     }
 }

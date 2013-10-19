@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer.person;
 
-public class Person {
+class Person {
 
   private final String firstName;
   private final String lastName;
@@ -12,8 +12,8 @@ public class Person {
   private final Sex sex;
   private final String telephoneNumber;
 
-  public enum Sex {
-    male, female
+  enum Sex {
+    male, female, undefined
   }
 
   public Person(String firstName, String lastName, String email, Sex sex, String telephoneNumber) {

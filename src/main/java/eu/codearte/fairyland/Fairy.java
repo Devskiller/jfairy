@@ -3,11 +3,8 @@
  */
 package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.producer.Company;
-import eu.codearte.fairyland.producer.FairyProducer;
-import eu.codearte.fairyland.producer.RandomDataGenerator;
-import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.person.Person;
+import eu.codearte.fairyland.producer.*;
+import eu.codearte.fairyland.producer.person.PersonProducer;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
 
@@ -90,16 +87,16 @@ public class Fairy {
     return createText(dataMaster, randomGenerator, stringifyUtil);
   }
 
-  public Person person() {
-    return createPerson(dataMaster, randomGenerator, stringifyUtil).generate();
+  public PersonProducer person() {
+    return createPerson(dataMaster, randomGenerator, stringifyUtil);
   }
 
-  public Person women() {
-    return createPerson(dataMaster, randomGenerator, stringifyUtil).generate(Person.Sex.female);
+  public PersonProducer women() {
+    return createPerson(dataMaster, randomGenerator, stringifyUtil).female();
   }
 
-  public Person men() {
-    return createPerson(dataMaster, randomGenerator, stringifyUtil).generate(Person.Sex.male);
+  public PersonProducer men() {
+    return createPerson(dataMaster, randomGenerator, stringifyUtil).male();
   }
 
   public Company company() {

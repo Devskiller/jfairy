@@ -4,8 +4,10 @@
 package eu.codearte.fairyland;
 
 import eu.codearte.fairyland.producer.*;
+import eu.codearte.fairyland.producer.person.PersonProducer;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
+import eu.codearte.fairyland.producer.text.TextProducer;
 
 public class FairyFactory {
 

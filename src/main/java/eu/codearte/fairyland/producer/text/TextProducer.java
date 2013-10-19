@@ -1,8 +1,11 @@
 /*
  * Copyright (c) 2013. Codearte
  */
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland.producer.text;
 
+import eu.codearte.fairyland.producer.FairyProducer;
+import eu.codearte.fairyland.producer.RandomDataGenerator;
+import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 
 import java.util.ArrayList;
