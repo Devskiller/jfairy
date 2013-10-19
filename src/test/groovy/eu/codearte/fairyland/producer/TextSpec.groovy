@@ -60,18 +60,4 @@ class TextSpec extends Specification {
         text.paragraph()
     }
 
-    def "should numerify hashed string"() {
-        expect:
-        text.numerify("Test#") ==~ /Test[0-9]/
-    }
-
-    def "should letterify hashed string"() {
-        expect:
-        text.letterify("Test?") ==~ /Test[a-z]/
-    }
-
-    def "should bothify hashed string"() {
-        expect:
-        text.bothify("Test?#") ==~ /Test[a-z][0-9]/
-    }
 }

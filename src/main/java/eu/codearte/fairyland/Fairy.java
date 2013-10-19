@@ -26,6 +26,7 @@ public class Fairy {
 
   private DataMaster dataMaster;
   private RandomGenerator randomGenerator = createRandomGenerator();
+  private StringifyUtil stringifyUtil = createStringifyUtil(randomGenerator);
 
   private Fairy(Locale locale, String filePrefix) {
 
@@ -76,31 +77,44 @@ public class Fairy {
     try {
       Constructor<T> constructor = producer.getConstructor(RandomDataGenerator.class, RandomGenerator.class,
           StringifyUtil.class);
-      RandomDataGenerator randomDataGenerator = createRandomDataGenerator(dataMaster, randomGenerator);
-      StringifyUtil stringifyUtil = createStringifyUtil(randomGenerator);
-      return constructor.newInstance(randomDataGenerator, randomGenerator, stringifyUtil);
+      return constructor.newInstance(
+          createRandomDataGenerator(dataMaster, randomGenerator),
+          randomGenerator,
+          stringifyUtil);
     } catch (ReflectiveOperationException e) {
       throw new IllegalArgumentException(e);
     }
   }
 
   public Text text() {
-    return createText(dataMaster, randomGenerator);
+    return createText(dataMaster, randomGenerator, stringifyUtil);
   }
 
   public Person person() {
-    return createPerson(dataMaster, randomGenerator).generate();
+    return createPerson(dataMaster, randomGenerator, stringifyUtil).generate();
   }
 
   public Person women() {
-    return createPerson(dataMaster, randomGenerator).generate(Person.Sex.female);
+    return createPerson(dataMaster, randomGenerator, stringifyUtil).generate(Person.Sex.female);
   }
 
   public Person men() {
-    return createPerson(dataMaster, randomGenerator).generate(Person.Sex.male);
+    return createPerson(dataMaster, randomGenerator, stringifyUtil).generate(Person.Sex.male);
   }
 
   public Company company() {
-    return createCompany(dataMaster, randomGenerator);
+    return createCompany(dataMaster, randomGenerator, stringifyUtil);
+  }
+
+  public String numerify(String numberString) {
+    return stringifyUtil.numerify(numberString);
+  }
+
+  public String letterify(String letterString) {
+    return stringifyUtil.letterify(letterString);
+  }
+
+  public String bothify(String string) {
+    return stringifyUtil.bothify(string);
   }
 }

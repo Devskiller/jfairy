@@ -28,18 +28,6 @@ public class Text {
     this.stringifyUtil = stringifyUtil;
   }
 
-  public String numerify(String numberString) {
-    return stringifyUtil.numerify(numberString);
-  }
-
-  public String letterify(String letterString) {
-    return stringifyUtil.letterify(letterString);
-  }
-
-  public String bothify(String string) {
-    return stringifyUtil.bothify(string);
-  }
-
   public Text limitedTo(int limit) {
     this.limit = limit;
     return this;

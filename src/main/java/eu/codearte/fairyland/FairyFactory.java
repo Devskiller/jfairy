@@ -19,9 +19,11 @@ public class FairyFactory {
     return new RandomGenerator(SEED);
   }
 
-  public static Text createText(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new Text(createTextProducer(dataMaster, randomGenerator), randomGenerator,
-        createStringifyUtil(randomGenerator));
+  public static Text createText(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new Text(
+        createTextProducer(dataMaster, randomGenerator),
+        randomGenerator,
+        stringifyUtil);
   }
 
   public static StringifyUtil createStringifyUtil(RandomGenerator randomGenerator) {
@@ -37,13 +39,17 @@ public class FairyFactory {
     return new StringifyUtil(randomGenerator);
   }
 
-  public static PersonProducer createPerson(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new PersonProducer(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator,
-        createStringifyUtil1(randomGenerator));
+  public static PersonProducer createPerson(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new PersonProducer(
+        createRandomDataGenerator(dataMaster, randomGenerator),
+        randomGenerator,
+        stringifyUtil);
   }
 
-  public static Company createCompany(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new Company(createRandomDataGenerator(dataMaster, randomGenerator), randomGenerator,
-        createStringifyUtil1(randomGenerator));
+  public static Company createCompany(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+    return new Company(
+        createRandomDataGenerator(dataMaster, randomGenerator),
+        randomGenerator,
+        stringifyUtil);
   }
 }
