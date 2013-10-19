@@ -11,21 +11,21 @@ public class StringifyUtil {
   }
 
   public String letterify(String letterString) {
-    return getString(letterString, '?', 'a', 'z');
+    return replaceSymbolWithCharsFromTo(letterString, '?', 'a', 'z');
   }
 
   public String numerify(String numberString) {
-    return getString(numberString, '#', '0', '9');
+    return replaceSymbolWithCharsFromTo(numberString, '#', '0', '9');
   }
 
   public String bothify(String string) {
     return letterify(numerify(string));
   }
 
-  private String getString(String numberString, char hash, char from, char to) {
+  private String replaceSymbolWithCharsFromTo(String string, char symbol, char from, char to) {
     String result = "";
-    for (char aChar : numberString.toCharArray()) {
-      if (aChar == hash) {
+    for (char aChar : string.toCharArray()) {
+      if (aChar == symbol) {
         result += (char) (from + random.randomInt(to - from));
       } else {
         result += aChar;
