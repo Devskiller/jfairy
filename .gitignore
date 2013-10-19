@@ -1,5 +1,4 @@
 ### Gradle ###
-# Exclude Folder List #
 .gradle/
 build/
 classes/
@@ -10,10 +9,5 @@ classes/
 *.iws
 .idea/
 
-### Java ###
-*.class
+### Other ###
 
-# Package Files #
-*.jar
-*.war
-*.ear
