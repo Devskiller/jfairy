@@ -7,6 +7,8 @@ import eu.codearte.fairyland.DataMaster;
 import eu.codearte.fairyland.producer.person.Person;
 
 import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
+import static eu.codearte.fairyland.producer.person.Person.Sex.female;
+import static eu.codearte.fairyland.producer.person.Person.Sex.male;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class PersonProducer extends FairyProducer {
@@ -17,12 +19,15 @@ public class PersonProducer extends FairyProducer {
   }
 
   public Person generate() {
-    return generate(Person.Sex.male);
+    return generate(randomSex());
   }
 
-  public Person generate(Person.Sex selectedSex) {
-    String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, selectedSex.name());
-    Person.Sex sex = selectedSex;
+  private Person.Sex randomSex() {
+    return random.trueOrFalse() ? male : female;
+  }
+
+  public Person generate(Person.Sex sex) {
+    String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex.name());
     String lastName = generator.getValues(DataMaster.LAST_NAME);
     String email = generateEmail(firstName, lastName);
     return new Person(firstName, lastName, email, sex);
