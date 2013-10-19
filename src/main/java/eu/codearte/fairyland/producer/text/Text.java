@@ -17,37 +17,27 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class Text {
 
   private final TextProducer textProducer;
+  private final RandomGenerator random;
+  private final StringifyUtil stringifyUtil;
 
   private int limit = 0;
-  private final RandomGenerator random;
 
-  public Text(TextProducer textProducer, RandomGenerator random) {
+  public Text(TextProducer textProducer, RandomGenerator random, StringifyUtil stringifyUtil) {
     this.random = random;
     this.textProducer = textProducer;
+    this.stringifyUtil = stringifyUtil;
   }
 
   public String numerify(String numberString) {
-    return getString(numberString, '#', '0', '9');
+    return stringifyUtil.numerify(numberString);
   }
 
   public String letterify(String letterString) {
-    return getString(letterString, '?', 'a', 'z');
+    return stringifyUtil.letterify(letterString);
   }
 
   public String bothify(String string) {
-    return letterify(numerify(string));
-  }
-
-  private String getString(String numberString, char hash, char from, char to) {
-    String result = "";
-    for (char aChar : numberString.toCharArray()) {
-      if (aChar == hash) {
-        result += (char) (from + random.randomInt(to - from + 1));
-      } else {
-        result += aChar;
-      }
-    }
-    return result;
+    return stringifyUtil.bothify(string);
   }
 
   public Text limitedTo(int limit) {

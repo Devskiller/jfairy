@@ -52,23 +52,26 @@ class TextSpec extends Specification {
 
     def "should generate sentence"() {
         expect:
-        text.sentence() == "Posuere consectetuer vitae Lorem eget risus. Consectetur suscipit."
+        text.sentence()
     }
 
     def "should generate paragraph"() {
         expect:
-        text.paragraph() == "Est. Congue, pellentesque a, mi. Interdum Praesent Proin purus turpis. Nisi. Lorem. Interdum. In, pellentesque congue. Congue erat. Vulputate elit. Leo Etiam dolor, congue."
+        text.paragraph()
     }
 
     def "should numerify hashed string"() {
         expect:
-        text.numerify("Test#") != "Test#";
-        text.numerify("Test#").length() == "Test#".length();
+        text.numerify("Test#") ==~ /Test[0-9]/
     }
 
     def "should letterify hashed string"() {
         expect:
-        text.letterify("Test?") != "Test?";
-        text.letterify("Test?").length() == "Test?".length();
+        text.letterify("Test?") ==~ /Test[a-z]/
+    }
+
+    def "should bothify hashed string"() {
+        expect:
+        text.bothify("Test?#") ==~ /Test[a-z][0-9]/
     }
 }

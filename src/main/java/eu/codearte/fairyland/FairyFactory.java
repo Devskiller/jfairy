@@ -4,6 +4,7 @@
 package eu.codearte.fairyland;
 
 import eu.codearte.fairyland.producer.*;
+import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
 
 public class FairyFactory {
@@ -19,7 +20,12 @@ public class FairyFactory {
   }
 
   public static Text createText(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new Text(createTextProducer(dataMaster, randomGenerator), randomGenerator);
+    return new Text(createTextProducer(dataMaster, randomGenerator), randomGenerator,
+        createStringifyUtil(randomGenerator));
+  }
+
+  private static StringifyUtil createStringifyUtil(RandomGenerator randomGenerator) {
+    return new StringifyUtil(randomGenerator);
   }
 
   private static TextProducer createTextProducer(DataMaster dataMaster, RandomGenerator randomGenerator) {

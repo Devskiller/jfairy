@@ -1,6 +1,7 @@
 package snippets
 
 import eu.codearte.fairyland.Fairy
+import eu.codearte.fairyland.producer.text.StringifyUtil
 
 import static eu.codearte.fairyland.Fairy.create
 

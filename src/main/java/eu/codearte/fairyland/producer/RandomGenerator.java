@@ -21,7 +21,7 @@ public class RandomGenerator {
   }
 
   public String randomElement(List<String> elements) {
-    return elements.get(randomInt(elements.size()));
+    return elements.get(randomInt(elements.size() - 1));
   }
 
   public List<String> randomElements(List<String> elements, int count) {
@@ -29,7 +29,14 @@ public class RandomGenerator {
     return elements.subList(0, count % elements.size());
   }
 
-  public int randomInt(int value) {
-    return value > 0 ? random.nextInt(value) : 0;
+  /**
+   * Returns random int value
+   *
+   * @param max value of the random number to be returned.  Must be
+   *            positive.
+   * @return random {@code int} value between {@code 0} (inclusive) and {@code max} (inclusive)
+   */
+  public int randomInt(int max) {
+    return max > 0 ? random.nextInt(max + 1) : 0;
   }
 }
