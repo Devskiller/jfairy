@@ -95,7 +95,6 @@ publishing {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.8'
+wrapper {
+    gradleVersion '1.8'
 }
-
