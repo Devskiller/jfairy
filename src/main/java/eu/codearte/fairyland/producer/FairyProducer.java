@@ -11,7 +11,7 @@ public abstract class FairyProducer {
   protected final RandomGenerator random;
   protected final FairUtil fairUtil;
 
-  public FairyProducer(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil) {
+  protected FairyProducer(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil) {
     this.generator = generator;
     this.random = random;
     this.fairUtil = fairUtil;

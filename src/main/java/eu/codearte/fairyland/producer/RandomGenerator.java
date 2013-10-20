@@ -46,11 +46,4 @@ public class RandomGenerator {
 
   }
 
-  public char randomBetween2(char min, char max) {
-//    LOG.info("min={}, max={}", min, max);
-    System.out.println("###" + max);
-    int range = max - min + 1;
-    int random = range > 0 ? this.random.nextInt(range) : 0;
-    return (char) (min + random);
-  }
 }

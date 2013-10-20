@@ -39,7 +39,7 @@ public class DataMaster {
   /**
    * This method is used by YAML decoder
    *
-   * @param data
+   * @param data fetched from yaml document
    */
   @SuppressWarnings("unused")
   public void setData(Map<String, List<String>> data) {

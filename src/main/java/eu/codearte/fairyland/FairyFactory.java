@@ -15,7 +15,7 @@ import eu.codearte.fairyland.producer.text.TextProducer;
 import eu.codearte.fairyland.producer.util.CalendarGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
 
-public class FairyFactory {
+class FairyFactory {
 
   private static final int SEED = 1761283695;
 

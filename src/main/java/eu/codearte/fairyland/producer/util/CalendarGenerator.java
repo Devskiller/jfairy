@@ -32,9 +32,8 @@ public class CalendarGenerator {
     GregorianCalendar calendar = timeProvider.getGregorianCalendar();
 
     calendar.roll(YEAR, -randomGenerator.randomBetween(0, 100));
-    int actualMaximumDay = calendar.getActualMaximum(DAY_OF_YEAR);
-    System.out.println(calendar.getTime());
-    calendar.set(DAY_OF_YEAR, randomGenerator.randomBetween(1, actualMaximumDay));
+    int maximumDay = calendar.getActualMaximum(DAY_OF_YEAR);
+    calendar.set(DAY_OF_YEAR, randomGenerator.randomBetween(1, maximumDay));
 
     return calendar;
   }

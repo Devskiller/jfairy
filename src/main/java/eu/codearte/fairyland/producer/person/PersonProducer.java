@@ -15,7 +15,7 @@ import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
 import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
-abstract class PersonProducer extends FairyProducer {
+public abstract class PersonProducer extends FairyProducer {
 
   private PersonHolder person;
 

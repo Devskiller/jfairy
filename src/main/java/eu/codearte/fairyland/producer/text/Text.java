@@ -68,7 +68,7 @@ public class Text {
   }
 
   private List<String> sentences(int sentenceCount) {
-    List<String> sentences = new ArrayList<String>(sentenceCount);
+    List<String> sentences = new ArrayList<>(sentenceCount);
     for (int i = 0; i < sentenceCount; i++) {
       sentences.add(sentence());
     }
