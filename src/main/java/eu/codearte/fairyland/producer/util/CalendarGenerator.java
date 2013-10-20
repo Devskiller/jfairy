@@ -13,12 +13,12 @@ import java.util.GregorianCalendar;
 import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.YEAR;
 
-public class RandomCalendar {
+public class CalendarGenerator {
 
   private final RandomGenerator randomGenerator;
   private final DateProvider dateProvider;
 
-  public RandomCalendar(RandomGenerator randomGenerator, DateProvider dateProvider) {
+  public CalendarGenerator(RandomGenerator randomGenerator, DateProvider dateProvider) {
     this.randomGenerator = randomGenerator;
     this.dateProvider = dateProvider;
   }

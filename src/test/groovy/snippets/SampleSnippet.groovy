@@ -23,12 +23,19 @@ println fairy.person().firstName();
 
 def person = fairy.person()
 println person.firstName();
-println person.sex();
 println person.isMale();
 println person.isFemale();
 println person.telephoneNumber();
+println person.dateOfBirth();
+
+def women = fairy.women()
+println women.firstName();
+println women.isMale();
+println women.isFemale();
+println women.telephoneNumber();
+println women.dateOfBirth();
 
 def text = create().text()
-println text.numerify("dupa###")
-println text.letterify("letter???")
-println text.bothify("?? ###-###")
+println Fairy.create().numerify("dupa###")
+println Fairy.create().letterify("letter???")
+println Fairy.create().bothify("?? ###-###")

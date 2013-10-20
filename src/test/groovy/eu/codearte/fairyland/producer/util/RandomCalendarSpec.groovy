@@ -6,13 +6,12 @@ package eu.codearte.fairyland.producer.util
 
 import eu.codearte.fairyland.producer.RandomGenerator
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class RandomCalendarSpec extends Specification {
 
     def randomGenerator = Mock(RandomGenerator);
     def dateProvider = Mock(DateProvider);
-    def randomCalendar = new RandomCalendar(randomGenerator, dateProvider)
+    def randomCalendar = new CalendarGenerator(randomGenerator, dateProvider)
 
     def "should generate 1 yanuary"() {
 

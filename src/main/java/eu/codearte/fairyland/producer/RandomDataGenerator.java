@@ -4,28 +4,29 @@
 
 package eu.codearte.fairyland.producer;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.producer.util.CalendarGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
-import static com.google.common.collect.FluentIterable.from;
 
 public class RandomDataGenerator {
   private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
   private final DataMaster data;
   private final RandomGenerator random;
+  private final CalendarGenerator calendarGenerator;
 
-  public RandomDataGenerator(DataMaster data, RandomGenerator random) {
+  public RandomDataGenerator(DataMaster data, RandomGenerator random, CalendarGenerator CalendarGenerator) {
     this.data = data;
     this.random = random;
+    this.calendarGenerator = CalendarGenerator;
+  }
+
+  public Date randomDateInThePast() {
+    return calendarGenerator.randomDateInThePast();
   }
 
   public List<String> randomElements(List<String> elements, int count) {

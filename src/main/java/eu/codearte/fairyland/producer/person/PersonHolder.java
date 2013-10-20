@@ -4,6 +4,8 @@
 
 package eu.codearte.fairyland.producer.person;
 
+import java.util.Date;
+
 class PersonHolder {
 
   private final String firstName;
@@ -11,17 +13,19 @@ class PersonHolder {
   private final String email;
   private final Sex sex;
   private final String telephoneNumber;
+  private final Date dateOfBirth;
 
   enum Sex {
     male, female
   }
 
-  public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber) {
+  public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, Date dateOfBirth) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.sex = sex;
     this.telephoneNumber = telephoneNumber;
+    this.dateOfBirth = dateOfBirth;
   }
 
   public String firstName() {
@@ -54,5 +58,9 @@ class PersonHolder {
 
   public String telephoneNumber() {
     return telephoneNumber;
+  }
+
+  Date dateOfBirth() {
+    return dateOfBirth;
   }
 }

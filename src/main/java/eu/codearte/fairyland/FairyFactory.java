@@ -12,22 +12,28 @@ import eu.codearte.fairyland.producer.person.Women;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.text.TextProducer;
+import eu.codearte.fairyland.producer.util.CalendarGenerator;
 
 public class FairyFactory {
 
   private static final int SEED = 1761283695;
 
-  public static RandomDataGenerator createRandomDataGenerator(DataMaster dataMaster, RandomGenerator randomGenerator) {
-    return new RandomDataGenerator(dataMaster, randomGenerator);
+  public static RandomDataGenerator createRandomDataGenerator(DataMaster dataMaster,
+                                                              RandomGenerator randomGenerator,
+                                                              CalendarGenerator randomCalendar) {
+    return new RandomDataGenerator(dataMaster, randomGenerator, randomCalendar);
   }
 
   public static RandomGenerator createRandomGenerator() {
     return new RandomGenerator(SEED);
   }
 
-  public static Text createText(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+  public static Text createText(DataMaster dataMaster,
+                                RandomGenerator randomGenerator,
+                                StringifyUtil stringifyUtil,
+                                CalendarGenerator calendarGenerator) {
     return new Text(
-        createTextProducer(dataMaster, randomGenerator, stringifyUtil),
+        createTextProducer(dataMaster, randomGenerator, stringifyUtil, calendarGenerator),
         randomGenerator);
   }
 
@@ -35,9 +41,12 @@ public class FairyFactory {
     return createStringifyUtil1(randomGenerator);
   }
 
-  private static TextProducer createTextProducer(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+  private static TextProducer createTextProducer(DataMaster dataMaster,
+                                                 RandomGenerator randomGenerator,
+                                                 StringifyUtil stringifyUtil,
+                                                 CalendarGenerator calendarGenerator) {
     return new TextProducer(
-        createRandomDataGenerator(dataMaster, randomGenerator),
+        createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
         randomGenerator,
         stringifyUtil);
   }
@@ -46,30 +55,42 @@ public class FairyFactory {
     return new StringifyUtil(randomGenerator);
   }
 
-  public static Person createPerson(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+  public static Person createPerson(DataMaster dataMaster,
+                                    RandomGenerator randomGenerator,
+                                    StringifyUtil stringifyUtil,
+                                    CalendarGenerator calendarGenerator) {
     return new Person(
-        createRandomDataGenerator(dataMaster, randomGenerator),
+        createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
         randomGenerator,
         stringifyUtil);
   }
 
-  public static Women createWomen(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+  public static Women createWomen(DataMaster dataMaster,
+                                  RandomGenerator randomGenerator,
+                                  StringifyUtil stringifyUtil,
+                                  CalendarGenerator calendarGenerator) {
     return new Women(
-        createRandomDataGenerator(dataMaster, randomGenerator),
+        createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
         randomGenerator,
         stringifyUtil);
   }
 
-  public static Men createMen(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+  public static Men createMen(DataMaster dataMaster,
+                              RandomGenerator randomGenerator,
+                              StringifyUtil stringifyUtil,
+                              CalendarGenerator calendarGenerator) {
     return new Men(
-        createRandomDataGenerator(dataMaster, randomGenerator),
+        createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
         randomGenerator,
         stringifyUtil);
   }
 
-  public static Company createCompany(DataMaster dataMaster, RandomGenerator randomGenerator, StringifyUtil stringifyUtil) {
+  public static Company createCompany(DataMaster dataMaster,
+                                      RandomGenerator randomGenerator,
+                                      StringifyUtil stringifyUtil,
+                                      CalendarGenerator calendarGenerator) {
     return new Company(
-        createRandomDataGenerator(dataMaster, randomGenerator),
+        createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
         randomGenerator,
         stringifyUtil);
   }

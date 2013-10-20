@@ -9,6 +9,8 @@ import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 
+import java.util.Date;
+
 import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
 import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
@@ -40,7 +42,8 @@ abstract class PersonProducer extends FairyProducer {
     String lastName = generator.getValues(DataMaster.LAST_NAME);
     String email = generateEmail(firstName, lastName);
     String telephonNumber = stringifyUtil.numerify(telephoneNumberFormat);
-    return new PersonHolder(firstName, lastName, email, sex, telephonNumber);
+    Date dateOfBirth = generator.randomDateInThePast();
+    return new PersonHolder(firstName, lastName, email, sex, telephonNumber, dateOfBirth);
   }
 
   public String firstName() {
@@ -76,6 +79,11 @@ abstract class PersonProducer extends FairyProducer {
   public String telephoneNumber() {
     checkPerson();
     return person.telephoneNumber();
+  }
+
+  public Date dateOfBirth() {
+    checkPerson();
+    return person.dateOfBirth();
   }
 
   private void checkPerson() {

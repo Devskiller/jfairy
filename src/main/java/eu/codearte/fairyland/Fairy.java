@@ -12,8 +12,8 @@ import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.Women;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
+import eu.codearte.fairyland.producer.util.CalendarGenerator;
 import eu.codearte.fairyland.producer.util.DateProvider;
-import eu.codearte.fairyland.producer.util.RandomCalendar;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -33,7 +33,7 @@ public class Fairy {
   private final RandomGenerator randomGenerator = createRandomGenerator();
   private final StringifyUtil stringifyUtil = createStringifyUtil(randomGenerator);
   private final DateProvider dateProvider = new DateProvider();
-  private final RandomCalendar randomCalendar = new RandomCalendar(randomGenerator, dateProvider);
+  private final CalendarGenerator calendarGenerator = new CalendarGenerator(randomGenerator, dateProvider);
 
   private Fairy(Locale locale, String filePrefix) {
 
@@ -82,10 +82,12 @@ public class Fairy {
 
     }
     try {
-      Constructor<T> constructor = producer.getConstructor(RandomDataGenerator.class, RandomGenerator.class,
+      Constructor<T> constructor = producer.getConstructor(
+          RandomDataGenerator.class,
+          RandomGenerator.class,
           StringifyUtil.class);
       return constructor.newInstance(
-          createRandomDataGenerator(dataMaster, randomGenerator),
+          createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
           randomGenerator,
           stringifyUtil);
     } catch (ReflectiveOperationException e) {
@@ -94,23 +96,23 @@ public class Fairy {
   }
 
   public Text text() {
-    return createText(dataMaster, randomGenerator, stringifyUtil);
+    return createText(dataMaster, randomGenerator, stringifyUtil, calendarGenerator);
   }
 
   public Person person() {
-    return createPerson(dataMaster, randomGenerator, stringifyUtil);
+    return createPerson(dataMaster, randomGenerator, stringifyUtil, calendarGenerator);
   }
 
   public Women women() {
-    return createWomen(dataMaster, randomGenerator, stringifyUtil);
+    return createWomen(dataMaster, randomGenerator, stringifyUtil, calendarGenerator);
   }
 
   public Men men() {
-    return createMen(dataMaster, randomGenerator, stringifyUtil);
+    return createMen(dataMaster, randomGenerator, stringifyUtil, calendarGenerator);
   }
 
   public Company company() {
-    return createCompany(dataMaster, randomGenerator, stringifyUtil);
+    return createCompany(dataMaster, randomGenerator, stringifyUtil, calendarGenerator);
   }
 
   public String numerify(String numberString) {
@@ -124,8 +126,8 @@ public class Fairy {
   public String bothify(String string) {
     return stringifyUtil.bothify(string);
   }
-  
-  public Date randomDateInThePast(){
-    return randomCalendar.randomDateInThePast();
+
+  public Date randomDateInThePast() {
+    return calendarGenerator.randomDateInThePast();
   }
 }

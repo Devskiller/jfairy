@@ -88,4 +88,11 @@ class PersonSpec extends Specification {
         then:
         person.telephoneNumber() ==~ /\d\d\d--\d\d\d/
     }
+
+    def "should create birth date"() {
+        when:
+        def person = Fairy.create().person()
+        then:
+        person.dateOfBirth().before(new Date())
+    }
 }
