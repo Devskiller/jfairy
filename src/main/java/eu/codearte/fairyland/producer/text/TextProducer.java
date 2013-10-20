@@ -6,7 +6,6 @@ package eu.codearte.fairyland.producer.text;
 import eu.codearte.fairyland.producer.FairyProducer;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.text.StringifyUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,8 @@ public class TextProducer extends FairyProducer {
   private final String loremIpsum;
   private final List<String> words;
 
-  public TextProducer(RandomDataGenerator generator, RandomGenerator random, StringifyUtil stringifyUtil1) {
-    super(generator, random, stringifyUtil1);
+  public TextProducer(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
+    super(generator, random, fairUtil1);
     loremIpsum = generator.getValue(DATA);
     words = asList(split(loremIpsum, ' '));
   }
@@ -46,7 +45,7 @@ public class TextProducer extends FairyProducer {
   }
 
   private List<String> readRawWords(int count, int precision) {
-    return generator.randomElements(words, count + random.randomInt(precision));
+    return generator.randomElements(words, random.randomBetween(count, count + precision));
   }
 
 }

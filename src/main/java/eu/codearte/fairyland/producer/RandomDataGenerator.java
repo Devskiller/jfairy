@@ -19,10 +19,10 @@ public class RandomDataGenerator {
   private final RandomGenerator random;
   private final CalendarGenerator calendarGenerator;
 
-  public RandomDataGenerator(DataMaster data, RandomGenerator random, CalendarGenerator CalendarGenerator) {
+  public RandomDataGenerator(DataMaster data, RandomGenerator random, CalendarGenerator calendarGenerator) {
     this.data = data;
     this.random = random;
-    this.calendarGenerator = CalendarGenerator;
+    this.calendarGenerator = calendarGenerator;
   }
 
   public Date randomDateInThePast() {

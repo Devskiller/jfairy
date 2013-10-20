@@ -6,10 +6,7 @@ package eu.codearte.fairyland
 
 import spock.lang.Specification
 
-import java.text.SimpleDateFormat
-
-class FairyTest extends Specification {
-
+class FairySpec extends Specification {
 
     def fairy = Fairy.create()
 

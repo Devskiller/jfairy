@@ -14,53 +14,59 @@ class PersonHolder {
   private final Sex sex;
   private final String telephoneNumber;
   private final Date dateOfBirth;
+  private final int age;
 
   enum Sex {
     male, female
   }
 
-  public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, Date dateOfBirth) {
+  public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, Date dateOfBirth, int age) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.sex = sex;
     this.telephoneNumber = telephoneNumber;
     this.dateOfBirth = dateOfBirth;
+    this.age = age;
   }
 
-  public String firstName() {
+  String firstName() {
     return firstName;
   }
 
-  public String lastName() {
+  String lastName() {
     return lastName;
   }
 
-  public String email() {
+  String email() {
     return email;
   }
 
-  public Sex sex() {
+  Sex sex() {
     return sex;
   }
 
-  public String fullName() {
+  String fullName() {
     return firstName + " " + lastName;
   }
 
-  public boolean isMale() {
+  boolean isMale() {
     return sex == Sex.male;
   }
 
-  public boolean isFemale() {
+  boolean isFemale() {
     return sex == Sex.female;
   }
 
-  public String telephoneNumber() {
+  String telephoneNumber() {
     return telephoneNumber;
   }
 
   Date dateOfBirth() {
     return dateOfBirth;
+  }
+
+  int age() {
+    return age;
   }
 }

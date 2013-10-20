@@ -1,7 +1,6 @@
 package snippets
 
 import eu.codearte.fairyland.Fairy
-import eu.codearte.fairyland.producer.text.StringifyUtil
 
 import static eu.codearte.fairyland.Fairy.create
 
@@ -27,6 +26,7 @@ println person.isMale();
 println person.isFemale();
 println person.telephoneNumber();
 println person.dateOfBirth();
+println person.age();
 
 def women = fairy.women()
 println women.firstName();
@@ -34,6 +34,7 @@ println women.isMale();
 println women.isFemale();
 println women.telephoneNumber();
 println women.dateOfBirth();
+println women.age();
 
 def text = create().text()
 println Fairy.create().numerify("dupa###")

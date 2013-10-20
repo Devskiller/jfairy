@@ -16,11 +16,11 @@ import static java.util.Calendar.YEAR;
 public class CalendarGenerator {
 
   private final RandomGenerator randomGenerator;
-  private final DateProvider dateProvider;
+  private final TimeProvider timeProvider;
 
-  public CalendarGenerator(RandomGenerator randomGenerator, DateProvider dateProvider) {
+  public CalendarGenerator(RandomGenerator randomGenerator, TimeProvider timeProvider) {
     this.randomGenerator = randomGenerator;
-    this.dateProvider = dateProvider;
+    this.timeProvider = timeProvider;
   }
 
   public Date randomDateInThePast() {
@@ -29,10 +29,12 @@ public class CalendarGenerator {
 
   public Calendar randomCalendarInThePast() {
 
-    GregorianCalendar calendar = dateProvider.getGregorianCalendar();
+    GregorianCalendar calendar = timeProvider.getGregorianCalendar();
 
-    calendar.roll(YEAR, -randomGenerator.randomInt(100));
-    calendar.set(DAY_OF_YEAR, 1 + randomGenerator.randomInt(calendar.getActualMaximum(DAY_OF_YEAR) - 1));
+    calendar.roll(YEAR, -randomGenerator.randomBetween(0, 100));
+    int actualMaximumDay = calendar.getActualMaximum(DAY_OF_YEAR);
+    System.out.println(calendar.getTime());
+    calendar.set(DAY_OF_YEAR, randomGenerator.randomBetween(1, actualMaximumDay));
 
     return calendar;
   }

@@ -7,7 +7,7 @@ import eu.codearte.fairyland.DataMaster;
 import eu.codearte.fairyland.producer.FairyProducer;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.text.StringifyUtil;
+import eu.codearte.fairyland.producer.text.FairUtil;
 
 import java.util.Date;
 
@@ -21,8 +21,8 @@ abstract class PersonProducer extends FairyProducer {
 
   private String telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
 
-  public PersonProducer(RandomDataGenerator generator, RandomGenerator random, StringifyUtil stringifyUtil1) {
-    super(generator, random, stringifyUtil1);
+  public PersonProducer(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
+    super(generator, random, fairUtil1);
   }
 
   public PersonProducer telephoneNumberFormat(String telephoneNumberFormat) {
@@ -41,9 +41,10 @@ abstract class PersonProducer extends FairyProducer {
     String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex.name());
     String lastName = generator.getValues(DataMaster.LAST_NAME);
     String email = generateEmail(firstName, lastName);
-    String telephonNumber = stringifyUtil.numerify(telephoneNumberFormat);
+    String telephonNumber = fairUtil.numerify(telephoneNumberFormat);
     Date dateOfBirth = generator.randomDateInThePast();
-    return new PersonHolder(firstName, lastName, email, sex, telephonNumber, dateOfBirth);
+    int age = fairUtil.age(dateOfBirth);
+    return new PersonHolder(firstName, lastName, email, sex, telephonNumber, dateOfBirth, age);
   }
 
   public String firstName() {
@@ -84,6 +85,10 @@ abstract class PersonProducer extends FairyProducer {
   public Date dateOfBirth() {
     checkPerson();
     return person.dateOfBirth();
+  }
+  public int age() {
+    checkPerson();
+    return person.age();
   }
 
   private void checkPerson() {

@@ -6,14 +6,14 @@ package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.DataMaster
 import eu.codearte.fairyland.producer.util.CalendarGenerator
-import eu.codearte.fairyland.producer.util.DateProvider
+import eu.codearte.fairyland.producer.util.TimeProvider
 import spock.lang.Specification
 
 class RandomDataGeneratorSpec extends Specification {
 
     def data = Mock(DataMaster)
     def randomGenerator = new RandomGenerator(1001L);
-    def randomCalendar = new CalendarGenerator(randomGenerator, new DateProvider())
+    def randomCalendar = new CalendarGenerator(randomGenerator, new TimeProvider())
 
     def "should return men"() {
         setup:

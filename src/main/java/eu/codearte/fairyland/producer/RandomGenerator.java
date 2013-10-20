@@ -3,13 +3,16 @@
  */
 package eu.codearte.fairyland.producer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.Random;
 
 import static java.util.Collections.shuffle;
 
 public class RandomGenerator {
-
+  private static final Logger LOG = LoggerFactory.getLogger(RandomGenerator.class);
   private final Random random;
 
   public RandomGenerator(long seed) {
@@ -21,7 +24,7 @@ public class RandomGenerator {
   }
 
   public String randomElement(List<String> elements) {
-    return elements.get(randomInt(elements.size() - 1));
+    return elements.get(randomBetween(0, elements.size() - 1));
   }
 
   public List<String> randomElements(List<String> elements, int count) {
@@ -36,7 +39,18 @@ public class RandomGenerator {
    *            positive.
    * @return random {@code int} value between {@code 0} (inclusive) and {@code max} (inclusive)
    */
-  public int randomInt(int max) {
-    return max > 0 ? random.nextInt(max + 1) : 0;
+  public int randomBetween(int min, int max) {
+    int range = max - min + 1;
+    int random = range > 0 ? this.random.nextInt(range) : 0;
+    return min + random;
+
+  }
+
+  public char randomBetween2(char min, char max) {
+//    LOG.info("min={}, max={}", min, max);
+    System.out.println("###" + max);
+    int range = max - min + 1;
+    int random = range > 0 ? this.random.nextInt(range) : 0;
+    return (char) (min + random);
   }
 }

@@ -16,7 +16,7 @@ import java.util.Locale;
 
 import static java.lang.String.format;
 
-public class DateProvider {
+public class TimeProvider {
 
   public GregorianCalendar getGregorianCalendar() {
     return new GregorianCalendar();
@@ -24,7 +24,7 @@ public class DateProvider {
 
   public Calendar getCalendar(String date) {
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-    Date result = null;
+    Date result;
     try {
       result = df.parse(date);
     } catch (ParseException e) {

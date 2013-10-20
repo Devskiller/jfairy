@@ -6,12 +6,12 @@ package eu.codearte.fairyland.producer.person;
 
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.text.StringifyUtil;
+import eu.codearte.fairyland.producer.text.FairUtil;
 
 public class Women extends PersonProducer {
 
-  public Women(RandomDataGenerator generator, RandomGenerator random, StringifyUtil stringifyUtil1) {
-    super(generator, random, stringifyUtil1);
+  public Women(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
+    super(generator, random, fairUtil1);
   }
 
   @Override

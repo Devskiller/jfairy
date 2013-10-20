@@ -95,4 +95,11 @@ class PersonSpec extends Specification {
         then:
         person.dateOfBirth().before(new Date())
     }
+
+    def "should create age"() {
+        when:
+        def person = Fairy.create().person()
+        then:
+        person.age()
+    }
 }

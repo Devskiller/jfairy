@@ -3,18 +3,18 @@
  */
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.producer.text.StringifyUtil;
+import eu.codearte.fairyland.producer.text.FairUtil;
 
 public abstract class FairyProducer {
 
   protected final RandomDataGenerator generator;
   protected final RandomGenerator random;
-  protected final StringifyUtil stringifyUtil;
+  protected final FairUtil fairUtil;
 
-  public FairyProducer(RandomDataGenerator generator, RandomGenerator random, StringifyUtil stringifyUtil) {
+  public FairyProducer(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil) {
     this.generator = generator;
     this.random = random;
-    this.stringifyUtil = stringifyUtil;
+    this.fairUtil = fairUtil;
   }
 
 }

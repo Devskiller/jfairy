@@ -13,7 +13,7 @@ class DateProviderSpec extends Specification {
     def "should parse date"() {
 
         setup:
-        DateProvider dateProvider = new DateProvider();
+        TimeProvider dateProvider = new TimeProvider();
 
         expect:
         def calendar = dateProvider.getCalendar(date);

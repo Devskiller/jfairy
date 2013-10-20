@@ -10,15 +10,15 @@ import spock.lang.Specification
 class RandomCalendarSpec extends Specification {
 
     def randomGenerator = Mock(RandomGenerator);
-    def dateProvider = Mock(DateProvider);
+    def dateProvider = Mock(TimeProvider);
     def randomCalendar = new CalendarGenerator(randomGenerator, dateProvider)
 
     def "should generate 1 yanuary"() {
 
         setup:
-        dateProvider.getGregorianCalendar() >> new DateProvider().getCalendar("2013-10-20")
-        randomGenerator.randomInt(100) >> 0
-        randomGenerator.randomInt(365) >> 0
+        dateProvider.getGregorianCalendar() >> new TimeProvider().getCalendar("2013-10-20")
+        randomGenerator.randomBetween(0, 100) >> 0
+        randomGenerator.randomBetween(1, 365) >> 1
 
         when:
         def calendar = randomCalendar.randomCalendarInThePast();
@@ -33,9 +33,9 @@ class RandomCalendarSpec extends Specification {
     def "should generate 1 february"() {
 
         setup:
-        dateProvider.getGregorianCalendar() >> new DateProvider().getCalendar("2013-10-20")
-        randomGenerator.randomInt(100) >> 10
-        randomGenerator.randomInt(364) >> 31
+        dateProvider.getGregorianCalendar() >> new TimeProvider().getCalendar("2013-10-20")
+        randomGenerator.randomBetween(0, 100) >> 10
+        randomGenerator.randomBetween(1, 365) >> 32
 
         when:
         def calendar = randomCalendar.randomCalendarInThePast();
@@ -49,9 +49,9 @@ class RandomCalendarSpec extends Specification {
     def "should generate last day of the year"() {
 
         setup:
-        dateProvider.getGregorianCalendar() >> new DateProvider().getCalendar("2013-10-20")
-        randomGenerator.randomInt(100) >> 20
-        randomGenerator.randomInt(364) >> 364
+        dateProvider.getGregorianCalendar() >> new TimeProvider().getCalendar("2013-10-20")
+        randomGenerator.randomBetween(0, 100) >> 20
+        randomGenerator.randomBetween(1, 365) >> 365
 
         when:
         def calendar = randomCalendar.randomCalendarInThePast();

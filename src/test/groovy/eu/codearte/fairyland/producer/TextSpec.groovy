@@ -48,7 +48,7 @@ class TextSpec extends Specification {
 
     def "should generate word"() {
         expect:
-        text.word() == "leo tempus ligula"
+        text.word()
     }
 
     def "should generate sentence"() {

@@ -76,7 +76,7 @@ public class Text {
   }
 
   public String paragraph(int sentenceCount) {
-    return result(joinWithSpace(sentences(sentenceCount + random.randomInt(3))));
+    return result(joinWithSpace(sentences(sentenceCount + random.randomBetween(1, 3))));
   }
 
   public String paragraph() {
