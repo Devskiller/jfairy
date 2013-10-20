@@ -6,6 +6,8 @@ package eu.codearte.fairyland
 
 import spock.lang.Specification
 
+import java.text.SimpleDateFormat
+
 class FairyTest extends Specification {
 
 
@@ -24,5 +26,10 @@ class FairyTest extends Specification {
     def "should bothify hashed string"() {
         expect:
         fairy.bothify("Test?#") ==~ /Test[a-z][0-9]/
+    }
+
+    def "should generate random date in the past"() {
+        expect:
+        fairy.randomDateInThePast().before(new Date())
     }
 }

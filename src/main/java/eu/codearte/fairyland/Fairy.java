@@ -12,9 +12,12 @@ import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.Women;
 import eu.codearte.fairyland.producer.text.StringifyUtil;
 import eu.codearte.fairyland.producer.text.Text;
+import eu.codearte.fairyland.producer.util.DateProvider;
+import eu.codearte.fairyland.producer.util.RandomCalendar;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.util.Date;
 import java.util.Locale;
 
 import static eu.codearte.fairyland.FairyFactory.*;
@@ -27,8 +30,10 @@ public class Fairy {
   private static final String DATA_FILE_PREFIX = "fairyland_";
 
   private DataMaster dataMaster;
-  private RandomGenerator randomGenerator = createRandomGenerator();
-  private StringifyUtil stringifyUtil = createStringifyUtil(randomGenerator);
+  private final RandomGenerator randomGenerator = createRandomGenerator();
+  private final StringifyUtil stringifyUtil = createStringifyUtil(randomGenerator);
+  private final DateProvider dateProvider = new DateProvider();
+  private final RandomCalendar randomCalendar = new RandomCalendar(randomGenerator, dateProvider);
 
   private Fairy(Locale locale, String filePrefix) {
 
@@ -118,5 +123,9 @@ public class Fairy {
 
   public String bothify(String string) {
     return stringifyUtil.bothify(string);
+  }
+  
+  public Date randomDateInThePast(){
+    return randomCalendar.randomDateInThePast();
   }
 }
