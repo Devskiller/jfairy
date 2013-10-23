@@ -8,6 +8,7 @@ classes/
 *.ipr
 *.iws
 .idea/
+out/
 
 ### Other ###
 
