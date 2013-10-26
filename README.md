@@ -13,14 +13,14 @@ This project can be built using [gradle](http://www.gradle.org/) command:
 Installation
 ------------
 
-Installation into [maven](maven.apache.org) local repository
+Installation into [maven](http://maven.apache.org/) local repository
 
     ./gradlew publishToMavenLocal
 
 Usage
 -----
 
-In maven projects:
+In Maven projects (pom.xml):
 
     <pom>
         ...
@@ -40,7 +40,18 @@ In maven projects:
         ...
     </pom>
 
+In Gradle projects (build.gradle):
+
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://dl.bintray.com/codearte/public'
+        }
+    }
+    ...
+    testCompile 'eu.codearte:fairyland:0.0.1'
+
 Sample
 ------
 
-Look into [code sample](snippets/)
+Look into [code sample](src/test/groovy/snippets/)
