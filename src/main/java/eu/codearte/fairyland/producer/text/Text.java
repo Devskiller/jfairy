@@ -15,6 +15,13 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 public class Text {
 
+  private static final int DEFAULT_WORD_COUNT = 3;
+  private static final int DEFAULT_WORD_COUNT_IN_SENTENCE = 3;
+  private static final int DEFAULT_SENTENCE_COUNT = 3;
+  private static final int WORD_COUNT_PRECISION_IN_SENTENCE = 6;
+  private static final int SENTENCE_COUNT_PRECISION_MIN = 1;
+  private static final int SENTENCE_COUNT_PRECISION_MAX = 3;
+
   private final TextProducer textProducer;
   private final RandomGenerator random;
 
@@ -42,7 +49,7 @@ public class Text {
   }
 
   public String word() {
-    return result(word(3));
+    return result(word(DEFAULT_WORD_COUNT));
   }
 
   public String word(int count) {
@@ -50,11 +57,11 @@ public class Text {
   }
 
   public String sentence() {
-    return result(sentence(3));
+    return result(sentence(DEFAULT_WORD_COUNT_IN_SENTENCE));
   }
 
   public String sentence(int wordCount) {
-    String randomWords = textProducer.rawWords(wordCount, 6);
+    String randomWords = textProducer.rawWords(wordCount, WORD_COUNT_PRECISION_IN_SENTENCE);
     List<String> sentences = new ArrayList<>();
     for (String sentence : Splitter.on(". ").split(randomWords)) {
       sentences.add(capitalize(sentence));
@@ -75,12 +82,12 @@ public class Text {
     return sentences;
   }
 
-  public String paragraph(int sentenceCount) {
-    return result(joinWithSpace(sentences(sentenceCount + random.randomBetween(1, 3))));
-  }
-
   public String paragraph() {
-    return result(paragraph(3));
+    return result(paragraph(DEFAULT_SENTENCE_COUNT));
   }
 
+  public String paragraph(int sentenceCount) {
+    return result(joinWithSpace(sentences(sentenceCount +
+        random.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
+  }
 }
