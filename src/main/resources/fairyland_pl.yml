@@ -1,0 +1,18 @@
+data:
+  domains: [pl, com, eu, com.pl]
+  firstNames: {
+    male: [Jakub, Mateusz, Bartłomiej, Kacper, Jan, Michał, Szymon, Maciej, Piotr, Filip, Mikołaj, Antoni, Aleksander, Adam, Franciszek, Wiktor, Igor, Karol, Maksymilian, Stanisław, Krzysztof, Patryk, Dawid, Tomasz, Oskar, Kamil, Paweł, Wojciech, Dominik, Adrian],
+    female: [Julia, Aleksandra, Zuzanna, Maja, Wiktoria, Natalia, Oliwia, Zofia, Maria, Karolina, Weronika, Alicja, Anna, Hanna, Magdalena, Patrycja, Martyna, Marta, Dominika, Katarzyna, Małgorzata, Emilia, Kinga, Klaudia, Paulina, Joanna]
+  }
+  lastNames: {
+    male: [Nowak, Kowalski, Wiśniewski, Dąbrowski, Lewandowski, Wójcik, Kamiński, Kowalczyk, Zieliński, Szymański, Woźniak, Kozłowski, Jankowski, Wojciechowski, Kwiatkowski, Kaczmarek, Mazur, Krawczyk, Piotrowski, Grabowski, Nowakowski, Pawłowski, Michalski, Nowicki, Adamczyk, Dudek, Zająć, Wieczorek, Jabłoński, Król, Majewski, Olszewski, Wróbel, Malinowski, Pawlak, Witkowski, Walczak, Stępień, Górski, Rutkowski, Michalak, SIkora, Ostrowski, Baran, Duda, Szewczyk, Tomaszewski, Pietrzak, Marciniak, Wróblewski, Zalewski, Jakubowski, Jasiński, Zawadzki, Sadowski, Bąk, Chmielewski, Włodarczyk, Borkowski, Czarnecki, Sawicki, Sokołowski, Urbański, Kubiak],
+    female: [Nowak, Kowalska, Wiśniewska, Dąbrowska, Lewandowska, Wójcik, Kamińska, Kowalczyk, Zielińska, Szymańska, Woźniak, Kozłowska, Jankowska, Wojciechowska, Kwiatkowska, Kaczmarek, Mazur, Krawczyk, Piotrowska, Grabowska, Nowakowska, Pawłowska, Michalska, Nowicki, Adamczyk, Dudek, Zająć, Wieczorek, Jabłońska, Król, Majewska, Olszewska, Wróbel, Malinowska, Pawlak, Witkowska, Walczak, Stępień, Górska, Rutkowska, Michalak, SIkora, Ostrowska, Baran, Duda, Szewczyk, Tomaszewska, Pietrzak, Marciniak, Wróblewska, Zalewska, Jakubowska, Jasińska, Zawadzki, Sadowska, Bąk, Chmielewska, Włodarczyk, Borkowska, Czarnecki, Sawicki, Sokołowska, Urbańska, Kubiak]
+  }
+  personalEmails: [gmail.com, yahoo.com, poczta.onet.pl, interia.pl, tlen.pl, wp.pl]
+  companyNames: [Alist, Beans, Klein, Felics, Adapt, MemorTech, Porta, SuperMemo, Nonos, Vitae, Woods, Quisuc, Quicker, Interdem, Morsem, Datastore, Linger, Buapel, Terson, Gualas, Yrsa, Warst, Erntogra, Robutenia, QuickLink, Furba, Hostes, FlyHigh]
+  companySuffixes: [Associates, Company, Consulting, Inc., Industries, Limited, LLC, Ltd]
+  companyEmails: [info, contact, company, office]
+
+  text: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra nulla ac diam. Quisque semper justo at risus. Donec venenatis, turpis vel hendrerit interdum, dui ligula ultricies purus, sed posuere libero dui id orci. Nam congue, pede vitae dapibus aliquet, elit magna vulputate arcu, vel tempus metus leo non est. Etiam sit amet lectus quis est congue mollis. Phasellus congue lacus eget neque. Phasellus ornare, ante vitae consectetuer consequat, purus sapien ultricies dolor, et mollis pede metus eget nisi. Praesent sodales velit quis augue. Cras suscipit, urna at aliquam rhoncus, urna quam viverra nisi, in interdum massa nibh nec erat.
+
+  telephone_number_formats: ['+48#########']

@@ -5,8 +5,9 @@ import eu.codearte.fairyland.Fairy
 import static eu.codearte.fairyland.Fairy.create
 
 println "\n * With context"
+def fairy = create(Locale.forLanguageTag("pl"))
 3.times {
-    def person = create().person()
+  def person = fairy.person()
 
     println "${person.fullName()} <${person.email()}>"
 
@@ -16,7 +17,6 @@ println "\n * With context"
 println create().text().word(3)
 println create().text().sentence(5)
 
-def fairy = Fairy.create()
 println fairy.person().firstName();
 println fairy.person().firstName();
 
