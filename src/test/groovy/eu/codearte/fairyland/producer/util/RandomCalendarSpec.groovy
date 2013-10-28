@@ -17,7 +17,7 @@ class RandomCalendarSpec extends Specification {
 
         setup:
         dateProvider.getGregorianCalendar() >> new TimeProvider().getCalendar("2013-10-20")
-        randomGenerator.randomBetween(0, 100) >> 0
+        randomGenerator.randomBetween(1, 100) >> 0
         randomGenerator.randomBetween(1, 365) >> 1
 
         when:
@@ -34,7 +34,7 @@ class RandomCalendarSpec extends Specification {
 
         setup:
         dateProvider.getGregorianCalendar() >> new TimeProvider().getCalendar("2013-10-20")
-        randomGenerator.randomBetween(0, 100) >> 10
+        randomGenerator.randomBetween(1, 100) >> 10
         randomGenerator.randomBetween(1, 365) >> 32
 
         when:
@@ -50,7 +50,7 @@ class RandomCalendarSpec extends Specification {
 
         setup:
         dateProvider.getGregorianCalendar() >> new TimeProvider().getCalendar("2013-10-20")
-        randomGenerator.randomBetween(0, 100) >> 20
+        randomGenerator.randomBetween(1, 100) >> 20
         randomGenerator.randomBetween(1, 365) >> 365
 
         when:

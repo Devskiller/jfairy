@@ -31,7 +31,7 @@ public class CalendarGenerator {
 
     GregorianCalendar calendar = timeProvider.getGregorianCalendar();
 
-    calendar.roll(YEAR, -randomGenerator.randomBetween(0, 100));
+    calendar.roll(YEAR, -randomGenerator.randomBetween(1, 100));
     int maximumDay = calendar.getActualMaximum(DAY_OF_YEAR);
     calendar.set(DAY_OF_YEAR, randomGenerator.randomBetween(1, maximumDay));
 
