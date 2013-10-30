@@ -11,15 +11,15 @@ public class PeselGenerator {
 
     public String pesel(GregorianCalendar calendar, PersonHolder.Sex sex) {
 
-        int yearField = calculateYear(calendar.get(Calendar.YEAR));
+        int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int number = (int) (Math.random() * 999);
-        int sexCode = calculateSex(sex);
+        int serialNumber = (int) (Math.random() * 1000);
+        int sexCode = calculateSexCode(sex);
 
-        String pesel = format("%02d%02d%02d%03d%d", yearField, month, day, number, sexCode);
+        String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
 
-        return pesel + calculateControl(pesel);
+        return pesel + calculateChecksum(pesel);
     }
 
     /**
@@ -33,14 +33,22 @@ public class PeselGenerator {
             return false;
         }
         int checksum = Integer.valueOf(pesel.substring(size - 1));
-        int control = PeselGenerator.calculateControl(pesel);
+        int checkDigit = calculateChecksum(pesel);
 
-        return control == checksum;
+        return checkDigit == checksum;
 
     }
 
-    private int calculateSex(PersonHolder.Sex sex) {
-        return ((int) (Math.random() * 5)) * 2 + (sex == PersonHolder.Sex.male ? 1 : 0);
+    private int calculateSexCode(PersonHolder.Sex sex) {
+        return randomDigitFrom0To4() * 2 + (isMale(sex) ? 1 : 0);
+    }
+
+    private boolean isMale(PersonHolder.Sex sex) {
+        return sex == PersonHolder.Sex.male;
+    }
+
+    private int randomDigitFrom0To4() {
+        return ((int) (Math.random() * 5));
     }
 
     private int calculateYear(int year) {
@@ -60,7 +68,7 @@ public class PeselGenerator {
         return month;
     }
 
-    private static int calculateControl(String pesel) {
+    private static int calculateChecksum(String pesel) {
         int j = 0, sum = 0, control = 0;
         for (int i = 0; i < 10; i++) {
             char c = pesel.charAt(i);
