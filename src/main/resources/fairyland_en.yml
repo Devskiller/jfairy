@@ -1,8 +1,8 @@
 data:
   domains: [com, eu, biz]
   firstNames: {
-    male: [Bart, Charles],
-    female: [Ana, Donna]
+    male: [Aaron, Adam, Adrian, Aiden, Alex, Alexander, Andrew, Angel, Anthony, Austin, Ayden, Benjamin, Bentley, Blake, Brandon, Brayden, Brody, Bryson, Caleb, Cameron, Carlos, Carson, Carter, Charles, Chase, Christian, Christopher, Colton, Connor, Cooper, Damian, Daniel, David, Dominic, Dylan, Easton, Eli, Elijah, Ethan, Evan, Gabriel, Gavin, Grayson, Henry, Hudson, Hunter, Ian, Isaac, Isaiah, Jace, Jack, Jackson, Jacob, James, Jason, Jaxon, Jayden, Jeremiah, John, Jonathan, Jordan, Jose, Joseph, Joshua, Josiah, Juan, Julian, Justin, Kayden, Kevin, Landon, Levi, Liam, Logan, Lucas, Luis, Luke, Mason, Matthew, Michael, Nathan, Nathaniel, Nicholas, Noah, Nolan, Oliver, Owen, Parker, Robert, Ryan, Ryder, Samuel, Sebastian, Thomas, Tristan, Tyler, William, Wyatt, Xavier, Zachary],
+    female: [Aaliyah, Abigail, Addison, Alexa, Alexandra, Alexis, Allison, Alyssa, Amelia, Andrea, Anna, Annabelle, Aria, Ariana, Arianna, Ashley, Aubree, Aubrey, Audrey, Autumn, Ava, Avery, Bailey, Bella, Brianna, Brooklyn, Camila, Caroline, Charlotte, Chloe, Claire, Elizabeth, Ella, Ellie, Emily, Emma, Eva, Evelyn, Faith, Gabriella, Genesis, Gianna, Grace, Hailey, Hannah, Harper, Isabella, Jasmine, Jocelyn, Julia, Katherine, Kayla, Kaylee, Kennedy, Khloe, Kimberly, Kylie, Lauren, Layla, Leah, Lillian, Lily, London, Lucy, Lydia, Mackenzie, Madeline, Madelyn, Madison, Makayla, Maya, Melanie, Mia, Molly, Morgan, Naomi, Natalie, Nevaeh, Olivia, Peyton, Piper, Reagan, Riley, Samantha, Sarah, Savannah, Scarlett, Serenity, Skylar, Sofia, Sophia, Sophie, Stella, Sydney, Taylor, Trinity, Victoria, Violet, Zoe, Zoey]
   }
   lastNames: {
     male: [Smith, Johns, Johnson, Berry, King, Abrams, Nick, Perry, Kelly, Thomas, Wilkinson, Lottar, Charle, Whitman, Procter],
