@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer.person.pl;
 
+import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Sex;
 
 import java.util.Calendar;
@@ -7,11 +8,18 @@ import java.util.GregorianCalendar;
 
 import static java.lang.String.format;
 
-public class Pesel {
+/**
+ * PESEL - Polish Powszechny Elektroniczny System Ewidencji Ludności,
+ * Universal Electronic System for Registration of the Population)
+ * <p/>
+ * More info: http://en.wikipedia.org/wiki/PESEL
+ */
+public class Pesel implements NationalIdentificationNumber {
 
     public static final int[] WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 
-    public String pesel(GregorianCalendar calendar, Sex sex) {
+    @Override
+    public String nationalIdentificationNumber(GregorianCalendar calendar, Sex sex) {
 
         int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
@@ -25,7 +33,6 @@ public class Pesel {
     }
 
     /**
-     *
      * @param pesel
      * @return
      */
@@ -80,4 +87,5 @@ public class Pesel {
         control = 10 - (sum % 10);
         return control % 10;
     }
+
 }

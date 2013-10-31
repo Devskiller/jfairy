@@ -1,7 +1,6 @@
 package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.person.Sex
-import eu.codearte.fairyland.producer.person.pl.Pesel
 import spock.lang.Specification
 
 import static eu.codearte.fairyland.producer.person.pl.Pesel.isValidPesel
@@ -19,7 +18,7 @@ class PeselTest extends Specification {
     void shouldGenerateValidPesel() {
 
         when:
-        def pesel = generator.pesel(new GregorianCalendar(), Sex.male);
+        def pesel = generator.nationalIdentificationNumber(new GregorianCalendar(), Sex.male);
         println pesel
 
         then:
