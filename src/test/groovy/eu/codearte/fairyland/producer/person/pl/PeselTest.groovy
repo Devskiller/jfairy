@@ -4,7 +4,7 @@ import eu.codearte.fairyland.producer.RandomGenerator
 import eu.codearte.fairyland.producer.person.Sex
 import spock.lang.Specification
 
-import static eu.codearte.fairyland.producer.person.pl.Pesel.isValidPesel
+import static eu.codearte.fairyland.producer.person.pl.Pesel.isValid
 
 class PeselTest extends Specification {
 
@@ -13,7 +13,7 @@ class PeselTest extends Specification {
 
     void shouldValidateGoodPesel() {
 
-        isValidPesel("44051401359")
+        isValid("44051401359")
 
     }
 
@@ -25,7 +25,7 @@ class PeselTest extends Specification {
 
         then:
         pesel
-        isValidPesel(pesel)
+        isValid(pesel)
     }
 
 }

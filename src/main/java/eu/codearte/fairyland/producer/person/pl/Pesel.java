@@ -43,7 +43,7 @@ public class Pesel implements NationalIdentificationNumber {
      * @param pesel
      * @return
      */
-    public static boolean isValidPesel(String pesel) {
+    public static boolean isValid(String pesel) {
         int size = pesel.length();
         if (size != 11) {
             return false;
@@ -56,11 +56,7 @@ public class Pesel implements NationalIdentificationNumber {
     }
 
     private int calculateSexCode(Sex sex) {
-        return randomGenerator.randomBetween(0, 4) * 2 + (isMale(sex) ? 1 : 0);
-    }
-
-    private boolean isMale(Sex sex) {
-        return sex == Sex.male;
+        return randomGenerator.randomBetween(0, 4) * 2 + (sex == Sex.male ? 1 : 0);
     }
 
     private int calculateYear(int year) {
@@ -81,14 +77,14 @@ public class Pesel implements NationalIdentificationNumber {
     }
 
     private static int calculateChecksum(String pesel) {
-        int j = 0, sum = 0, control = 0;
-        for (int i = 0; i < 10; i++) {
-            char c = pesel.charAt(i);
-            j = Integer.valueOf(String.valueOf(c));
-            sum += j * WEIGHTS[i];
+        int sum = 0, checksum;
+        int i = 0;
+        for (int weight : WEIGHTS) {
+            int digit = (int) pesel.charAt(i++);
+            sum += digit * weight;
         }
-        control = 10 - (sum % 10);
-        return control % 10;
+        checksum = 10 - (sum % 10);
+        return checksum % 10;
     }
 
 }
