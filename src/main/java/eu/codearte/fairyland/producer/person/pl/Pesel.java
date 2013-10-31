@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer.person.pl;
 
+import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Sex;
 
@@ -18,13 +19,19 @@ public class Pesel implements NationalIdentificationNumber {
 
     public static final int[] WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 
+    private final RandomGenerator randomGenerator;
+
+    public Pesel(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
+
     @Override
     public String nationalIdentificationNumber(GregorianCalendar calendar, Sex sex) {
 
         int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int serialNumber = (int) (Math.random() * 1000);
+        int serialNumber = randomGenerator.randomBetween(0, 999);
         int sexCode = calculateSexCode(sex);
 
         String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
@@ -49,15 +56,11 @@ public class Pesel implements NationalIdentificationNumber {
     }
 
     private int calculateSexCode(Sex sex) {
-        return randomDigitFrom0To4() * 2 + (isMale(sex) ? 1 : 0);
+        return randomGenerator.randomBetween(0, 4) * 2 + (isMale(sex) ? 1 : 0);
     }
 
     private boolean isMale(Sex sex) {
         return sex == Sex.male;
-    }
-
-    private int randomDigitFrom0To4() {
-        return ((int) (Math.random() * 5));
     }
 
     private int calculateYear(int year) {

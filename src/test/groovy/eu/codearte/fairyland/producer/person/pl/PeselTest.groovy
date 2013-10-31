@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer.person.pl
 
+import eu.codearte.fairyland.producer.RandomGenerator
 import eu.codearte.fairyland.producer.person.Sex
 import spock.lang.Specification
 
@@ -7,7 +8,8 @@ import static eu.codearte.fairyland.producer.person.pl.Pesel.isValidPesel
 
 class PeselTest extends Specification {
 
-    def Pesel generator = new Pesel();
+    def RandomGenerator randomGenerator = new RandomGenerator(10002L);
+    def Pesel generator = new Pesel(randomGenerator);
 
     void shouldValidateGoodPesel() {
 
@@ -26,16 +28,4 @@ class PeselTest extends Specification {
         isValidPesel(pesel)
     }
 
-    void testName() throws Exception {
-
-        for (int i = 0; i < 10000; i++) {
-            def i1 = (int) (Math.random() * 10)
-            if (i1 == 10) throw new RuntimeException();
-            println "" + i1 + ","
-        }
-
-        expect:
-        true
-
-    }
 }
