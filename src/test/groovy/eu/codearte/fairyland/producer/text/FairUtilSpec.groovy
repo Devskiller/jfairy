@@ -14,14 +14,9 @@ class FairUtilSpec extends Specification {
     def timeProvider = Mock(TimeProvider)
     def text = new FairUtil(randomGenerator, timeProvider);
 
-    int num0 = (int) '0'
-    int num9 = (int) '9'
-    int letterA = (int) 'a'
-    int letterZ = (int) 'z'
-
     def setup() {
-        randomGenerator.randomBetween(num0, num9) >> '7'
-        randomGenerator.randomBetween(letterA, letterZ) >> 'x'
+        randomGenerator.randomBetween('0', '9') >> '7'
+        randomGenerator.randomBetween('a', 'z') >> 'x'
     }
 
     def "should replace # with digit 0"() {
