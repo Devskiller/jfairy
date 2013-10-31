@@ -78,9 +78,9 @@ public class Pesel implements NationalIdentificationNumber {
 
     private static int calculateChecksum(String pesel) {
         int sum = 0, checksum;
-        int i = 0;
+        int i= 0;
         for (int weight : WEIGHTS) {
-            int digit = (int) pesel.charAt(i++);
+            int digit = (int) pesel.charAt(i);
             sum += digit * weight;
         }
         checksum = 10 - (sum % 10);
