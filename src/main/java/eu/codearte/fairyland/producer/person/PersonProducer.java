@@ -36,9 +36,9 @@ public abstract class PersonProducer extends FairyProducer {
     person = generatePersonWithSex(getSex());
   }
 
-  abstract PersonHolder.Sex getSex();
+  abstract Sex getSex();
 
-  private PersonHolder generatePersonWithSex(PersonHolder.Sex sex) {
+  private PersonHolder generatePersonWithSex(Sex sex) {
     String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex.name());
     String lastName = generator.getValuesOfType(DataMaster.LAST_NAME, sex.name());
     String email = generateEmail(firstName, lastName);

@@ -15,8 +15,8 @@ public class Women extends PersonProducer {
   }
 
   @Override
-  final PersonHolder.Sex getSex() {
-    return PersonHolder.Sex.female;
+  final Sex getSex() {
+    return Sex.female;
   }
 
 }

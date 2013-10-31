@@ -16,11 +16,7 @@ class PersonHolder {
   private final Date dateOfBirth;
   private final int age;
 
-  enum Sex {
-    male, female
-  }
-
-  public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, Date dateOfBirth, int age) {
+    public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, Date dateOfBirth, int age) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;

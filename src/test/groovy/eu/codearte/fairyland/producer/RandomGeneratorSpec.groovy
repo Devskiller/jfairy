@@ -26,7 +26,6 @@ class RandomGeneratorSpec extends Specification {
         1           | 3           || 2
         0           | 4           || 0
         48          | 57          || 53
-//        '0' as char | '9' as char || 0
 
     }
 }

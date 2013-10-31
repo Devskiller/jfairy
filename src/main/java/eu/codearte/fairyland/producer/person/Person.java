@@ -8,32 +8,32 @@ import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.text.FairUtil;
 
-import static eu.codearte.fairyland.producer.person.PersonHolder.Sex.*;
+import static eu.codearte.fairyland.producer.person.Sex.*;
 
 public class Person extends PersonProducer {
 
-  private PersonHolder.Sex sex = randomSex();
+  private Sex sex = randomSex();
 
   public Person(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
     super(generator, random, fairUtil1);
   }
 
   @Override
-  PersonHolder.Sex getSex() {
+  Sex getSex() {
     return sex;
   }
 
-  private PersonHolder.Sex randomSex() {
+  private Sex randomSex() {
     return random.trueOrFalse() ? male : female;
   }
 
   public Person male() {
-    sex = PersonHolder.Sex.male;
+    sex = Sex.male;
     return this;
   }
 
   public Person female() {
-    sex = PersonHolder.Sex.female;
+    sex = Sex.female;
     return this;
   }
 

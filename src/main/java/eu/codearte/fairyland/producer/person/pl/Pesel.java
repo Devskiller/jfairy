@@ -1,15 +1,17 @@
-package eu.codearte.fairyland.producer.person;
+package eu.codearte.fairyland.producer.person.pl;
+
+import eu.codearte.fairyland.producer.person.Sex;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static java.lang.String.format;
 
-public class PeselGenerator {
+public class Pesel {
 
     public static final int[] WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 
-    public String pesel(GregorianCalendar calendar, PersonHolder.Sex sex) {
+    public String pesel(GregorianCalendar calendar, Sex sex) {
 
         int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
@@ -23,7 +25,7 @@ public class PeselGenerator {
     }
 
     /**
-     * FIXME: Move to other class
+     *
      * @param pesel
      * @return
      */
@@ -39,12 +41,12 @@ public class PeselGenerator {
 
     }
 
-    private int calculateSexCode(PersonHolder.Sex sex) {
+    private int calculateSexCode(Sex sex) {
         return randomDigitFrom0To4() * 2 + (isMale(sex) ? 1 : 0);
     }
 
-    private boolean isMale(PersonHolder.Sex sex) {
-        return sex == PersonHolder.Sex.male;
+    private boolean isMale(Sex sex) {
+        return sex == Sex.male;
     }
 
     private int randomDigitFrom0To4() {
