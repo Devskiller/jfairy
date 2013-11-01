@@ -3,7 +3,10 @@ package eu.codearte.fairyland.producer.person.pl;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 
+import static java.lang.Integer.parseInt;
+import static java.lang.String.copyValueOf;
 import static java.lang.String.format;
+import static java.lang.String.valueOf;
 
 /**
  * Polish Identity Card Number
@@ -23,30 +26,29 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
      */
     public String identityNumber() {
 
-        int digits = randomGenerator.randomBetween(0, 99999);
-
-        String identification = format("%c%c%c%c%05d", randomLetter(), randomLetter(), randomLetter(), '?', digits);
+        char[] id = new char[WEIGHTS.length];
         int checksum = 0;
         int index = 0;
+
         for (int weight : WEIGHTS) {
-            int value;
+            int value = 0;
+            char code = ' ';
+            // FIXME: First character should be 'A' for number generated before 2014
             if (index < 3) {
-                value = identification.charAt(index) - 'A' + 10;
-            } else {
-                value = identification.charAt(index) - '0';
+                code = randomGenerator.randomBetween('A', 'Z');
+                value = code + 10;
+            } else if (index > 3) {
+                code = randomGenerator.randomBetween('0', '9');
+                value = code;
             }
-            index++;
+            id[index++] = code;
             checksum += weight * value;
         }
-        return identification.replace('?', digit(checksum % 10));
+
+        id[3] = valueOf(checksum % 10).charAt(0);
+
+        return copyValueOf(id);
 
     }
 
-    private char digit(int digit) {
-        return (char) (digit + '0');
-    }
-
-    private char randomLetter() {
-        return randomGenerator.randomBetween('A', 'Z');
-    }
 }

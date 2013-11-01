@@ -6,7 +6,6 @@ package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.RandomGenerator
 import spock.lang.Specification
-
 /**
  * @author mariuszs
  * @since 30.10.13.
@@ -21,10 +20,10 @@ class PolishIdentityCardNumberTest extends Specification {
     void shouldGenerateProperNumber() {
         setup:
             randomGenerator.randomBetween('A', 'Z') >>> ['A', 'B', 'A']
-            randomGenerator.randomBetween(0, 99999) >> 0
+            randomGenerator.randomBetween('0', '9') >> '0'
         when:
-            PolishIdentityCardNumber idNumberGenerator = new PolishIdentityCardNumber(randomGenerator)
-            def id = idNumberGenerator.identityNumber()
+            PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
+            def id = generator.identityNumber()
 
             println id
         then:
