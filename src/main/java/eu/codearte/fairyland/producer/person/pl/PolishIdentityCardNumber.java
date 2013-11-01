@@ -3,9 +3,7 @@ package eu.codearte.fairyland.producer.person.pl;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 
-import static java.lang.Integer.parseInt;
 import static java.lang.String.copyValueOf;
-import static java.lang.String.format;
 import static java.lang.String.valueOf;
 
 /**
@@ -13,7 +11,7 @@ import static java.lang.String.valueOf;
  */
 public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
-    public static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
+    private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
 
     private final RandomGenerator randomGenerator;
 
@@ -24,7 +22,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
     /**
      * @return identityNumber
      */
-    public String identityNumber() {
+    public String identityNumber(int year) {
 
         char[] id = new char[WEIGHTS.length];
         int checksum = 0;
@@ -33,13 +31,19 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
         for (int weight : WEIGHTS) {
             int value = 0;
             char code = ' ';
-            // FIXME: First character should be 'A' for number generated before 2014
             if (index < 3) {
-                code = randomGenerator.randomBetween('A', 'Z');
-                value = code + 10;
+                if (index == 0 && year < 2015) {
+                    code = 'A';
+                } else if (index == 0 && year < 2025) {
+                    code = 'B';
+                } else {
+                    code = randomGenerator.randomBetween('A', 'Z');
+                }
+                value = code - 'A' + 10;
+
             } else if (index > 3) {
                 code = randomGenerator.randomBetween('0', '9');
-                value = code;
+                value = code - '0';
             }
             id[index++] = code;
             checksum += weight * value;

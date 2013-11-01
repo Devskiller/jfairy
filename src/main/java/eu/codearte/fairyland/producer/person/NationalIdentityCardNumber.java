@@ -10,5 +10,5 @@ package eu.codearte.fairyland.producer.person;
  */
 public interface NationalIdentityCardNumber {
 
-    public String identityNumber();
+    public String identityNumber(int year);
 }

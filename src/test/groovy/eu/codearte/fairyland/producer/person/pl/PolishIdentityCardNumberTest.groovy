@@ -19,11 +19,11 @@ class PolishIdentityCardNumberTest extends Specification {
      */
     void shouldGenerateProperNumber() {
         setup:
-            randomGenerator.randomBetween('A', 'Z') >>> ['A', 'B', 'A']
+            randomGenerator.randomBetween('A', 'Z') >>> ['B', 'A']
             randomGenerator.randomBetween('0', '9') >> '0'
         when:
             PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
-            def id = generator.identityNumber()
+            def id = generator.identityNumber(2013)
 
             println id
         then:
