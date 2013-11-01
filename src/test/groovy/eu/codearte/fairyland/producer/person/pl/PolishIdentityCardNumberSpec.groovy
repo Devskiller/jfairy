@@ -24,10 +24,10 @@ class PolishIdentityCardNumberSpec extends Specification {
         def max = (2013 - BEGIN) * PREFIXES_BY_YEAR
         setup:
             randomGenerator.randomBetween(max, max + PREFIXES_BY_YEAR) >> 26 // ABA
-            randomGenerator.randomBetween('0', '9') >> '0'
+            randomGenerator.randomBetween(0, 99999) >> 0
         when:
             PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
-            def id = generator.identityNumber(2013)
+            def id = generator.identityNumber(new GregorianCalendar())
         then:
             id == "ABA300000"
     }

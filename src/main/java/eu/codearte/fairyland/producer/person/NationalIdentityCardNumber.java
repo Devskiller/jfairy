@@ -4,11 +4,13 @@
 
 package eu.codearte.fairyland.producer.person;
 
+import java.util.GregorianCalendar;
+
 /**
  * @author mariuszs
  * @since 31.10.13.
  */
 public interface NationalIdentityCardNumber {
 
-    public String identityNumber(int year);
+    public String identityNumber(GregorianCalendar calendar);
 }
