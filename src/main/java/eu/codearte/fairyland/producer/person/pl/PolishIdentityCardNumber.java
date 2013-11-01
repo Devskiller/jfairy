@@ -5,6 +5,8 @@ import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 
 import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
+import static java.lang.System.arraycopy;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
  * Polish Identity Card Number
@@ -12,6 +14,8 @@ import static java.lang.String.valueOf;
 public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
     private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
+    public static final int BEGIN = 2000;
+    public static final int PREFIXES_BY_YEAR = 45;
 
     private final RandomGenerator randomGenerator;
 
@@ -28,24 +32,18 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
         int checksum = 0;
         int index = 0;
 
+        fillPrefix(year, id);
+
         for (int weight : WEIGHTS) {
             int value = 0;
-            char code = ' ';
             if (index < 3) {
-                if (index == 0 && year < 2015) {
-                    code = 'A';
-                } else if (index == 0 && year < 2025) {
-                    code = 'B';
-                } else {
-                    code = randomGenerator.randomBetween('A', 'Z');
-                }
-                value = code - 'A' + 10;
-
+                value = id[index] - 'A' + 10;
             } else if (index > 3) {
-                code = randomGenerator.randomBetween('0', '9');
+                char code = randomGenerator.randomBetween('0', '9');
+                id[index] = code;
                 value = code - '0';
             }
-            id[index++] = code;
+            index++;
             checksum += weight * value;
         }
 
@@ -53,6 +51,14 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
         return copyValueOf(id);
 
+    }
+
+    private void fillPrefix(int year, char[] id) {
+        int maxPrefix = (year - BEGIN) * PREFIXES_BY_YEAR;
+        int range = randomGenerator.randomBetween(maxPrefix, maxPrefix + PREFIXES_BY_YEAR);
+        String prefix = AlphaNumberSystem.convertToString(range, 26);
+        char[] charArray = leftPad(prefix, 3, 'A').toCharArray();
+        arraycopy(charArray, 0, id, 0, charArray.length);
     }
 
 }

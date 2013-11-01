@@ -6,26 +6,28 @@ package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.RandomGenerator
 import spock.lang.Specification
+
+import static eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber.BEGIN
+import static eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber.PREFIXES_BY_YEAR
 /**
  * @author mariuszs
  * @since 30.10.13.
  */
-class PolishIdentityCardNumberTest extends Specification {
+class PolishIdentityCardNumberSpec extends Specification {
 
     def randomGenerator = Mock(RandomGenerator)
 
     /**
      * http://en.wikipedia.org/wiki/Polish_identity_card
      */
-    void shouldGenerateProperNumber() {
+    void "should generate proper id number"() {
+        def max = (2013 - BEGIN) * PREFIXES_BY_YEAR
         setup:
-            randomGenerator.randomBetween('A', 'Z') >>> ['B', 'A']
+            randomGenerator.randomBetween(max, max + PREFIXES_BY_YEAR) >> 26 // ABA
             randomGenerator.randomBetween('0', '9') >> '0'
         when:
             PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
             def id = generator.identityNumber(2013)
-
-            println id
         then:
             id == "ABA300000"
     }
