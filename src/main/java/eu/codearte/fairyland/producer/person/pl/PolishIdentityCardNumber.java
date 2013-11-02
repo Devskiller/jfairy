@@ -33,7 +33,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
      */
     public String identityNumber(GregorianCalendar calendar) {
 
-        checkArgument(calendar.after(new GregorianCalendar(2000, 0, 1)));
+        checkArgument(calendar.get(Calendar.YEAR) >= 2000, "Polish ID was introduced in 2000");
 
         char[] id = new char[WEIGHTS.length];
 

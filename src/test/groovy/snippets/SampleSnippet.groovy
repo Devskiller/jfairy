@@ -41,3 +41,4 @@ println Fairy.create().letterify("letter???")
 println Fairy.create().bothify("?? ###-###")
 
 println fairy.nationalIdentityNumber()
+println fairy.nationalIdentificationNumber()

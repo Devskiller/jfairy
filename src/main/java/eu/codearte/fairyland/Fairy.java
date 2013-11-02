@@ -9,7 +9,9 @@ import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.Men;
 import eu.codearte.fairyland.producer.person.Person;
+import eu.codearte.fairyland.producer.person.Sex;
 import eu.codearte.fairyland.producer.person.Women;
+import eu.codearte.fairyland.producer.person.pl.Pesel;
 import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
@@ -121,6 +123,12 @@ public class Fairy {
     public String nationalIdentityNumber() {
         return new PolishIdentityCardNumber(randomGenerator).identityNumber(
                 calendarGenerator.randomCalendarBetweenYears(2000, timeProvider.getYear()));
+    }
+
+    public String nationalIdentificationNumber() {
+        return new Pesel(randomGenerator).nationalIdentificationNumber(
+                calendarGenerator.randomCalendarBetweenYears(1979, timeProvider.getYear()),
+                randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }
 
     public String numerify(String numberString) {

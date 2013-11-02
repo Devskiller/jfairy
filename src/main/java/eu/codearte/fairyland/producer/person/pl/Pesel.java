@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer.person.pl;
 
+import com.google.common.base.Preconditions;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Sex;
@@ -7,6 +8,7 @@ import eu.codearte.fairyland.producer.person.Sex;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.String.format;
 
 /**
@@ -28,6 +30,7 @@ public class Pesel implements NationalIdentificationNumber {
     @Override
     public String nationalIdentificationNumber(GregorianCalendar calendar, Sex sex) {
 
+        checkArgument(calendar.get(Calendar.YEAR) >= 1979, "Pesel was introduced in 1979");
         int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -78,7 +81,7 @@ public class Pesel implements NationalIdentificationNumber {
 
     private static int calculateChecksum(String pesel) {
         int sum = 0, checksum;
-        int i= 0;
+        int i = 0;
         for (int weight : WEIGHTS) {
             int digit = (int) pesel.charAt(i);
             sum += digit * weight;
