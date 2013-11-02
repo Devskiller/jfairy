@@ -30,5 +30,6 @@ class PolishIdentityCardNumberSpec extends Specification {
             def id = generator.identityNumber(new GregorianCalendar())
         then:
             id == "ABA300000"
+            generator.isValid(id)
     }
 }

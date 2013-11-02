@@ -6,6 +6,7 @@ import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static eu.codearte.fairyland.producer.person.pl.AlphaNumberSystem.convertToString;
 import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
@@ -32,12 +33,30 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
      */
     public String identityNumber(GregorianCalendar calendar) {
 
+        checkArgument(calendar.after(new GregorianCalendar(2000, 0, 1)));
+
         char[] id = new char[WEIGHTS.length];
-        int checksum = 0;
-        int index = 0;
 
         fillAlphaPrefix(calendar.get(Calendar.YEAR), id);
         fillDigits(id);
+
+        char checksum = calculateChecksum(id);
+
+        id[3] = checksum;
+
+        return copyValueOf(id);
+
+    }
+
+    public boolean isValid(String id) {
+        int checksum = calculateChecksum(id.toCharArray());
+
+        return id.charAt(3) == checksum;
+    }
+
+    private char calculateChecksum(char[] id) {
+        int index = 0;
+        int checksum = 0;
 
         for (int weight : WEIGHTS) {
             int value = 0;
@@ -50,10 +69,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
             checksum += weight * value;
         }
 
-        id[3] = valueOf(checksum % 10).charAt(0);
-
-        return copyValueOf(id);
-
+        return valueOf(checksum % 10).charAt(0);
     }
 
     private void fillDigits(char[] id) {

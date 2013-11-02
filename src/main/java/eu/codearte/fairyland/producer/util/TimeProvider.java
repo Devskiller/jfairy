@@ -18,33 +18,37 @@ import static java.lang.String.format;
 
 public class TimeProvider {
 
-  public GregorianCalendar getGregorianCalendar() {
-    return new GregorianCalendar();
-  }
-
-  public Calendar getCalendar(String date) {
-    DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-    Date result;
-    try {
-      result = df.parse(date);
-    } catch (ParseException e) {
-      throw new FairyException(format("Parsing date %s exception", date), e);
+    public GregorianCalendar getGregorianCalendar() {
+        return new GregorianCalendar();
     }
-    Calendar calendar = GregorianCalendar.getInstance();
-    calendar.setTime(result);
-    return calendar;
-  }
 
-  public GregorianCalendar getGregorianCalendar(int year, int month, int day) {
-    return new GregorianCalendar(year, month - 1, day);
-  }
+    public int getYear() {
+        return getGregorianCalendar().get(Calendar.YEAR);
+    }
 
-  public Date getDate() {
-    return getGregorianCalendar().getTime();
-  }
+    public Calendar getCalendar(String date) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date result;
+        try {
+            result = df.parse(date);
+        } catch (ParseException e) {
+            throw new FairyException(format("Parsing date %s exception", date), e);
+        }
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(result);
+        return calendar;
+    }
 
-  public Date getDate(int year, int month, int day) {
-    return getGregorianCalendar(year, month, day).getTime();
-  }
+    public GregorianCalendar getGregorianCalendar(int year, int month, int day) {
+        return new GregorianCalendar(year, month - 1, day);
+    }
+
+    public Date getDate() {
+        return getGregorianCalendar().getTime();
+    }
+
+    public Date getDate(int year, int month, int day) {
+        return getGregorianCalendar(year, month, day).getTime();
+    }
 
 }

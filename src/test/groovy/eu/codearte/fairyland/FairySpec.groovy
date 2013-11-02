@@ -29,4 +29,9 @@ class FairySpec extends Specification {
         expect:
         fairy.randomDateInThePast().before(new Date())
     }
+
+    def "should generate national identity card number"() {
+        expect:
+        fairy.nationalIdentityNumber()
+    }
 }

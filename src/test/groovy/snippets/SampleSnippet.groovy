@@ -36,7 +36,8 @@ println women.telephoneNumber();
 println women.dateOfBirth();
 println women.age();
 
-def text = create().text()
 println Fairy.create().numerify("dupa###")
 println Fairy.create().letterify("letter???")
 println Fairy.create().bothify("?? ###-###")
+
+println fairy.nationalIdentityNumber()

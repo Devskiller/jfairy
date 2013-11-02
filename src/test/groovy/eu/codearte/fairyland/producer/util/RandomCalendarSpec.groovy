@@ -21,7 +21,7 @@ class RandomCalendarSpec extends Specification {
         randomGenerator.randomBetween(1, 365) >> 1
 
         when:
-        def calendar = randomCalendar.randomCalendarInThePast();
+        def calendar = randomCalendar.randomCalendarInThePast(100);
 
         then:
         calendar.get(GregorianCalendar.YEAR) == 2013
@@ -38,7 +38,7 @@ class RandomCalendarSpec extends Specification {
         randomGenerator.randomBetween(1, 365) >> 32
 
         when:
-        def calendar = randomCalendar.randomCalendarInThePast();
+        def calendar = randomCalendar.randomCalendarInThePast(100);
 
         then:
         calendar.get(GregorianCalendar.YEAR) == 2003
@@ -54,7 +54,7 @@ class RandomCalendarSpec extends Specification {
         randomGenerator.randomBetween(1, 365) >> 365
 
         when:
-        def calendar = randomCalendar.randomCalendarInThePast();
+        def calendar = randomCalendar.randomCalendarInThePast(100);
 
         then:
         calendar.get(GregorianCalendar.YEAR) == 1993
