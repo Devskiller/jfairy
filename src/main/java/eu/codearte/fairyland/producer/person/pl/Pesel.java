@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 
 /**
@@ -30,7 +31,6 @@ public class Pesel implements NationalIdentificationNumber {
     @Override
     public String nationalIdentificationNumber(GregorianCalendar calendar, Sex sex) {
 
-        checkArgument(calendar.get(Calendar.YEAR) >= 1979, "Pesel was introduced in 1979");
         int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -51,7 +51,8 @@ public class Pesel implements NationalIdentificationNumber {
         if (size != 11) {
             return false;
         }
-        int checksum = Integer.valueOf(pesel.substring(size - 1));
+
+        int checksum = valueOf(pesel.substring(size - 1));
         int checkDigit = calculateChecksum(pesel);
 
         return checkDigit == checksum;

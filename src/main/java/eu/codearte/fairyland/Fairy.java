@@ -127,7 +127,7 @@ public class Fairy {
 
     public String nationalIdentificationNumber() {
         return new Pesel(randomGenerator).nationalIdentificationNumber(
-                calendarGenerator.randomCalendarBetweenYears(1979, timeProvider.getYear()),
+                calendarGenerator.randomCalendarInThePast(),
                 randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }
 
