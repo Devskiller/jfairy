@@ -8,6 +8,7 @@ import eu.codearte.fairyland.producer.RandomGenerator;
 import org.apache.commons.lang3.StringUtils;
 
 import static java.lang.String.valueOf;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
  * @author mariuszs
@@ -68,10 +69,11 @@ public class NIP implements VATIdentificationNumber {
 
         String prefix = valueOf(CODES[randomGenerator.randomBetween(0, CODES.length - 1)]);
 
-        String number = StringUtils.leftPad(valueOf(randomGenerator.randomBetween(0, 999999)), 6, "0");
+        String number = leftPad(valueOf(randomGenerator.randomBetween(0, 999999)), 6, "0");
 
-        String nip = prefix + number;
-        return nip + calculateChecksum(nip);
+        String base = prefix + number;
+
+        return base + calculateChecksum(base);
     }
 
     boolean isNIPValid(String nip) {
