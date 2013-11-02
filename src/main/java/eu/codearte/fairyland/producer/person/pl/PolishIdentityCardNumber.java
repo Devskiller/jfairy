@@ -29,9 +29,9 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
     }
 
     /**
-     * @return identityNumber
+     * @return generate
      */
-    public String identityNumber(GregorianCalendar calendar) {
+    public String generate(GregorianCalendar calendar) {
 
         checkArgument(calendar.get(Calendar.YEAR) >= 2000, "Polish ID was introduced in 2000");
 

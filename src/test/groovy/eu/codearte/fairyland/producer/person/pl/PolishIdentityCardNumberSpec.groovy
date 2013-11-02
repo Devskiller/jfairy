@@ -27,7 +27,7 @@ class PolishIdentityCardNumberSpec extends Specification {
             randomGenerator.randomBetween(0, 99999) >> 0
         when:
             PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
-            def id = generator.identityNumber(new GregorianCalendar())
+            def id = generator.generate(new GregorianCalendar())
         then:
             id == "ABA300000"
             generator.isValid(id)

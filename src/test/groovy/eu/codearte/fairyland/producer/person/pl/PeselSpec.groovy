@@ -29,7 +29,7 @@ class PeselSpec extends Specification {
     def "should generate good pesel"() {
 
         when:
-            def pesel = generator.nationalIdentificationNumber(new GregorianCalendar(), Sex.male);
+            def pesel = generator.generate(new GregorianCalendar(), Sex.male);
             println pesel
 
         then:

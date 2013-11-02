@@ -12,5 +12,5 @@ import java.util.GregorianCalendar;
  */
 public interface NationalIdentityCardNumber {
 
-    public String identityNumber(GregorianCalendar calendar);
+    public String generate(GregorianCalendar calendar);
 }

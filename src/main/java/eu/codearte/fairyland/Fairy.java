@@ -20,9 +20,7 @@ import eu.codearte.fairyland.producer.util.TimeProvider;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import static eu.codearte.fairyland.FairyFactory.*;
@@ -121,12 +119,12 @@ public class Fairy {
     }
 
     public String nationalIdentityNumber() {
-        return new PolishIdentityCardNumber(randomGenerator).identityNumber(
+        return new PolishIdentityCardNumber(randomGenerator).generate(
                 calendarGenerator.randomCalendarBetweenYears(2000, timeProvider.getYear()));
     }
 
     public String nationalIdentificationNumber() {
-        return new Pesel(randomGenerator).nationalIdentificationNumber(
+        return new Pesel(randomGenerator).generate(
                 calendarGenerator.randomCalendarInThePast(),
                 randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }

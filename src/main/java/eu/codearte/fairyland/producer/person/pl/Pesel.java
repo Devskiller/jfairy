@@ -29,7 +29,7 @@ public class Pesel implements NationalIdentificationNumber {
     }
 
     @Override
-    public String nationalIdentificationNumber(GregorianCalendar calendar, Sex sex) {
+    public String generate(GregorianCalendar calendar, Sex sex) {
 
         int year = calculateYear(calendar.get(Calendar.YEAR));
         int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));

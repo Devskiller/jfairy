@@ -1,8 +1,14 @@
 package snippets
 
 import eu.codearte.fairyland.producer.RandomGenerator
+import eu.codearte.fairyland.producer.person.pl.NIP
 import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber
 
-def dowod = new PolishIdentityCardNumber(new RandomGenerator(3L));
+def random = new RandomGenerator(3L)
+def dowod = new PolishIdentityCardNumber(random);
+def nip = new NIP(random)
 
-println dowod.identityNumber(new GregorianCalendar())
+println dowod.generate(new GregorianCalendar())
+
+
+println nip.generate()

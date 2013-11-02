@@ -11,5 +11,5 @@ import java.util.GregorianCalendar;
  */
 public interface NationalIdentificationNumber {
 
-    String nationalIdentificationNumber(GregorianCalendar calendar, Sex sex);
+    String generate(GregorianCalendar calendar, Sex sex);
 }
