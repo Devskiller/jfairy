@@ -30,6 +30,7 @@ println "        Phone: " + person.telephoneNumber();
 println "Date of birth: " + person.dateOfBirth();
 println "          Age: " + person.age();
 println "        Pesel: " + person.nationalIdentificationNumber();
+println "           ID: " + person.nationalIdentityCardNumber();
 
 println ""
 person.female()

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +26,8 @@ public class RandomDataGenerator {
     this.calendarGenerator = calendarGenerator;
   }
 
-  public Date randomDateInThePast() {
-    return calendarGenerator.randomDateInThePast();
+  public GregorianCalendar randomDateInThePast(int years) {
+    return calendarGenerator.randomCalendarInThePast(years);
   }
 
   public List<String> randomElements(List<String> elements, int count) {

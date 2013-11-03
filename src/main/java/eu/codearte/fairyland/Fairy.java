@@ -96,7 +96,7 @@ public class Fairy {
 
     public String nationalIdentificationNumber() {
         return createNationalIdentificationNumber(randomGenerator)
-                .generate(calendarGenerator.randomCalendarInThePast(),
+                .generate(calendarGenerator.randomCalendarInThePast(10),
                         randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }
 
@@ -113,6 +113,6 @@ public class Fairy {
     }
 
     public Date randomDateInThePast() {
-        return calendarGenerator.randomDateInThePast();
+        return calendarGenerator.randomCalendarInThePast(100).getTime();
     }
 }

@@ -22,14 +22,6 @@ public class CalendarGenerator {
         this.timeProvider = timeProvider;
     }
 
-    public Date randomDateInThePast() {
-        return randomCalendarInThePast().getTime();
-    }
-
-    public GregorianCalendar randomCalendarInThePast() {
-        return randomCalendarInThePast(100);
-    }
-
     public GregorianCalendar randomCalendarInThePast(int maxYear) {
 
         GregorianCalendar calendar = timeProvider.getGregorianCalendar();

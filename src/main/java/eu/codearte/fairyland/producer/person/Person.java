@@ -24,6 +24,7 @@ public class Person {
     private final RandomDataGenerator generator;
     private final FairUtil fairUtil;
     private final NationalIdentificationNumber nationalIdentificationNumber;
+    private final NationalIdentityCardNumber nationalIdentityCardNumber;
 
     private String firstName;
     private String lastName;
@@ -37,11 +38,12 @@ public class Person {
 
     public Person(RandomGenerator random,
                   RandomDataGenerator generator,
-                  FairUtil fairUtil, NationalIdentificationNumber nationalIdentificationNumber) {
+                  FairUtil fairUtil, NationalIdentificationNumber nationalIdentificationNumber, NationalIdentityCardNumber nationalIdentityCardNumber) {
         this.random = random;
         this.generator = generator;
         this.fairUtil = fairUtil;
         this.nationalIdentificationNumber = nationalIdentificationNumber;
+        this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 
         this.config = new Config(random);
         config.applyTelephoneNumberFormat(generator.getValues(TELEPHONE_NUMBER_FORMATS));
@@ -72,7 +74,7 @@ public class Person {
         lastName = generator.getValuesOfType(DataMaster.LAST_NAME, config.sex().name());
         email = generateEmail(firstName, lastName);
         telephoneNumber = fairUtil.numerify(config.getTelephoneNumberFormat());
-        dateOfBirth = generator.randomDateInThePast();
+        dateOfBirth = generator.randomDateInThePast(100).getTime();
         age = fairUtil.age(dateOfBirth);
         sex = config.sex();
     }
@@ -129,6 +131,10 @@ public class Person {
         GregorianCalendar date = new GregorianCalendar();
         date.setTime(dateOfBirth);
         return nationalIdentificationNumber.generate(date, config.sex());
+    }
+
+    public String nationalIdentityCardNumber(){
+        return nationalIdentityCardNumber.generate(generator.randomDateInThePast(10));
     }
 
 }
