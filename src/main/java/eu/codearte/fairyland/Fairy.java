@@ -7,7 +7,6 @@ import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.Sex;
-import eu.codearte.fairyland.producer.person.pl.Pesel;
 import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
@@ -29,7 +28,8 @@ public class Fairy {
     private static final int SEED = 1761283695;
 
     private DataMaster dataMaster;
-    private final RandomGenerator randomGenerator = new RandomGenerator(SEED);;
+    private final RandomGenerator randomGenerator = new RandomGenerator(SEED);
+    ;
     private final TimeProvider timeProvider = new TimeProvider();
     private final FairUtil fairUtil = createStringifyUtil(randomGenerator, timeProvider);
     private final CalendarGenerator calendarGenerator = new CalendarGenerator(randomGenerator, timeProvider);
@@ -95,9 +95,9 @@ public class Fairy {
     }
 
     public String nationalIdentificationNumber() {
-        return new Pesel(randomGenerator).generate(
-                calendarGenerator.randomCalendarInThePast(),
-                randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
+        return createNationalIdentificationNumber(randomGenerator)
+                .generate(calendarGenerator.randomCalendarInThePast(),
+                        randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }
 
     public String numerify(String numberString) {

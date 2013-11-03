@@ -6,8 +6,10 @@ package eu.codearte.fairyland;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
+import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.pl.NIP;
+import eu.codearte.fairyland.producer.person.pl.Pesel;
 import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
@@ -54,7 +56,11 @@ class FairyFactory {
         return new Person(
                 randomGenerator,
                 createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
-                fairUtil);
+                fairUtil, createNationalIdentificationNumber(randomGenerator));
+    }
+
+    public static NationalIdentificationNumber createNationalIdentificationNumber(RandomGenerator randomGenerator) {
+        return new Pesel(randomGenerator);
     }
 
     public static Company createCompany(DataMaster dataMaster,

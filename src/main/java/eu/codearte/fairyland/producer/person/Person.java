@@ -10,6 +10,7 @@ import eu.codearte.fairyland.producer.text.FairUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
 import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
@@ -19,112 +20,98 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class Person {
 
-    private PersonHolder person;
-
     private final RandomGenerator random;
     private final RandomDataGenerator generator;
     private final FairUtil fairUtil;
+    private final NationalIdentificationNumber nationalIdentificationNumber;
 
-    private String telephoneNumberFormat;
-
+    private String firstName;
+    private String lastName;
+    private String email;
     private Sex sex;
+    private String telephoneNumber;
+    private Date dateOfBirth;
+    private int age;
 
-    public Person(RandomGenerator random, RandomDataGenerator generator, FairUtil fairUtil) {
+    private final Config config;
+
+    public Person(RandomGenerator random,
+                  RandomDataGenerator generator,
+                  FairUtil fairUtil, NationalIdentificationNumber nationalIdentificationNumber) {
         this.random = random;
         this.generator = generator;
         this.fairUtil = fairUtil;
+        this.nationalIdentificationNumber = nationalIdentificationNumber;
 
-        telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
-        sex = randomSex();
-    }
+        this.config = new Config(random);
+        config.applyTelephoneNumberFormat(generator.getValues(TELEPHONE_NUMBER_FORMATS));
 
-    Sex getSex() {
-        return sex;
-    }
-
-    private Sex randomSex() {
-        return random.trueOrFalse() ? male : female;
+        generatePerson();
     }
 
     public Person male() {
-        sex = Sex.male;
+        config.applySex(Sex.male);
+        generatePerson();
         return this;
     }
 
     public Person female() {
-        sex = Sex.female;
+        config.applySex(Sex.female);
+        generatePerson();
         return this;
     }
 
     public Person telephoneNumberFormat(String telephoneNumberFormat) {
-        this.telephoneNumberFormat = telephoneNumberFormat;
-        regeneratePerson();
+        config.applyTelephoneNumberFormat(telephoneNumberFormat);
+        generatePerson();
         return this;
     }
 
-    private void regeneratePerson() {
-        person = generatePersonWithSex(getSex());
-    }
-
-    private PersonHolder generatePersonWithSex(Sex sex) {
-        String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex.name());
-        String lastName = generator.getValuesOfType(DataMaster.LAST_NAME, sex.name());
-        String email = generateEmail(firstName, lastName);
-        String telephonNumber = fairUtil.numerify(telephoneNumberFormat);
-        Date dateOfBirth = generator.randomDateInThePast();
-        int age = fairUtil.age(dateOfBirth);
-        return new PersonHolder(firstName, lastName, email, sex, telephonNumber, dateOfBirth, age);
+    private void generatePerson() {
+        firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, config.sex().name());
+        lastName = generator.getValuesOfType(DataMaster.LAST_NAME, config.sex().name());
+        email = generateEmail(firstName, lastName);
+        telephoneNumber = fairUtil.numerify(config.getTelephoneNumberFormat());
+        dateOfBirth = generator.randomDateInThePast();
+        age = fairUtil.age(dateOfBirth);
+        sex = config.sex();
     }
 
     public String firstName() {
-        checkPerson();
-        return person.firstName();
+        return firstName;
     }
 
     public String lastName() {
-        checkPerson();
-        return person.lastName();
+        return lastName;
     }
 
     public String email() {
-        checkPerson();
-        return person.email();
+        return email;
     }
 
     public String fullName() {
-        checkPerson();
-        return person.fullName();
+        return firstName + " " + lastName;
     }
 
     public boolean isMale() {
-        checkPerson();
-        return person.isMale();
+        return sex == male;
     }
 
     public boolean isFemale() {
-        checkPerson();
-        return person.isFemale();
+        return sex == female;
     }
 
     public String telephoneNumber() {
-        checkPerson();
-        return person.telephoneNumber();
+        return telephoneNumber;
     }
 
     public Date dateOfBirth() {
-        checkPerson();
-        return person.dateOfBirth();
+        return dateOfBirth;
     }
+
 
     public int age() {
-        checkPerson();
-        return person.age();
-    }
-
-    private void checkPerson() {
-        if (person == null) {
-            regeneratePerson();
-        }
+        return age;
     }
 
     private String generateEmail(String firstName, Object lastName) {
@@ -136,6 +123,12 @@ public class Person {
             }
         }
         return StringUtils.stripAccents(lowerCase(temp + lastName + "@" + generator.getValues(PERSONAL_EMAIL)));
+    }
+
+    public String nationalIdentificationNumber() {
+        GregorianCalendar date = new GregorianCalendar();
+        date.setTime(dateOfBirth);
+        return nationalIdentificationNumber.generate(date, config.sex());
     }
 
 }
