@@ -8,14 +8,14 @@ import org.apache.commons.lang3.StringUtils;
  * @author Codearte
  * @since 2013-10-07
  */
-public class Company extends FairyProducer {
+public class Company {
 
   private String name;
   private final String domain;
   private final String email;
 
-  public Company(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
-    super(generator, random, fairUtil1);
+  public Company(RandomGenerator random, RandomDataGenerator generator) {
+
     name = generator.getValues(DataMaster.COMPANY_NAME);
     if (random.trueOrFalse()) {
       name += " " + generator.getValues(DataMaster.COMPANY_SUFFIX);

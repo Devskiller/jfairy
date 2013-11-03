@@ -28,15 +28,9 @@ println person.telephoneNumber();
 println person.dateOfBirth();
 println person.age();
 
-def women = fairy.women()
-println women.firstName();
-println women.isMale();
-println women.isFemale();
-println women.telephoneNumber();
-println women.dateOfBirth();
-println women.age();
 
-println Fairy.create().numerify("dupa###")
+
+println Fairy.create().numerify("bleble###")
 println Fairy.create().letterify("letter???")
 println Fairy.create().bothify("?? ###-###")
 

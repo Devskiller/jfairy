@@ -1,40 +1,141 @@
 /*
- * Copyright (c) 2013. Codearte
+ * Copyright (c) 2013 Codearte
  */
-
 package eu.codearte.fairyland.producer.person;
 
+import eu.codearte.fairyland.DataMaster;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.text.FairUtil;
+import org.apache.commons.lang3.StringUtils;
 
-import static eu.codearte.fairyland.producer.person.Sex.*;
+import java.util.Date;
 
-public class Person extends PersonProducer {
+import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
+import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
+import static eu.codearte.fairyland.producer.person.Sex.female;
+import static eu.codearte.fairyland.producer.person.Sex.male;
+import static org.apache.commons.lang3.StringUtils.lowerCase;
 
-  private Sex sex = randomSex();
+public class Person {
 
-  public Person(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
-    super(generator, random, fairUtil1);
-  }
+    private PersonHolder person;
 
-  @Override
-  Sex getSex() {
-    return sex;
-  }
+    private final RandomGenerator random;
+    private final RandomDataGenerator generator;
+    private final FairUtil fairUtil;
 
-  private Sex randomSex() {
-    return random.trueOrFalse() ? male : female;
-  }
+    private String telephoneNumberFormat;
 
-  public Person male() {
-    sex = Sex.male;
-    return this;
-  }
+    private Sex sex;
 
-  public Person female() {
-    sex = Sex.female;
-    return this;
-  }
+    public Person(RandomGenerator random, RandomDataGenerator generator, FairUtil fairUtil) {
+        this.random = random;
+        this.generator = generator;
+        this.fairUtil = fairUtil;
+
+        telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
+        sex = randomSex();
+    }
+
+    Sex getSex() {
+        return sex;
+    }
+
+    private Sex randomSex() {
+        return random.trueOrFalse() ? male : female;
+    }
+
+    public Person male() {
+        sex = Sex.male;
+        return this;
+    }
+
+    public Person female() {
+        sex = Sex.female;
+        return this;
+    }
+
+    public Person telephoneNumberFormat(String telephoneNumberFormat) {
+        this.telephoneNumberFormat = telephoneNumberFormat;
+        regeneratePerson();
+        return this;
+    }
+
+    private void regeneratePerson() {
+        person = generatePersonWithSex(getSex());
+    }
+
+    private PersonHolder generatePersonWithSex(Sex sex) {
+        String firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex.name());
+        String lastName = generator.getValuesOfType(DataMaster.LAST_NAME, sex.name());
+        String email = generateEmail(firstName, lastName);
+        String telephonNumber = fairUtil.numerify(telephoneNumberFormat);
+        Date dateOfBirth = generator.randomDateInThePast();
+        int age = fairUtil.age(dateOfBirth);
+        return new PersonHolder(firstName, lastName, email, sex, telephonNumber, dateOfBirth, age);
+    }
+
+    public String firstName() {
+        checkPerson();
+        return person.firstName();
+    }
+
+    public String lastName() {
+        checkPerson();
+        return person.lastName();
+    }
+
+    public String email() {
+        checkPerson();
+        return person.email();
+    }
+
+    public String fullName() {
+        checkPerson();
+        return person.fullName();
+    }
+
+    public boolean isMale() {
+        checkPerson();
+        return person.isMale();
+    }
+
+    public boolean isFemale() {
+        checkPerson();
+        return person.isFemale();
+    }
+
+    public String telephoneNumber() {
+        checkPerson();
+        return person.telephoneNumber();
+    }
+
+    public Date dateOfBirth() {
+        checkPerson();
+        return person.dateOfBirth();
+    }
+
+    public int age() {
+        checkPerson();
+        return person.age();
+    }
+
+    private void checkPerson() {
+        if (person == null) {
+            regeneratePerson();
+        }
+    }
+
+    private String generateEmail(String firstName, Object lastName) {
+        String temp = "";
+        if (random.trueOrFalse()) {
+            temp = firstName;
+            if (random.trueOrFalse()) {
+                temp += ".";
+            }
+        }
+        return StringUtils.stripAccents(lowerCase(temp + lastName + "@" + generator.getValues(PERSONAL_EMAIL)));
+    }
 
 }

@@ -6,12 +6,6 @@ import spock.lang.Ignore
 import spock.lang.Specification
 
 class PersonSpec extends Specification {
-    def "should instantiate Person producer"() {
-        when:
-        def person = Fairy.create().produce(Person.class)
-        then:
-        person instanceof Person
-    }
 
     def "should instantiate PersonProducer producer with person"() {
         when:
@@ -45,20 +39,6 @@ class PersonSpec extends Specification {
         person.fullName()
         person.email()
         person.isMale() || person.isFemale()
-    }
-
-    def "should create women"() {
-        when:
-        def person = Fairy.create().women()
-        then:
-        person.isFemale()
-    }
-
-    def "should create men"() {
-        when:
-        def person = Fairy.create().men()
-        then:
-        person.isMale()
     }
 
     def "should create female"() {

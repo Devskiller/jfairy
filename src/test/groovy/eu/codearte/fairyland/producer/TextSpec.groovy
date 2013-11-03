@@ -13,13 +13,6 @@ class TextSpec extends Specification {
         text = Fairy.create().text()
     }
 
-    def "should instantiate Text producer"() {
-        when:
-        TextProducer producer = Fairy.create().produce(TextProducer.class)
-        then:
-        producer instanceof TextProducer
-    }
-
     def "should instantiate Text producer with Text object"() {
         expect:
         text instanceof Text

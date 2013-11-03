@@ -4,13 +4,9 @@
 package eu.codearte.fairyland;
 
 import eu.codearte.fairyland.producer.Company;
-import eu.codearte.fairyland.producer.FairyProducer;
-import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
-import eu.codearte.fairyland.producer.person.Men;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.Sex;
-import eu.codearte.fairyland.producer.person.Women;
 import eu.codearte.fairyland.producer.person.pl.Pesel;
 import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
@@ -19,7 +15,6 @@ import eu.codearte.fairyland.producer.util.CalendarGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.Date;
 import java.util.Locale;
 
@@ -80,42 +75,17 @@ public class Fairy {
         return new Fairy(locale, dataFilePrefix);
     }
 
-    public <T extends FairyProducer> T produce(Class<T> producer) {
-        if (producer == null) {
-
-        }
-        try {
-            Constructor<T> constructor = producer.getConstructor(
-                    RandomDataGenerator.class,
-                    RandomGenerator.class,
-                    FairUtil.class);
-            return constructor.newInstance(
-                    createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
-                    randomGenerator,
-                    fairUtil);
-        } catch (ReflectiveOperationException e) {
-            throw new IllegalArgumentException(e);
-        }
-    }
 
     public Text text() {
-        return createText(dataMaster, randomGenerator, fairUtil, calendarGenerator);
+        return createText(dataMaster, randomGenerator, calendarGenerator);
     }
 
     public Person person() {
         return createPerson(dataMaster, randomGenerator, fairUtil, calendarGenerator);
     }
 
-    public Women women() {
-        return createWomen(dataMaster, randomGenerator, fairUtil, calendarGenerator);
-    }
-
-    public Men men() {
-        return createMen(dataMaster, randomGenerator, fairUtil, calendarGenerator);
-    }
-
     public Company company() {
-        return createCompany(dataMaster, randomGenerator, fairUtil, calendarGenerator);
+        return createCompany(dataMaster, randomGenerator, calendarGenerator);
     }
 
     public String nationalIdentityNumber() {

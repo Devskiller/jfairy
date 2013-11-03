@@ -3,7 +3,6 @@
  */
 package eu.codearte.fairyland.producer.text;
 
-import eu.codearte.fairyland.producer.FairyProducer;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 
@@ -14,38 +13,42 @@ import static eu.codearte.fairyland.TextUtils.joinWithSpace;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.*;
 
-public class TextProducer extends FairyProducer {
+public class TextProducer {
 
-  private static final String DATA = "text";
+    private static final String DATA = "text";
 
-  private final String loremIpsum;
-  private final List<String> words;
+    private final RandomDataGenerator generator;
+    private final RandomGenerator random;
 
-  public TextProducer(RandomDataGenerator generator, RandomGenerator random, FairUtil fairUtil1) {
-    super(generator, random, fairUtil1);
-    loremIpsum = generator.getValue(DATA);
-    words = asList(split(loremIpsum, ' '));
-  }
+    private final String loremIpsum;
+    private final List<String> words;
 
-  public String getLoremIpsum() {
-    return loremIpsum;
-  }
-
-  public String rawWords(int count, int precision) {
-    List<String> result = readRawWords(count, precision);
-    return joinWithSpace(result);
-  }
-
-  public String cleanWords(int count) {
-    List<String> result = new ArrayList<>();
-    for (String part : readRawWords(count, 0)) {
-      result.add(uncapitalize(replaceChars(part, "., ", "")));
+    public TextProducer(RandomDataGenerator generator, RandomGenerator random) {
+        this.generator = generator;
+        this.random = random;
+        loremIpsum = generator.getValue(DATA);
+        words = asList(split(loremIpsum, ' '));
     }
-    return joinWithSpace(result);
-  }
 
-  private List<String> readRawWords(int count, int precision) {
-    return generator.randomElements(words, random.randomBetween(count, count + precision));
-  }
+    public String getLoremIpsum() {
+        return loremIpsum;
+    }
+
+    public String rawWords(int count, int precision) {
+        List<String> result = readRawWords(count, precision);
+        return joinWithSpace(result);
+    }
+
+    public String cleanWords(int count) {
+        List<String> result = new ArrayList<>();
+        for (String part : readRawWords(count, 0)) {
+            result.add(uncapitalize(replaceChars(part, "., ", "")));
+        }
+        return joinWithSpace(result);
+    }
+
+    private List<String> readRawWords(int count, int precision) {
+        return generator.randomElements(words, random.randomBetween(count, count + precision));
+    }
 
 }
