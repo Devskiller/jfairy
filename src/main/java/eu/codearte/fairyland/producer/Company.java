@@ -1,7 +1,7 @@
 package eu.codearte.fairyland.producer;
 
 import eu.codearte.fairyland.DataMaster;
-import eu.codearte.fairyland.producer.text.FairUtil;
+import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -10,13 +10,16 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Company {
 
+  private final VATIdentificationNumber vatIdentificationNumber;
+
   private String name;
   private final String domain;
   private final String email;
 
-  public Company(RandomGenerator random, RandomDataGenerator generator) {
+  public Company(RandomGenerator random, RandomDataGenerator generator, VATIdentificationNumber vatIdentificationNumber) {
+      this.vatIdentificationNumber = vatIdentificationNumber;
 
-    name = generator.getValues(DataMaster.COMPANY_NAME);
+      name = generator.getValues(DataMaster.COMPANY_NAME);
     if (random.trueOrFalse()) {
       name += " " + generator.getValues(DataMaster.COMPANY_SUFFIX);
     }
@@ -35,6 +38,10 @@ public class Company {
 
   public String email() {
     return email + "@" + domain;
+  }
+
+  public String vatIdentificationNumber(){
+    return vatIdentificationNumber.generate();
   }
 
 }

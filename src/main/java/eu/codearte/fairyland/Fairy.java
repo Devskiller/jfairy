@@ -26,9 +26,10 @@ import static eu.codearte.fairyland.FairyFactory.*;
 public class Fairy {
 
     private static final String DATA_FILE_PREFIX = "fairyland_";
+    private static final int SEED = 1761283695;
 
     private DataMaster dataMaster;
-    private final RandomGenerator randomGenerator = createRandomGenerator();
+    private final RandomGenerator randomGenerator = new RandomGenerator(SEED);;
     private final TimeProvider timeProvider = new TimeProvider();
     private final FairUtil fairUtil = createStringifyUtil(randomGenerator, timeProvider);
     private final CalendarGenerator calendarGenerator = new CalendarGenerator(randomGenerator, timeProvider);

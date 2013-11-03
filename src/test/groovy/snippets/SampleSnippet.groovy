@@ -1,6 +1,7 @@
 package snippets
 
 import eu.codearte.fairyland.Fairy
+import eu.codearte.fairyland.producer.Company
 
 import static eu.codearte.fairyland.Fairy.create
 
@@ -36,3 +37,8 @@ println Fairy.create().bothify("?? ###-###")
 
 println fairy.nationalIdentityNumber()
 println fairy.nationalIdentificationNumber()
+
+def company = Fairy.create().company()
+println "Company: " + company.name()
+println "URL: " + company.url()
+println "VAT: " + company.vatIdentificationNumber()

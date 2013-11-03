@@ -22,5 +22,6 @@ class CompanySpec extends Specification {
     company.name()
     company.email()
     company.url()
+    company.vatIdentificationNumber()
   }
 }

@@ -7,6 +7,8 @@ import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.Person;
+import eu.codearte.fairyland.producer.person.pl.NIP;
+import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.text.TextProducer;
@@ -15,16 +17,10 @@ import eu.codearte.fairyland.producer.util.TimeProvider;
 
 class FairyFactory {
 
-    private static final int SEED = 1761283695;
-
     public static RandomDataGenerator createRandomDataGenerator(DataMaster dataMaster,
                                                                 RandomGenerator randomGenerator,
                                                                 CalendarGenerator randomCalendar) {
         return new RandomDataGenerator(dataMaster, randomGenerator, randomCalendar);
-    }
-
-    public static RandomGenerator createRandomGenerator() {
-        return new RandomGenerator(SEED);
     }
 
     public static Text createText(DataMaster dataMaster,
@@ -66,6 +62,11 @@ class FairyFactory {
                                         CalendarGenerator calendarGenerator) {
         return new Company(
                 randomGenerator,
-                createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator));
+                createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
+                createVatIdentificationNumber(randomGenerator));
+    }
+
+    private static VATIdentificationNumber createVatIdentificationNumber(RandomGenerator randomGenerator) {
+        return new NIP(randomGenerator);
     }
 }
