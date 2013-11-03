@@ -40,6 +40,7 @@ class PersonSpec extends Specification {
         person.email()
         person.isMale() || person.isFemale()
         person.nationalIdentificationNumber()
+        person.nationalIdentityCardNumber()
     }
 
     def "should create female"() {

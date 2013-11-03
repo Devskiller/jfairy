@@ -2,6 +2,7 @@ package snippets
 
 import eu.codearte.fairyland.Fairy
 import eu.codearte.fairyland.producer.Company
+import eu.codearte.fairyland.producer.person.Person
 
 import static eu.codearte.fairyland.Fairy.create
 
@@ -33,14 +34,14 @@ println "        Pesel: " + person.nationalIdentificationNumber();
 println "           ID: " + person.nationalIdentityCardNumber();
 
 println ""
-person.female()
-println "Women: " + person.fullName();
-person.male()
-println "  Men: " + person.fullName();
 
-println ""
+3.times {
+    println "  Men: " + person.male().fullName()
+}
 
-
+3.times {
+    println "Women: " + person.female().fullName()
+}
 
 println Fairy.create().numerify("bleble###")
 println Fairy.create().letterify("letter???")
