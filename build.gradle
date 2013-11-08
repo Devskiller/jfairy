@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: "sonar"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -87,6 +88,18 @@ publishing {
                 password = bintrayApiKey
             }
         }
+    }
+}
+
+sonar {
+    server {
+        url = System.getProperty("sonar.url", "http://localhost:9000")
+    }
+    database {
+        url = System.getProperty("sonar.jdbc", "jdbc:mysql://localhost/sonar")
+        driverClassName = "com.mysql.jdbc.Driver"
+        username = System.getProperty("sonar.username", "sonar")
+        password = System.getProperty("sonar.password", "")
     }
 }
 
