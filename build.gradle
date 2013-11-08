@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-apply plugin: "sonar"
+apply plugin: "sonar-runner"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -91,15 +91,12 @@ publishing {
     }
 }
 
-sonar {
-    server {
-        url = System.getProperty("sonar.url", "http://localhost:9000")
-    }
-    database {
-        url = System.getProperty("sonar.jdbc", "jdbc:mysql://localhost/sonar")
-        driverClassName = "com.mysql.jdbc.Driver"
-        username = System.getProperty("sonar.username", "sonar")
-        password = System.getProperty("sonar.password", "")
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
     }
 }
 
