@@ -5,7 +5,7 @@
 package eu.codearte.fairyland.producer;
 
 import eu.codearte.fairyland.DataMaster;
-import eu.codearte.fairyland.producer.util.CalendarGenerator;
+import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,16 +17,16 @@ public class RandomDataGenerator {
   private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
   private final DataMaster data;
   private final RandomGenerator random;
-  private final CalendarGenerator calendarGenerator;
+  private final DateGenerator dateGenerator;
 
-  public RandomDataGenerator(DataMaster data, RandomGenerator random, CalendarGenerator calendarGenerator) {
+  public RandomDataGenerator(DataMaster data, RandomGenerator random, DateGenerator dateGenerator) {
     this.data = data;
     this.random = random;
-    this.calendarGenerator = calendarGenerator;
+    this.dateGenerator = dateGenerator;
   }
 
   public DateTime randomDateInThePast(int years) {
-    return calendarGenerator.randomDateInThePast(years);
+    return dateGenerator.randomDateInThePast(years);
   }
 
   public List<String> randomElements(List<String> elements, int count) {

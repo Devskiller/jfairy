@@ -10,7 +10,7 @@ import eu.codearte.fairyland.producer.person.Sex;
 import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
-import eu.codearte.fairyland.producer.util.CalendarGenerator;
+import eu.codearte.fairyland.producer.util.DateGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
 import org.joda.time.DateTime;
 
@@ -31,7 +31,7 @@ public class Fairy {
     private final RandomGenerator randomGenerator = new RandomGenerator(SEED);
     private final TimeProvider timeProvider = new TimeProvider();
     private final FairUtil fairUtil = createStringifyUtil(randomGenerator, timeProvider);
-    private final CalendarGenerator calendarGenerator = new CalendarGenerator(randomGenerator, timeProvider);
+    private final DateGenerator dateGenerator = new DateGenerator(randomGenerator, timeProvider);
 
     private Fairy(Locale locale, String filePrefix) {
 
@@ -77,25 +77,25 @@ public class Fairy {
 
 
     public Text text() {
-        return createText(dataMaster, randomGenerator, calendarGenerator);
+        return createText(dataMaster, randomGenerator, dateGenerator);
     }
 
     public Person person() {
-        return createPerson(dataMaster, randomGenerator, fairUtil, calendarGenerator);
+        return createPerson(dataMaster, randomGenerator, fairUtil, dateGenerator);
     }
 
     public Company company() {
-        return createCompany(dataMaster, randomGenerator, calendarGenerator);
+        return createCompany(dataMaster, randomGenerator, dateGenerator);
     }
 
     public String nationalIdentityNumber() {
         return new PolishIdentityCardNumber(randomGenerator).generate(
-                calendarGenerator.randomDateBetweenYears(2000, timeProvider.getCurrentYear()));
+                dateGenerator.randomDateBetweenYears(2000, timeProvider.getCurrentYear()));
     }
 
     public String nationalIdentificationNumber() {
         return createNationalIdentificationNumber(randomGenerator)
-                .generate(calendarGenerator.randomDateInThePast(10),
+                .generate(dateGenerator.randomDateInThePast(10),
                         randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }
 
@@ -112,6 +112,6 @@ public class Fairy {
     }
 
     public DateTime randomDateInThePast() {
-        return calendarGenerator.randomDateInThePast(100);
+        return dateGenerator.randomDateInThePast(100);
     }
 }

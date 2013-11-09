@@ -9,8 +9,7 @@ import com.google.common.base.Preconditions;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import org.joda.time.DateTime;
 
-//TODO: MZA: Rename to DateGenerator
-public class CalendarGenerator {
+public class DateGenerator {
 
     @VisibleForTesting
     static final int SECONDS_BEFORE_TO_BE_IN_THE_PAST = 1;
@@ -18,7 +17,7 @@ public class CalendarGenerator {
     private final RandomGenerator randomGenerator;
     private final TimeProvider timeProvider;
 
-    public CalendarGenerator(RandomGenerator randomGenerator, TimeProvider timeProvider) {
+    public DateGenerator(RandomGenerator randomGenerator, TimeProvider timeProvider) {
         this.randomGenerator = randomGenerator;
         this.timeProvider = timeProvider;
     }

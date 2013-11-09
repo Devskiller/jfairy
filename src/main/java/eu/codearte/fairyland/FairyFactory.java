@@ -16,22 +16,22 @@ import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.text.TextProducer;
-import eu.codearte.fairyland.producer.util.CalendarGenerator;
+import eu.codearte.fairyland.producer.util.DateGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
 
 class FairyFactory {
 
     public static RandomDataGenerator createRandomDataGenerator(DataMaster dataMaster,
                                                                 RandomGenerator randomGenerator,
-                                                                CalendarGenerator randomCalendar) {
+                                                                DateGenerator randomCalendar) {
         return new RandomDataGenerator(dataMaster, randomGenerator, randomCalendar);
     }
 
     public static Text createText(DataMaster dataMaster,
                                   RandomGenerator randomGenerator,
-                                  CalendarGenerator calendarGenerator) {
+                                  DateGenerator dateGenerator) {
         return new Text(
-                createTextProducer(dataMaster, randomGenerator, calendarGenerator),
+                createTextProducer(dataMaster, randomGenerator, dateGenerator),
                 randomGenerator);
     }
 
@@ -41,9 +41,9 @@ class FairyFactory {
 
     private static TextProducer createTextProducer(DataMaster dataMaster,
                                                    RandomGenerator randomGenerator,
-                                                   CalendarGenerator calendarGenerator) {
+                                                   DateGenerator dateGenerator) {
         return new TextProducer(
-                createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
+                createRandomDataGenerator(dataMaster, randomGenerator, dateGenerator),
                 randomGenerator);
     }
 
@@ -54,10 +54,10 @@ class FairyFactory {
     public static Person createPerson(DataMaster dataMaster,
                                       RandomGenerator randomGenerator,
                                       FairUtil fairUtil,
-                                      CalendarGenerator calendarGenerator) {
+                                      DateGenerator dateGenerator) {
         return new Person(
                 randomGenerator,
-                createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
+                createRandomDataGenerator(dataMaster, randomGenerator, dateGenerator),
                 fairUtil,
                 createNationalIdentificationNumber(randomGenerator),
                 createNationalIdentityCardNumber(randomGenerator));
@@ -73,10 +73,10 @@ class FairyFactory {
 
     public static Company createCompany(DataMaster dataMaster,
                                         RandomGenerator randomGenerator,
-                                        CalendarGenerator calendarGenerator) {
+                                        DateGenerator dateGenerator) {
         return new Company(
                 randomGenerator,
-                createRandomDataGenerator(dataMaster, randomGenerator, calendarGenerator),
+                createRandomDataGenerator(dataMaster, randomGenerator, dateGenerator),
                 createVatIdentificationNumber(randomGenerator));
     }
 

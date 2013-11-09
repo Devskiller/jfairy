@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class CalendarGeneratorSpec extends Specification {
+class DateGeneratorSpec extends Specification {
 
     private static final MAX_YEARS_IN_THE_PAST = 5
 
@@ -23,7 +23,7 @@ class CalendarGeneratorSpec extends Specification {
 
     private randomGeneratorMock = Mock(RandomGenerator)
     private timeProviderMock = Mock(TimeProvider)
-    private CalendarGenerator sut = new CalendarGenerator(randomGeneratorMock, timeProviderMock)
+    private DateGenerator sut = new DateGenerator(randomGeneratorMock, timeProviderMock)
 
     def setup() {
         timeProviderMock.getCurrentDate() >> CURRENT_DATE
