@@ -3,6 +3,7 @@
  */
 package eu.codearte.fairyland.producer;
 
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,10 +46,26 @@ public class RandomGenerator {
         return min + random;
     }
 
+    //TODO: MZA: Duplication - should be merged into one method when consistent logic will be determined
     public char randomBetween(char min, char max) {
         int range = max - min + 1;
         int random = range > 0 ? this.random.nextInt(range) : 0;
         return (char) (min + random);
     }
 
+    /**
+     * Returns random long value from a range (including both range boundaries).
+     *
+     * It required to satisfied condition min <= max.
+     *
+     * @param min lower bound of a range
+     * @param max higher bound of a range
+     * @return pseudorandom {@code long} value between {@code mon} (inclusive) and {@code max} (inclusive)
+     */
+    public long randomBetween(long min, long max) {
+        Preconditions.checkArgument(min <= max, "%s has to be <= %s", min, max);
+        //Can it be done easier for long numbers?
+        long range = (max - min) + 1;
+        return min + (long)(random.nextDouble() * range);
+    }
 }

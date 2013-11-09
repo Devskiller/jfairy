@@ -10,13 +10,12 @@ import spock.lang.Unroll
 class RandomGeneratorSpec extends Specification {
 
     @Unroll
-    def "should generate random between 5-9"() {
+    def "should generate random number from given range #from - #to"() {
         setup:
         RandomGenerator randomGenerator = new RandomGenerator(100L);
 
         expect:
         def between = randomGenerator.randomBetween(from, to)
-        println between
         between == value
 
         where:
@@ -26,6 +25,8 @@ class RandomGeneratorSpec extends Specification {
         1           | 3           || 2
         0           | 4           || 0
         48          | 57          || 53
-
+        2L          | 2L          || 2L
+        -5L         | -2L         || -3L
+        -3L         | 2L          || 1L
     }
 }

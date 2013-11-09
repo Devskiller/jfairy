@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer.person;
 
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
 
 /**
  * @author mariuszs
@@ -12,5 +12,5 @@ import java.util.GregorianCalendar;
  */
 public interface NationalIdentityCardNumber {
 
-    public String generate(GregorianCalendar calendar);
+    public String generate(DateTime date);
 }

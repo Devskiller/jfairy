@@ -13,6 +13,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'com.google.guava:guava:15.0'
     compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'joda-time:joda-time:2.3'
     testCompile 'ch.qos.logback:logback-classic:1.0.13'
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'cglib:cglib-nodep:2.2.2'

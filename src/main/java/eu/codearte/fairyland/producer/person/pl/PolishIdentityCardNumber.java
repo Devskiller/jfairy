@@ -2,9 +2,7 @@ package eu.codearte.fairyland.producer.person.pl;
 
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static eu.codearte.fairyland.producer.person.pl.AlphaNumberSystem.convertToString;
@@ -28,16 +26,13 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
         this.randomGenerator = randomGenerator;
     }
 
-    /**
-     * @return generate
-     */
-    public String generate(GregorianCalendar calendar) {
+    public String generate(DateTime date) {
 
-        checkArgument(calendar.get(Calendar.YEAR) >= 2000, "Polish ID was introduced in 2000");
+        checkArgument(date.getYear() >= 2000, "Polish ID was introduced in 2000");
 
         char[] id = new char[WEIGHTS.length];
 
-        fillAlphaPrefix(calendar.get(Calendar.YEAR), id);
+        fillAlphaPrefix(date.getYear(), id);
         fillDigits(id);
 
         char checksum = calculateChecksum(id);

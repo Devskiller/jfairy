@@ -1,14 +1,10 @@
 package eu.codearte.fairyland.producer.person.pl;
 
-import com.google.common.base.Preconditions;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Sex;
+import org.joda.time.DateTime;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 
@@ -29,11 +25,11 @@ public class Pesel implements NationalIdentificationNumber {
     }
 
     @Override
-    public String generate(GregorianCalendar calendar, Sex sex) {
+    public String generate(DateTime date, Sex sex) {
 
-        int year = calculateYear(calendar.get(Calendar.YEAR));
-        int month = calculateMonth(calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = date.getYearOfCentury();
+        int month = calculateMonth(date.getMonthOfYear(), date.getYear());
+        int day = date.getDayOfMonth();
         int serialNumber = randomGenerator.randomBetween(0, 999);
         int sexCode = calculateSexCode(sex);
 
@@ -59,14 +55,6 @@ public class Pesel implements NationalIdentificationNumber {
 
     }
 
-    private int calculateSexCode(Sex sex) {
-        return randomGenerator.randomBetween(0, 4) * 2 + (sex == Sex.male ? 1 : 0);
-    }
-
-    private int calculateYear(int year) {
-        return year % 100;
-    }
-
     private int calculateMonth(int month, int year) {
         if (year >= 1800 && year < 1900) {
             month += 80;
@@ -78,6 +66,10 @@ public class Pesel implements NationalIdentificationNumber {
             month += 60;
         }
         return month;
+    }
+
+    private int calculateSexCode(Sex sex) {
+        return randomGenerator.randomBetween(0, 4) * 2 + (sex == Sex.male ? 1 : 0);
     }
 
     private static int calculateChecksum(String pesel) {

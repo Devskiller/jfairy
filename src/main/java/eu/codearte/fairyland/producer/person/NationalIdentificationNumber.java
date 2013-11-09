@@ -4,12 +4,12 @@
 
 package eu.codearte.fairyland.producer.person;
 
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
 
 /**
  * @author mariuszs
  */
 public interface NationalIdentificationNumber {
 
-    String generate(GregorianCalendar calendar, Sex sex);
+    String generate(DateTime date, Sex sex);
 }

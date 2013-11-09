@@ -2,9 +2,8 @@ package eu.codearte.fairyland.producer.text;
 
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
-import eu.codearte.fairyland.producer.util.TimeUtil;
-
-import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 
 public class FairUtil {
 
@@ -29,8 +28,8 @@ public class FairUtil {
     return letterify(numerify(string));
   }
 
-  public int age(Date dateOfBirth) {
-    return TimeUtil.yearsBetween(dateOfBirth, timeProvider.getGregorianCalendar().getTime());
+  public int age(DateTime dateOfBirth) {
+    return Years.yearsBetween(dateOfBirth, timeProvider.getCurrentDate()).getYears();
   }
 
   private String replaceSymbolWithCharsFromTo(String string, char symbol, char from, char to) {

@@ -4,15 +4,16 @@
 
 package eu.codearte.fairyland.producer.util;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Preconditions;
 import eu.codearte.fairyland.producer.RandomGenerator;
+import org.joda.time.DateTime;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import static java.util.Calendar.DAY_OF_YEAR;
-import static java.util.Calendar.YEAR;
-
+//TODO: MZA: Rename to DateGenerator
 public class CalendarGenerator {
+
+    @VisibleForTesting
+    static final int SECONDS_BEFORE_TO_BE_IN_THE_PAST = 1;
 
     private final RandomGenerator randomGenerator;
     private final TimeProvider timeProvider;
@@ -22,31 +23,30 @@ public class CalendarGenerator {
         this.timeProvider = timeProvider;
     }
 
-    public GregorianCalendar randomCalendarInThePast(int maxYear) {
-
-        GregorianCalendar calendar = timeProvider.getGregorianCalendar();
-
-        calendar.roll(YEAR, -randomGenerator.randomBetween(1, maxYear));
-
-        fillDay(calendar);
-
-        return calendar;
+    public DateTime randomDateInThePast(int maxYearsEarlier) {
+        Preconditions.checkArgument(maxYearsEarlier >= 0, "%s has to be >= 0", maxYearsEarlier);
+        DateTime currentDate = timeProvider.getCurrentDate();
+        DateTime latestDateInThePast = currentDate.minusSeconds(SECONDS_BEFORE_TO_BE_IN_THE_PAST);
+        DateTime maxYearsEarlierDate = currentDate.minusYears(maxYearsEarlier);
+        return randomDateBetweenTwoDates(maxYearsEarlierDate, latestDateInThePast);
     }
 
-    public GregorianCalendar randomCalendarBetweenYears(int from, int to) {
-
-        GregorianCalendar calendar = timeProvider.getGregorianCalendar();
-
-        calendar.set(YEAR, randomGenerator.randomBetween(from, to));
-
-        fillDay(calendar);
-
-        return calendar;
+    private DateTime randomDateBetweenTwoDates(DateTime from, DateTime to) {
+        return new DateTime(randomGenerator.randomBetween(from.getMillis(), to.getMillis()));
     }
 
-    private void fillDay(GregorianCalendar calendar) {
-        int maximumDay = calendar.getActualMaximum(DAY_OF_YEAR);
-        calendar.set(DAY_OF_YEAR, randomGenerator.randomBetween(1, maximumDay));
+    public DateTime randomDateBetweenYears(int from, int to) {
+        Preconditions.checkArgument(from <= to, "%s has to be <= %s", from, to);
+        DateTime fromDate = getDateForFirstDayForGivenYear(from);
+        DateTime toDate = getDateForLastDayForGivenYear(to);
+        return randomDateBetweenTwoDates(fromDate, toDate);
     }
 
+    private DateTime getDateForLastDayForGivenYear(int year) {
+        return new DateTime(getDateForFirstDayForGivenYear(year + 1).getMillis() - 1);
+    }
+
+    private DateTime getDateForFirstDayForGivenYear(int year) {
+        return new DateTime(year, 1, 1, 0, 0);
+    }
 }

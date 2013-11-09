@@ -2,6 +2,7 @@ package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.RandomGenerator
 import eu.codearte.fairyland.producer.person.Sex
+import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -27,11 +28,8 @@ class PeselSpec extends Specification {
     }
 
     def "should generate good pesel"() {
-
         when:
-            def pesel = generator.generate(new GregorianCalendar(), Sex.male);
-            println pesel
-
+            def pesel = generator.generate(DateTime.now(), Sex.male);
         then:
             pesel
             isValid(pesel)

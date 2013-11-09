@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer.person;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 class PersonHolder {
 
@@ -13,10 +13,10 @@ class PersonHolder {
   private final String email;
   private final Sex sex;
   private final String telephoneNumber;
-  private final Date dateOfBirth;
+  private final DateTime dateOfBirth;
   private final int age;
 
-    public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, Date dateOfBirth, int age) {
+    public PersonHolder(String firstName, String lastName, String email, Sex sex, String telephoneNumber, DateTime dateOfBirth, int age) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -58,7 +58,7 @@ class PersonHolder {
     return telephoneNumber;
   }
 
-  Date dateOfBirth() {
+  DateTime dateOfBirth() {
     return dateOfBirth;
   }
 

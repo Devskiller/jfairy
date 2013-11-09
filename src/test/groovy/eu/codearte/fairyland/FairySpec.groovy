@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland
 
+import org.joda.time.DateTime
 import spock.lang.Specification
 
 class FairySpec extends Specification {
@@ -27,7 +28,7 @@ class FairySpec extends Specification {
 
     def "should generate random date in the past"() {
         expect:
-        fairy.randomDateInThePast().before(new Date())
+        fairy.randomDateInThePast().isBefore(DateTime.now())
     }
 
     def "should generate national identity card number"() {

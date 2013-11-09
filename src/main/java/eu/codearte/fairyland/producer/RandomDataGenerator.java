@@ -6,11 +6,10 @@ package eu.codearte.fairyland.producer;
 
 import eu.codearte.fairyland.DataMaster;
 import eu.codearte.fairyland.producer.util.CalendarGenerator;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +25,8 @@ public class RandomDataGenerator {
     this.calendarGenerator = calendarGenerator;
   }
 
-  public GregorianCalendar randomDateInThePast(int years) {
-    return calendarGenerator.randomCalendarInThePast(years);
+  public DateTime randomDateInThePast(int years) {
+    return calendarGenerator.randomDateInThePast(years);
   }
 
   public List<String> randomElements(List<String> elements, int count) {

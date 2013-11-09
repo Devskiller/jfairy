@@ -2,6 +2,7 @@ package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
 import eu.codearte.fairyland.producer.person.Person
+import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
 
@@ -75,7 +76,7 @@ class PersonSpec extends Specification {
         when:
         def person = Fairy.create().person()
         then:
-        person.dateOfBirth().before(new Date())
+        person.dateOfBirth().isBefore(DateTime.now())
     }
 
     def "should create age"() {

@@ -12,9 +12,9 @@ import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.util.CalendarGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
+import org.joda.time.DateTime;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Locale;
 
 import static eu.codearte.fairyland.FairyFactory.*;
@@ -29,7 +29,6 @@ public class Fairy {
 
     private DataMaster dataMaster;
     private final RandomGenerator randomGenerator = new RandomGenerator(SEED);
-    ;
     private final TimeProvider timeProvider = new TimeProvider();
     private final FairUtil fairUtil = createStringifyUtil(randomGenerator, timeProvider);
     private final CalendarGenerator calendarGenerator = new CalendarGenerator(randomGenerator, timeProvider);
@@ -91,12 +90,12 @@ public class Fairy {
 
     public String nationalIdentityNumber() {
         return new PolishIdentityCardNumber(randomGenerator).generate(
-                calendarGenerator.randomCalendarBetweenYears(2000, timeProvider.getYear()));
+                calendarGenerator.randomDateBetweenYears(2000, timeProvider.getCurrentYear()));
     }
 
     public String nationalIdentificationNumber() {
         return createNationalIdentificationNumber(randomGenerator)
-                .generate(calendarGenerator.randomCalendarInThePast(10),
+                .generate(calendarGenerator.randomDateInThePast(10),
                         randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
     }
 
@@ -112,7 +111,7 @@ public class Fairy {
         return fairUtil.bothify(string);
     }
 
-    public Date randomDateInThePast() {
-        return calendarGenerator.randomCalendarInThePast(100).getTime();
+    public DateTime randomDateInThePast() {
+        return calendarGenerator.randomDateInThePast(100);
     }
 }

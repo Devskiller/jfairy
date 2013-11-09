@@ -8,9 +8,7 @@ import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
 
 import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
 import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
@@ -31,7 +29,7 @@ public class Person {
     private String email;
     private Sex sex;
     private String telephoneNumber;
-    private Date dateOfBirth;
+    private DateTime dateOfBirth;
     private int age;
 
     private final Config config;
@@ -74,7 +72,7 @@ public class Person {
         lastName = generator.getValuesOfType(DataMaster.LAST_NAME, config.sex().name());
         email = generateEmail(firstName, lastName);
         telephoneNumber = fairUtil.numerify(config.getTelephoneNumberFormat());
-        dateOfBirth = generator.randomDateInThePast(100).getTime();
+        dateOfBirth = generator.randomDateInThePast(100);
         age = fairUtil.age(dateOfBirth);
         sex = config.sex();
     }
@@ -107,7 +105,7 @@ public class Person {
         return telephoneNumber;
     }
 
-    public Date dateOfBirth() {
+    public DateTime dateOfBirth() {
         return dateOfBirth;
     }
 
@@ -128,9 +126,7 @@ public class Person {
     }
 
     public String nationalIdentificationNumber() {
-        GregorianCalendar date = new GregorianCalendar();
-        date.setTime(dateOfBirth);
-        return nationalIdentificationNumber.generate(date, config.sex());
+        return nationalIdentificationNumber.generate(new DateTime(dateOfBirth), config.sex());
     }
 
     public String nationalIdentityCardNumber(){
