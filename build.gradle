@@ -92,11 +92,6 @@ publishing {
     }
 }
 
-buildscript {
-    repositories { mavenCentral() }
-    dependencies { classpath 'org.ajoberstar:gradle-jacoco:0.3.0' }
-}
-
 sonarRunner {
     sonarProperties {
         property "sonar.host.url", "http://localhost:9000"
