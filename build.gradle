@@ -3,6 +3,7 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: "sonar-runner"
+apply plugin: 'jacoco'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -91,6 +92,11 @@ publishing {
     }
 }
 
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath 'org.ajoberstar:gradle-jacoco:0.3.0' }
+}
+
 sonarRunner {
     sonarProperties {
         property "sonar.host.url", "http://localhost:9000"
@@ -98,6 +104,10 @@ sonarRunner {
         property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
         property "sonar.jdbc.username", "sonar"
     }
+}
+
+test {
+    ignoreFailures = true
 }
 
 wrapper {
