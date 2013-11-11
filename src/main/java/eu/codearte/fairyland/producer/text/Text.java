@@ -39,10 +39,11 @@ public class Text {
     }
 
     public String result(String result) {
-        if (limit > 0)
+        if (limit > 0) {
             return left(result, limit);
-        else
+        } else {
             return result;
+        }
     }
 
     public String loremIpsum() {

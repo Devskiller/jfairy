@@ -10,20 +10,24 @@ package eu.codearte.fairyland.producer.person.pl;
  */
 public class AlphaNumberSystem {
 
-    final static char[] digits = {
+    static final char[] DIGITS = {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
     };
 
-    public static String convertToString(int number, int base) {
-        char buffer[] = new char[20];
+    private AlphaNumberSystem() {
+    }
+
+    public static String convertToString(final int numberToConvert, final int base) {
+        int number = numberToConvert;
+        final char[] buffer = new char[20];
         int charPosition = buffer.length - 1;
 
         if (number == 0) {
-            buffer[charPosition--] = digits[number];
+            buffer[charPosition--] = DIGITS[number];
         } else {
             while (number > 0) {
-                buffer[charPosition--] = digits[number % base];
+                buffer[charPosition--] = DIGITS[number % base];
                 number /= base;
             }
         }

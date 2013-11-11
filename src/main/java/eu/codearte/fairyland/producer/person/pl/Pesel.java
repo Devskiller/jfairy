@@ -16,7 +16,7 @@ import static java.lang.String.format;
  */
 public class Pesel implements NationalIdentificationNumber {
 
-    public static final int[] WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+    private static final int[] WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 
     private final RandomGenerator randomGenerator;
 
@@ -56,16 +56,17 @@ public class Pesel implements NationalIdentificationNumber {
     }
 
     private int calculateMonth(int month, int year) {
+        int peselMonth = month;
         if (year >= 1800 && year < 1900) {
-            month += 80;
+            peselMonth += 80;
         } else if (year >= 2000 && year < 2100) {
-            month += 20;
+            peselMonth += 20;
         } else if (year > 2100 && year < 2200) {
-            month += 40;
+            peselMonth += 40;
         } else if (year > 2200 && year < 2300) {
-            month += 60;
+            peselMonth += 60;
         }
-        return month;
+        return peselMonth;
     }
 
     private int calculateSexCode(Sex sex) {

@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  */
 public class NIP implements VATIdentificationNumber {
 
-    public static final int[] CODES = new int[]{
+    static final int[] CODES = new int[]{
             101, 102, 103, 104, 105, 106, 107, 108, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 121, 122, 123,
             124, 125, 126, 127, 128, 129, 131, 132, 133, 134, 135, 136, 137, 138, 139, 141, 142, 143, 144, 145, 146,
             147, 148, 149, 151, 152, 153, 154, 155, 156, 157, 158, 159, 161, 162, 163, 164, 165, 166, 167, 168, 169,
@@ -56,7 +56,7 @@ public class NIP implements VATIdentificationNumber {
             992, 993, 994, 995, 996, 997, 998
     };
 
-    public static final int[] WEIGHTS = new int[]{6, 5, 7, 2, 3, 4, 5, 6, 7};
+    private static final int[] WEIGHTS = new int[]{6, 5, 7, 2, 3, 4, 5, 6, 7};
 
     private final RandomGenerator randomGenerator;
 
@@ -77,16 +77,23 @@ public class NIP implements VATIdentificationNumber {
     }
 
     boolean isNIPValid(String nip) {
-        if (nip.length() == 13) {
-            nip = nip.replaceAll("-", "");
+        String normalizedNip = normalizeNip(nip);
+        if (normalizedNip.length() != 10) {
+            return false;
         }
-        if (nip.length() != 10) return false;
         try {
-            int checksum = calculateChecksum(nip);
-            return checksum == nip.charAt(9) - '0';
+            int checksum = calculateChecksum(normalizedNip);
+            return checksum == normalizedNip.charAt(9) - '0';
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private String normalizeNip(String value) {
+        if (value.length() == 13) {
+            return value.replaceAll("-", "");
+        }
+        return value;
     }
 
     private int calculateChecksum(String nip) {

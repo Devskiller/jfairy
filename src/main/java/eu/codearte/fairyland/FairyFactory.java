@@ -19,7 +19,10 @@ import eu.codearte.fairyland.producer.text.TextProducer;
 import eu.codearte.fairyland.producer.util.DateGenerator;
 import eu.codearte.fairyland.producer.util.TimeProvider;
 
-class FairyFactory {
+final class FairyFactory {
+
+    private FairyFactory() {
+    }
 
     public static RandomDataGenerator createRandomDataGenerator(DataMaster dataMaster,
                                                                 RandomGenerator randomGenerator,

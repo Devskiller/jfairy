@@ -4,8 +4,6 @@
 package eu.codearte.fairyland.producer;
 
 import com.google.common.base.Preconditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Random;
@@ -13,7 +11,7 @@ import java.util.Random;
 import static java.util.Collections.shuffle;
 
 public class RandomGenerator {
-    private static final Logger LOG = LoggerFactory.getLogger(RandomGenerator.class);
+
     private final Random random;
 
     public RandomGenerator(long seed) {
@@ -42,20 +40,18 @@ public class RandomGenerator {
      */
     public int randomBetween(int min, int max) {
         int range = max - min + 1;
-        int random = range > 0 ? this.random.nextInt(range) : 0;
-        return min + random;
+        int randomInt = range > 0 ? this.random.nextInt(range) : 0;
+        return min + randomInt;
     }
 
     //TODO: MZA: Duplication - should be merged into one method when consistent logic will be determined
     public char randomBetween(char min, char max) {
-        int range = max - min + 1;
-        int random = range > 0 ? this.random.nextInt(range) : 0;
-        return (char) (min + random);
+        return (char) randomBetween((int) min, (int) max);
     }
 
     /**
      * Returns random long value from a range (including both range boundaries).
-     *
+     * <p/>
      * It required to satisfied condition min <= max.
      *
      * @param min lower bound of a range
@@ -66,6 +62,6 @@ public class RandomGenerator {
         Preconditions.checkArgument(min <= max, "%s has to be <= %s", min, max);
         //Can it be done easier for long numbers?
         long range = (max - min) + 1;
-        return min + (long)(random.nextDouble() * range);
+        return min + (long) (random.nextDouble() * range);
     }
 }
