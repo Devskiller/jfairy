@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland;
 
+import com.google.common.collect.Maps;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Maps.newHashMap;
 
 public class DataMaster {
 
@@ -27,7 +29,7 @@ public class DataMaster {
   public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
 
 
-  private Map<String, List<String>> data = new HashMap<>();
+  private Map<String, List<String>> data = newHashMap();
 
   DataMaster() {
   }

@@ -3,12 +3,14 @@
  */
 package eu.codearte.fairyland.producer.text;
 
+import com.google.common.collect.Lists;
 import eu.codearte.fairyland.producer.RandomDataGenerator;
 import eu.codearte.fairyland.producer.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static eu.codearte.fairyland.TextUtils.joinWithSpace;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -40,7 +42,7 @@ public class TextProducer {
     }
 
     public String cleanWords(int count) {
-        List<String> result = new ArrayList<>();
+        List<String> result = newArrayList();
         for (String part : readRawWords(count, 0)) {
             result.add(uncapitalize(replaceChars(part, "., ", "")));
         }
