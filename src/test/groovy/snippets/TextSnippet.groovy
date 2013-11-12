@@ -1,6 +1,7 @@
 package snippets
 
 import eu.codearte.fairyland.Fairy
+
 def text = Fairy.create().text()
 
 println "* Lorem ipsum *"

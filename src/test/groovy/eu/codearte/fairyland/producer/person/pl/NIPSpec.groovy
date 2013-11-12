@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer.person.pl
 
-import eu.codearte.fairyland.producer.RandomGenerator
+import eu.codearte.fairyland.producer.util.RandomGenerator
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -14,30 +14,30 @@ import spock.lang.Unroll
  */
 class NIPSpec extends Specification {
 
-    def random = Mock(RandomGenerator)
-    def generator = new NIP(random)
+   def random = Mock(RandomGenerator)
+   def generator = new NIP(random)
 
-    @Unroll
-    def "Should validate #nip as #valid"() {
+   @Unroll
+   def "Should validate #nip as #valid"() {
 
-        expect:
-            generator.isNIPValid(nip) == valid
+      expect:
+      generator.isNIPValid(nip) == valid
 
-        where:
-            nip          | valid
-            "2684494529" | true
-            "1234567890" | false
-            "0000000000" | true
-    }
+      where:
+      nip          | valid
+      "2684494529" | true
+      "1234567890" | false
+      "0000000000" | true
+   }
 
-    def "Should generate good NIP"() {
+   def "Should generate good NIP"() {
 
-        when:
-            def nip = generator.generate()
-        then:
-            nip == "1010000002"
-            generator.isNIPValid(nip)
+      when:
+      def nip = generator.generate()
+      then:
+      nip == "1010000002"
+      generator.isNIPValid(nip)
 
-    }
+   }
 
 }

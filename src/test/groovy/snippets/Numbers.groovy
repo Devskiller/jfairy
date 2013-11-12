@@ -1,6 +1,6 @@
 package snippets
 
-import eu.codearte.fairyland.producer.RandomGenerator
+import eu.codearte.fairyland.producer.util.RandomGenerator
 import eu.codearte.fairyland.producer.person.pl.NIP
 import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber
 import org.joda.time.DateTime
