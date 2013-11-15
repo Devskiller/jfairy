@@ -17,21 +17,21 @@ import static eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber.
  */
 class PolishIdentityCardNumberSpec extends Specification {
 
-   def randomGenerator = Mock(RandomGenerator)
+  def randomGenerator = Mock(RandomGenerator)
 
-   /**
-    * http://en.wikipedia.org/wiki/Polish_identity_card
-    */
-   void "should generate proper id number"() {
-      def max = (2013 - BEGIN) * PREFIXES_BY_YEAR
-      setup:
-      randomGenerator.randomBetween(max, max + PREFIXES_BY_YEAR) >> 26 // ABA
-      randomGenerator.randomBetween(0, 99999) >> 0
-      when:
-      PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
-      def id = generator.generate(DateTime.now())
-      then:
-      id == "ABA300000"
-      generator.isValid(id)
-   }
+  /**
+   * http://en.wikipedia.org/wiki/Polish_identity_card
+   */
+  void "should generate proper id number"() {
+    def max = (2013 - BEGIN) * PREFIXES_BY_YEAR
+    setup:
+    randomGenerator.randomBetween(max, max + PREFIXES_BY_YEAR) >> 26 // ABA
+    randomGenerator.randomBetween(0, 99999) >> 0
+    when:
+    PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
+    def id = generator.generate(DateTime.now())
+    then:
+    id == "ABA300000"
+    generator.isValid(id)
+  }
 }

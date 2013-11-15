@@ -11,5 +11,5 @@ import org.joda.time.DateTime;
  */
 public interface NationalIdentificationNumber {
 
-   String generate(DateTime date, Sex sex);
+  String generate(DateTime date, Sex sex);
 }

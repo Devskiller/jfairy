@@ -9,45 +9,50 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.List;
 import java.util.Map;
 
+@Singleton
 public class RandomDataGenerator {
-   private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
-   private final DataMaster data;
-   private final RandomGenerator random;
-   private final DateGenerator dateGenerator;
 
-   public RandomDataGenerator(DataMaster data, RandomGenerator random, DateGenerator dateGenerator) {
-      this.data = data;
-      this.random = random;
-      this.dateGenerator = dateGenerator;
-   }
+  private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
+  private final DataMaster data;
+  private final RandomGenerator random;
+  private final DateGenerator dateGenerator;
 
-   public DateTime randomDateInThePast(int years) {
-      return dateGenerator.randomDateInThePast(years);
-   }
+  @Inject
+  public RandomDataGenerator(DataMaster data, RandomGenerator random, DateGenerator dateGenerator) {
+    this.data = data;
+    this.random = random;
+    this.dateGenerator = dateGenerator;
+  }
 
-   public List<String> randomElements(List<String> elements, int count) {
-      return random.randomElements(elements, count);
-   }
+  public DateTime randomDateInThePast(int years) {
+    return dateGenerator.randomDateInThePast(years);
+  }
 
-   public String getValue(String data) {
-      return this.data.getString(data);
-   }
+  public List<String> randomElements(List<String> elements, int count) {
+    return random.randomElements(elements, count);
+  }
 
-   public String getValuesOfType(String dataKey, final String type) {
-      LOG.trace("getValuesOfType(dataKey={}, type={})", dataKey, type);
+  public String getValue(String data) {
+    return this.data.getString(data);
+  }
 
-      Map<String, List<String>> stringMap = data.getStringMap(dataKey);
+  public String getValuesOfType(String dataKey, final String type) {
+    LOG.trace("getValuesOfType(dataKey={}, type={})", dataKey, type);
 
-      List<String> entries = stringMap.get(type);
+    Map<String, List<String>> stringMap = data.getStringMap(dataKey);
 
-      LOG.trace("Selected entries {}", entries);
-      return random.randomElement(entries);
-   }
+    List<String> entries = stringMap.get(type);
 
-   public String getValues(String key) {
-      return random.randomElement(data.getStringList(key));
-   }
+    LOG.trace("Selected entries {}", entries);
+    return random.randomElement(entries);
+  }
+
+  public String getValues(String key) {
+    return random.randomElement(data.getStringList(key));
+  }
 }

@@ -9,11 +9,11 @@ import static com.google.common.base.Joiner.on;
 
 public final class TextUtils {
 
-   private TextUtils() {
-   }
+  private TextUtils() {
+  }
 
-   public static String joinWithSpace(List<String> result) {
-      return on(" ").join(result);
-   }
+  public static String joinWithSpace(List<String> result) {
+    return on(" ").join(result);
+  }
 
 }
