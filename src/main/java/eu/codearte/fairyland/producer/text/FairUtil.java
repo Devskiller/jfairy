@@ -5,12 +5,15 @@ import eu.codearte.fairyland.producer.util.TimeProvider;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
+import javax.inject.Inject;
+
 public class FairUtil {
 
    private final RandomGenerator random;
 
    private final TimeProvider timeProvider;
 
+  @Inject
    public FairUtil(RandomGenerator random, TimeProvider timeProvider) {
       this.random = random;
       this.timeProvider = timeProvider;
