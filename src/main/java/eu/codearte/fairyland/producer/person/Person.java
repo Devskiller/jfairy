@@ -125,7 +125,7 @@ public class Person {
 				temp += ".";
 			}
 		}
-		return StringUtils.stripAccents(lowerCase(temp + lastName + "@" + generator.getValues(PERSONAL_EMAIL)));
+		return StringUtils.stripAccents(lowerCase(temp + lastName + '@' + generator.getValues(PERSONAL_EMAIL)));
 	}
 
 	public String nationalIdentificationNumber() {
