@@ -18,70 +18,70 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  */
 public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
-  private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
-  public static final int BEGIN = 2000;
-  public static final int PREFIXES_BY_YEAR = 45;
+	private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
+	public static final int BEGIN = 2000;
+	public static final int PREFIXES_BY_YEAR = 45;
 
-  private final RandomGenerator randomGenerator;
+	private final RandomGenerator randomGenerator;
 
-  @Inject
-  public PolishIdentityCardNumber(RandomGenerator randomGenerator) {
-    this.randomGenerator = randomGenerator;
-  }
+	@Inject
+	public PolishIdentityCardNumber(RandomGenerator randomGenerator) {
+		this.randomGenerator = randomGenerator;
+	}
 
-  public String generate(DateTime date) {
+	public String generate(DateTime date) {
 
-    checkArgument(date.getYear() >= 2000, "Polish ID was introduced in 2000");
+		checkArgument(date.getYear() >= 2000, "Polish ID was introduced in 2000");
 
-    char[] id = new char[WEIGHTS.length];
+		char[] id = new char[WEIGHTS.length];
 
-    fillAlphaPrefix(date.getYear(), id);
-    fillDigits(id);
+		fillAlphaPrefix(date.getYear(), id);
+		fillDigits(id);
 
-    char checksum = calculateChecksum(id);
+		char checksum = calculateChecksum(id);
 
-    id[3] = checksum;
+		id[3] = checksum;
 
-    return copyValueOf(id);
+		return copyValueOf(id);
 
-  }
+	}
 
-  public boolean isValid(String id) {
-    int checksum = calculateChecksum(id.toCharArray());
+	public boolean isValid(String id) {
+		int checksum = calculateChecksum(id.toCharArray());
 
-    return id.charAt(3) == checksum;
-  }
+		return id.charAt(3) == checksum;
+	}
 
-  private char calculateChecksum(char[] id) {
-    int index = 0;
-    int checksum = 0;
+	private char calculateChecksum(char[] id) {
+		int index = 0;
+		int checksum = 0;
 
-    for (int weight : WEIGHTS) {
-      int value = 0;
-      if (index < 3) {
-        value = id[index] - 'A' + 10;
-      } else if (index > 3) {
-        value = id[index] - '0';
-      }
-      index++;
-      checksum += weight * value;
-    }
+		for (int weight : WEIGHTS) {
+			int value = 0;
+			if (index < 3) {
+				value = id[index] - 'A' + 10;
+			} else if (index > 3) {
+				value = id[index] - '0';
+			}
+			index++;
+			checksum += weight * value;
+		}
 
-    return valueOf(checksum % 10).charAt(0);
-  }
+		return valueOf(checksum % 10).charAt(0);
+	}
 
-  private void fillDigits(char[] id) {
-    String num = valueOf(randomGenerator.randomBetween(0, 99999));
-    char[] digits = leftPad(num, 5, '0').toCharArray();
-    arraycopy(digits, 0, id, 4, digits.length);
-  }
+	private void fillDigits(char[] id) {
+		String num = valueOf(randomGenerator.randomBetween(0, 99999));
+		char[] digits = leftPad(num, 5, '0').toCharArray();
+		arraycopy(digits, 0, id, 4, digits.length);
+	}
 
-  private void fillAlphaPrefix(int year, char[] id) {
-    int maxPrefix = (year - BEGIN) * PREFIXES_BY_YEAR;
-    int range = randomGenerator.randomBetween(maxPrefix, maxPrefix + PREFIXES_BY_YEAR);
-    String prefix = convertToString(range, 26);
-    char[] charArray = leftPad(prefix, 3, 'A').toCharArray();
-    arraycopy(charArray, 0, id, 0, charArray.length);
-  }
+	private void fillAlphaPrefix(int year, char[] id) {
+		int maxPrefix = (year - BEGIN) * PREFIXES_BY_YEAR;
+		int range = randomGenerator.randomBetween(maxPrefix, maxPrefix + PREFIXES_BY_YEAR);
+		String prefix = convertToString(range, 26);
+		char[] charArray = leftPad(prefix, 3, 'A').toCharArray();
+		arraycopy(charArray, 0, id, 0, charArray.length);
+	}
 
 }

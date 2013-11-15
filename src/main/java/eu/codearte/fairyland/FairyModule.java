@@ -14,10 +14,10 @@ import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
  */
 public class FairyModule extends AbstractModule {
 
-  @Override
-  protected void configure() {
-    bind(NationalIdentificationNumber.class).to(Pesel.class);
-    bind(NationalIdentityCardNumber.class).to(PolishIdentityCardNumber.class);
-    bind(VATIdentificationNumber.class).to(NIP.class);
-  }
+	@Override
+	protected void configure() {
+		bind(NationalIdentificationNumber.class).to(Pesel.class);
+		bind(NationalIdentityCardNumber.class).to(PolishIdentityCardNumber.class);
+		bind(VATIdentificationNumber.class).to(NIP.class);
+	}
 }
