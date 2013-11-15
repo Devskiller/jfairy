@@ -38,19 +38,6 @@ public final class Fairy {
 			throw new IllegalStateException(e);
 		}
 
-//    pico.as(Characteristics.CACHE).addComponent(dataMaster);
-//    pico.addComponent(randomGenerator);
-//    pico.addComponent(FairUtil.class);
-//    pico.addComponent(TimeProvider.class);
-//    pico.addComponent(DateGenerator.class);
-//    pico.addComponent(RandomDataGenerator.class);
-//    pico.addComponent(Text.class);
-//    pico.addComponent(TextProducer.class);
-//    pico.addComponent(Person.class).as(Characteristics.CACHE);
-//    pico.addComponent(NationalIdentificationNumber.class, Pesel.class);
-//    pico.addComponent(NationalIdentityCardNumber.class, PolishIdentityCardNumber.class);
-//    pico.addComponent(VATIdentificationNumber.class, NIP.class);
-//    pico.as(Characteristics.NO_CACHE).addComponent(Company.class);
 	}
 
 	/**
