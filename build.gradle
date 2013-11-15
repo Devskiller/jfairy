@@ -10,122 +10,122 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 buildscript {
-  repositories {
-    mavenCentral()
-    mavenLocal()
-  }
-  dependencies {
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.30.1'
-    classpath "org.pitest:pitest:0.31"
-  }
+	repositories {
+		mavenCentral()
+		mavenLocal()
+	}
+	dependencies {
+		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.30.1'
+		classpath "org.pitest:pitest:0.31"
+	}
 }
 
 dependencies {
-  compile 'org.yaml:snakeyaml:[1.0,2.0)'
-  compile 'org.apache.commons:commons-lang3:3.1'
-  compile 'com.google.guava:guava:15.0'
-  compile 'org.slf4j:slf4j-api:1.7.5'
-  compile 'joda-time:joda-time:2.3'
-  compile 'com.google.inject:guice:3.0'
-  testCompile 'ch.qos.logback:logback-classic:1.0.13'
-  testCompile 'org.codehaus.groovy:groovy-all:2.1.9'
-  testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
-  testCompile 'cglib:cglib-nodep:2.2.2'
-  testCompile 'org.objenesis:objenesis:2.0'
+	compile 'org.yaml:snakeyaml:[1.0,2.0)'
+	compile 'org.apache.commons:commons-lang3:3.1'
+	compile 'com.google.guava:guava:15.0'
+	compile 'org.slf4j:slf4j-api:1.7.5'
+	compile 'joda-time:joda-time:2.3'
+	compile 'com.google.inject:guice:3.0'
+	testCompile 'ch.qos.logback:logback-classic:1.0.13'
+	testCompile 'org.codehaus.groovy:groovy-all:2.1.9'
+	testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+	testCompile 'cglib:cglib-nodep:2.2.2'
+	testCompile 'org.objenesis:objenesis:2.0'
 }
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
+	classifier = 'javadoc'
+	from javadoc.destinationDir
 }
 task sourceJar(type: Jar) {
-  classifier = 'sources'
-  from sourceSets.main.allSource
+	classifier = 'sources'
+	from sourceSets.main.allSource
 }
 artifacts {
-  archives jar
-  archives sourceJar
-  archives javadocJar
+	archives jar
+	archives sourceJar
+	archives javadocJar
 }
 
 
 repositories {
-  mavenCentral()
+	mavenCentral()
 }
 
 jar {
-  manifest {
-    attributes(
-        "Application-Name": "Fairyland",
-        "Implementation-Title": "Fairyland",
-        "Implementation-Version": version,
-        "Implementation-Vendor": 'Codearte',
-        'Built-Date': new Date(),
-        'Built-JDK': System.properties['java.version'],
-        'Built-Gradle': gradle.gradleVersion,
-        "Built-By": System.properties['user.name'])
-  }
+	manifest {
+		attributes(
+				"Application-Name": "Fairyland",
+				"Implementation-Title": "Fairyland",
+				"Implementation-Version": version,
+				"Implementation-Vendor": 'Codearte',
+				'Built-Date': new Date(),
+				'Built-JDK': System.properties['java.version'],
+				'Built-Gradle': gradle.gradleVersion,
+				"Built-By": System.properties['user.name'])
+	}
 }
 
 def pomConfig = {
-  url 'https://github.com/Codearte/fairyland'
-  licenses {
-    license {
-      name "The Apache Software License, Version 2.0"
-      url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-      distribution "repo"
-    }
-  }
+	url 'https://github.com/Codearte/fairyland'
+	licenses {
+		license {
+			name "The Apache Software License, Version 2.0"
+			url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+			distribution "repo"
+		}
+	}
 }
 
 publishing {
-  publications {
-    mavenCustom(MavenPublication) {
-      from components.java
+	publications {
+		mavenCustom(MavenPublication) {
+			from components.java
 
-      artifact sourceJar {
-        classifier "sources"
-      }
-      artifact javadocJar {
-        classifier "javadoc"
-      }
+			artifact sourceJar {
+				classifier "sources"
+			}
+			artifact javadocJar {
+				classifier "javadoc"
+			}
 
-      pom.withXml {
-        def root = asNode()
-        root.appendNode('description', description)
-        root.children().last() + pomConfig
-      }
-    }
-  }
-  repositories {
-    maven {
-      url "https://api.bintray.com/maven/codearte/public/fairyland"
-      credentials {
-        username = bintrayUserName
-        password = bintrayApiKey
-      }
-    }
-  }
+			pom.withXml {
+				def root = asNode()
+				root.appendNode('description', description)
+				root.children().last() + pomConfig
+			}
+		}
+	}
+	repositories {
+		maven {
+			url "https://api.bintray.com/maven/codearte/public/fairyland"
+			credentials {
+				username = bintrayUserName
+				password = bintrayApiKey
+			}
+		}
+	}
 }
 
 sonarRunner {
-  sonarProperties {
-    property "sonar.host.url", "http://localhost:9000"
-    property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
-    property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
-    property "sonar.jdbc.username", "sonar"
-  }
+	sonarProperties {
+		property "sonar.host.url", "http://localhost:9000"
+		property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+		property "sonar.jdbc.username", "sonar"
+	}
 }
 
 pitest {
-  targetClasses = ['eu.codearte.fairyland.*']
-  threads = 4
-  pitestVersion = 0.31
+	targetClasses = ['eu.codearte.fairyland.*']
+	threads = 4
+	pitestVersion = 0.31
 }
 
 test {
-  ignoreFailures = true
+	ignoreFailures = true
 }
 
 wrapper {
-  gradleVersion '1.8'
+	gradleVersion '1.8'
 }

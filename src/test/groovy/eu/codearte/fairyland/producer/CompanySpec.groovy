@@ -9,20 +9,20 @@ import spock.lang.Specification
  */
 class CompanySpec extends Specification {
 
-  def "should instantiate Company producer"() {
-    when:
-    def company = Fairy.create().company()
-    then:
-    company instanceof Company
-  }
+	def "should instantiate Company producer"() {
+		when:
+		def company = Fairy.create().company()
+		then:
+		company instanceof Company
+	}
 
-  def "should be sure that data exists"() {
-    when:
-    def company = Fairy.create().company()
-    then:
-    company.name()
-    company.email()
-    company.url()
-    company.vatIdentificationNumber()
-  }
+	def "should be sure that data exists"() {
+		when:
+		def company = Fairy.create().company()
+		then:
+		company.name()
+		company.email()
+		company.url()
+		company.vatIdentificationNumber()
+	}
 }

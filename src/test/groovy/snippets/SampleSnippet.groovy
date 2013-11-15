@@ -7,9 +7,9 @@ import static eu.codearte.fairyland.Fairy.create
 println "\n * With context"
 def fairy = create(Locale.forLanguageTag("pl"))
 3.times {
-  def person = fairy.person()
+	def person = fairy.person()
 
-  println "${person.fullName()} <${person.email()}>"
+	println "${person.fullName()} <${person.email()}>"
 
 }
 
@@ -34,11 +34,11 @@ println "           ID: " + person.nationalIdentityCardNumber();
 println ""
 
 3.times {
-  println "  Men: " + person.male().fullName()
+	println "  Men: " + person.male().fullName()
 }
 
 3.times {
-  println "Women: " + person.female().fullName()
+	println "Women: " + person.female().fullName()
 }
 
 println Fairy.create().numerify("bleble###")

@@ -12,5 +12,5 @@ package eu.codearte.fairyland.producer.person.pl;
  */
 public interface VATIdentificationNumber {
 
-  String generate();
+	String generate();
 }

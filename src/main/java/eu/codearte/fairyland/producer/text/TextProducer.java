@@ -16,41 +16,41 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 public class TextProducer {
 
-  private static final String DATA = "text";
+	private static final String DATA = "text";
 
-  private final RandomDataGenerator generator;
-  private final RandomGenerator random;
+	private final RandomDataGenerator generator;
+	private final RandomGenerator random;
 
-  private final String loremIpsum;
-  private final List<String> words;
+	private final String loremIpsum;
+	private final List<String> words;
 
-  @Inject
-  public TextProducer(RandomDataGenerator generator, RandomGenerator random) {
-    this.generator = generator;
-    this.random = random;
-    loremIpsum = generator.getValue(DATA);
-    words = asList(split(loremIpsum, ' '));
-  }
+	@Inject
+	public TextProducer(RandomDataGenerator generator, RandomGenerator random) {
+		this.generator = generator;
+		this.random = random;
+		loremIpsum = generator.getValue(DATA);
+		words = asList(split(loremIpsum, ' '));
+	}
 
-  public String getLoremIpsum() {
-    return loremIpsum;
-  }
+	public String getLoremIpsum() {
+		return loremIpsum;
+	}
 
-  public String rawWords(int count, int precision) {
-    List<String> result = readRawWords(count, precision);
-    return joinWithSpace(result);
-  }
+	public String rawWords(int count, int precision) {
+		List<String> result = readRawWords(count, precision);
+		return joinWithSpace(result);
+	}
 
-  public String cleanWords(int count) {
-    List<String> result = newArrayList();
-    for (String part : readRawWords(count, 0)) {
-      result.add(uncapitalize(replaceChars(part, "., ", "")));
-    }
-    return joinWithSpace(result);
-  }
+	public String cleanWords(int count) {
+		List<String> result = newArrayList();
+		for (String part : readRawWords(count, 0)) {
+			result.add(uncapitalize(replaceChars(part, "., ", "")));
+		}
+		return joinWithSpace(result);
+	}
 
-  private List<String> readRawWords(int count, int precision) {
-    return generator.randomElements(words, random.randomBetween(count, count + precision));
-  }
+	private List<String> readRawWords(int count, int precision) {
+		return generator.randomElements(words, random.randomBetween(count, count + precision));
+	}
 
 }
