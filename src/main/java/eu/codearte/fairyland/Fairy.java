@@ -38,8 +38,6 @@ public final class Fairy {
 
   private DataMaster dataMaster;
   private final RandomGenerator randomGenerator = new RandomGenerator(SEED);
-  private final TimeProvider timeProvider = new TimeProvider();
-  private final DateGenerator dateGenerator = new DateGenerator(randomGenerator, timeProvider);
 
   private Fairy(Locale locale, String filePrefix) {
     pico = new PicoBuilder().withCaching().withConstructorInjection().build();
@@ -53,9 +51,9 @@ public final class Fairy {
 
     pico.as(Characteristics.CACHE).addComponent(dataMaster);
     pico.addComponent(randomGenerator);
-    pico.addComponent(timeProvider);
     pico.addComponent(FairUtil.class);
-    pico.addComponent(dateGenerator);
+    pico.addComponent(TimeProvider.class);
+    pico.addComponent(DateGenerator.class);
     pico.addComponent(RandomDataGenerator.class);
     pico.addComponent(Text.class);
     pico.addComponent(TextProducer.class);
@@ -113,13 +111,14 @@ public final class Fairy {
 
   public String nationalIdentityNumber() {
     return pico.getComponent(NationalIdentityCardNumber.class).generate(
-        dateGenerator.randomDateBetweenYears(2000, timeProvider.getCurrentYear()));
+        pico.getComponent(DateGenerator.class)
+            .randomDateBetweenYears(2000, pico.getComponent(TimeProvider.class).getCurrentYear()));
   }
 
   public String nationalIdentificationNumber() {
     return pico.getComponent(NationalIdentificationNumber.class)
-        .generate(dateGenerator.randomDateInThePast(10),
-            randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
+        .generate(pico.getComponent(DateGenerator.class)
+            .randomDateInThePast(10), randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
   }
 
   public String numerify(String numberString) {
@@ -135,6 +134,6 @@ public final class Fairy {
   }
 
   public DateTime randomDateInThePast() {
-    return dateGenerator.randomDateInThePast(100);
+    return pico.getComponent(DateGenerator.class).randomDateInThePast(100);
   }
 }
