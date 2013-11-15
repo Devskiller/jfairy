@@ -26,17 +26,13 @@ import java.util.Locale;
 public final class Fairy {
 
   private static final String DATA_FILE_PREFIX = "fairyland_";
-  private static final int SEED = 1761283695;
   private final Injector injector;
-
-  private DataMaster dataMaster;
-  private final RandomGenerator randomGenerator = new RandomGenerator(SEED);
 
   private Fairy(Locale locale, String filePrefix) {
     injector = Guice.createInjector(new FairyModule());
 
     try {
-      dataMaster = new DataMaster();
+      DataMaster dataMaster = injector.getInstance(DataMaster.class);
       dataMaster.readResources(filePrefix + locale.getLanguage() + ".yml");
     } catch (IOException e) {
       throw new IllegalStateException(e);
@@ -111,7 +107,7 @@ public final class Fairy {
   public String nationalIdentificationNumber() {
     return injector.getInstance(NationalIdentificationNumber.class)
         .generate(injector.getInstance(DateGenerator.class)
-            .randomDateInThePast(10), randomGenerator.trueOrFalse() ? Sex.male : Sex.female);
+            .randomDateInThePast(10), injector.getInstance(RandomGenerator.class).trueOrFalse() ? Sex.male : Sex.female);
   }
 
   public String numerify(String numberString) {

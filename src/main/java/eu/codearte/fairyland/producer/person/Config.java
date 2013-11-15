@@ -11,33 +11,33 @@ import static eu.codearte.fairyland.producer.person.Sex.male;
  */
 public class Config {
 
-   private final RandomGenerator random;
+  private final RandomGenerator random;
 
-   private Sex sex;
-   private String telephoneNumberFormat;
+  private Sex sex;
+  private String telephoneNumberFormat;
 
-   public Config(RandomGenerator random) {
-      this.random = random;
-      sex = randomSex();
-   }
+  public Config(RandomGenerator random) {
+    this.random = random;
+    sex = randomSex();
+  }
 
-   private Sex randomSex() {
-      return random.trueOrFalse() ? male : female;
-   }
+  private Sex randomSex() {
+    return random.trueOrFalse() ? male : female;
+  }
 
-   public Sex sex() {
-      return sex;
-   }
+  public Sex sex() {
+    return sex;
+  }
 
-   public String getTelephoneNumberFormat() {
-      return telephoneNumberFormat;
-   }
+  public String getTelephoneNumberFormat() {
+    return telephoneNumberFormat;
+  }
 
-   public void applyTelephoneNumberFormat(String telephoneNumberFormat) {
-      this.telephoneNumberFormat = telephoneNumberFormat;
-   }
+  public void applyTelephoneNumberFormat(String telephoneNumberFormat) {
+    this.telephoneNumberFormat = telephoneNumberFormat;
+  }
 
-   public void applySex(Sex sex) {
-      this.sex = sex;
-   }
+  public void applySex(Sex sex) {
+    this.sex = sex;
+  }
 }
