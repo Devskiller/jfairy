@@ -33,4 +33,5 @@ class FairUtilSpec extends Specification {
 		expect:
 		text.bothify("Test?#") == "Testx7"
 	}
+
 }

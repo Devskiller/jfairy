@@ -71,7 +71,6 @@ public final class Fairy {
 		return new Fairy(locale, dataFilePrefix);
 	}
 
-
 	public Text text() {
 		return injector.getInstance(Text.class);
 	}
@@ -92,28 +91,8 @@ public final class Fairy {
 		return injector.getInstance(Company.class);
 	}
 
-	public String nationalIdentityNumber() {
-		return injector.getInstance(NationalIdentityCardNumber.class).generate();
-	}
-
-	public String nationalIdentificationNumber() {
-		return injector.getInstance(NationalIdentificationNumber.class).generate();
-	}
-
-	public String numerify(String numberString) {
-		return injector.getInstance(FairyUtil.class).numerify(numberString);
-	}
-
-	public String letterify(String letterString) {
-		return injector.getInstance(FairyUtil.class).letterify(letterString);
-	}
-
-	public String bothify(String string) {
-		return injector.getInstance(FairyUtil.class).bothify(string);
-	}
-
-	public DateTime randomDateInThePast() {
-		return injector.getInstance(DateGenerator.class).randomDateInThePast(100);
+	public FairyUtil fairyUtil() {
+		return injector.getInstance(FairyUtil.class);
 	}
 
 }

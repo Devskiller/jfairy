@@ -46,8 +46,8 @@ println Fairy.create().numerify("bleble###")
 println Fairy.create().letterify("letter???")
 println Fairy.create().bothify("?? ###-###")
 
-println fairy.nationalIdentityNumber()
-println fairy.nationalIdentificationNumber()
+println fairy.person().nationalIdentityCardNumber()
+println fairy.person().nationalIdentificationNumber()
 
 def create = Fairy.create()
 def company = create.company()

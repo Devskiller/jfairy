@@ -35,7 +35,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	@Override
 	public String generate() {
 
-		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(2000);
+		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(BEGIN);
 
 		return generate(dateTime);
 	}
