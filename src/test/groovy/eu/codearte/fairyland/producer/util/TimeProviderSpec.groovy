@@ -7,7 +7,7 @@ package eu.codearte.fairyland.producer.util
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class DateProviderSpec extends Specification {
+class TimeProviderSpec extends Specification {
 
 	@Unroll def "should parse date #date"() {
 		setup:

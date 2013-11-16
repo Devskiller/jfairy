@@ -19,11 +19,18 @@ import static java.lang.String.format;
  */
 public class Pesel implements NationalIdentificationNumber {
 
+	private static final int PESEL_LENGTH = 11;
+	private static final int VALIDITY_IN_YEARS = 10;
+
+	private static final int[] PERIOD_WEIGHTS = {80, 0, 20, 40, 60};
+	private static final int PERIOD_FACTOR = 100;
+	private static final int BEGIN_YEAR = 1800;
+
 	private static final int[] WEIGHTS = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 	private static final int MIN_SERIAL_NUMBER = 0;
 	private static final int MAX_SERIAL_NUMBER = 999;
-	private static final int VALIDITY_IN_YEARS = 10;
-	private static final int PESEL_LENGTH = 11;
+
+	private static final int TEN = 10;
 
 	private final DateGenerator dateGenerator;
 	private final BaseProducer baseProducer;
@@ -74,17 +81,7 @@ public class Pesel implements NationalIdentificationNumber {
 	}
 
 	private int calculateMonth(int month, int year) {
-		int peselMonth = month;
-		if (year >= 1800 && year < 1900) {
-			peselMonth += 80;
-		} else if (year >= 2000 && year < 2100) {
-			peselMonth += 20;
-		} else if (year > 2100 && year < 2200) {
-			peselMonth += 40;
-		} else if (year > 2200 && year < 2300) {
-			peselMonth += 60;
-		}
-		return peselMonth;
+		return month + PERIOD_WEIGHTS[(year - BEGIN_YEAR) / PERIOD_FACTOR];
 	}
 
 	private int calculateSexCode(Person.Sex sex) {
@@ -98,8 +95,8 @@ public class Pesel implements NationalIdentificationNumber {
 			int digit = (int) pesel.charAt(i);
 			sum += digit * weight;
 		}
-		checksum = 10 - (sum % 10);
-		return checksum % 10;
+		checksum = TEN - (sum % TEN);
+		return checksum % TEN;
 	}
 
 }
