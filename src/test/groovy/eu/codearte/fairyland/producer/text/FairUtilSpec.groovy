@@ -12,7 +12,7 @@ class FairUtilSpec extends Specification {
 
 	def randomGenerator = Mock(RandomGenerator);
 	def timeProvider = Mock(TimeProvider)
-	def text = new FairUtil(randomGenerator, timeProvider);
+	def text = new FairyUtil(randomGenerator, timeProvider);
 
 	def setup() {
 		randomGenerator.randomBetween('0', '9') >> '7'

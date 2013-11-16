@@ -2,6 +2,7 @@ package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
 import eu.codearte.fairyland.producer.person.Person
+import eu.codearte.fairyland.producer.person.PersonProperties
 import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
@@ -45,14 +46,14 @@ class PersonSpec extends Specification {
 
 	def "should create female"() {
 		when:
-		def person = Fairy.create().person().female()
+		def person = Fairy.create().person(PersonProperties.female())
 		then:
 		person.isFemale()
 	}
 
 	def "should create male"() {
 		when:
-		def person = Fairy.create().person().male()
+		def person = Fairy.create().person(PersonProperties.male())
 		then:
 		person.isMale()
 	}
@@ -66,7 +67,7 @@ class PersonSpec extends Specification {
 
 	def "should create telephone number in defined format"() {
 		when:
-		def person = Fairy.create().person().telephoneNumberFormat("###--###")
+		def person = Fairy.create().person(PersonProperties.telephoneFormat("###--###"))
 		then:
 		person.telephoneNumber() ==~ /\d\d\d--\d\d\d/
 	}

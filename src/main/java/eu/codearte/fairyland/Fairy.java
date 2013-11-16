@@ -10,7 +10,7 @@ import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.PersonProperties;
-import eu.codearte.fairyland.producer.text.FairUtil;
+import eu.codearte.fairyland.producer.text.FairyUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
@@ -75,11 +75,19 @@ public final class Fairy {
 	}
 
 	public Person person() {
-		return injector.getInstance(Person.class);
+		Person person = injector.getInstance(Person.class);
+		person.generatePerson();
+		return person;
 	}
 
 	public Person person(PersonProperties.PersonProperty... personProperties) {
-		return injector.getInstance(Person.class);
+		Person person = injector.getInstance(Person.class);
+		for (PersonProperties.PersonProperty personProperty : personProperties) {
+			injector.injectMembers(personProperty);
+			personProperty.apply(person);
+		}
+		person.generatePerson();
+		return person;
 	}
 
 	public Company company() {
@@ -95,22 +103,19 @@ public final class Fairy {
 	}
 
 	public String numerify(String numberString) {
-		return injector.getInstance(FairUtil.class).numerify(numberString);
+		return injector.getInstance(FairyUtil.class).numerify(numberString);
 	}
 
 	public String letterify(String letterString) {
-		return injector.getInstance(FairUtil.class).letterify(letterString);
+		return injector.getInstance(FairyUtil.class).letterify(letterString);
 	}
 
 	public String bothify(String string) {
-		return injector.getInstance(FairUtil.class).bothify(string);
+		return injector.getInstance(FairyUtil.class).bothify(string);
 	}
 
 	public DateTime randomDateInThePast() {
 		return injector.getInstance(DateGenerator.class).randomDateInThePast(100);
 	}
 
-	public void playground() {
-		Fairy.create().person(PersonProperties.male(), PersonProperties.minAge(21));
-	}
 }

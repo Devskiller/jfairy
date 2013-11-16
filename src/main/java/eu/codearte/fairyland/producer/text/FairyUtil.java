@@ -9,14 +9,14 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class FairUtil {
+public class FairyUtil {
 
 	private final RandomGenerator random;
 
 	private final TimeProvider timeProvider;
 
 	@Inject
-	public FairUtil(RandomGenerator random, TimeProvider timeProvider) {
+	public FairyUtil(RandomGenerator random, TimeProvider timeProvider) {
 		this.random = random;
 		this.timeProvider = timeProvider;
 	}

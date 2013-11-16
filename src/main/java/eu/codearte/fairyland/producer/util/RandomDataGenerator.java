@@ -46,7 +46,7 @@ public class RandomDataGenerator {
 
 		Map<String, List<String>> stringMap = data.getStringMap(dataKey);
 
-		List<String> entries = stringMap.get(type);
+		List<String> entries = stringMap.get(type.toLowerCase());
 
 		LOG.trace("Selected entries {}", entries);
 		return random.randomElement(entries);
