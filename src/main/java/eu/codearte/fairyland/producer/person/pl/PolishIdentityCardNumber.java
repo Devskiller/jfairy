@@ -43,7 +43,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	@Override
 	public String generate(DateTime date) {
 
-		checkArgument(date.getYear() >= 2000, "Polish ID was introduced in 2000");
+		checkArgument(date.getYear() >= BEGIN, "Polish ID was introduced in 2000");
 
 		char[] id = new char[WEIGHTS.length];
 

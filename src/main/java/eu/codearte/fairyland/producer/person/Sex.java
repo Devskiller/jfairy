@@ -9,5 +9,5 @@ package eu.codearte.fairyland.producer.person;
  * @since 31.10.13.
  */
 public enum Sex {
-	male, female
+	MALE, FEMALE
 }

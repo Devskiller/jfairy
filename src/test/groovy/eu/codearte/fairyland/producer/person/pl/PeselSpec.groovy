@@ -2,7 +2,6 @@ package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.person.Sex
 import eu.codearte.fairyland.producer.util.DateGenerator
-import eu.codearte.fairyland.producer.util.RandomDataGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification

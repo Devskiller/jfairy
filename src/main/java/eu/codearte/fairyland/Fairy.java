@@ -9,12 +9,9 @@ import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 import eu.codearte.fairyland.producer.person.Person;
-import eu.codearte.fairyland.producer.person.Sex;
 import eu.codearte.fairyland.producer.text.FairUtil;
 import eu.codearte.fairyland.producer.text.Text;
 import eu.codearte.fairyland.producer.util.DateGenerator;
-import eu.codearte.fairyland.producer.util.RandomGenerator;
-import eu.codearte.fairyland.producer.util.TimeProvider;
 import org.joda.time.DateTime;
 
 import java.io.IOException;
@@ -32,8 +29,7 @@ public final class Fairy {
 		injector = Guice.createInjector(new FairyModule());
 
 		try {
-			DataMaster dataMaster = injector.getInstance(DataMaster.class);
-			dataMaster.readResources(filePrefix + locale.getLanguage() + ".yml");
+			injector.getInstance(DataMaster.class).readResources(filePrefix + locale.getLanguage() + ".yml");
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
