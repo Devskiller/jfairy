@@ -2,10 +2,14 @@ package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
 import eu.codearte.fairyland.producer.person.Person
-import eu.codearte.fairyland.producer.person.PersonProperties
 import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
+
+import static eu.codearte.fairyland.producer.person.PersonProperties.*
+
+
+
 
 class PersonSpec extends Specification {
 
@@ -46,14 +50,14 @@ class PersonSpec extends Specification {
 
 	def "should create female"() {
 		when:
-		def person = Fairy.create().person(PersonProperties.female())
+		def person = Fairy.create().person(female())
 		then:
 		person.isFemale()
 	}
 
 	def "should create male"() {
 		when:
-		def person = Fairy.create().person(PersonProperties.male())
+		def person = Fairy.create().person(male())
 		then:
 		person.isMale()
 	}
@@ -67,7 +71,7 @@ class PersonSpec extends Specification {
 
 	def "should create telephone number in defined format"() {
 		when:
-		def person = Fairy.create().person(PersonProperties.telephoneFormat("###--###"))
+		def person = Fairy.create().person(telephoneFormat("###--###"))
 		then:
 		person.telephoneNumber() ==~ /\d\d\d--\d\d\d/
 	}
@@ -103,7 +107,7 @@ class PersonSpec extends Specification {
 		def company = fairy.company()
 
 		when:
-		def person = fairy.person(PersonProperties.company(company))
+		def person = fairy.person(withCompany(company))
 
 		then:
 		person.companyEmail() contains company.domain()

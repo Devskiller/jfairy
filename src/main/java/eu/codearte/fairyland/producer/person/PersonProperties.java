@@ -59,7 +59,7 @@ public class PersonProperties {
 		};
 	}
 
-	public static PersonProperty company(final Company company) {
+	public static PersonProperty withCompany(final Company company) {
 		return new PersonProperty() {
 			@Override
 			public void apply(Person person) {
