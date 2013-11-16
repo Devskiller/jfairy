@@ -14,15 +14,19 @@ import spock.lang.Specification
 class RandomDataGeneratorSpec extends Specification {
 
 	def data = Mock(DataMaster)
-	def randomGenerator = Mock(RandomGenerator);
-	def randomCalendar = new DateGenerator(randomGenerator, new TimeProvider())
+	def baseProducer = Spy(BaseProducer);
+	def randomCalendar = new DateGenerator(baseProducer, new TimeProvider())
+
+	def setup() {
+		baseProducer.randomBetween() >> 0
+	}
 
 	def "should return men"() {
 		setup:
 		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-		RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator, randomCalendar);
+		RandomDataGenerator generator = new RandomDataGenerator(data, baseProducer, randomCalendar);
 		def male = generator.getValuesOfType(Person.FIRST_NAME, "male");
 
 		then:
@@ -34,7 +38,7 @@ class RandomDataGeneratorSpec extends Specification {
 		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-		RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator, randomCalendar);
+		RandomDataGenerator generator = new RandomDataGenerator(data, baseProducer, randomCalendar);
 		def female = generator.getValuesOfType(Person.FIRST_NAME, "female");
 
 		then:

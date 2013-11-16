@@ -58,7 +58,7 @@ public class Pesel implements NationalIdentificationNumber {
 
 	/**
 	 * @param pesel
-	 * @return
+	 * @return pesel validity
 	 */
 	public static boolean isValid(String pesel) {
 		int size = pesel.length();
