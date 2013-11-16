@@ -1,7 +1,7 @@
 package snippets
 
-import eu.codearte.fairyland.producer.person.pl.NIP
-import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber
+import eu.codearte.fairyland.producer.locale.pl.NIP
+import eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber
 import eu.codearte.fairyland.producer.util.DateGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import eu.codearte.fairyland.producer.util.TimeProvider

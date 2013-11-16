@@ -2,8 +2,9 @@
  * Copyright (c) 2013 Codearte and authors
  */
 
-package eu.codearte.fairyland.producer.person.pl;
+package eu.codearte.fairyland.producer.locale.pl;
 
+import eu.codearte.fairyland.producer.VATIdentificationNumber;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 
 import javax.inject.Inject;

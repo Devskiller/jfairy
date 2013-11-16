@@ -3,16 +3,16 @@ package eu.codearte.fairyland;
 import com.google.inject.AbstractModule;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
-import eu.codearte.fairyland.producer.person.pl.NIP;
-import eu.codearte.fairyland.producer.person.pl.Pesel;
-import eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber;
-import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
+import eu.codearte.fairyland.producer.locale.pl.NIP;
+import eu.codearte.fairyland.producer.person.locale.pl.Pesel;
+import eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber;
+import eu.codearte.fairyland.producer.VATIdentificationNumber;
 
 /**
  * @author jkubrynski@gmail.com
  * @since 2013-11-15
  */
-public class FairyModule extends AbstractModule {
+class FairyModule extends AbstractModule {
 
 	@Override
 	protected void configure() {

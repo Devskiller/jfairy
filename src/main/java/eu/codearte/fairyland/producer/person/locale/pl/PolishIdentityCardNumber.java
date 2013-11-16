@@ -1,4 +1,4 @@
-package eu.codearte.fairyland.producer.person.pl;
+package eu.codearte.fairyland.producer.person.locale.pl;
 
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 import eu.codearte.fairyland.producer.util.DateGenerator;
@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static eu.codearte.fairyland.producer.person.pl.AlphaNumberSystem.convertToString;
+import static eu.codearte.fairyland.producer.person.locale.pl.AlphaNumberSystem.convertToString;
 import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;

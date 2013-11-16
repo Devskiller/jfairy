@@ -12,11 +12,15 @@ import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 
-import static eu.codearte.fairyland.producer.person.Sex.FEMALE;
-import static eu.codearte.fairyland.producer.person.Sex.MALE;
+import static eu.codearte.fairyland.producer.person.Person.Sex.FEMALE;
+import static eu.codearte.fairyland.producer.person.Person.Sex.MALE;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class Person {
+
+	public static enum Sex {
+		MALE, FEMALE
+	}
 
 	public static final String FIRST_NAME = "firstNames";
 	public static final String LAST_NAME = "lastNames";
@@ -153,4 +157,5 @@ public class Person {
 	public String companyEmail() {
 		return companyEmail;
 	}
+
 }

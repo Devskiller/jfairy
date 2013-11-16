@@ -1,6 +1,5 @@
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.producer.person.pl.VATIdentificationNumber;
 import eu.codearte.fairyland.producer.util.RandomDataGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 import org.apache.commons.lang3.StringUtils;

@@ -4,13 +4,14 @@
 
 package eu.codearte.fairyland.producer.person.pl
 
+import eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber
 import eu.codearte.fairyland.producer.util.DateGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification
 
-import static eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber.BEGIN
-import static eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber.PREFIXES_BY_YEAR
+import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.BEGIN
+import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.PREFIXES_BY_YEAR
 
 /**
  * @author mariuszs

@@ -1,13 +1,14 @@
 package eu.codearte.fairyland.producer.person.pl
 
-import eu.codearte.fairyland.producer.person.Sex
+import eu.codearte.fairyland.producer.person.Person
+import eu.codearte.fairyland.producer.person.locale.pl.Pesel
 import eu.codearte.fairyland.producer.util.DateGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static eu.codearte.fairyland.producer.person.pl.Pesel.isValid
+import static eu.codearte.fairyland.producer.person.locale.pl.Pesel.isValid
 
 class PeselSpec extends Specification {
 
@@ -30,7 +31,7 @@ class PeselSpec extends Specification {
 
 	def "should generate good pesel"() {
 		when:
-		def pesel = generator.generate(DateTime.now(), Sex.MALE);
+		def pesel = generator.generate(DateTime.now(), Person.Sex.MALE);
 		then:
 		pesel
 		isValid(pesel)

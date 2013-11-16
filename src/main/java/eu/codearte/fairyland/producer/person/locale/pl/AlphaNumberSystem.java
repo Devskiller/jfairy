@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Codearte and authors
  */
 
-package eu.codearte.fairyland.producer.person.pl;
+package eu.codearte.fairyland.producer.person.locale.pl;
 
 /**
  * @author mariuszs

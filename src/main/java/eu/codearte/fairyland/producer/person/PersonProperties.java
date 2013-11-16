@@ -30,7 +30,7 @@ public final class PersonProperties {
 		return new PersonProperty() {
 			@Override
 			public void apply(Person person) {
-				person.setSex(Sex.MALE);
+				person.setSex(Person.Sex.MALE);
 			}
 		};
 	}
@@ -39,7 +39,7 @@ public final class PersonProperties {
 		return new PersonProperty() {
 			@Override
 			public void apply(Person person) {
-				person.setSex(Sex.FEMALE);
+				person.setSex(Person.Sex.FEMALE);
 			}
 		};
 	}
@@ -70,4 +70,5 @@ public final class PersonProperties {
 			}
 		};
 	}
+
 }

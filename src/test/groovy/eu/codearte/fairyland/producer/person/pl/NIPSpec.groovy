@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer.person.pl
 
+import eu.codearte.fairyland.producer.locale.pl.NIP
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import spock.lang.Specification
 import spock.lang.Unroll

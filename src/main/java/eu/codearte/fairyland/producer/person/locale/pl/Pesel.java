@@ -1,7 +1,7 @@
-package eu.codearte.fairyland.producer.person.pl;
+package eu.codearte.fairyland.producer.person.locale.pl;
 
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
-import eu.codearte.fairyland.producer.person.Sex;
+import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.util.DateGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 import org.joda.time.DateTime;
@@ -34,13 +34,13 @@ public class Pesel implements NationalIdentificationNumber {
 	public String generate() {
 
 		DateTime date = dateGenerator.randomDateInThePast(10);
-		Sex sex = randomGenerator.trueOrFalse() ? Sex.MALE : Sex.FEMALE;
+		Person.Sex sex = randomGenerator.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
 
 		return generate(date, sex);
 	}
 
 	@Override
-	public String generate(DateTime date, Sex sex) {
+	public String generate(DateTime date, Person.Sex sex) {
 		int year = date.getYearOfCentury();
 		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
 		int day = date.getDayOfMonth();
@@ -83,8 +83,8 @@ public class Pesel implements NationalIdentificationNumber {
 		return peselMonth;
 	}
 
-	private int calculateSexCode(Sex sex) {
-		return randomGenerator.randomBetween(0, 4) * 2 + (sex == Sex.MALE ? 1 : 0);
+	private int calculateSexCode(Person.Sex sex) {
+		return randomGenerator.randomBetween(0, 4) * 2 + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {
