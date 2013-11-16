@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Codearte
  */
 
-package eu.codearte.fairyland;
+package eu.codearte.fairyland.producer.util;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -31,7 +31,7 @@ public class DataMaster {
 
 	private Map<String, List<String>> data = newHashMap();
 
-	DataMaster() {
+	private DataMaster() {
 	}
 
 	void appendData(DataMaster dataMaster) {
@@ -82,7 +82,7 @@ public class DataMaster {
 		return element;
 	}
 
-	void readResources(String path) throws IOException {
+	public void readResources(String path) throws IOException {
 		Enumeration<URL> resources =
 				getClass().getClassLoader().getResources(path);
 

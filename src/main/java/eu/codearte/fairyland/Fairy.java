@@ -12,6 +12,7 @@ import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.PersonProperties;
 import eu.codearte.fairyland.producer.text.FairyUtil;
 import eu.codearte.fairyland.producer.text.Text;
+import eu.codearte.fairyland.producer.util.DataMaster;
 import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
 

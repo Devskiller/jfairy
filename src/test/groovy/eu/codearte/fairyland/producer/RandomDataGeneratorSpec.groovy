@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer
 
-import eu.codearte.fairyland.DataMaster
+import eu.codearte.fairyland.producer.util.DataMaster
 import eu.codearte.fairyland.producer.util.DateGenerator
 import eu.codearte.fairyland.producer.util.RandomDataGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator

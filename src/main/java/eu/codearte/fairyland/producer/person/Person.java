@@ -3,7 +3,7 @@
  */
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.producer.util.DataMaster;
 import eu.codearte.fairyland.producer.text.FairyUtil;
 import eu.codearte.fairyland.producer.util.RandomDataGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
@@ -12,8 +12,8 @@ import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 
-import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
-import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
+import static eu.codearte.fairyland.producer.util.DataMaster.PERSONAL_EMAIL;
+import static eu.codearte.fairyland.producer.util.DataMaster.TELEPHONE_NUMBER_FORMATS;
 import static eu.codearte.fairyland.producer.person.Sex.FEMALE;
 import static eu.codearte.fairyland.producer.person.Sex.MALE;
 import static org.apache.commons.lang3.StringUtils.lowerCase;

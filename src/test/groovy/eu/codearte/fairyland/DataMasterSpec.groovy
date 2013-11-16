@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland
 
+import eu.codearte.fairyland.producer.util.DataMaster
 import spock.lang.Specification
 
 class DataMasterSpec extends Specification {
