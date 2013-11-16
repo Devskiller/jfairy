@@ -47,11 +47,11 @@ class PersonHolder {
 	}
 
 	boolean isMale() {
-		return sex == Sex.male;
+		return sex == Sex.MALE;
 	}
 
 	boolean isFemale() {
-		return sex == Sex.female;
+		return sex == Sex.FEMALE;
 	}
 
 	String telephoneNumber() {

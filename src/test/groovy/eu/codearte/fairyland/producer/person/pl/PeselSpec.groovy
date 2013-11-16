@@ -30,7 +30,7 @@ class PeselSpec extends Specification {
 
 	def "should generate good pesel"() {
 		when:
-		def pesel = generator.generate(DateTime.now(), Sex.male);
+		def pesel = generator.generate(DateTime.now(), Sex.MALE);
 		then:
 		pesel
 		isValid(pesel)

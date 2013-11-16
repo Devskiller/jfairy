@@ -2,8 +2,8 @@ package eu.codearte.fairyland.producer.person;
 
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 
-import static eu.codearte.fairyland.producer.person.Sex.female;
-import static eu.codearte.fairyland.producer.person.Sex.male;
+import static eu.codearte.fairyland.producer.person.Sex.FEMALE;
+import static eu.codearte.fairyland.producer.person.Sex.MALE;
 
 /**
  * @author mariuszs
@@ -22,7 +22,7 @@ public class Config {
 	}
 
 	private Sex randomSex() {
-		return random.trueOrFalse() ? male : female;
+		return random.trueOrFalse() ? MALE : FEMALE;
 	}
 
 	public Sex sex() {

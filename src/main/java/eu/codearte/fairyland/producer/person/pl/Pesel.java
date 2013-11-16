@@ -34,7 +34,7 @@ public class Pesel implements NationalIdentificationNumber {
 	public String generate() {
 
 		DateTime date = dateGenerator.randomDateInThePast(10);
-		Sex sex = randomGenerator.trueOrFalse() ? Sex.male : Sex.female;
+		Sex sex = randomGenerator.trueOrFalse() ? Sex.MALE : Sex.FEMALE;
 
 		return generate(date, sex);
 	}
@@ -84,7 +84,7 @@ public class Pesel implements NationalIdentificationNumber {
 	}
 
 	private int calculateSexCode(Sex sex) {
-		return randomGenerator.randomBetween(0, 4) * 2 + (sex == Sex.male ? 1 : 0);
+		return randomGenerator.randomBetween(0, 4) * 2 + (sex == Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {

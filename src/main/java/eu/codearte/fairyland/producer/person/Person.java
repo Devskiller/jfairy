@@ -14,8 +14,8 @@ import javax.inject.Inject;
 
 import static eu.codearte.fairyland.DataMaster.PERSONAL_EMAIL;
 import static eu.codearte.fairyland.DataMaster.TELEPHONE_NUMBER_FORMATS;
-import static eu.codearte.fairyland.producer.person.Sex.female;
-import static eu.codearte.fairyland.producer.person.Sex.male;
+import static eu.codearte.fairyland.producer.person.Sex.FEMALE;
+import static eu.codearte.fairyland.producer.person.Sex.MALE;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class Person {
@@ -53,13 +53,13 @@ public class Person {
 	}
 
 	public Person male() {
-		config.applySex(Sex.male);
+		config.applySex(MALE);
 		generatePerson();
 		return this;
 	}
 
 	public Person female() {
-		config.applySex(Sex.female);
+		config.applySex(FEMALE);
 		generatePerson();
 		return this;
 	}
@@ -97,11 +97,11 @@ public class Person {
 	}
 
 	public boolean isMale() {
-		return sex == male;
+		return sex == MALE;
 	}
 
 	public boolean isFemale() {
-		return sex == female;
+		return sex == FEMALE;
 	}
 
 	public String telephoneNumber() {
