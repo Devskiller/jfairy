@@ -17,7 +17,7 @@ class AlphaNumberSystemSpec extends Specification {
 
 	@Unroll void "Number #x should be converted to #y"() {
 		expect:
-		convertToString(x, 26) == y;
+		convertToString(x, ('A' .. 'Z').size()) == y;
 		where:
 		x  | y
 		0  | "A"
