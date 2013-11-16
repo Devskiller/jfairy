@@ -48,9 +48,9 @@ public class Person {
 
 	@Inject
 	public Person(RandomGenerator random,
-								RandomDataGenerator generator,
-								FairyUtil fairyUtil, NationalIdentificationNumber nationalIdentificationNumber,
-								NationalIdentityCardNumber nationalIdentityCardNumber, Company company) {
+				  RandomDataGenerator generator,
+				  FairyUtil fairyUtil, NationalIdentificationNumber nationalIdentificationNumber,
+				  NationalIdentityCardNumber nationalIdentityCardNumber, Company company) {
 		this.random = random;
 		this.generator = generator;
 		this.fairyUtil = fairyUtil;
