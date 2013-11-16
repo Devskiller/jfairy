@@ -48,6 +48,10 @@ public class Company {
 		return email + "@" + domain;
 	}
 
+	public String domain() {
+		return domain;
+	}
+
 	public String vatIdentificationNumber() {
 		return vatIdentificationNumber.generate();
 	}

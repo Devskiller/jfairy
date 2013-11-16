@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer.person;
 
+import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 
 import javax.inject.Inject;
@@ -54,6 +55,15 @@ public class PersonProperties {
 			@Override
 			public void apply(Person person) {
 				person.telephoneNumberFormat(telephoneFormat);
+			}
+		};
+	}
+
+	public static PersonProperty company(final Company company) {
+		return new PersonProperty() {
+			@Override
+			public void apply(Person person) {
+				person.setCompany(company);
 			}
 		};
 	}

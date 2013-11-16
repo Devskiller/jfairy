@@ -85,4 +85,18 @@ class PersonSpec extends Specification {
 		then:
 		person.age()
 	}
+
+	def "should create person for company"() {
+		given:
+		def fairy = Fairy.create()
+		def company = fairy.company()
+
+		when:
+		def person = fairy.person(PersonProperties.company(company))
+
+		then:
+		person.companyEmail() contains company.domain()
+
+
+	}
 }

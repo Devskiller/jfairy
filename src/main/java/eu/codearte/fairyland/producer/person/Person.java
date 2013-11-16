@@ -3,6 +3,7 @@
  */
 package eu.codearte.fairyland.producer.person;
 
+import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.text.FairyUtil;
 import eu.codearte.fairyland.producer.util.RandomDataGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
@@ -35,17 +36,21 @@ public class Person {
 	private DateTime dateOfBirth;
 	private Integer age;
 	private String telephoneNumberFormat;
+	private Company company;
+	private String companyEmail;
 
 	@Inject
 	public Person(RandomGenerator random,
 								RandomDataGenerator generator,
 								FairyUtil fairyUtil, NationalIdentificationNumber nationalIdentificationNumber,
-								NationalIdentityCardNumber nationalIdentityCardNumber) {
+								NationalIdentityCardNumber nationalIdentityCardNumber, Company company) {
 		this.random = random;
 		this.generator = generator;
 		this.fairyUtil = fairyUtil;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
+		//fixme - should be created only if needed
+		this.company = company;
 	}
 
 	public void telephoneNumberFormat(String telephoneNumberFormat) {
@@ -69,6 +74,8 @@ public class Person {
 		if (dateOfBirth == null) {
 			dateOfBirth = generator.randomDateInThePast(age);
 		}
+		companyEmail = StringUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
+
 	}
 
 	public String firstName() {
@@ -137,5 +144,13 @@ public class Person {
 
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public String companyEmail() {
+		return companyEmail;
 	}
 }
