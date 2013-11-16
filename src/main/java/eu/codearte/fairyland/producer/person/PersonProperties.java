@@ -48,7 +48,7 @@ public final class PersonProperties {
 		return new PersonProperty() {
 			@Override
 			public void apply(Person person) {
-				person.setAge(getRandomGenerator().randomBetween(minAge, 100));
+				person.setAge(getRandomGenerator().randomBetween(minAge, Person.MAX_AGE));
 			}
 		};
 	}

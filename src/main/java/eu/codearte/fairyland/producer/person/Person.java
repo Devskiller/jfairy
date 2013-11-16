@@ -18,6 +18,9 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class Person {
 
+	public static final int MIN_AGE = 1;
+	public static final int MAX_AGE = 100;
+
 	public static enum Sex {
 		MALE, FEMALE
 	}
@@ -73,7 +76,7 @@ public class Person {
 		}
 		telephoneNumber = fairyUtil.numerify(telephoneNumberFormat);
 		if (age == null) {
-			age = random.randomBetween(1, 100);
+			age = random.randomBetween(MIN_AGE, MAX_AGE);
 		}
 		if (dateOfBirth == null) {
 			dateOfBirth = generator.randomDateInThePast(age);
@@ -135,7 +138,7 @@ public class Person {
 	}
 
 	public String nationalIdentityCardNumber() {
-		return nationalIdentityCardNumber.generate(generator.randomDateInThePast(10));
+		return nationalIdentityCardNumber.generate();
 	}
 
 	public void setSex(Sex sex) {
@@ -144,10 +147,6 @@ public class Person {
 
 	public void setAge(int age) {
 		this.age = age;
-	}
-
-	public void setTelephoneNumber(String telephoneNumber) {
-		this.telephoneNumber = telephoneNumber;
 	}
 
 	public void setCompany(Company company) {
