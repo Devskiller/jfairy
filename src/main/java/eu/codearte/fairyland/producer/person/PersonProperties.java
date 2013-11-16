@@ -11,6 +11,9 @@ import javax.inject.Inject;
  */
 public class PersonProperties {
 
+	private PersonProperties() {
+	}
+
 	public abstract static class PersonProperty {
 
 		@Inject
