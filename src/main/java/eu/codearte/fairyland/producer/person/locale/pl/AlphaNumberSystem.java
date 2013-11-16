@@ -20,7 +20,7 @@ public final class AlphaNumberSystem {
 
 	public static String convertToString(final int numberToConvert, final int base) {
 		int number = numberToConvert;
-		final char[] buffer = new char[20];
+		final char[] buffer = new char[(numberToConvert / DIGITS.length) + 1];
 		int charPosition = buffer.length - 1;
 
 		if (number == 0) {
