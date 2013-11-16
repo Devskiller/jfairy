@@ -20,6 +20,10 @@ import static java.lang.String.format;
 public class Pesel implements NationalIdentificationNumber {
 
 	private static final int[] WEIGHTS = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+	private static final int MIN_SERIAL_NUMBER = 0;
+	private static final int MAX_SERIAL_NUMBER = 999;
+	private static final int VALIDITY_IN_YEARS = 10;
+	static final int PESEL_LENGTH = 11;
 
 	private final RandomGenerator randomGenerator;
 	private final DateGenerator dateGenerator;
@@ -33,7 +37,7 @@ public class Pesel implements NationalIdentificationNumber {
 	@Override
 	public String generate() {
 
-		DateTime date = dateGenerator.randomDateInThePast(10);
+		DateTime date = dateGenerator.randomDateInThePast(VALIDITY_IN_YEARS);
 		Person.Sex sex = randomGenerator.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
 
 		return generate(date, sex);
@@ -44,7 +48,7 @@ public class Pesel implements NationalIdentificationNumber {
 		int year = date.getYearOfCentury();
 		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
 		int day = date.getDayOfMonth();
-		int serialNumber = randomGenerator.randomBetween(0, 999);
+		int serialNumber = randomGenerator.randomBetween(MIN_SERIAL_NUMBER, MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
 		String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
@@ -58,7 +62,7 @@ public class Pesel implements NationalIdentificationNumber {
 	 */
 	public static boolean isValid(String pesel) {
 		int size = pesel.length();
-		if (size != 11) {
+		if (size != PESEL_LENGTH) {
 			return false;
 		}
 
