@@ -29,8 +29,9 @@ public class Pesel implements NationalIdentificationNumber {
 	private static final int[] WEIGHTS = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 	private static final int MIN_SERIAL_NUMBER = 0;
 	private static final int MAX_SERIAL_NUMBER = 999;
-
 	private static final int TEN = 10;
+
+	private static final int[] SEX_FIELDS = {0, 2, 4, 6, 8};
 
 	private final DateGenerator dateGenerator;
 	private final BaseProducer baseProducer;
@@ -85,7 +86,7 @@ public class Pesel implements NationalIdentificationNumber {
 	}
 
 	private int calculateSexCode(Person.Sex sex) {
-		return baseProducer.randomBetween(0, 4) * 2 + (sex == Person.Sex.MALE ? 1 : 0);
+		return SEX_FIELDS[baseProducer.randomBetween(0, SEX_FIELDS.length)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {
