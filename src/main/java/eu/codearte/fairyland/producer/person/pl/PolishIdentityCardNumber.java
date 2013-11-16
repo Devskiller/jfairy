@@ -1,6 +1,7 @@
 package eu.codearte.fairyland.producer.person.pl;
 
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
+import eu.codearte.fairyland.producer.util.DateGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 import org.joda.time.DateTime;
 
@@ -23,12 +24,23 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	public static final int PREFIXES_BY_YEAR = 45;
 
 	private final RandomGenerator randomGenerator;
+	private final DateGenerator dateGenerator;
 
 	@Inject
-	public PolishIdentityCardNumber(RandomGenerator randomGenerator) {
+	public PolishIdentityCardNumber(DateGenerator dateGenerator, RandomGenerator randomGenerator) {
+		this.dateGenerator = dateGenerator;
 		this.randomGenerator = randomGenerator;
 	}
 
+	@Override
+	public String generate() {
+
+		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(2000);
+
+		return generate(dateTime);
+	}
+
+	@Override
 	public String generate(DateTime date) {
 
 		checkArgument(date.getYear() >= 2000, "Polish ID was introduced in 2000");

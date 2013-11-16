@@ -86,9 +86,7 @@ public final class Fairy {
 	}
 
 	public String nationalIdentityNumber() {
-		return injector.getInstance(NationalIdentityCardNumber.class).generate(
-				injector.getInstance(DateGenerator.class)
-						.randomDateBetweenYears(2000, injector.getInstance(TimeProvider.class).getCurrentYear()));
+		return injector.getInstance(NationalIdentityCardNumber.class).generate();
 	}
 
 	public String nationalIdentificationNumber() {

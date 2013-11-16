@@ -13,4 +13,6 @@ import org.joda.time.DateTime;
 public interface NationalIdentityCardNumber {
 
 	public String generate(DateTime date);
+
+	String generate();
 }

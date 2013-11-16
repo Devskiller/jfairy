@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer.person.pl
 
+import eu.codearte.fairyland.producer.util.DateGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification
@@ -18,6 +19,7 @@ import static eu.codearte.fairyland.producer.person.pl.PolishIdentityCardNumber.
 class PolishIdentityCardNumberSpec extends Specification {
 
 	def randomGenerator = Mock(RandomGenerator)
+	def dateGenerator = Mock(DateGenerator)
 
 	/**
 	 * http://en.wikipedia.org/wiki/Polish_identity_card
@@ -28,7 +30,7 @@ class PolishIdentityCardNumberSpec extends Specification {
 		randomGenerator.randomBetween(max, max + PREFIXES_BY_YEAR) >> 26 // ABA
 		randomGenerator.randomBetween(0, 99999) >> 0
 		when:
-		PolishIdentityCardNumber generator = new PolishIdentityCardNumber(randomGenerator)
+		PolishIdentityCardNumber generator = new PolishIdentityCardNumber(dateGenerator, randomGenerator)
 		def id = generator.generate(DateTime.now())
 		then:
 		id == "ABA300000"
