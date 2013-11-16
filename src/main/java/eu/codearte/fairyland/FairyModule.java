@@ -1,12 +1,12 @@
 package eu.codearte.fairyland;
 
 import com.google.inject.AbstractModule;
+import eu.codearte.fairyland.producer.VATIdentificationNumber;
+import eu.codearte.fairyland.producer.locale.pl.NIP;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
-import eu.codearte.fairyland.producer.locale.pl.NIP;
 import eu.codearte.fairyland.producer.person.locale.pl.Pesel;
 import eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber;
-import eu.codearte.fairyland.producer.VATIdentificationNumber;
 
 /**
  * @author jkubrynski@gmail.com

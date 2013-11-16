@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer.text
 
+import eu.codearte.fairyland.producer.BaseProducer
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import eu.codearte.fairyland.producer.util.TimeProvider
 import spock.lang.Specification
@@ -12,7 +13,7 @@ class FairUtilSpec extends Specification {
 
 	def randomGenerator = Mock(RandomGenerator);
 	def timeProvider = Mock(TimeProvider)
-	def text = new FairyUtil(randomGenerator, timeProvider);
+	def text = new BaseProducer(randomGenerator, timeProvider);
 
 	def setup() {
 		randomGenerator.randomBetween('0', '9') >> '7'

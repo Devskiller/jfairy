@@ -1,10 +1,9 @@
-/*
- * Copyright (c) 2013. Codearte
- */
-package eu.codearte.fairyland.producer.util;
+package eu.codearte.fairyland.producer;
 
 import com.google.common.base.Preconditions;
+import eu.codearte.fairyland.producer.util.TimeProvider;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 import java.util.Random;
@@ -12,18 +11,18 @@ import java.util.Random;
 import static java.util.Collections.shuffle;
 
 @Singleton
-public class RandomGenerator {
+public class BaseProducer {
 
 	private static final int SEED = 1761283695;
 
 	private final Random random;
 
-	public RandomGenerator() {
-		this(SEED);
-	}
+	private final TimeProvider timeProvider;
 
-	public RandomGenerator(long seed) {
-		random = new Random(seed);
+	@Inject
+	public BaseProducer(TimeProvider timeProvider) {
+		this.random = new Random(SEED);
+		this.timeProvider = timeProvider;
 	}
 
 	public boolean trueOrFalse() {
@@ -71,5 +70,29 @@ public class RandomGenerator {
 		//Can it be done easier for long numbers?
 		long range = (max - min) + 1;
 		return min + (long) (random.nextDouble() * range);
+	}
+
+	public String letterify(String letterString) {
+		return replaceSymbolWithCharsFromTo(letterString, '?', 'a', 'z');
+	}
+
+	public String numerify(String numberString) {
+		return replaceSymbolWithCharsFromTo(numberString, '#', '0', '9');
+	}
+
+	public String bothify(String string) {
+		return letterify(numerify(string));
+	}
+
+	private String replaceSymbolWithCharsFromTo(String string, char symbol, char from, char to) {
+		StringBuilder result = new StringBuilder();
+		for (char aChar : string.toCharArray()) {
+			if (aChar == symbol) {
+				result.append(randomBetween(from, to));
+			} else {
+				result.append(aChar);
+			}
+		}
+		return result.toString();
 	}
 }

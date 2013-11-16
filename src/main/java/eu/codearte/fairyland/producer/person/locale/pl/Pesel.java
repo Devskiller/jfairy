@@ -1,9 +1,9 @@
 package eu.codearte.fairyland.producer.person.locale.pl;
 
+import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.util.DateGenerator;
-import eu.codearte.fairyland.producer.util.RandomGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -25,20 +25,20 @@ public class Pesel implements NationalIdentificationNumber {
 	private static final int VALIDITY_IN_YEARS = 10;
 	static final int PESEL_LENGTH = 11;
 
-	private final RandomGenerator randomGenerator;
 	private final DateGenerator dateGenerator;
+	private final BaseProducer baseProducer;
 
 	@Inject
-	public Pesel(DateGenerator dateGenerator, RandomGenerator randomGenerator) {
-		this.randomGenerator = randomGenerator;
+	public Pesel(DateGenerator dateGenerator, BaseProducer baseProducer) {
 		this.dateGenerator = dateGenerator;
+		this.baseProducer = baseProducer;
 	}
 
 	@Override
 	public String generate() {
 
 		DateTime date = dateGenerator.randomDateInThePast(VALIDITY_IN_YEARS);
-		Person.Sex sex = randomGenerator.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
+		Person.Sex sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
 
 		return generate(date, sex);
 	}
@@ -48,7 +48,7 @@ public class Pesel implements NationalIdentificationNumber {
 		int year = date.getYearOfCentury();
 		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
 		int day = date.getDayOfMonth();
-		int serialNumber = randomGenerator.randomBetween(MIN_SERIAL_NUMBER, MAX_SERIAL_NUMBER);
+		int serialNumber = baseProducer.randomBetween(MIN_SERIAL_NUMBER, MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
 		String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
@@ -88,7 +88,7 @@ public class Pesel implements NationalIdentificationNumber {
 	}
 
 	private int calculateSexCode(Person.Sex sex) {
-		return randomGenerator.randomBetween(0, 4) * 2 + (sex == Person.Sex.MALE ? 1 : 0);
+		return baseProducer.randomBetween(0, 4) * 2 + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {

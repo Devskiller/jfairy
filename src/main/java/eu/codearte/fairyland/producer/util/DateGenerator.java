@@ -5,6 +5,7 @@
 package eu.codearte.fairyland.producer.util;
 
 import com.google.common.annotations.VisibleForTesting;
+import eu.codearte.fairyland.producer.BaseProducer;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -18,12 +19,12 @@ public class DateGenerator {
 	@VisibleForTesting
 	static final int SECONDS_BEFORE_TO_BE_IN_THE_PAST = 1;
 
-	private final RandomGenerator randomGenerator;
+	private final BaseProducer baseProducer;
 	private final TimeProvider timeProvider;
 
 	@Inject
-	public DateGenerator(RandomGenerator randomGenerator, TimeProvider timeProvider) {
-		this.randomGenerator = randomGenerator;
+	public DateGenerator(BaseProducer baseProducer, TimeProvider timeProvider) {
+		this.baseProducer = baseProducer;
 		this.timeProvider = timeProvider;
 	}
 
@@ -36,7 +37,7 @@ public class DateGenerator {
 	}
 
 	private DateTime randomDateBetweenTwoDates(DateTime from, DateTime to) {
-		return new DateTime(randomGenerator.randomBetween(from.getMillis(), to.getMillis()));
+		return new DateTime(baseProducer.randomBetween(from.getMillis(), to.getMillis()));
 	}
 
 	public DateTime randomDateBetweenYears(int fromYear, int toYear) {

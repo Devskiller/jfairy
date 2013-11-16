@@ -1,8 +1,8 @@
 package eu.codearte.fairyland.producer.person.locale.pl;
 
+import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 import eu.codearte.fairyland.producer.util.DateGenerator;
-import eu.codearte.fairyland.producer.util.RandomGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -23,13 +23,13 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	public static final int BEGIN = 2000;
 	public static final int PREFIXES_BY_YEAR = 45;
 
-	private final RandomGenerator randomGenerator;
 	private final DateGenerator dateGenerator;
+	private final BaseProducer baseProducer;
 
 	@Inject
-	public PolishIdentityCardNumber(DateGenerator dateGenerator, RandomGenerator randomGenerator) {
+	public PolishIdentityCardNumber(DateGenerator dateGenerator, BaseProducer baseProducer) {
 		this.dateGenerator = dateGenerator;
-		this.randomGenerator = randomGenerator;
+		this.baseProducer = baseProducer;
 	}
 
 	@Override
@@ -83,14 +83,14 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	}
 
 	private void fillDigits(char[] id) {
-		String num = valueOf(randomGenerator.randomBetween(0, 99999));
+		String num = valueOf(baseProducer.randomBetween(0, 99999));
 		char[] digits = leftPad(num, 5, '0').toCharArray();
 		arraycopy(digits, 0, id, 4, digits.length);
 	}
 
 	private void fillAlphaPrefix(int year, char[] id) {
 		int maxPrefix = (year - BEGIN) * PREFIXES_BY_YEAR;
-		int range = randomGenerator.randomBetween(maxPrefix, maxPrefix + PREFIXES_BY_YEAR);
+		int range = baseProducer.randomBetween(maxPrefix, maxPrefix + PREFIXES_BY_YEAR);
 		String prefix = convertToString(range, 26);
 		char[] charArray = leftPad(prefix, 3, 'A').toCharArray();
 		arraycopy(charArray, 0, id, 0, charArray.length);

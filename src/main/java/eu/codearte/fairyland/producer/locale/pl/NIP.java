@@ -4,8 +4,8 @@
 
 package eu.codearte.fairyland.producer.locale.pl;
 
+import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.VATIdentificationNumber;
-import eu.codearte.fairyland.producer.util.RandomGenerator;
 
 import javax.inject.Inject;
 
@@ -59,20 +59,20 @@ public class NIP implements VATIdentificationNumber {
 	};
 
 	private static final int[] WEIGHTS = {6, 5, 7, 2, 3, 4, 5, 6, 7};
-
-	private final RandomGenerator randomGenerator;
+	private final BaseProducer baseProducer;
 
 	@Inject
-	public NIP(RandomGenerator randomGenerator) {
-		this.randomGenerator = randomGenerator;
+	public NIP(BaseProducer baseProducer) {
+
+		this.baseProducer = baseProducer;
 	}
 
 	@Override
 	public String generate() {
 
-		String prefix = valueOf(CODES[randomGenerator.randomBetween(0, CODES.length - 1)]);
+		String prefix = valueOf(CODES[baseProducer.randomBetween(0, CODES.length - 1)]);
 
-		String number = leftPad(valueOf(randomGenerator.randomBetween(0, 999999)), 6, "0");
+		String number = leftPad(valueOf(baseProducer.randomBetween(0, 999999)), 6, "0");
 
 		String base = prefix + number;
 

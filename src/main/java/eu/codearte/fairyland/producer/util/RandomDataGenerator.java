@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer.util;
 
+import eu.codearte.fairyland.producer.BaseProducer;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +19,13 @@ public class RandomDataGenerator {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
 	private final DataMaster data;
-	private final RandomGenerator random;
+	private final BaseProducer baseProducer;
 	private final DateGenerator dateGenerator;
 
 	@Inject
-	public RandomDataGenerator(DataMaster data, RandomGenerator random, DateGenerator dateGenerator) {
+	public RandomDataGenerator(DataMaster data, BaseProducer baseProducer, DateGenerator dateGenerator) {
 		this.data = data;
-		this.random = random;
+		this.baseProducer = baseProducer;
 		this.dateGenerator = dateGenerator;
 	}
 
@@ -33,7 +34,7 @@ public class RandomDataGenerator {
 	}
 
 	public List<String> randomElements(List<String> elements, int count) {
-		return random.randomElements(elements, count);
+		return baseProducer.randomElements(elements, count);
 	}
 
 	public String getValue(String data) {
@@ -48,10 +49,10 @@ public class RandomDataGenerator {
 		List<String> entries = stringMap.get(type.toLowerCase());
 
 		LOG.trace("Selected entries {}", entries);
-		return random.randomElement(entries);
+		return baseProducer.randomElement(entries);
 	}
 
 	public String getValues(String key) {
-		return random.randomElement(data.getStringList(key));
+		return baseProducer.randomElement(data.getStringList(key));
 	}
 }

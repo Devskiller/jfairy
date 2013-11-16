@@ -5,13 +5,16 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.producer.person.Person
-import eu.codearte.fairyland.producer.util.*
+import eu.codearte.fairyland.producer.util.DataMaster
+import eu.codearte.fairyland.producer.util.DateGenerator
+import eu.codearte.fairyland.producer.util.RandomDataGenerator
+import eu.codearte.fairyland.producer.util.TimeProvider
 import spock.lang.Specification
 
 class RandomDataGeneratorSpec extends Specification {
 
 	def data = Mock(DataMaster)
-	def randomGenerator = new RandomGenerator(1001L);
+	def randomGenerator = Mock(RandomGenerator);
 	def randomCalendar = new DateGenerator(randomGenerator, new TimeProvider())
 
 	def "should return men"() {

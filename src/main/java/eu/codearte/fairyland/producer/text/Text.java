@@ -5,7 +5,7 @@ package eu.codearte.fairyland.producer.text;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
-import eu.codearte.fairyland.producer.util.RandomGenerator;
+import eu.codearte.fairyland.producer.BaseProducer;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -25,14 +25,14 @@ public class Text {
 	private static final int SENTENCE_COUNT_PRECISION_MAX = 3;
 
 	private final TextProducer textProducer;
-	private final RandomGenerator random;
+	private final BaseProducer baseProducer;
 
 	private int limit = 0;
 
 	@Inject
-	public Text(TextProducer textProducer, RandomGenerator random) {
-		this.random = random;
+	public Text(TextProducer textProducer, BaseProducer baseProducer) {
 		this.textProducer = textProducer;
+		this.baseProducer = baseProducer;
 	}
 
 	public Text limitedTo(int limit) {
@@ -92,6 +92,6 @@ public class Text {
 
 	public String paragraph(int sentenceCount) {
 		return result(joinWithSpace(sentences(sentenceCount +
-				random.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
+				baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
 	}
 }
