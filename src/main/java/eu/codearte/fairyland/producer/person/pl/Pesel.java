@@ -2,6 +2,7 @@ package eu.codearte.fairyland.producer.person.pl;
 
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Sex;
+import eu.codearte.fairyland.producer.util.DateGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
 import org.joda.time.DateTime;
 
@@ -18,18 +19,28 @@ import static java.lang.String.format;
  */
 public class Pesel implements NationalIdentificationNumber {
 
-	private static final int[] WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+	private static final int[] WEIGHTS = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
 
 	private final RandomGenerator randomGenerator;
+	private final DateGenerator dateGenerator;
 
 	@Inject
-	public Pesel(RandomGenerator randomGenerator) {
+	public Pesel(DateGenerator dateGenerator, RandomGenerator randomGenerator) {
 		this.randomGenerator = randomGenerator;
+		this.dateGenerator = dateGenerator;
+	}
+
+	@Override
+	public String generate() {
+
+		DateTime date = dateGenerator.randomDateInThePast(10);
+		Sex sex = randomGenerator.trueOrFalse() ? Sex.male : Sex.female;
+
+		return generate(date, sex);
 	}
 
 	@Override
 	public String generate(DateTime date, Sex sex) {
-
 		int year = date.getYearOfCentury();
 		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
 		int day = date.getDayOfMonth();

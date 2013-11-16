@@ -1,6 +1,8 @@
 package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.person.Sex
+import eu.codearte.fairyland.producer.util.DateGenerator
+import eu.codearte.fairyland.producer.util.RandomDataGenerator
 import eu.codearte.fairyland.producer.util.RandomGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification
@@ -10,8 +12,9 @@ import static eu.codearte.fairyland.producer.person.pl.Pesel.isValid
 
 class PeselSpec extends Specification {
 
-	def RandomGenerator randomGenerator = new RandomGenerator(10002L);
-	def Pesel generator = new Pesel(randomGenerator);
+	def randomGenerator = new RandomGenerator(10002L);
+	def dateGenerator = Mock(DateGenerator);
+	def Pesel generator = new Pesel(dateGenerator, randomGenerator);
 
 	@Unroll def "should validate #pesel as #valid"() {
 
