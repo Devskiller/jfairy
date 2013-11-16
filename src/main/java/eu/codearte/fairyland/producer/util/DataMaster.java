@@ -19,19 +19,9 @@ import static com.google.common.collect.Maps.newHashMap;
 @Singleton
 public class DataMaster {
 
-	public static final String FIRST_NAME = "firstNames";
-	public static final String LAST_NAME = "lastNames";
-	public static final String PERSONAL_EMAIL = "personalEmails";
-	public static final String DOMAIN = "domains";
-	public static final String COMPANY_NAME = "companyNames";
-	public static final String COMPANY_SUFFIX = "companySuffixes";
-	public static final String COMPANY_EMAIL = "companyEmails";
-	public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
-
-
 	private Map<String, List<String>> data = newHashMap();
 
-	private DataMaster() {
+	DataMaster() {
 	}
 
 	void appendData(DataMaster dataMaster) {

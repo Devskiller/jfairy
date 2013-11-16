@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer
 
+import eu.codearte.fairyland.producer.person.Person
 import eu.codearte.fairyland.producer.util.DataMaster
 import eu.codearte.fairyland.producer.util.DateGenerator
 import eu.codearte.fairyland.producer.util.RandomDataGenerator
@@ -19,11 +20,11 @@ class RandomDataGeneratorSpec extends Specification {
 
 	def "should return men"() {
 		setup:
-		data.getStringMap(DataMaster.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
 		RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator, randomCalendar);
-		def male = generator.getValuesOfType(DataMaster.FIRST_NAME, "male");
+		def male = generator.getValuesOfType(Person.FIRST_NAME, "male");
 
 		then:
 		male == "Mark"
@@ -31,11 +32,11 @@ class RandomDataGeneratorSpec extends Specification {
 
 	def "should return one of women"() {
 		setup:
-		data.getStringMap(DataMaster.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
 		RandomDataGenerator generator = new RandomDataGenerator(data, randomGenerator, randomCalendar);
-		def female = generator.getValuesOfType(DataMaster.FIRST_NAME, "female");
+		def female = generator.getValuesOfType(Person.FIRST_NAME, "female");
 
 		then:
 		female == "Ana" || "Ivon"

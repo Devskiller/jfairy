@@ -3,7 +3,6 @@
  */
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.producer.util.DataMaster;
 import eu.codearte.fairyland.producer.text.FairyUtil;
 import eu.codearte.fairyland.producer.util.RandomDataGenerator;
 import eu.codearte.fairyland.producer.util.RandomGenerator;
@@ -12,14 +11,16 @@ import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 
-import static eu.codearte.fairyland.producer.util.DataMaster.PERSONAL_EMAIL;
-import static eu.codearte.fairyland.producer.util.DataMaster.TELEPHONE_NUMBER_FORMATS;
 import static eu.codearte.fairyland.producer.person.Sex.FEMALE;
 import static eu.codearte.fairyland.producer.person.Sex.MALE;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class Person {
 
+	public static final String FIRST_NAME = "firstNames";
+	public static final String LAST_NAME = "lastNames";
+	public static final String PERSONAL_EMAIL = "personalEmails";
+	public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
 	private final RandomGenerator random;
 	private final RandomDataGenerator generator;
 	private final FairyUtil fairyUtil;
@@ -55,8 +56,8 @@ public class Person {
 		if (sex == null) {
 			sex = random.trueOrFalse() ? MALE : FEMALE;
 		}
-		firstName = generator.getValuesOfType(DataMaster.FIRST_NAME, sex.name());
-		lastName = generator.getValuesOfType(DataMaster.LAST_NAME, sex.name());
+		firstName = generator.getValuesOfType(FIRST_NAME, sex.name());
+		lastName = generator.getValuesOfType(LAST_NAME, sex.name());
 		email = generateEmail(firstName, lastName);
 		if (telephoneNumberFormat == null) {
 			telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
