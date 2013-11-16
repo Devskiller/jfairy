@@ -9,7 +9,7 @@ import javax.inject.Inject;
  * @author jkubrynski@gmail.com
  * @since 2013-11-16
  */
-public class PersonProperties {
+public final class PersonProperties {
 
 	private PersonProperties() {
 	}

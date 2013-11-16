@@ -5,11 +5,7 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.producer.person.Person
-import eu.codearte.fairyland.producer.util.DataMaster
-import eu.codearte.fairyland.producer.util.DateGenerator
-import eu.codearte.fairyland.producer.util.RandomDataGenerator
-import eu.codearte.fairyland.producer.util.RandomGenerator
-import eu.codearte.fairyland.producer.util.TimeProvider
+import eu.codearte.fairyland.producer.util.*
 import spock.lang.Specification
 
 class RandomDataGeneratorSpec extends Specification {
