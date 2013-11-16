@@ -51,7 +51,7 @@ public class Person {
 		this.telephoneNumberFormat = telephoneNumberFormat;
 	}
 
-	public void generatePerson() {
+	public void generate() {
 		if (sex == null) {
 			sex = random.trueOrFalse() ? MALE : FEMALE;
 		}

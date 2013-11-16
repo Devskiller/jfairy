@@ -25,6 +25,7 @@ import java.util.Locale;
 public final class Fairy {
 
 	private static final String DATA_FILE_PREFIX = "fairyland_";
+
 	private final Injector injector;
 
 	private Fairy(Locale locale, String filePrefix) {
@@ -75,19 +76,15 @@ public final class Fairy {
 		return injector.getInstance(Text.class);
 	}
 
-	public Person person() {
-		Person person = injector.getInstance(Person.class);
-		person.generatePerson();
-		return person;
-	}
-
 	public Person person(PersonProperties.PersonProperty... personProperties) {
 		Person person = injector.getInstance(Person.class);
+
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
 			injector.injectMembers(personProperty);
 			personProperty.apply(person);
 		}
-		person.generatePerson();
+
+		person.generate();
 		return person;
 	}
 
