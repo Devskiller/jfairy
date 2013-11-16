@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static eu.codearte.fairyland.producer.person.locale.pl.AlphaNumberSystem.convertToString;
+import static eu.codearte.fairyland.producer.util.AlphaNumberSystem.convertToString;
 import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;

@@ -7,7 +7,7 @@ package eu.codearte.fairyland.producer.person.pl
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static eu.codearte.fairyland.producer.person.locale.pl.AlphaNumberSystem.convertToString
+import static eu.codearte.fairyland.producer.util.AlphaNumberSystem.convertToString
 
 /**
  * @author mariuszs
