@@ -87,7 +87,7 @@ public final class Fairy {
 		return injector.getInstance(Company.class);
 	}
 
-	public BaseProducer fairyUtil() {
+	public BaseProducer baseProducer() {
 		return injector.getInstance(BaseProducer.class);
 	}
 

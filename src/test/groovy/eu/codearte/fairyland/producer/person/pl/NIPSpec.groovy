@@ -4,8 +4,8 @@
 
 package eu.codearte.fairyland.producer.person.pl
 
+import eu.codearte.fairyland.producer.BaseProducer
 import eu.codearte.fairyland.producer.locale.pl.NIP
-import eu.codearte.fairyland.producer.util.RandomGenerator
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -15,8 +15,8 @@ import spock.lang.Unroll
  */
 class NIPSpec extends Specification {
 
-	def random = Mock(RandomGenerator)
-	def generator = new NIP(random)
+	def baseProducer = Mock(BaseProducer)
+	def generator = new NIP(baseProducer)
 
 	@Unroll def "Should validate #nip as #valid"() {
 

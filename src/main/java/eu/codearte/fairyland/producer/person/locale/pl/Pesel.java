@@ -23,7 +23,7 @@ public class Pesel implements NationalIdentificationNumber {
 	private static final int MIN_SERIAL_NUMBER = 0;
 	private static final int MAX_SERIAL_NUMBER = 999;
 	private static final int VALIDITY_IN_YEARS = 10;
-	static final int PESEL_LENGTH = 11;
+	private static final int PESEL_LENGTH = 11;
 
 	private final DateGenerator dateGenerator;
 	private final BaseProducer baseProducer;

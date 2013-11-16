@@ -5,19 +5,18 @@
 package eu.codearte.fairyland.producer.text
 
 import eu.codearte.fairyland.producer.BaseProducer
-import eu.codearte.fairyland.producer.util.RandomGenerator
 import eu.codearte.fairyland.producer.util.TimeProvider
 import spock.lang.Specification
 
 class FairUtilSpec extends Specification {
 
-	def randomGenerator = Mock(RandomGenerator);
+	def baseProducer = Mock(BaseProducer);
 	def timeProvider = Mock(TimeProvider)
-	def text = new BaseProducer(randomGenerator, timeProvider);
+	def text = new BaseProducer(baseProducer, timeProvider);
 
 	def setup() {
-		randomGenerator.randomBetween('0', '9') >> '7'
-		randomGenerator.randomBetween('a', 'z') >> 'x'
+		baseProducer.randomBetween('0', '9') >> '7'
+		baseProducer.randomBetween('a', 'z') >> 'x'
 	}
 
 	def "should replace # with digit 0"() {
