@@ -92,9 +92,7 @@ public final class Fairy {
 	}
 
 	public String nationalIdentificationNumber() {
-		return injector.getInstance(NationalIdentificationNumber.class)
-				.generate(injector.getInstance(DateGenerator.class)
-						.randomDateInThePast(10), injector.getInstance(RandomGenerator.class).trueOrFalse() ? Sex.male : Sex.female);
+		return injector.getInstance(NationalIdentificationNumber.class).generate();
 	}
 
 	public String numerify(String numberString) {
