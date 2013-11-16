@@ -18,7 +18,13 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  */
 public class NIP implements VATIdentificationNumber {
 
-	static final int[] CODES = {
+	// ex 1234563218
+	private static final int NIP_LENGTH = 10;
+
+	// ex 123-456-32-18
+	private static final int FORMATTED_NIP_LENGTH = 13;
+
+	private static final int[] CODES = {
 			101, 102, 103, 104, 105, 106, 107, 108, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 121, 122, 123,
 			124, 125, 126, 127, 128, 129, 131, 132, 133, 134, 135, 136, 137, 138, 139, 141, 142, 143, 144, 145, 146,
 			147, 148, 149, 151, 152, 153, 154, 155, 156, 157, 158, 159, 161, 162, 163, 164, 165, 166, 167, 168, 169,
@@ -57,8 +63,15 @@ public class NIP implements VATIdentificationNumber {
 			968, 969, 971, 972, 973, 974, 975, 976, 977, 978, 979, 981, 982, 983, 984, 985, 986, 987, 988, 989, 991,
 			992, 993, 994, 995, 996, 997, 998
 	};
-
 	private static final int[] WEIGHTS = {6, 5, 7, 2, 3, 4, 5, 6, 7};
+
+	// 123______8
+	private static final int SERIAL_NUMBER_SIZE = 6;
+	private static final int MAX_SERIAL_NUMBER = 999999;
+
+	// 1234563_18
+	private static final int CHECKSUM_CHAR_INDEX = 9;
+
 	private final BaseProducer baseProducer;
 
 	@Inject
@@ -70,9 +83,9 @@ public class NIP implements VATIdentificationNumber {
 	@Override
 	public String generate() {
 
-		String prefix = valueOf(CODES[baseProducer.randomBetween(0, CODES.length - 1)]);
+		String prefix = valueOf(CODES[baseProducer.randomWithMax(CODES.length - 1)]);
 
-		String number = leftPad(valueOf(baseProducer.randomBetween(0, 999999)), 6, "0");
+		String number = leftPad(valueOf(baseProducer.randomWithMax(MAX_SERIAL_NUMBER)), SERIAL_NUMBER_SIZE, "0");
 
 		String base = prefix + number;
 
@@ -81,19 +94,19 @@ public class NIP implements VATIdentificationNumber {
 
 	boolean isNIPValid(String nip) {
 		String normalizedNip = normalizeNip(nip);
-		if (normalizedNip.length() != 10) {
+		if (normalizedNip.length() != NIP_LENGTH) {
 			return false;
 		}
 		try {
 			int checksum = calculateChecksum(normalizedNip);
-			return checksum == normalizedNip.charAt(9) - '0';
+			return checksum == normalizedNip.charAt(CHECKSUM_CHAR_INDEX) - '0';
 		} catch (NumberFormatException e) {
 			return false;
 		}
 	}
 
 	private String normalizeNip(String value) {
-		if (value.length() == 13) {
+		if (value.length() == FORMATTED_NIP_LENGTH) {
 			return value.replaceAll("-", "");
 		}
 		return value;

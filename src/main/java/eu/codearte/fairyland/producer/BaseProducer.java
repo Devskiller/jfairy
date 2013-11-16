@@ -51,6 +51,10 @@ public class BaseProducer {
 		return min + randomInt;
 	}
 
+	public int randomWithMax(int max) {
+		return randomBetween(0, max);
+	}
+
 	//TODO: MZA: Duplication - should be merged into one method when consistent logic will be determined
 	public char randomBetween(char min, char max) {
 		return (char) randomBetween((int) min, (int) max);

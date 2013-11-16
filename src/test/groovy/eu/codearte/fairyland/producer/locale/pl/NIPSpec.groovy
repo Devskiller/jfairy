@@ -2,10 +2,9 @@
  * Copyright (c) 2013 Codearte and authors
  */
 
-package eu.codearte.fairyland.producer.person.pl
+package eu.codearte.fairyland.producer.locale.pl
 
 import eu.codearte.fairyland.producer.BaseProducer
-import eu.codearte.fairyland.producer.locale.pl.NIP
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -18,7 +17,8 @@ class NIPSpec extends Specification {
 	def baseProducer = Mock(BaseProducer)
 	def generator = new NIP(baseProducer)
 
-	@Unroll def "Should validate #nip as #valid"() {
+	@Unroll
+	def "Should validate #nip as #valid"() {
 
 		expect:
 		generator.isNIPValid(nip) == valid
