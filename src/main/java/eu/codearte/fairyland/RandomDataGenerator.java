@@ -23,8 +23,8 @@ public class RandomDataGenerator {
 		this.data = data;
 	}
 
-	public String getValue(String data) {
-		return this.data.getString(data);
+	public String getValue(String dataname) {
+		return data.getString(dataname);
 	}
 
 	public List<String> getValuesOfType(String dataKey, final String type) {

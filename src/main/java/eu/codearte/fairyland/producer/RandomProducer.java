@@ -23,6 +23,10 @@ public class RandomProducer {
 		this.fakerProducer = fakerProducer;
 	}
 
+	public String getValue(String dataName) {
+		return randomDataGenerator.getValue(dataName);
+	}
+
 	public String getValuesOfType(String dataKey, final String type) {
 		List<String> valuesOfType = randomDataGenerator.getValuesOfType(dataKey, type);
 		return randomElement(valuesOfType);

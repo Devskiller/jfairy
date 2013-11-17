@@ -3,7 +3,6 @@
  */
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.RandomDataGenerator;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.RandomProducer;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +27,6 @@ public class Person {
 	public static final String LAST_NAME = "lastNames";
 	public static final String PERSONAL_EMAIL = "personalEmails";
 	public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
-	private final RandomDataGenerator generator;
 	private final RandomProducer randomProducer;
 	private final NationalIdentificationNumber nationalIdentificationNumber;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
@@ -45,12 +43,10 @@ public class Person {
 	private String companyEmail;
 
 	@Inject
-	public Person(RandomDataGenerator generator,
-				  RandomProducer randomProducer,
+	public Person(RandomProducer randomProducer,
 				  NationalIdentificationNumber nationalIdentificationNumber,
 				  NationalIdentityCardNumber nationalIdentityCardNumber,
 				  Company company) {
-		this.generator = generator;
 		this.randomProducer = randomProducer;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;

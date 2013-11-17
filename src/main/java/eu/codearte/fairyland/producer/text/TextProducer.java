@@ -4,7 +4,6 @@
 package eu.codearte.fairyland.producer.text;
 
 import eu.codearte.fairyland.producer.RandomProducer;
-import eu.codearte.fairyland.RandomDataGenerator;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -18,17 +17,15 @@ public class TextProducer {
 
 	private static final String DATA = "text";
 
-	private final RandomDataGenerator generator;
 	private final RandomProducer randomProducer;
 
 	private final String loremIpsum;
 	private final List<String> words;
 
 	@Inject
-	public TextProducer(RandomDataGenerator generator, RandomProducer randomProducer) {
-		this.generator = generator;
+	public TextProducer(RandomProducer randomProducer) {
 		this.randomProducer = randomProducer;
-		loremIpsum = generator.getValue(DATA);
+		loremIpsum = randomProducer.getValue(DATA);
 		words = asList(split(loremIpsum, ' '));
 	}
 
@@ -50,7 +47,11 @@ public class TextProducer {
 	}
 
 	private List<String> readRawWords(int count, int precision) {
-		return randomProducer.randomElements(words, randomProducer.randomBetween(count, count + precision));
+		return randomProducer.randomElements(words, getRandomWithPrecision(count, precision));
+	}
+
+	public int getRandomWithPrecision(int count, int precision) {
+		return randomProducer.randomBetween(count, count + precision);
 	}
 
 }
