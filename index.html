@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Fairyland by Codearte</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Fairyland</h1>
+        <h2>Java fake data generator</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/Codearte/fairyland/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/Codearte/fairyland/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/Codearte/fairyland" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="fairyland-" class="anchor" href="#fairyland-"><span class="octicon octicon-link"></span></a>fairyland <a href="https://travis-ci.org/Codearte/fairyland"><img src="https://travis-ci.org/Codearte/fairyland.png" alt="Build Status"></a>
+</h1>
+
+<p>Java fake data generator</p>
+
+<h2>
+<a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h2>
+
+<p>This project can be built using <a href="http://www.gradle.org/">gradle</a> command:</p>
+
+<pre><code>./gradlew build
+</code></pre>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Installation into <a href="http://maven.apache.org/">maven</a> local repository</p>
+
+<pre><code>./gradlew publishToMavenLocal
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>In Maven projects (pom.xml):</p>
+
+<pre><code>&lt;pom&gt;
+    ...
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;url&gt;http://dl.bintray.com/codearte/public&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+    ...
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;eu.codearte&lt;/groupId&gt;
+            &lt;artifactId&gt;fairyland&lt;/artifactId&gt;
+            &lt;version&gt;0.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    ...
+&lt;/pom&gt;
+</code></pre>
+
+<p>In Gradle projects (build.gradle):</p>
+
+<pre><code>repositories {
+    mavenCentral()
+    maven {
+        url 'http://dl.bintray.com/codearte/public'
+    }
+}
+...
+testCompile 'eu.codearte:fairyland:0.0.1'
+</code></pre>
+
+<h2>
+<a name="sample" class="anchor" href="#sample"><span class="octicon octicon-link"></span></a>Sample</h2>
+
+<p>Look into <a href="src/test/groovy/snippets/">code sample</a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
