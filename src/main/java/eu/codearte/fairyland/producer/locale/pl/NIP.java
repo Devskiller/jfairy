@@ -71,6 +71,7 @@ public class NIP implements VATIdentificationNumber {
 
 	// 1234563_18
 	private static final int CHECKSUM_CHAR_INDEX = 9;
+	static final int MODULO11 = 11;
 
 	private final BaseProducer baseProducer;
 
@@ -118,7 +119,7 @@ public class NIP implements VATIdentificationNumber {
 		for (int i = 0; i < WEIGHTS.length; i++) {
 			sum += (chars[i] - '0') * WEIGHTS[i];
 		}
-		return sum % 11;
+		return sum % MODULO11;
 	}
 }
 
