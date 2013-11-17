@@ -1,8 +1,8 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
-import eu.codearte.fairyland.producer.company.Company
 import eu.codearte.fairyland.producer.locale.pl.NIP
+import org.apache.commons.validator.routines.DomainValidator
 import org.apache.commons.validator.routines.EmailValidator
 import org.apache.commons.validator.routines.UrlValidator
 import spock.lang.Specification
@@ -13,14 +13,15 @@ import spock.lang.Specification
  */
 class CompanySpec extends Specification {
 
-	def EmailValidator emailValidator = EmailValidator.getInstance();
-	def UrlValidator urlValidator = UrlValidator.getInstance();
+	def emailValidator = EmailValidator.getInstance();
+	def urlValidator = UrlValidator.getInstance();
+	def domainValidator = DomainValidator.getInstance();
 
 	def "should instantiate Company producer"() {
 		when:
 		def company = Fairy.create().company()
 		then:
-		company instanceof Company
+		company
 	}
 
 	def "should be sure that data exists"() {
@@ -28,6 +29,7 @@ class CompanySpec extends Specification {
 		def company = Fairy.create().company()
 		then:
 		company.name()
+		domainValidator.isValid(company.domain())
 		emailValidator.isValid(company.email())
 		urlValidator.isValid(company.url())
 		NIP.isValid(company.vatIdentificationNumber())
