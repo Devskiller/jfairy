@@ -1,6 +1,7 @@
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland.producer.net;
 
 import com.google.inject.Inject;
+import eu.codearte.fairyland.producer.BaseProducer;
 
 public class IPNumber {
 
