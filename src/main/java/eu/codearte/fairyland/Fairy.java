@@ -5,6 +5,7 @@ package eu.codearte.fairyland;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.person.Person;

@@ -3,7 +3,7 @@
  */
 package eu.codearte.fairyland.producer.text;
 
-import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
 
 import javax.inject.Inject;
@@ -19,14 +19,12 @@ public class TextProducer {
 	private static final String DATA = "text";
 
 	private final BaseProducer baseProducer;
- 	private final DataMaster dataMaster;
 
 	private final String loremIpsum;
 	private final List<String> words;
 
 	@Inject
 	public TextProducer(DataMaster dataMaster, BaseProducer baseProducer) {
-		this.dataMaster = dataMaster;
 		this.baseProducer = baseProducer;
 		loremIpsum = dataMaster.getString(DATA);
 		words = asList(split(loremIpsum, ' '));

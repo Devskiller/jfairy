@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Codearte
  */
 
-package eu.codearte.fairyland;
+package eu.codearte.fairyland.data;
 
 import eu.codearte.fairyland.producer.BaseProducer;
 import org.yaml.snakeyaml.Yaml;

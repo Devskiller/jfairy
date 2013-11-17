@@ -1,6 +1,6 @@
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.data.DataMaster;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;

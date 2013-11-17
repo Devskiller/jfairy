@@ -3,7 +3,7 @@
  */
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.DataMaster;
+import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.DateProducer;

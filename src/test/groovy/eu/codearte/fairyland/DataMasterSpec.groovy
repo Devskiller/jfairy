@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland
 
+import eu.codearte.fairyland.data.DataMaster
 import eu.codearte.fairyland.producer.person.Person
 import spock.lang.Specification
 
