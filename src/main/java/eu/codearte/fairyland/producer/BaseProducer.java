@@ -17,12 +17,9 @@ public class BaseProducer {
 
 	private final Random random;
 
-	private final TimeProvider timeProvider;
-
 	@Inject
-	public BaseProducer(TimeProvider timeProvider) {
+	public BaseProducer() {
 		this.random = new Random(SEED);
-		this.timeProvider = timeProvider;
 	}
 
 	public boolean trueOrFalse() {
