@@ -3,7 +3,7 @@ package eu.codearte.fairyland.producer.net;
 import com.google.inject.Inject;
 import eu.codearte.fairyland.producer.BaseProducer;
 
-public class IPNumber {
+class IPNumber {
 
 	private static final String IP_FORMAT = "%s.%s.%s.%s";
 

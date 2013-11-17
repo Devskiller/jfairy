@@ -14,7 +14,7 @@ import static eu.codearte.fairyland.producer.text.TextUtils.joinWithSpace;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.*;
 
-public class TextProducer {
+class TextProducer {
 
 	private static final String DATA = "text";
 
