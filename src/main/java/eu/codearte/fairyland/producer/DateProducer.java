@@ -5,7 +5,6 @@
 package eu.codearte.fairyland.producer;
 
 import com.google.common.annotations.VisibleForTesting;
-import eu.codearte.fairyland.producer.util.TimeProvider;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;

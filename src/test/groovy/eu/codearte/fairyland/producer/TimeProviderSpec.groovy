@@ -2,14 +2,15 @@
  * Copyright (c) 2013. Codearte
  */
 
-package eu.codearte.fairyland.producer.util
+package eu.codearte.fairyland.producer
 
 import spock.lang.Specification
 import spock.lang.Unroll
 
 class TimeProviderSpec extends Specification {
 
-	@Unroll def "should parse date #date"() {
+	@Unroll
+	def "should parse date #date"() {
 		setup:
 		TimeProvider dateProvider = new TimeProvider();
 		expect:
