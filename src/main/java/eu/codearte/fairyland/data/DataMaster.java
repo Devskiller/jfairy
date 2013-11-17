@@ -17,13 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
 
 @Singleton
 public class DataMaster {
 
 	private final BaseProducer baseProducer;
-	private Map<String, Object> dataSource = new CaseInsensitiveMap<Object>();
+	private Map<String, Object> dataSource = new CaseInsensitiveMap();
 
 	@Inject
 	DataMaster(BaseProducer baseProducer) {
@@ -94,21 +93,8 @@ public class DataMaster {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void appendData(Data dataMaster) {
-		Map<String, Object> data = dataMaster.getData();
-
-		for (String key : data.keySet()) {
-			Object value = data.get(key);
-			if (value instanceof Map) {
-				CaseInsensitiveMap<Object> insensitiveMap = new CaseInsensitiveMap<Object>();
-				insensitiveMap.putAll((Map<? extends String,?>) value);
-				dataSource.put(key, insensitiveMap);
-			} else {
-				dataSource.put(key, value);
-			}
-		}
-
+		dataSource.putAll(dataMaster.getData());
 	}
 
 	public static class Data {
@@ -130,16 +116,25 @@ public class DataMaster {
 		}
 	}
 
-	private class CaseInsensitiveMap<T> extends HashMap<String, T> {
+	private static class CaseInsensitiveMap extends HashMap<String, Object> {
 
 		@Override
-		public T put(String key, T value) {
-			return super.put(key.toLowerCase(), value);
+		@SuppressWarnings("unchecked")
+		public Object put(String key, Object value) {
+			String loweredKey = key.toLowerCase();
+			Object valueToInsert = value;
+
+			if (value instanceof Map) {
+				valueToInsert = new CaseInsensitiveMap();
+				((CaseInsensitiveMap) valueToInsert).putAll((Map<? extends String, ?>) value);
+			}
+
+			return super.put(loweredKey, valueToInsert);
 		}
 
 		@Override
 		@SuppressWarnings("unchecked")
-		public T get(Object key) {
+		public Object get(Object key) {
 			return super.get(((String) key).toLowerCase());
 		}
 
