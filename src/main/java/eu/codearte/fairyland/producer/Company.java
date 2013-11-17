@@ -1,6 +1,5 @@
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.RandomDataGenerator;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
