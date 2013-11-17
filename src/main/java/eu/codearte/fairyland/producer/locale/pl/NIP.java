@@ -6,9 +6,12 @@ package eu.codearte.fairyland.producer.locale.pl;
 
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.VATIdentificationNumber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
@@ -17,6 +20,8 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  * @since 02.11.13.
  */
 public class NIP implements VATIdentificationNumber {
+
+	private static final Logger LOG = LoggerFactory.getLogger(NIP.class);
 
 	// ex 1234563218
 	private static final int NIP_LENGTH = 10;
@@ -102,6 +107,7 @@ public class NIP implements VATIdentificationNumber {
 			int checksum = calculateChecksum(normalizedNip);
 			return checksum == normalizedNip.charAt(CHECKSUM_CHAR_INDEX) - '0';
 		} catch (NumberFormatException e) {
+			LOG.debug(format("Invalid nip %s", nip), e);
 			return false;
 		}
 	}
