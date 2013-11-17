@@ -17,12 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 @Singleton
 public class DataMaster {
 
 	private final BaseProducer baseProducer;
-	private Map<String, List<String>> dataSource = new CaseInsensitiveMap<List<String>>();
+	private Map<String, Object> dataSource = new CaseInsensitiveMap<Object>();
 
 	@Inject
 	DataMaster(BaseProducer baseProducer) {
@@ -38,16 +39,12 @@ public class DataMaster {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getStringList(String key) {
-		return (List<String>) getData(key);
+		return getData(key, List.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	public Map<String, List<String>> getStringMap(String key) {
-		//todo replace by more fancy solution
-		Map<String, List<String>> data = (Map<String, List<String>>) getData(key);
-		CaseInsensitiveMap<List<String>> result = new CaseInsensitiveMap<List<String>>();
-		result.putAll(data);
-		return result;
+		return (Map<String, List<String>>) getData(key, Map.class);
 	}
 
 	public String getValuesOfType(String dataKey, final String type) {
@@ -66,17 +63,24 @@ public class DataMaster {
 	 * @throws IllegalArgumentException if no element for key has been found
 	 */
 	public String getString(String key) {
-		return (String) getData(key);
+		return getData(key, String.class);
 	}
 
 	public String getRandomValue(String key) {
 		return baseProducer.randomElement(getStringList(key));
 	}
 
-	private Object getData(String key) {
+	@SuppressWarnings({"unchecked", "ConstantConditions"}) // checked by checkArgument
+	private <T> T getData(String key, Class<T> type) {
+		checkArgument(key != null, "key cannot be null");
+		checkArgument(type != null, "type cannot be null");
+
 		Object element = dataSource.get(key);
 		checkArgument(element != null, "No such key: %s", key);
-		return element;
+		checkArgument(type.isAssignableFrom(element.getClass()),
+				"Element under desired key has incorrect type - should be %s", type.getSimpleName());
+
+		return (T) element;
 	}
 
 	//fixme - should be package-private
@@ -90,15 +94,26 @@ public class DataMaster {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void appendData(Data dataMaster) {
-		Map<String, List<String>> data = dataMaster.getData();
+		Map<String, Object> data = dataMaster.getData();
 
-		dataSource.putAll(data);
+		for (String key : data.keySet()) {
+			Object value = data.get(key);
+			if (value instanceof Map) {
+				CaseInsensitiveMap<Object> insensitiveMap = new CaseInsensitiveMap<Object>();
+				insensitiveMap.putAll((Map<? extends String,?>) value);
+				dataSource.put(key, insensitiveMap);
+			} else {
+				dataSource.put(key, value);
+			}
+		}
+
 	}
 
 	public static class Data {
 
-		private Map<String, List<String>> data;
+		private Map<String, Object> data;
 
 		/**
 		 * This method is used by YAML decoder
@@ -106,11 +121,11 @@ public class DataMaster {
 		 * @param data fetched from yaml document
 		 */
 		@SuppressWarnings("unused")
-		public void setData(Map<String, List<String>> data) {
+		public void setData(Map<String, Object> data) {
 			this.data = data;
 		}
 
-		private Map<String, List<String>> getData() {
+		private Map<String, Object> getData() {
 			return data;
 		}
 	}
