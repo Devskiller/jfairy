@@ -1,7 +1,6 @@
 package eu.codearte.fairyland.producer;
 
 import com.google.common.base.Preconditions;
-import eu.codearte.fairyland.producer.util.TimeProvider;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
