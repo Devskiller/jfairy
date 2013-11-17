@@ -34,9 +34,11 @@ public class Person {
 	static final String PERSONAL_EMAIL = "personalEmails";
 	@VisibleForTesting
 	static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
+
 	private final DataMaster dataMaster;
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
+	private final Address address;
 	private final NationalIdentificationNumber nationalIdentificationNumber;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
 
@@ -51,13 +53,20 @@ public class Person {
 	private Company company;
 	private String companyEmail;
 
+	// FIXME: Too many parameters
 	@Inject
-	public Person(DataMaster dataMaster, DateProducer dateProducer,
-								BaseProducer baseProducer, NationalIdentificationNumber nationalIdentificationNumber,
-								NationalIdentityCardNumber nationalIdentityCardNumber, Company company) {
+	public Person(DataMaster dataMaster,
+				  DateProducer dateProducer,
+				  BaseProducer baseProducer,
+				  Address address,
+				  NationalIdentificationNumber nationalIdentificationNumber,
+				  NationalIdentityCardNumber nationalIdentityCardNumber,
+				  Company company) {
+
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
+		this.address = address;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		//fixme - should be created only if needed
@@ -159,6 +168,10 @@ public class Person {
 
 	public String companyEmail() {
 		return companyEmail;
+	}
+
+	public Address getAddress(){
+		return address;
 	}
 
 }

@@ -1,6 +1,8 @@
 package eu.codearte.fairyland.producer.person
 
 import eu.codearte.fairyland.Fairy
+import org.apache.commons.validator.routines.DomainValidator
+import org.apache.commons.validator.routines.EmailValidator
 import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
@@ -8,6 +10,8 @@ import spock.lang.Specification
 import static eu.codearte.fairyland.producer.person.PersonProperties.*
 
 class PersonSpec extends Specification {
+
+	def emailValidator = EmailValidator.getInstance();
 
 	def "should instantiate PersonProducer producer with person"() {
 		when:
@@ -20,11 +24,11 @@ class PersonSpec extends Specification {
 		when:
 		def person = Fairy.create().person()
 		then:
-		person.email()
 		"${person.firstName()} ${person.lastName()}" == person.fullName()
 	}
 
-	@Ignore def "second generated name should be different"() {
+	@Ignore
+	def "second generated name should be different"() {
 		setup:
 		def fairy = Fairy.create()
 		expect:
@@ -42,6 +46,8 @@ class PersonSpec extends Specification {
 		person.isMale() || person.isFemale()
 		person.nationalIdentificationNumber()
 		person.nationalIdentityCardNumber()
+
+		emailValidator.isValid(person.email())
 	}
 
 	def "should create female"() {
@@ -95,17 +101,26 @@ class PersonSpec extends Specification {
 
 		then:
 		person.companyEmail()
+		emailValidator.isValid(person.companyEmail())
 	}
 
-	def "should create person for company"() {
+	def "should create address"() {
 		given:
-		def fairy = Fairy.create()
-		def company = fairy.company()
-
+		def person = Fairy.create().person()
 		when:
-		def person = fairy.person(withCompany(company))
-
+		def address = person.getAddress()
 		then:
-		person.companyEmail() contains company.domain()
+		address
 	}
+	def "should create address postal code"() {
+		given:
+		def person = Fairy.create().person()
+		when:
+		def postalCode = person.getAddress().getPostalCode()
+		then:
+		postalCode
+
+	}
+
+
 }

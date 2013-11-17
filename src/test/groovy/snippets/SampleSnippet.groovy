@@ -31,6 +31,7 @@ println "Date of birth: " + person.dateOfBirth();
 println "          Age: " + person.age();
 println "        Pesel: " + person.nationalIdentificationNumber();
 println "           ID: " + person.nationalIdentityCardNumber();
+println "  Postal Code: " + person.getAddress().getPostalCode();
 
 println ""
 
@@ -41,10 +42,6 @@ println ""
 3.times {
 	println "Women: " + fairy.person(PersonProperties.female()).fullName()
 }
-
-println Fairy.create().numerify("bleble###")
-println Fairy.create().letterify("letter???")
-println Fairy.create().bothify("?? ###-###")
 
 println fairy.person().nationalIdentityCardNumber()
 println fairy.person().nationalIdentificationNumber()
