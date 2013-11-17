@@ -18,3 +18,5 @@ data:
   telephone_number_formats: ['###-###-###', '###-###-####']
 
   postal_code: ['#####']
+
+  country: ['Canada', 'USA', 'Poland']
