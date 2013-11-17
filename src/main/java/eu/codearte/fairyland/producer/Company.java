@@ -15,6 +15,7 @@ public class Company {
 	public static final String COMPANY_NAME = "companyNames";
 	public static final String COMPANY_SUFFIX = "companySuffixes";
 	public static final String COMPANY_EMAIL = "companyEmails";
+
 	private final VATIdentificationNumber vatIdentificationNumber;
 
 	private String name;
@@ -22,16 +23,16 @@ public class Company {
 	private final String email;
 
 	@Inject
-	public Company(RandomProducer randomProducer, RandomDataGenerator generator, VATIdentificationNumber vatIdentificationNumber) {
+	public Company(RandomProducer randomProducer, VATIdentificationNumber vatIdentificationNumber) {
 		this.vatIdentificationNumber = vatIdentificationNumber;
 
-		name = generator.getValues(COMPANY_NAME);
+		name = randomProducer.getValues(COMPANY_NAME);
 		if (randomProducer.trueOrFalse()) {
-			name += " " + generator.getValues(COMPANY_SUFFIX);
+			name += " " + randomProducer.getValues(COMPANY_SUFFIX);
 		}
 		domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
-				+ "." + generator.getValues(DOMAIN);
-		email = generator.getValues(COMPANY_EMAIL);
+				+ "." + randomProducer.getValues(DOMAIN);
+		email = randomProducer.getValues(COMPANY_EMAIL);
 	}
 
 	public String name() {

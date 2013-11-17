@@ -3,9 +3,9 @@
  */
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.producer.RandomProducer;
-import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.RandomDataGenerator;
+import eu.codearte.fairyland.producer.Company;
+import eu.codearte.fairyland.producer.RandomProducer;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
@@ -46,7 +46,8 @@ public class Person {
 
 	@Inject
 	public Person(RandomDataGenerator generator,
-				  RandomProducer randomProducer, NationalIdentificationNumber nationalIdentificationNumber,
+				  RandomProducer randomProducer,
+				  NationalIdentificationNumber nationalIdentificationNumber,
 				  NationalIdentityCardNumber nationalIdentityCardNumber,
 				  Company company) {
 		this.generator = generator;
@@ -65,11 +66,11 @@ public class Person {
 		if (sex == null) {
 			sex = randomProducer.trueOrFalse() ? MALE : FEMALE;
 		}
-		firstName = generator.getValuesOfType(FIRST_NAME, sex.name());
-		lastName = generator.getValuesOfType(LAST_NAME, sex.name());
+		firstName = randomProducer.getValuesOfType(FIRST_NAME, sex.name());
+		lastName = randomProducer.getValuesOfType(LAST_NAME, sex.name());
 		email = generateEmail(firstName, lastName);
 		if (telephoneNumberFormat == null) {
-			telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
+			telephoneNumberFormat = randomProducer.getValues(TELEPHONE_NUMBER_FORMATS);
 		}
 		telephoneNumber = randomProducer.numerify(telephoneNumberFormat);
 		if (age == null) {
@@ -127,7 +128,7 @@ public class Person {
 				temp += ".";
 			}
 		}
-		return StringUtils.stripAccents(lowerCase(temp + lastName + '@' + generator.getValues(PERSONAL_EMAIL)));
+		return StringUtils.stripAccents(lowerCase(temp + lastName + '@' + randomProducer.getValues(PERSONAL_EMAIL)));
 	}
 
 	public String nationalIdentificationNumber() {

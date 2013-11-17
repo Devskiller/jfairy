@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer;
 
+import eu.codearte.fairyland.RandomDataGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -12,12 +13,23 @@ public class RandomProducer {
 	private final RandomGenerator random;
 	private final FakerProducer fakerProducer;
 	private final DateGenerator dateGenerator;
+	private final RandomDataGenerator randomDataGenerator;
 
 	@Inject
-	public RandomProducer(RandomGenerator random, DateGenerator dateGenerator, FakerProducer fakerProducer) {
+	public RandomProducer(RandomGenerator random, DateGenerator dateGenerator, RandomDataGenerator randomDataGenerator, FakerProducer fakerProducer) {
 		this.random = random;
 		this.dateGenerator = dateGenerator;
+		this.randomDataGenerator = randomDataGenerator;
 		this.fakerProducer = fakerProducer;
+	}
+
+	public String getValuesOfType(String dataKey, final String type) {
+		List<String> valuesOfType = randomDataGenerator.getValuesOfType(dataKey, type);
+		return randomElement(valuesOfType);
+	}
+
+	public String getValues(String key) {
+		return randomElement(randomDataGenerator.getValues(key));
 	}
 
 	public DateTime randomDateInThePast(int maxYearsEarlier) {
@@ -32,7 +44,7 @@ public class RandomProducer {
 		return random.getBoolean();
 	}
 
-	public String randomElement(List<String> elements) {
+	private String randomElement(List<String> elements) {
 		return elements.get(randomBetween(0, elements.size() - 1));
 	}
 

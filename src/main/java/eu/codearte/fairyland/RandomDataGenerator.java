@@ -4,7 +4,6 @@
 
 package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.producer.RandomProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,31 +17,26 @@ public class RandomDataGenerator {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
 	private final DataMaster data;
-	private final RandomProducer randomProducer;
 
 	@Inject
-	public RandomDataGenerator(DataMaster data, RandomProducer randomProducer) {
+	public RandomDataGenerator(DataMaster data) {
 		this.data = data;
-		this.randomProducer = randomProducer;
 	}
 
 	public String getValue(String data) {
 		return this.data.getString(data);
 	}
 
-	public String getValuesOfType(String dataKey, final String type) {
+	public List<String> getValuesOfType(String dataKey, final String type) {
 		LOG.trace("getValuesOfType(dataKey={}, type={})", dataKey, type);
 
 		Map<String, List<String>> stringMap = data.getStringMap(dataKey);
 
-		List<String> entries = stringMap.get(type.toLowerCase());
-
-		LOG.trace("Selected entries {}", entries);
-		return randomProducer.randomElement(entries);
+		return stringMap.get(type.toLowerCase());
 	}
 
-	public String getValues(String key) {
-		return randomProducer.randomElement(data.getStringList(key));
+	public List<String> getValues(String key) {
+		return data.getStringList(key);
 	}
 
 }
