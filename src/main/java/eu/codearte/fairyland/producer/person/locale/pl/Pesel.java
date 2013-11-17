@@ -84,8 +84,9 @@ public class Pesel implements NationalIdentificationNumber {
 		return month + PERIOD_WEIGHTS[(year - BEGIN_YEAR) / PERIOD_FACTOR];
 	}
 
+	// This should be tested
 	private int calculateSexCode(Person.Sex sex) {
-		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length)] + (sex == Person.Sex.MALE ? 1 : 0);
+		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length - 1)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {
