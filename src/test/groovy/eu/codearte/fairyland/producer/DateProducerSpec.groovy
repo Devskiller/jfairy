@@ -43,6 +43,16 @@ class DateProducerSpec extends Specification {
 		dateInThePast == SOME_DATE_IN_THE_PAST
 	}
 
+	def "should fail generate date in the past if passed value is negative"() {
+		given:
+		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+				SOME_DATE_IN_THE_PAST_IN_MILLIS
+		when:
+		sut.randomDateInThePast(-MAX_YEARS_IN_THE_PAST)
+		then:
+		thrown IllegalArgumentException
+	}
+
 	def "should be able to reach minimum date for date in the past"() {
 		given:
 		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
