@@ -1,7 +1,7 @@
 package eu.codearte.fairyland.producer.person;
 
 import eu.codearte.fairyland.producer.BaseProducer;
-import eu.codearte.fairyland.producer.Company;
+import eu.codearte.fairyland.producer.company.Company;
 
 import javax.inject.Inject;
 

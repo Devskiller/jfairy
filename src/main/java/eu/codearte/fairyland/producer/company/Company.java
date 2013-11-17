@@ -1,6 +1,8 @@
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland.producer.company;
 
 import eu.codearte.fairyland.data.DataMaster;
+import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.VATIdentificationNumber;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;

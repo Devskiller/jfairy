@@ -1,6 +1,7 @@
 package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
+import eu.codearte.fairyland.producer.company.Company
 import spock.lang.Specification
 
 /**
