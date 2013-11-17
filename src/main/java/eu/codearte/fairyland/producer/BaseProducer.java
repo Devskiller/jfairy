@@ -47,7 +47,7 @@ public class BaseProducer {
 		return min + randomInt;
 	}
 
-	public int randomWithMax(int max) {
+	public int randomInt(int max) {
 		return randomBetween(0, max);
 	}
 

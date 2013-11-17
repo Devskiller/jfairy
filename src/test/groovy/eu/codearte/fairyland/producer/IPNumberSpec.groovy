@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class IPNumberSpec extends Specification {
 
-	InetAddressValidator validator = InetAddressValidator.getInstance();
+	InetAddressValidator ipValidator = InetAddressValidator.getInstance();
 
 	def "Should generate proper ip number"() {
 		IPNumber ipNumber = new IPNumber(new BaseProducer());
@@ -13,7 +13,7 @@ class IPNumberSpec extends Specification {
 
 		expect:
 		ip
-		validator.isValid(ip)
+		ipValidator.isValid(ip)
 
 	}
 }

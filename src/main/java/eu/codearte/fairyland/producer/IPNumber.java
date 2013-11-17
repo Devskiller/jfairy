@@ -18,7 +18,7 @@ public class IPNumber {
 	}
 
 	private int ipNumberPart() {
-		return baseProducer.randomBetween(0, 255);
+		return baseProducer.randomInt(255);
 	}
 
 }

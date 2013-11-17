@@ -89,9 +89,9 @@ public class NIP implements VATIdentificationNumber {
 	@Override
 	public String generate() {
 
-		String prefix = valueOf(CODES[baseProducer.randomWithMax(CODES.length - 1)]);
+		String prefix = valueOf(CODES[baseProducer.randomInt(CODES.length - 1)]);
 
-		String number = leftPad(valueOf(baseProducer.randomWithMax(MAX_SERIAL_NUMBER)), SERIAL_NUMBER_SIZE, "0");
+		String number = leftPad(valueOf(baseProducer.randomInt(MAX_SERIAL_NUMBER)), SERIAL_NUMBER_SIZE, "0");
 
 		String base = prefix + number;
 

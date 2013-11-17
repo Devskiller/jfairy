@@ -99,7 +99,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	}
 
 	private void fillDigitsPart(char[] id) {
-		String num = valueOf(baseProducer.randomWithMax(MAX_DIGITS_PART_VALUE));
+		String num = valueOf(baseProducer.randomInt(MAX_DIGITS_PART_VALUE));
 		char[] digits = leftPad(num, DIGITS_PART_SIZE, '0').toCharArray();
 		arraycopy(digits, 0, id, CHECKSUM_INDEX + 1, digits.length);
 	}

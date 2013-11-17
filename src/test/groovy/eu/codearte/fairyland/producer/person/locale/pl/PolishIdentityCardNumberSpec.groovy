@@ -27,7 +27,7 @@ class PolishIdentityCardNumberSpec extends Specification {
 		def max = (2013 - ISSUING_BEGIN) * LETTER_WEIGHT
 		setup:
 		baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A' .. 'Z').size() // ABA
-		baseProducer.randomWithMax(MAX_DIGITS_PART_VALUE) >> 0
+		baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
 		when:
 		PolishIdentityCardNumber generator = new PolishIdentityCardNumber(dateGenerator, baseProducer)
 		def id = generator.generate(DateTime.parse("2013-12-12"))

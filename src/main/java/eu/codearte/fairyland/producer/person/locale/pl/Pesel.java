@@ -55,7 +55,7 @@ public class Pesel implements NationalIdentificationNumber {
 		int year = date.getYearOfCentury();
 		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
 		int day = date.getDayOfMonth();
-		int serialNumber = baseProducer.randomWithMax(MAX_SERIAL_NUMBER);
+		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
 		String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
@@ -85,7 +85,7 @@ public class Pesel implements NationalIdentificationNumber {
 	}
 
 	private int calculateSexCode(Person.Sex sex) {
-		return SEX_FIELDS[baseProducer.randomWithMax(SEX_FIELDS.length)] + (sex == Person.Sex.MALE ? 1 : 0);
+		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {
