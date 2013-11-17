@@ -1,15 +1,11 @@
-package eu.codearte.fairyland.producer
+package eu.codearte.fairyland.producer.person
 
 import eu.codearte.fairyland.Fairy
-import eu.codearte.fairyland.producer.person.Person
 import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
 
 import static eu.codearte.fairyland.producer.person.PersonProperties.*
-
-
-
 
 class PersonSpec extends Specification {
 

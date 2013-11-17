@@ -1,9 +1,8 @@
-package eu.codearte.fairyland.producer.person.pl
+package eu.codearte.fairyland.producer.person.locale.pl
 
 import eu.codearte.fairyland.producer.BaseProducer
 import eu.codearte.fairyland.producer.DateProducer
 import eu.codearte.fairyland.producer.person.Person
-import eu.codearte.fairyland.producer.person.locale.pl.Pesel
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll

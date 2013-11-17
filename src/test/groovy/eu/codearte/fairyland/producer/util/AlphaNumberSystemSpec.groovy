@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Codearte and authors
  */
 
-package eu.codearte.fairyland.producer.person.pl
+package eu.codearte.fairyland.producer.util
 
 import spock.lang.Specification
 import spock.lang.Unroll

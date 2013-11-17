@@ -5,8 +5,8 @@ package eu.codearte.fairyland.producer.person;
 
 import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
-import eu.codearte.fairyland.producer.company.Company;
 import eu.codearte.fairyland.producer.DateProducer;
+import eu.codearte.fairyland.producer.company.Company;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 

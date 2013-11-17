@@ -1,15 +1,14 @@
 /*
  * Copyright (c) 2013 Codearte and authors
  */
-package eu.codearte.fairyland.producer.util
+package eu.codearte.fairyland.producer
 
-import eu.codearte.fairyland.producer.BaseProducer
-import eu.codearte.fairyland.producer.DateProducer
+import eu.codearte.fairyland.producer.util.TimeProvider
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class DateProducerrSpec extends Specification {
+class DateProducerSpec extends Specification {
 
 	private static final MAX_YEARS_IN_THE_PAST = 5
 
