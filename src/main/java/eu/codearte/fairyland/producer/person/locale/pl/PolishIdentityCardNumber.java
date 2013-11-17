@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer.person.locale.pl;
 
+import com.google.common.annotations.VisibleForTesting;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
 import eu.codearte.fairyland.producer.util.DateGenerator;
@@ -19,9 +20,24 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  */
 public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
+	@VisibleForTesting
+	static final int ISSUING_BEGIN = 2000;
+
 	private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
-	public static final int BEGIN = 2000;
-	public static final int PREFIXES_BY_YEAR = 45;
+	private static final int CHECKSUM_INDEX = 3;
+
+	private static final int DIGITS_PART_SIZE = 5;
+
+	@VisibleForTesting
+	static final int MAX_DIGITS_PART_VALUE = 99999;
+
+	@VisibleForTesting
+	static final int LETTER_WEIGHT = 45;
+	private static final int LETTERS_PART_SIZE = 3;
+	private static final int LETTER_VALUE_MODIFIER = 10;
+	private static final int ALPHABET_SIZE = 26;
+
+	private static final int BASE_TEN = 10;
 
 	private final DateGenerator dateGenerator;
 	private final BaseProducer baseProducer;
@@ -35,7 +51,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	@Override
 	public String generate() {
 
-		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(BEGIN);
+		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(ISSUING_BEGIN);
 
 		return generate(dateTime);
 	}
@@ -43,16 +59,16 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	@Override
 	public String generate(DateTime date) {
 
-		checkArgument(date.getYear() >= BEGIN, "Polish ID was introduced in 2000");
+		checkArgument(date.getYear() >= ISSUING_BEGIN, "Polish ID was introduced in 2000");
 
 		char[] id = new char[WEIGHTS.length];
 
-		fillAlphaPrefix(date.getYear(), id);
-		fillDigits(id);
+		fillLettersPart(date.getYear(), id);
+		fillDigitsPart(id);
 
 		char checksum = calculateChecksum(id);
 
-		id[3] = checksum;
+		id[CHECKSUM_INDEX] = checksum;
 
 		return copyValueOf(id);
 
@@ -61,7 +77,7 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	public boolean isValid(String id) {
 		int checksum = calculateChecksum(id.toCharArray());
 
-		return id.charAt(3) == checksum;
+		return id.charAt(CHECKSUM_INDEX) == checksum;
 	}
 
 	private char calculateChecksum(char[] id) {
@@ -70,29 +86,29 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
 		for (int weight : WEIGHTS) {
 			int value = 0;
-			if (index < 3) {
-				value = id[index] - 'A' + 10;
-			} else if (index > 3) {
+			if (index < CHECKSUM_INDEX) {
+				value = id[index] - 'A' + LETTER_VALUE_MODIFIER;
+			} else if (index > CHECKSUM_INDEX) {
 				value = id[index] - '0';
 			}
 			index++;
 			checksum += weight * value;
 		}
 
-		return valueOf(checksum % 10).charAt(0);
+		return valueOf(checksum % BASE_TEN).charAt(0);
 	}
 
-	private void fillDigits(char[] id) {
-		String num = valueOf(baseProducer.randomBetween(0, 99999));
-		char[] digits = leftPad(num, 5, '0').toCharArray();
-		arraycopy(digits, 0, id, 4, digits.length);
+	private void fillDigitsPart(char[] id) {
+		String num = valueOf(baseProducer.randomWithMax(MAX_DIGITS_PART_VALUE));
+		char[] digits = leftPad(num, DIGITS_PART_SIZE, '0').toCharArray();
+		arraycopy(digits, 0, id, CHECKSUM_INDEX + 1, digits.length);
 	}
 
-	private void fillAlphaPrefix(int year, char[] id) {
-		int maxPrefix = (year - BEGIN) * PREFIXES_BY_YEAR;
-		int range = baseProducer.randomBetween(maxPrefix, maxPrefix + PREFIXES_BY_YEAR);
-		String prefix = convertToString(range, 26);
-		char[] charArray = leftPad(prefix, 3, 'A').toCharArray();
+	private void fillLettersPart(int year, char[] id) {
+		int maxPrefix = (year - ISSUING_BEGIN) * LETTER_WEIGHT;
+		int range = baseProducer.randomBetween(maxPrefix, maxPrefix + LETTER_WEIGHT);
+		String prefix = convertToString(range, ALPHABET_SIZE);
+		char[] charArray = leftPad(prefix, LETTERS_PART_SIZE, 'A').toCharArray();
 		arraycopy(charArray, 0, id, 0, charArray.length);
 	}
 
