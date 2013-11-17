@@ -9,15 +9,16 @@ import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class DateGeneratorSpec extends Specification {
+class DateProducerrSpec extends Specification {
 
 	private static final MAX_YEARS_IN_THE_PAST = 5
 
 	private static final CURRENT_DATE = DateTime.parse("2013-11-09T01:16:00")
+	private static final int CURRENT_YEAR = 2013
 	private static final LATEST_DATE_IN_THE_PAST = DateTime.parse("2013-11-09T01:15:59")
 	private static final SOME_DATE_IN_THE_PAST = DateTime.parse("2011-01-20T12:32:12")
-	private static final FIVE_YEARS_EARLIER_DATE = DateTime.parse("2008-11-09T01:16:00")
 
+	private static final FIVE_YEARS_EARLIER_DATE = DateTime.parse("2008-11-09T01:16:00")
 	private static final LATEST_DATE_IN_THE_PAST_IN_MILLIS = LATEST_DATE_IN_THE_PAST.getMillis()
 	private static final SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.getMillis()
 	private static final FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.getMillis()
@@ -28,6 +29,7 @@ class DateGeneratorSpec extends Specification {
 
 	def setup() {
 		timeProviderMock.getCurrentDate() >> CURRENT_DATE
+		timeProviderMock.getCurrentYear() >> CURRENT_YEAR
 	}
 
 	def "should generate date in the past"() {
@@ -62,9 +64,10 @@ class DateGeneratorSpec extends Specification {
 		dateInThePast == LATEST_DATE_IN_THE_PAST
 	}
 
-	@Unroll def "should generate date between years #fromYear - #toYear"() {
+	@Unroll
+	def "should generate date between years #fromYear - #toYear"() {
 		given:
-		baseProducer.randomBetween(_, _) >> {args -> (args[1] + args[0]) / 2}
+		baseProducer.randomBetween(_, _) >> { args -> (args[1] + args[0]) / 2 }
 		expect:
 		sut.randomDateBetweenYears(fromYear, toYear) == expectedDate
 		where:
@@ -73,4 +76,17 @@ class DateGeneratorSpec extends Specification {
 		2010     | 2010   || new DateTime("2010-07-02T12:59:59.999")
 		2015     | 2020   || new DateTime("2017-12-31T23:59:59.999")
 	}
+
+	def "should generate date between specified year and now"() {
+		given:
+		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+				SOME_DATE_IN_THE_PAST_IN_MILLIS
+		when:
+		def dateInThePast = sut.randomDateBetweenYearAndNow(2008)
+		then:
+		dateInThePast < CURRENT_DATE
+		dateInThePast > FIVE_YEARS_EARLIER_DATE
+		dateInThePast == SOME_DATE_IN_THE_PAST
+	}
+
 }

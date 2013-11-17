@@ -36,6 +36,11 @@ public class DateProducer {
 		return randomDateBetweenTwoDates(maxYearsEarlierDate, latestDateInThePast);
 	}
 
+	public DateTime randomDateBetweenYearAndNow(int fromYear) {
+		int actualYear = timeProvider.getCurrentYear();
+		return randomDateInThePast(actualYear - fromYear);
+	}
+
 	private DateTime randomDateBetweenTwoDates(DateTime from, DateTime to) {
 		return new DateTime(baseProducer.randomBetween(from.getMillis(), to.getMillis()));
 	}
@@ -44,14 +49,6 @@ public class DateProducer {
 		checkArgument(fromYear <= toYear, "%s has to be <= %s", fromYear, toYear);
 		DateTime fromDate = getDateForFirstDayForGivenYear(fromYear);
 		DateTime toDate = getDateForLastDayForGivenYear(toYear);
-		return randomDateBetweenTwoDates(fromDate, toDate);
-	}
-
-	public DateTime randomDateBetweenYearAndNow(int fromYear) {
-		int to = timeProvider.getCurrentYear();
-		checkArgument(fromYear <= to, "%s has to be <= %s", fromYear, to);
-		DateTime fromDate = getDateForFirstDayForGivenYear(fromYear);
-		DateTime toDate = getDateForLastDayForGivenYear(to);
 		return randomDateBetweenTwoDates(fromDate, toDate);
 	}
 
