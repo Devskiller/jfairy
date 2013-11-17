@@ -1,6 +1,6 @@
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.producer.RandomProducer;
+import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.Company;
 
 import javax.inject.Inject;
@@ -17,12 +17,12 @@ public final class PersonProperties {
 	public abstract static class PersonProperty {
 
 		@Inject
-		private RandomProducer randomProducer;
+		private BaseProducer baseProducer;
 
 		public abstract void apply(Person person);
 
-		protected RandomProducer getRandomProducer() {
-			return randomProducer;
+		protected BaseProducer getBaseProducer() {
+			return baseProducer;
 		}
 	}
 
@@ -48,7 +48,7 @@ public final class PersonProperties {
 		return new PersonProperty() {
 			@Override
 			public void apply(Person person) {
-				person.setAge(getRandomProducer().randomBetween(minAge, Person.MAX_AGE));
+				person.setAge(getBaseProducer().randomBetween(minAge, Person.MAX_AGE));
 			}
 		};
 	}

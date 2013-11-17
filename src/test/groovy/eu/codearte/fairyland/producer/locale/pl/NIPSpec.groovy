@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer.locale.pl
 
-import eu.codearte.fairyland.producer.RandomProducer
+import eu.codearte.fairyland.producer.BaseProducer
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -14,7 +14,7 @@ import spock.lang.Unroll
  */
 class NIPSpec extends Specification {
 
-	def baseProducer = Mock(RandomProducer)
+	def baseProducer = Mock(BaseProducer)
 	def generator = new NIP(baseProducer)
 
 	@Unroll

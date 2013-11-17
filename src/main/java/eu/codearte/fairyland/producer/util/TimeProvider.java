@@ -2,14 +2,14 @@
  * Copyright (c) 2013. Codearte
  */
 
-package eu.codearte.fairyland.producer;
+package eu.codearte.fairyland.producer.util;
 
 import org.joda.time.DateTime;
 
 import javax.inject.Singleton;
 
 @Singleton
-class TimeProvider {
+public class TimeProvider {
 
 	public int getCurrentYear() {
 		return getCurrentDate().getYear();

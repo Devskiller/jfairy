@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer
 
+import eu.codearte.fairyland.producer.util.TimeProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -12,7 +13,7 @@ class RandomGeneratorSpec extends Specification {
 	@Unroll
 	def "should generate random number from given range #from - #to"() {
 		setup:
-		def randomGenerator = new RandomGenerator();
+		def randomGenerator = new BaseProducer(new TimeProvider());
 
 		expect:
 		def between = randomGenerator.randomBetween(from, to)

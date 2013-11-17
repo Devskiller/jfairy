@@ -1,8 +1,9 @@
 package eu.codearte.fairyland.producer.person.locale.pl;
 
 import com.google.common.annotations.VisibleForTesting;
-import eu.codearte.fairyland.producer.RandomProducer;
+import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
+import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -38,17 +39,19 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
 	private static final int BASE_TEN = 10;
 
-	private final RandomProducer randomProducer;
+	private final DateGenerator dateGenerator;
+	private final BaseProducer baseProducer;
 
 	@Inject
-	public PolishIdentityCardNumber(RandomProducer randomProducer) {
-		this.randomProducer = randomProducer;
+	public PolishIdentityCardNumber(DateGenerator dateGenerator, BaseProducer baseProducer) {
+		this.dateGenerator = dateGenerator;
+		this.baseProducer = baseProducer;
 	}
 
 	@Override
 	public String generate() {
 
-		DateTime dateTime = randomProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN);
+		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(ISSUING_BEGIN);
 
 		return generate(dateTime);
 	}
@@ -96,14 +99,14 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	}
 
 	private void fillDigitsPart(char[] id) {
-		String num = valueOf(randomProducer.randomWithMax(MAX_DIGITS_PART_VALUE));
+		String num = valueOf(baseProducer.randomWithMax(MAX_DIGITS_PART_VALUE));
 		char[] digits = leftPad(num, DIGITS_PART_SIZE, '0').toCharArray();
 		arraycopy(digits, 0, id, CHECKSUM_INDEX + 1, digits.length);
 	}
 
 	private void fillLettersPart(int year, char[] id) {
 		int maxPrefix = (year - ISSUING_BEGIN) * LETTER_WEIGHT;
-		int range = randomProducer.randomBetween(maxPrefix, maxPrefix + LETTER_WEIGHT);
+		int range = baseProducer.randomBetween(maxPrefix, maxPrefix + LETTER_WEIGHT);
 		String prefix = convertToString(range, ALPHABET_SIZE);
 		char[] charArray = leftPad(prefix, LETTERS_PART_SIZE, 'A').toCharArray();
 		arraycopy(charArray, 0, id, 0, charArray.length);

@@ -2,7 +2,7 @@
  * Copyright (c) 2013 Codearte
  */
 
-package eu.codearte.fairyland;
+package eu.codearte.fairyland.producer.util;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -16,8 +16,6 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.Maps.newHashMap;
 
-//FIXME: This should has default access but is problem with snakeyaml impl
-//lass org.yaml.snakeyaml.introspector.MethodProperty can not access a member of class eu.codearte.fairyland.DataMaster with modifiers "public"
 @Singleton
 public class DataMaster {
 
@@ -74,7 +72,7 @@ public class DataMaster {
 		return element;
 	}
 
-	void readResources(String path) throws IOException {
+	public void readResources(String path) throws IOException {
 		Enumeration<URL> resources =
 				getClass().getClassLoader().getResources(path);
 

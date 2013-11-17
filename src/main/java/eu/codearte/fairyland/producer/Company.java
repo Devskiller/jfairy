@@ -1,5 +1,6 @@
 package eu.codearte.fairyland.producer;
 
+import eu.codearte.fairyland.producer.util.RandomDataGenerator;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -14,7 +15,6 @@ public class Company {
 	public static final String COMPANY_NAME = "companyNames";
 	public static final String COMPANY_SUFFIX = "companySuffixes";
 	public static final String COMPANY_EMAIL = "companyEmails";
-
 	private final VATIdentificationNumber vatIdentificationNumber;
 
 	private String name;
@@ -22,16 +22,16 @@ public class Company {
 	private final String email;
 
 	@Inject
-	public Company(RandomProducer randomProducer, VATIdentificationNumber vatIdentificationNumber) {
+	public Company(BaseProducer baseProducer, RandomDataGenerator generator, VATIdentificationNumber vatIdentificationNumber) {
 		this.vatIdentificationNumber = vatIdentificationNumber;
 
-		name = randomProducer.getValues(COMPANY_NAME);
-		if (randomProducer.trueOrFalse()) {
-			name += " " + randomProducer.getValues(COMPANY_SUFFIX);
+		name = generator.getValues(COMPANY_NAME);
+		if (baseProducer.trueOrFalse()) {
+			name += " " + generator.getValues(COMPANY_SUFFIX);
 		}
 		domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
-				+ "." + randomProducer.getValues(DOMAIN);
-		email = randomProducer.getValues(COMPANY_EMAIL);
+				+ "." + generator.getValues(DOMAIN);
+		email = generator.getValues(COMPANY_EMAIL);
 	}
 
 	public String name() {

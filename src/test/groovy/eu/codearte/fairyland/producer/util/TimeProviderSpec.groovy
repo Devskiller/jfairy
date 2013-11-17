@@ -2,9 +2,8 @@
  * Copyright (c) 2013. Codearte
  */
 
-package eu.codearte.fairyland.producer
+package eu.codearte.fairyland.producer.util
 
-import eu.codearte.fairyland.producer.TimeProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 
