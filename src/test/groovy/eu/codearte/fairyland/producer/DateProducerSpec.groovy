@@ -4,6 +4,7 @@
 package eu.codearte.fairyland.producer
 
 import org.joda.time.DateTime
+import org.joda.time.Period
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -15,13 +16,14 @@ class DateProducerSpec extends Specification {
 	private static final int CURRENT_YEAR = 2013
 	private static final LATEST_DATE_IN_THE_PAST = DateTime.parse("2013-11-09T01:15:59")
 	private static final SOME_DATE_IN_THE_PAST = DateTime.parse("2011-01-20T12:32:12")
+	private static final ONE_YEAR_LATER = DateTime.parse("2014-11-09T01:16:00")
 
 	private static final FIVE_YEARS_EARLIER_DATE = DateTime.parse("2008-11-09T01:16:00")
 	private static final LATEST_DATE_IN_THE_PAST_IN_MILLIS = LATEST_DATE_IN_THE_PAST.getMillis()
 	private static final SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.getMillis()
 	private static final FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.getMillis()
 
-	private baseProducer = Mock(BaseProducer)
+	private baseProducer = Spy(BaseProducer)
 	private timeProviderMock = Mock(TimeProvider)
 	private DateProducer sut = new DateProducer(baseProducer, timeProviderMock)
 
@@ -95,6 +97,14 @@ class DateProducerSpec extends Specification {
 		dateInThePast < CURRENT_DATE
 		dateInThePast > FIVE_YEARS_EARLIER_DATE
 		dateInThePast == SOME_DATE_IN_THE_PAST
+	}
+
+	def "should generate date between now and specified period"() {
+		when:
+		def dateInFuturePeriod = sut.randomDateBetweenNowAndFuturePeriod(Period.months(12))
+		then:
+		dateInFuturePeriod >= CURRENT_DATE
+		dateInFuturePeriod <= ONE_YEAR_LATER
 	}
 
 }

@@ -6,6 +6,7 @@ package eu.codearte.fairyland.producer;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -57,5 +58,10 @@ public class DateProducer {
 
 	private DateTime getDateForFirstDayForGivenYear(int year) {
 		return new DateTime(year, 1, 1, 0, 0);
+	}
+
+	public DateTime randomDateBetweenNowAndFuturePeriod(Period futurePeriod) {
+		DateTime now = timeProvider.getCurrentDate();
+		return new DateTime(baseProducer.randomBetween(now.getMillis(), now.plus(futurePeriod).getMillis()));
 	}
 }

@@ -8,6 +8,7 @@ import com.google.inject.Injector;
 import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.company.Company;
+import eu.codearte.fairyland.producer.payment.CreditCardProducer;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.PersonProperties;
 import eu.codearte.fairyland.producer.text.Text;
@@ -93,4 +94,7 @@ public final class Fairy {
 		return injector.getInstance(BaseProducer.class);
 	}
 
+	public CreditCardProducer creditCard() {
+		return injector.getInstance(CreditCardProducer.class);
+	}
 }

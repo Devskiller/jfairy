@@ -2,7 +2,6 @@ package eu.codearte.fairyland.producer;
 
 import com.google.common.base.Preconditions;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 import java.util.Random;
@@ -16,9 +15,12 @@ public class BaseProducer {
 
 	private final Random random;
 
-	@Inject
 	public BaseProducer() {
-		this.random = new Random(SEED);
+		this(SEED);
+	}
+
+	public BaseProducer(int seed) {
+		this.random = new Random(seed);
 	}
 
 	public boolean trueOrFalse() {
