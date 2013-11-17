@@ -20,7 +20,7 @@ import java.util.Locale;
  */
 public final class Fairy {
 
-	private static final String DATA_FILE_PREFIX = "fairyland_";
+	private static final String DATA_FILE_PREFIX = "fairyland";
 
 	private final Injector injector;
 
@@ -29,7 +29,8 @@ public final class Fairy {
 
 		try {
 			DataMaster dataMaster = injector.getInstance(DataMaster.class);
-			dataMaster.readResources(filePrefix + locale.getLanguage() + ".yml");
+			dataMaster.readResources(filePrefix + ".yml");
+			dataMaster.readResources(filePrefix + "_" + locale.getLanguage() + ".yml");
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
@@ -37,7 +38,7 @@ public final class Fairy {
 	}
 
 	/**
-	 * Use this factory method to create dataset containing default fairyland_{langCode}.yml files
+	 * Use this factory method to create dataset containing default fairyland.yml and fairyland_{langCode}.yml files
 	 * merged with custom files with the same name
 	 *
 	 * @return Fairy instance
@@ -47,7 +48,7 @@ public final class Fairy {
 	}
 
 	/**
-	 * Use this factory method to create dataset containing default fairyland_{langCode}.yml files
+	 * Use this factory method to create dataset containing default fairyland.yml and fairyland_{langCode}.yml files
 	 * merged with custom files with the same name
 	 *
 	 * @param locale will be used to assess langCode for data file
@@ -61,7 +62,7 @@ public final class Fairy {
 	 * Use this factory method to create your own dataset overriding bundled one
 	 *
 	 * @param locale         will be used to assess langCode for data file
-	 * @param dataFilePrefix prefix of the data file - final pattern will be dataFilePrefix_{langCode}.yml
+	 * @param dataFilePrefix prefix of the data file - final pattern will be fairyland.yml and dataFilePrefix_{langCode}.yml
 	 * @return Fairy instance
 	 */
 	public static Fairy create(Locale locale, String dataFilePrefix) {

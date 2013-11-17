@@ -13,10 +13,10 @@ import javax.inject.Inject;
  */
 public class Company {
 
-	public static final String DOMAIN = "domains";
-	public static final String COMPANY_NAME = "companyNames";
-	public static final String COMPANY_SUFFIX = "companySuffixes";
-	public static final String COMPANY_EMAIL = "companyEmails";
+	private static final String DOMAIN = "domains";
+	private static final String COMPANY_NAME = "companyNames";
+	private static final String COMPANY_SUFFIX = "companySuffixes";
+	private static final String COMPANY_EMAIL = "companyEmails";
 	private final VATIdentificationNumber vatIdentificationNumber;
 
 	private String name;

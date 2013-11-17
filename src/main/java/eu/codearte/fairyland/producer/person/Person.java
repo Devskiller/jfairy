@@ -3,6 +3,7 @@
  */
 package eu.codearte.fairyland.producer.person;
 
+import com.google.common.annotations.VisibleForTesting;
 import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.DateProducer;
@@ -25,10 +26,14 @@ public class Person {
 		MALE, FEMALE
 	}
 
-	public static final String FIRST_NAME = "firstNames";
-	public static final String LAST_NAME = "lastNames";
-	public static final String PERSONAL_EMAIL = "personalEmails";
-	public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
+	@VisibleForTesting
+	static final String FIRST_NAME = "firstNames";
+	@VisibleForTesting
+	static final String LAST_NAME = "lastNames";
+	@VisibleForTesting
+	static final String PERSONAL_EMAIL = "personalEmails";
+	@VisibleForTesting
+	static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
 	private final DataMaster dataMaster;
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
