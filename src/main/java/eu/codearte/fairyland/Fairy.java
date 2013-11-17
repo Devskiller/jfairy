@@ -10,7 +10,6 @@ import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.PersonProperties;
 import eu.codearte.fairyland.producer.text.Text;
-import eu.codearte.fairyland.producer.util.DataMaster;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -28,7 +27,8 @@ public final class Fairy {
 		injector = Guice.createInjector(new FairyModule());
 
 		try {
-			injector.getInstance(DataMaster.class).readResources(filePrefix + locale.getLanguage() + ".yml");
+			DataMaster dataMaster = injector.getInstance(DataMaster.class);
+			dataMaster.readResources(filePrefix + locale.getLanguage() + ".yml");
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}

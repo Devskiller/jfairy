@@ -1,9 +1,9 @@
 package eu.codearte.fairyland.producer.person.locale.pl;
 
 import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.DateProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Person;
-import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -32,19 +32,19 @@ public class Pesel implements NationalIdentificationNumber {
 
 	private static final int[] SEX_FIELDS = {0, 2, 4, 6, 8};
 
-	private final DateGenerator dateGenerator;
+	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public Pesel(DateGenerator dateGenerator, BaseProducer baseProducer) {
-		this.dateGenerator = dateGenerator;
+	public Pesel(DateProducer dateProducer, BaseProducer baseProducer) {
+		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 	}
 
 	@Override
 	public String generate() {
 
-		DateTime date = dateGenerator.randomDateInThePast(VALIDITY_IN_YEARS);
+		DateTime date = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS);
 		Person.Sex sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
 
 		return generate(date, sex);

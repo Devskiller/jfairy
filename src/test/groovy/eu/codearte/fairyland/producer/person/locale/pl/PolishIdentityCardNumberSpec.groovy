@@ -5,14 +5,11 @@
 package eu.codearte.fairyland.producer.person.locale.pl
 
 import eu.codearte.fairyland.producer.BaseProducer
-import eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber
-import eu.codearte.fairyland.producer.util.DateGenerator
+import eu.codearte.fairyland.producer.DateProducer
 import org.joda.time.DateTime
 import spock.lang.Specification
 
-import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.ISSUING_BEGIN
-import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.LETTER_WEIGHT
-import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.MAX_DIGITS_PART_VALUE
+import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.*
 
 /**
  * @author mariuszs
@@ -21,7 +18,7 @@ import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCard
 class PolishIdentityCardNumberSpec extends Specification {
 
 	def baseProducer = Mock(BaseProducer)
-	def dateGenerator = Mock(DateGenerator)
+	def dateGenerator = Mock(DateProducer)
 
 	/**
 	 * http://en.wikipedia.org/wiki/Polish_identity_card

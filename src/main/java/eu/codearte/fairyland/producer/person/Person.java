@@ -3,9 +3,10 @@
  */
 package eu.codearte.fairyland.producer.person;
 
+import eu.codearte.fairyland.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.Company;
-import eu.codearte.fairyland.producer.util.RandomDataGenerator;
+import eu.codearte.fairyland.producer.DateProducer;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
@@ -28,7 +29,8 @@ public class Person {
 	public static final String LAST_NAME = "lastNames";
 	public static final String PERSONAL_EMAIL = "personalEmails";
 	public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
-	private final RandomDataGenerator generator;
+	private final DataMaster dataMaster;
+	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 	private final NationalIdentificationNumber nationalIdentificationNumber;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
@@ -45,10 +47,11 @@ public class Person {
 	private String companyEmail;
 
 	@Inject
-	public Person(RandomDataGenerator generator,
+	public Person(DataMaster dataMaster, DateProducer dateProducer,
 								BaseProducer baseProducer, NationalIdentificationNumber nationalIdentificationNumber,
 								NationalIdentityCardNumber nationalIdentityCardNumber, Company company) {
-		this.generator = generator;
+		this.dataMaster = dataMaster;
+		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
@@ -64,18 +67,18 @@ public class Person {
 		if (sex == null) {
 			sex = baseProducer.trueOrFalse() ? MALE : FEMALE;
 		}
-		firstName = generator.getValuesOfType(FIRST_NAME, sex.name());
-		lastName = generator.getValuesOfType(LAST_NAME, sex.name());
+		firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
+		lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name());
 		email = generateEmail(firstName, lastName);
 		if (telephoneNumberFormat == null) {
-			telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
+			telephoneNumberFormat = dataMaster.getRandomValue(TELEPHONE_NUMBER_FORMATS);
 		}
 		telephoneNumber = baseProducer.numerify(telephoneNumberFormat);
 		if (age == null) {
 			age = baseProducer.randomBetween(MIN_AGE, MAX_AGE);
 		}
 		if (dateOfBirth == null) {
-			dateOfBirth = generator.randomDateInThePast(age);
+			dateOfBirth = dateProducer.randomDateInThePast(age);
 		}
 		companyEmail = StringUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
 
@@ -126,7 +129,7 @@ public class Person {
 				temp += ".";
 			}
 		}
-		return StringUtils.stripAccents(lowerCase(temp + lastName + '@' + generator.getValues(PERSONAL_EMAIL)));
+		return StringUtils.stripAccents(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
 	}
 
 	public String nationalIdentificationNumber() {

@@ -4,18 +4,14 @@
 
 package eu.codearte.fairyland.producer
 
+import eu.codearte.fairyland.DataMaster
 import eu.codearte.fairyland.producer.person.Person
-import eu.codearte.fairyland.producer.util.DataMaster
-import eu.codearte.fairyland.producer.util.DateGenerator
-import eu.codearte.fairyland.producer.util.RandomDataGenerator
-import eu.codearte.fairyland.producer.util.TimeProvider
 import spock.lang.Specification
 
 class RandomDataGeneratorSpec extends Specification {
 
-	def data = Mock(DataMaster)
 	def baseProducer = Spy(BaseProducer);
-	def randomCalendar = new DateGenerator(baseProducer, new TimeProvider())
+	def data = Spy(DataMaster, constructorArgs: [baseProducer])
 
 	def setup() {
 		baseProducer.randomBetween() >> 0
@@ -26,8 +22,7 @@ class RandomDataGeneratorSpec extends Specification {
 		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-		RandomDataGenerator generator = new RandomDataGenerator(data, baseProducer, randomCalendar);
-		def male = generator.getValuesOfType(Person.FIRST_NAME, "male");
+		def male = data.getValuesOfType(Person.FIRST_NAME, "male");
 
 		then:
 		male == "Mark"
@@ -38,8 +33,7 @@ class RandomDataGeneratorSpec extends Specification {
 		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-		RandomDataGenerator generator = new RandomDataGenerator(data, baseProducer, randomCalendar);
-		def female = generator.getValuesOfType(Person.FIRST_NAME, "female");
+		def female = data.getValuesOfType(Person.FIRST_NAME, "female");
 
 		then:
 		female == "Ana" || "Ivon"

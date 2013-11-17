@@ -1,9 +1,9 @@
 package eu.codearte.fairyland.producer.person.pl
 
 import eu.codearte.fairyland.producer.BaseProducer
+import eu.codearte.fairyland.producer.DateProducer
 import eu.codearte.fairyland.producer.person.Person
 import eu.codearte.fairyland.producer.person.locale.pl.Pesel
-import eu.codearte.fairyland.producer.util.DateGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -13,7 +13,7 @@ import static eu.codearte.fairyland.producer.person.locale.pl.Pesel.isValid
 class PeselSpec extends Specification {
 
 	def randomGenerator = Mock(BaseProducer);
-	def dateGenerator = Mock(DateGenerator);
+	def dateGenerator = Mock(DateProducer);
 	def Pesel generator = new Pesel(dateGenerator, randomGenerator);
 
 	@Unroll

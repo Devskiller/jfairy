@@ -4,6 +4,7 @@
 package eu.codearte.fairyland.producer.util
 
 import eu.codearte.fairyland.producer.BaseProducer
+import eu.codearte.fairyland.producer.DateProducer
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -23,7 +24,7 @@ class DateGeneratorSpec extends Specification {
 
 	private baseProducer = Mock(BaseProducer)
 	private timeProviderMock = Mock(TimeProvider)
-	private DateGenerator sut = new DateGenerator(baseProducer, timeProviderMock)
+	private DateProducer sut = new DateProducer(baseProducer, timeProviderMock)
 
 	def setup() {
 		timeProviderMock.getCurrentDate() >> CURRENT_DATE

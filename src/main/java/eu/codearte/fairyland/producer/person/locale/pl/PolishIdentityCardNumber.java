@@ -2,8 +2,8 @@ package eu.codearte.fairyland.producer.person.locale.pl;
 
 import com.google.common.annotations.VisibleForTesting;
 import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.DateProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentityCardNumber;
-import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -39,19 +39,19 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 
 	private static final int BASE_TEN = 10;
 
-	private final DateGenerator dateGenerator;
+	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public PolishIdentityCardNumber(DateGenerator dateGenerator, BaseProducer baseProducer) {
-		this.dateGenerator = dateGenerator;
+	public PolishIdentityCardNumber(DateProducer dateProducer, BaseProducer baseProducer) {
+		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 	}
 
 	@Override
 	public String generate() {
 
-		DateTime dateTime = dateGenerator.randomDateBetweenYearAndNow(ISSUING_BEGIN);
+		DateTime dateTime = dateProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN);
 
 		return generate(dateTime);
 	}

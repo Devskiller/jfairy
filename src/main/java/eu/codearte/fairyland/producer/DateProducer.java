@@ -2,10 +2,10 @@
  * Copyright (c) 2013. Codearte
  */
 
-package eu.codearte.fairyland.producer.util;
+package eu.codearte.fairyland.producer;
 
 import com.google.common.annotations.VisibleForTesting;
-import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.util.TimeProvider;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Singleton
-public class DateGenerator {
+public class DateProducer {
 
 	@VisibleForTesting
 	static final int SECONDS_BEFORE_TO_BE_IN_THE_PAST = 1;
@@ -23,7 +23,7 @@ public class DateGenerator {
 	private final TimeProvider timeProvider;
 
 	@Inject
-	public DateGenerator(BaseProducer baseProducer, TimeProvider timeProvider) {
+	public DateProducer(BaseProducer baseProducer, TimeProvider timeProvider) {
 		this.baseProducer = baseProducer;
 		this.timeProvider = timeProvider;
 	}
