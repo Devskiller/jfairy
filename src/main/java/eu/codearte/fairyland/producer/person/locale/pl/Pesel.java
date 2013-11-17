@@ -1,9 +1,8 @@
 package eu.codearte.fairyland.producer.person.locale.pl;
 
-import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.RandomProducer;
 import eu.codearte.fairyland.producer.person.NationalIdentificationNumber;
 import eu.codearte.fairyland.producer.person.Person;
-import eu.codearte.fairyland.producer.util.DateGenerator;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -32,20 +31,18 @@ public class Pesel implements NationalIdentificationNumber {
 
 	private static final int[] SEX_FIELDS = {0, 2, 4, 6, 8};
 
-	private final DateGenerator dateGenerator;
-	private final BaseProducer baseProducer;
+	private final RandomProducer randomProducer;
 
 	@Inject
-	public Pesel(DateGenerator dateGenerator, BaseProducer baseProducer) {
-		this.dateGenerator = dateGenerator;
-		this.baseProducer = baseProducer;
+	public Pesel(RandomProducer randomProducer) {
+		this.randomProducer = randomProducer;
 	}
 
 	@Override
 	public String generate() {
 
-		DateTime date = dateGenerator.randomDateInThePast(VALIDITY_IN_YEARS);
-		Person.Sex sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
+		DateTime date = randomProducer.randomDateInThePast(VALIDITY_IN_YEARS);
+		Person.Sex sex = randomProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
 
 		return generate(date, sex);
 	}
@@ -55,7 +52,7 @@ public class Pesel implements NationalIdentificationNumber {
 		int year = date.getYearOfCentury();
 		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
 		int day = date.getDayOfMonth();
-		int serialNumber = baseProducer.randomWithMax(MAX_SERIAL_NUMBER);
+		int serialNumber = randomProducer.randomWithMax(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
 		String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
@@ -85,7 +82,7 @@ public class Pesel implements NationalIdentificationNumber {
 	}
 
 	private int calculateSexCode(Person.Sex sex) {
-		return SEX_FIELDS[baseProducer.randomWithMax(SEX_FIELDS.length)] + (sex == Person.Sex.MALE ? 1 : 0);
+		return SEX_FIELDS[randomProducer.randomWithMax(SEX_FIELDS.length)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
 	private static int calculateChecksum(String pesel) {

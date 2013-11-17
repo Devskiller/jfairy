@@ -5,12 +5,11 @@ package eu.codearte.fairyland;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.RandomProducer;
 import eu.codearte.fairyland.producer.Company;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.PersonProperties;
 import eu.codearte.fairyland.producer.text.Text;
-import eu.codearte.fairyland.producer.util.DataMaster;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -87,8 +86,8 @@ public final class Fairy {
 		return injector.getInstance(Company.class);
 	}
 
-	public BaseProducer baseProducer() {
-		return injector.getInstance(BaseProducer.class);
+	public RandomProducer baseProducer() {
+		return injector.getInstance(RandomProducer.class);
 	}
 
 }

@@ -1,9 +1,8 @@
 /*
  * Copyright (c) 2013 Codearte and authors
  */
-package eu.codearte.fairyland.producer.util
+package eu.codearte.fairyland.producer
 
-import eu.codearte.fairyland.producer.BaseProducer
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -21,9 +20,9 @@ class DateGeneratorSpec extends Specification {
 	private static final SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.getMillis()
 	private static final FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.getMillis()
 
-	private baseProducer = Mock(BaseProducer)
+	private randomGenerator = Mock(RandomGenerator)
 	private timeProviderMock = Mock(TimeProvider)
-	private DateGenerator sut = new DateGenerator(baseProducer, timeProviderMock)
+	private DateGenerator sut = new DateGenerator(timeProviderMock, randomGenerator)
 
 	def setup() {
 		timeProviderMock.getCurrentDate() >> CURRENT_DATE
@@ -31,7 +30,7 @@ class DateGeneratorSpec extends Specification {
 
 	def "should generate date in the past"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+		randomGenerator.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 				SOME_DATE_IN_THE_PAST_IN_MILLIS
 		when:
 		def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
@@ -43,7 +42,7 @@ class DateGeneratorSpec extends Specification {
 
 	def "should be able to reach minimum date for date in the past"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+		randomGenerator.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 				FIVE_YEARS_EARLIER_DATE_IN_MILLIS
 		when:
 		def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
@@ -53,7 +52,7 @@ class DateGeneratorSpec extends Specification {
 
 	def "maximum date should be before now with defined offset for date in the past"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+		randomGenerator.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 				LATEST_DATE_IN_THE_PAST_IN_MILLIS
 		when:
 		def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
@@ -61,9 +60,10 @@ class DateGeneratorSpec extends Specification {
 		dateInThePast == LATEST_DATE_IN_THE_PAST
 	}
 
-	@Unroll def "should generate date between years #fromYear - #toYear"() {
+	@Unroll
+	def "should generate date between years #fromYear - #toYear"() {
 		given:
-		baseProducer.randomBetween(_, _) >> {args -> (args[1] + args[0]) / 2}
+		randomGenerator.randomBetween(_, _) >> { args -> (args[1] + args[0]) / 2 }
 		expect:
 		sut.randomDateBetweenYears(fromYear, toYear) == expectedDate
 		where:

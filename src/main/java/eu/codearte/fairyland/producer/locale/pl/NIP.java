@@ -4,7 +4,7 @@
 
 package eu.codearte.fairyland.producer.locale.pl;
 
-import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.RandomProducer;
 import eu.codearte.fairyland.producer.VATIdentificationNumber;
 
 import javax.inject.Inject;
@@ -73,20 +73,20 @@ public class NIP implements VATIdentificationNumber {
 	private static final int CHECKSUM_CHAR_INDEX = 9;
 	static final int MODULO11 = 11;
 
-	private final BaseProducer baseProducer;
+	private final RandomProducer randomProducer;
 
 	@Inject
-	public NIP(BaseProducer baseProducer) {
+	public NIP(RandomProducer randomProducer) {
 
-		this.baseProducer = baseProducer;
+		this.randomProducer = randomProducer;
 	}
 
 	@Override
 	public String generate() {
 
-		String prefix = valueOf(CODES[baseProducer.randomWithMax(CODES.length - 1)]);
+		String prefix = valueOf(CODES[randomProducer.randomWithMax(CODES.length - 1)]);
 
-		String number = leftPad(valueOf(baseProducer.randomWithMax(MAX_SERIAL_NUMBER)), SERIAL_NUMBER_SIZE, "0");
+		String number = leftPad(valueOf(randomProducer.randomWithMax(MAX_SERIAL_NUMBER)), SERIAL_NUMBER_SIZE, "0");
 
 		String base = prefix + number;
 

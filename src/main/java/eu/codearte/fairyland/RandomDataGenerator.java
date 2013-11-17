@@ -2,10 +2,9 @@
  * Copyright (c) 2013. Codearte
  */
 
-package eu.codearte.fairyland.producer.util;
+package eu.codearte.fairyland;
 
-import eu.codearte.fairyland.producer.BaseProducer;
-import org.joda.time.DateTime;
+import eu.codearte.fairyland.producer.RandomProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,22 +18,12 @@ public class RandomDataGenerator {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RandomDataGenerator.class);
 	private final DataMaster data;
-	private final BaseProducer baseProducer;
-	private final DateGenerator dateGenerator;
+	private final RandomProducer randomProducer;
 
 	@Inject
-	public RandomDataGenerator(DataMaster data, BaseProducer baseProducer, DateGenerator dateGenerator) {
+	public RandomDataGenerator(DataMaster data, RandomProducer randomProducer) {
 		this.data = data;
-		this.baseProducer = baseProducer;
-		this.dateGenerator = dateGenerator;
-	}
-
-	public DateTime randomDateInThePast(int years) {
-		return dateGenerator.randomDateInThePast(years);
-	}
-
-	public List<String> randomElements(List<String> elements, int count) {
-		return baseProducer.randomElements(elements, count);
+		this.randomProducer = randomProducer;
 	}
 
 	public String getValue(String data) {
@@ -49,10 +38,11 @@ public class RandomDataGenerator {
 		List<String> entries = stringMap.get(type.toLowerCase());
 
 		LOG.trace("Selected entries {}", entries);
-		return baseProducer.randomElement(entries);
+		return randomProducer.randomElement(entries);
 	}
 
 	public String getValues(String key) {
-		return baseProducer.randomElement(data.getStringList(key));
+		return randomProducer.randomElement(data.getStringList(key));
 	}
+
 }

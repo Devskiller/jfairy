@@ -4,15 +4,11 @@
 
 package eu.codearte.fairyland.producer.person.locale.pl
 
-import eu.codearte.fairyland.producer.BaseProducer
-import eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber
-import eu.codearte.fairyland.producer.util.DateGenerator
+import eu.codearte.fairyland.producer.RandomProducer
 import org.joda.time.DateTime
 import spock.lang.Specification
 
-import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.ISSUING_BEGIN
-import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.LETTER_WEIGHT
-import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.MAX_DIGITS_PART_VALUE
+import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCardNumber.*
 
 /**
  * @author mariuszs
@@ -20,8 +16,7 @@ import static eu.codearte.fairyland.producer.person.locale.pl.PolishIdentityCard
  */
 class PolishIdentityCardNumberSpec extends Specification {
 
-	def baseProducer = Mock(BaseProducer)
-	def dateGenerator = Mock(DateGenerator)
+	def baseProducer = Mock(RandomProducer)
 
 	/**
 	 * http://en.wikipedia.org/wiki/Polish_identity_card
@@ -29,10 +24,10 @@ class PolishIdentityCardNumberSpec extends Specification {
 	void "should generate proper id number"() {
 		def max = (2013 - ISSUING_BEGIN) * LETTER_WEIGHT
 		setup:
-		baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A' .. 'Z').size() // ABA
+		baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
 		baseProducer.randomWithMax(MAX_DIGITS_PART_VALUE) >> 0
 		when:
-		PolishIdentityCardNumber generator = new PolishIdentityCardNumber(dateGenerator, baseProducer)
+		PolishIdentityCardNumber generator = new PolishIdentityCardNumber(baseProducer)
 		def id = generator.generate(DateTime.parse("2013-12-12"))
 		then:
 		id == "ABA300000"

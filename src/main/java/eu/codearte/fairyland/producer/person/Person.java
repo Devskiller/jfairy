@@ -3,9 +3,9 @@
  */
 package eu.codearte.fairyland.producer.person;
 
-import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.RandomProducer;
 import eu.codearte.fairyland.producer.Company;
-import eu.codearte.fairyland.producer.util.RandomDataGenerator;
+import eu.codearte.fairyland.RandomDataGenerator;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
@@ -29,7 +29,7 @@ public class Person {
 	public static final String PERSONAL_EMAIL = "personalEmails";
 	public static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
 	private final RandomDataGenerator generator;
-	private final BaseProducer baseProducer;
+	private final RandomProducer randomProducer;
 	private final NationalIdentificationNumber nationalIdentificationNumber;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
 
@@ -46,10 +46,11 @@ public class Person {
 
 	@Inject
 	public Person(RandomDataGenerator generator,
-								BaseProducer baseProducer, NationalIdentificationNumber nationalIdentificationNumber,
-								NationalIdentityCardNumber nationalIdentityCardNumber, Company company) {
+				  RandomProducer randomProducer, NationalIdentificationNumber nationalIdentificationNumber,
+				  NationalIdentityCardNumber nationalIdentityCardNumber,
+				  Company company) {
 		this.generator = generator;
-		this.baseProducer = baseProducer;
+		this.randomProducer = randomProducer;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		//fixme - should be created only if needed
@@ -62,7 +63,7 @@ public class Person {
 
 	public void generate() {
 		if (sex == null) {
-			sex = baseProducer.trueOrFalse() ? MALE : FEMALE;
+			sex = randomProducer.trueOrFalse() ? MALE : FEMALE;
 		}
 		firstName = generator.getValuesOfType(FIRST_NAME, sex.name());
 		lastName = generator.getValuesOfType(LAST_NAME, sex.name());
@@ -70,12 +71,12 @@ public class Person {
 		if (telephoneNumberFormat == null) {
 			telephoneNumberFormat = generator.getValues(TELEPHONE_NUMBER_FORMATS);
 		}
-		telephoneNumber = baseProducer.numerify(telephoneNumberFormat);
+		telephoneNumber = randomProducer.numerify(telephoneNumberFormat);
 		if (age == null) {
-			age = baseProducer.randomBetween(MIN_AGE, MAX_AGE);
+			age = randomProducer.randomBetween(MIN_AGE, MAX_AGE);
 		}
 		if (dateOfBirth == null) {
-			dateOfBirth = generator.randomDateInThePast(age);
+			dateOfBirth = randomProducer.randomDateInThePast(age);
 		}
 		companyEmail = StringUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
 
@@ -120,9 +121,9 @@ public class Person {
 
 	private String generateEmail(String firstName, Object lastName) {
 		String temp = "";
-		if (baseProducer.trueOrFalse()) {
+		if (randomProducer.trueOrFalse()) {
 			temp = firstName;
-			if (baseProducer.trueOrFalse()) {
+			if (randomProducer.trueOrFalse()) {
 				temp += ".";
 			}
 		}

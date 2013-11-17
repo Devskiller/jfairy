@@ -1,6 +1,6 @@
 package eu.codearte.fairyland.producer;
 
-import eu.codearte.fairyland.producer.util.RandomDataGenerator;
+import eu.codearte.fairyland.RandomDataGenerator;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -22,11 +22,11 @@ public class Company {
 	private final String email;
 
 	@Inject
-	public Company(BaseProducer baseProducer, RandomDataGenerator generator, VATIdentificationNumber vatIdentificationNumber) {
+	public Company(RandomProducer randomProducer, RandomDataGenerator generator, VATIdentificationNumber vatIdentificationNumber) {
 		this.vatIdentificationNumber = vatIdentificationNumber;
 
 		name = generator.getValues(COMPANY_NAME);
-		if (baseProducer.trueOrFalse()) {
+		if (randomProducer.trueOrFalse()) {
 			name += " " + generator.getValues(COMPANY_SUFFIX);
 		}
 		domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
