@@ -4,6 +4,7 @@
 
 package eu.codearte.fairyland.producer.locale.pl;
 
+import com.google.common.annotations.VisibleForTesting;
 import eu.codearte.fairyland.producer.BaseProducer;
 import eu.codearte.fairyland.producer.VATIdentificationNumber;
 import org.slf4j.Logger;
@@ -98,7 +99,9 @@ public class NIP implements VATIdentificationNumber {
 		return base + calculateChecksum(base);
 	}
 
-	boolean isNIPValid(String nip) {
+	// TODO: Move to separate module
+	@VisibleForTesting
+	public static boolean isValid(String nip) {
 		String normalizedNip = normalizeNip(nip);
 		if (normalizedNip.length() != NIP_LENGTH) {
 			return false;
@@ -112,14 +115,14 @@ public class NIP implements VATIdentificationNumber {
 		}
 	}
 
-	private String normalizeNip(String value) {
+	private static String normalizeNip(String value) {
 		if (value.length() == FORMATTED_NIP_LENGTH) {
 			return value.replaceAll("-", "");
 		}
 		return value;
 	}
 
-	private int calculateChecksum(String nip) {
+	private static int calculateChecksum(String nip) {
 		char[] chars = nip.toCharArray();
 		int sum = 0;
 		for (int i = 0; i < WEIGHTS.length; i++) {

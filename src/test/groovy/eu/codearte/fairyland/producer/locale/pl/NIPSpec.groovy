@@ -21,7 +21,7 @@ class NIPSpec extends Specification {
 	def "Should validate #nip as #valid"() {
 
 		expect:
-		generator.isNIPValid(nip) == valid
+		generator.isValid(nip) == valid
 
 		where:
 		nip          | valid
@@ -36,7 +36,7 @@ class NIPSpec extends Specification {
 		def nip = generator.generate()
 		then:
 		nip == "1010000002"
-		generator.isNIPValid(nip)
+		generator.isValid(nip)
 
 	}
 

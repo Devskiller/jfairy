@@ -2,6 +2,9 @@ package eu.codearte.fairyland.producer
 
 import eu.codearte.fairyland.Fairy
 import eu.codearte.fairyland.producer.company.Company
+import eu.codearte.fairyland.producer.locale.pl.NIP
+import org.apache.commons.validator.routines.EmailValidator
+import org.apache.commons.validator.routines.UrlValidator
 import spock.lang.Specification
 
 /**
@@ -9,6 +12,9 @@ import spock.lang.Specification
  * @since 2013-10-07
  */
 class CompanySpec extends Specification {
+
+	def EmailValidator emailValidator = EmailValidator.getInstance();
+	def UrlValidator urlValidator = UrlValidator.getInstance();
 
 	def "should instantiate Company producer"() {
 		when:
@@ -22,8 +28,8 @@ class CompanySpec extends Specification {
 		def company = Fairy.create().company()
 		then:
 		company.name()
-		company.email()
-		company.url()
-		company.vatIdentificationNumber()
+		emailValidator.isValid(company.email())
+		urlValidator.isValid(company.url())
+		NIP.isValid(company.vatIdentificationNumber())
 	}
 }
