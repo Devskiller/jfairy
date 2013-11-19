@@ -13,6 +13,9 @@ import javax.inject.Inject;
  */
 public class CreditCardProducer {
 
+	private static final Period DEFAULT_VALIDITY = Period.months(36);
+	private static final String DATA_KEY = "cardVendors";
+
 	private final DataMaster dataMaster;
 	private final DateProducer dateProducer;
 	private String cardVendor;
@@ -25,9 +28,9 @@ public class CreditCardProducer {
 		generate();
 	}
 
-	public void generate() {
-		cardVendor = dataMaster.getRandomValue("cardVendors");
-		expiryDate = dateProducer.randomDateBetweenNowAndFuturePeriod(Period.months(36));
+	public final void generate() {
+		cardVendor = dataMaster.getRandomValue(DATA_KEY);
+		expiryDate = dateProducer.randomDateBetweenNowAndFuturePeriod(DEFAULT_VALIDITY);
 	}
 
 	public String vendor() {
