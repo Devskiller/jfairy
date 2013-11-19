@@ -74,9 +74,26 @@ public class BaseProducer {
 		return min + (long) (random.nextDouble() * range);
 	}
 
+  /**
+   * Returns random double value
+   *
+   * @param max value of the random number to be returned.  Must be
+   *            positive.
+   * @return random {@code double} value between {@code 0} (inclusive) and {@code max} (inclusive)
+   */
+  public double randomBetween(double min, double max) {
+    double range = max - min;
+    double randomDouble = range > 0 ? this.random.nextDouble()*range : 0;
+    return min + randomDouble;
+  }
+
 	public String letterify(String letterString) {
-		return replaceSymbolWithCharsFromTo(letterString, '?', 'a', 'z');
+		return letterify(letterString, 'a', 'z');
 	}
+
+  public String letterify(String letterString, char from, char to) {
+    return replaceSymbolWithCharsFromTo(letterString, '?', from, to);
+  }
 
 	public String numerify(String numberString) {
 		return replaceSymbolWithCharsFromTo(numberString, '#', '0', '9');

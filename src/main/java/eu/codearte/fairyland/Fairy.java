@@ -7,7 +7,9 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import eu.codearte.fairyland.data.DataMaster;
 import eu.codearte.fairyland.producer.BaseProducer;
+import eu.codearte.fairyland.producer.DateProducer;
 import eu.codearte.fairyland.producer.company.Company;
+import eu.codearte.fairyland.producer.net.Network;
 import eu.codearte.fairyland.producer.payment.CreditCardProducer;
 import eu.codearte.fairyland.producer.person.Person;
 import eu.codearte.fairyland.producer.person.PersonProperties;
@@ -94,7 +96,15 @@ public final class Fairy {
 		return injector.getInstance(BaseProducer.class);
 	}
 
+  public DateProducer dateProducer() {
+    return injector.getInstance(DateProducer.class);
+  }
+
 	public CreditCardProducer creditCard() {
 		return injector.getInstance(CreditCardProducer.class);
 	}
+
+  public Network network() {
+    return injector.getInstance(Network.class);
+  }
 }
