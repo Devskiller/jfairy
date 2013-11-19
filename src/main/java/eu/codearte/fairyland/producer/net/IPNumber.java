@@ -6,6 +6,7 @@ import eu.codearte.fairyland.producer.BaseProducer;
 class IPNumber {
 
 	private static final String IP_FORMAT = "%s.%s.%s.%s";
+	private static final int MAX = 0xFF;
 
 	private final BaseProducer baseProducer;
 
@@ -19,7 +20,7 @@ class IPNumber {
 	}
 
 	private int ipNumberPart() {
-		return baseProducer.randomInt(255);
+		return baseProducer.randomInt(MAX);
 	}
 
 }
