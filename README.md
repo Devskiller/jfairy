@@ -34,7 +34,7 @@ In Maven projects (pom.xml):
             <dependency>
                 <groupId>eu.codearte</groupId>
                 <artifactId>fairyland</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.4</version>
             </dependency>
         </dependencies>
         ...
@@ -49,9 +49,9 @@ In Gradle projects (build.gradle):
         }
     }
     ...
-    testCompile 'eu.codearte:fairyland:0.0.1'
+    testCompile 'eu.codearte:fairyland:0.0.4'
 
 Sample
 ------
 
-Look into [code sample](src/test/groovy/snippets/)
+Look into [code sample](https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/)
