@@ -101,8 +101,8 @@ publishing {
 		maven {
 			url "https://api.bintray.com/maven/codearte/public/fairyland"
 			credentials {
-				username = bintrayUserName
-				password = bintrayApiKey
+				username = bintrayUser
+				password = bintrayKey
 			}
 		}
 	}
