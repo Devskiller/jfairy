@@ -74,72 +74,71 @@
 
 <p>In Maven projects (pom.xml):</p>
 
-<pre><code>&lt;pom&gt;
+        <div class="highlight highlight-xml"><pre><span class="nt">&lt;pom&gt;</span>
     ...
-    &lt;repositories&gt;
-        &lt;repository&gt;
-            &lt;url&gt;http://dl.bintray.com/codearte/public&lt;/url&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
+    <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://dl.bintray.com/codearte/public<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+    <span class="nt">&lt;/repositories&gt;</span>
     ...
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;eu.codearte&lt;/groupId&gt;
-            &lt;artifactId&gt;fairyland&lt;/artifactId&gt;
-            &lt;version&gt;0.0.8&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>eu.codearte<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>fairyland<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.0.8<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
     ...
-&lt;/pom&gt;
-</code></pre>
+<span class="nt">&lt;/pom&gt;</span>
+</pre></div>
 
 <p>In Gradle projects (build.gradle):</p>
 
-<pre><code>{% highlight groovy %}repositories {
-    mavenCentral()
-    maven {
-        url 'http://dl.bintray.com/codearte/public'
-    }
-}
+        <div class="highlight highlight-groovy"><pre><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">mavenCentral</span><span class="o">()</span>
+    <span class="n">maven</span> <span class="o">{</span>
+        <span class="n">url</span> <span class="s1">'http://dl.bintray.com/codearte/public'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 ...
 testCompile 'eu.codearte:fairyland:0.0.8'
-{% endhighlight %}
-</code></pre>
+</pre></div>
 
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 <p>Creating simple objects:</p>
 
-{% highlight java %}  Fairy fairy = Fairy.create();
-  Person person = fairy.person();
+<div class="highlight highlight-java"><pre>  <span class="n">Fairy</span> <span class="n">fairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+  <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">person</span><span class="o">();</span>
 
-  System.out.println(person.fullName());            // Chloe Barker
-  System.out.println(person.email());               // barker@yahoo.com
-  System.out.println(person.telephoneNumber());     // 690-950-802
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">fullName</span><span class="o">());</span>            <span class="c1">// Chloe Barker</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">email</span><span class="o">());</span>               <span class="c1">// barker@yahoo.com</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">telephoneNumber</span><span class="o">());</span>     <span class="c1">// 690-950-802</span>
 
-  Person adultMale = fairy.person(male(), minAge(21);
-  System.out.println(adultMale.isMale());              // true
-  System.out.println(adultMale.dateOfBirth());         // at least 21 years earlier
-{% endhighlight %}
+  <span class="n">Person</span> <span class="n">adultMale</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">person</span><span class="o">(</span><span class="n">male</span><span class="o">(),</span> <span class="n">minAge</span><span class="o">(</span><span class="mi">21</span><span class="o">);</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">adultMale</span><span class="o">.</span><span class="na">isMale</span><span class="o">());</span>           <span class="c1">// true</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">adultMale</span><span class="o">.</span><span class="na">dateOfBirth</span><span class="o">());</span>      <span class="c1">// at least 21 years earlier</span>
+</pre></div>
 
 <p>Creating related objects:</p>
 
-<pre><code>  Fairy fairy = Fairy.create();
-  Company company = fairy.company();
-  System.out.println(company.name());          // Robuten Associates
-  System.out.println(company.url());           // http://www.robuteniaassociates.com
+<div class="highlight highlight-java"><pre>  <span class="n">Fairy</span> <span class="n">fairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+  <span class="n">Company</span> <span class="n">company</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">company</span><span class="o">();</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">company</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>          <span class="c1">// Robuten Associates</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">company</span><span class="o">.</span><span class="na">url</span><span class="o">());</span>           <span class="c1">// http://www.robuteniaassociates.com</span>
 
-  Person salesman = fairy.person(withCompany(company));
-  System.out.println(salesman.fullName());     // Juan Camacho
-  System.out.println(salesman.companyEmail()); // juan.camacho@robuteniaassociates.com
-</code></pre>
+  <span class="n">Person</span> <span class="n">salesman</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">person</span><span class="o">(</span><span class="n">withCompany</span><span class="o">(</span><span class="n">company</span><span class="o">));</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">salesman</span><span class="o">.</span><span class="na">fullName</span><span class="o">());</span>     <span class="c1">// Juan Camacho</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">salesman</span><span class="o">.</span><span class="na">companyEmail</span><span class="o">());</span> <span class="c1">// juan.camacho@robuteniaassociates.com</span>
+</pre></div>
 
 <p>Locale support:</p>
 
-<pre><code>  Fairy enFairy = Fairy.create();                               // Locale.ENGLISH
-  Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));    // Polish version
-</code></pre>
+<div class="highlight highlight-java"><pre>  <span class="n">Fairy</span> <span class="n">enFairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>                               <span class="c1">// Locale.ENGLISH</span>
+  <span class="n">Fairy</span> <span class="n">plFairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">forLanguageTag</span><span class="o">(</span><span class="s">"pl"</span><span class="o">));</span>    <span class="c1">// Polish version</span>
+</pre></div>
 
 <h2>
 <a name="sample" class="anchor" href="#sample"><span class="octicon octicon-link"></span></a>Other samples</h2>
