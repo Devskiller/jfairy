@@ -11,16 +11,10 @@ import static java.util.Collections.shuffle;
 @Singleton
 public class BaseProducer {
 
-	private static final int SEED = 1761283695;
-
 	private final Random random;
 
 	public BaseProducer() {
-		this(SEED);
-	}
-
-	public BaseProducer(int seed) {
-		this.random = new Random(seed);
+		this.random = new Random();
 	}
 
 	public boolean trueOrFalse() {
