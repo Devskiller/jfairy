@@ -67,52 +67,31 @@ jar {
 	}
 }
 
-def pomConfig = {
-	url 'https://github.com/Codearte/fairyland'
-	licenses {
-		license {
-			name "The Apache Software License, Version 2.0"
-			url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-			distribution "repo"
-		}
-	}
-}
-
-publishing {
-	publications {
-		mavenCustom(MavenPublication) {
-			from components.java
-
-			artifact sourceJar {
-				classifier "sources"
-			}
-			artifact javadocJar {
-				classifier "javadoc"
-			}
-
-			pom.withXml {
-				def root = asNode()
-				root.appendNode('description', description)
-				root.children().last() + pomConfig
-			}
-		}
-	}
-	repositories {
-		maven {
-			url "https://api.bintray.com/maven/codearte/public/fairyland"
-			credentials {
-				username = bintrayUser
-				password = bintrayKey
-			}
-		}
-	}
-}
-
 uploadArchives {
 	repositories {
 		mavenDeployer {
 			name = 'Codearte Public Repository'
 			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/fairyland')
+
+			pom.project {
+				name 'Fairyland'
+				description 'Fairyland - Java fake data generator'
+				url 'http://codearte.github.io/fairyland/'
+				licenses {
+					license {
+						name 'The Apache Software License, Version 2.0'
+						url 'http://www.apache.org/licenses/LICENSE-2.0'
+						distribution 'repo'
+					}
+				}
+
+				scm {
+					connection 'scm:git:git@github.com:Codearte/fairyland.git'
+					developerConnection 'scm:git:git@github.com:Codearte/fairyland.git'
+					url 'https://github.com/Codearte/fairyland'
+				}
+
+			}
 		}
 	}
 }
