@@ -71,7 +71,9 @@ uploadArchives {
 	repositories {
 		mavenDeployer {
 			name = 'Codearte Public Repository'
-			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/fairyland')
+			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/fairyland'){
+				authentication(userName: bintrayUser, password: bintrayKey)
+			}
 
 			pom.project {
 				name 'Fairyland'

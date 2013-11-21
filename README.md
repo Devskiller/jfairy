@@ -34,7 +34,7 @@ In Maven projects (pom.xml):
             <dependency>
                 <groupId>eu.codearte</groupId>
                 <artifactId>fairyland</artifactId>
-                <version>0.0.6</version>
+                <version>0.0.8</version>
             </dependency>
         </dependencies>
         ...
@@ -49,7 +49,7 @@ In Gradle projects (build.gradle):
         }
     }
     ...
-    testCompile 'eu.codearte:fairyland:0.0.6'
+    testCompile 'eu.codearte:fairyland:0.0.8'
 
 Sample
 ------
