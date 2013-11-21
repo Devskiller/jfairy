@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640" />
+    <meta name="viewport" content="width=740" />
 
     <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
     <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
@@ -50,8 +50,8 @@
 <a name="fairyland-" class="anchor" href="#fairyland-"><span class="octicon octicon-link"></span></a>fairyland <a href="https://travis-ci.org/Codearte/fairyland"><img src="https://travis-ci.org/Codearte/fairyland.png" alt="Build Status"></a>
 </h1>
 
-          <p style="text-align: center"><script type="text/javascript" src="http://www.ohloh.net/p/711058/widgets/project_thin_badge.js"></script></p>
-<p>Java fake data generator</p>
+<p style="text-align: center"><script type="text/javascript" src="http://www.ohloh.net/p/711058/widgets/project_thin_badge.js"></script></p>
+<p>Java fake data generator. Based on Wikipedia: <blockquote cite="http://en.wikipedia.org/wiki/Fairyland">Fairyland, in folklore, is the fabulous land or abode of fairies or fays.</blockquote></p>
 
 <h2>
 <a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h2>
@@ -70,7 +70,7 @@
 </code></pre>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a name="embedding" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Adding into project</h2>
 
 <p>In Maven projects (pom.xml):</p>
 
@@ -86,7 +86,7 @@
         &lt;dependency&gt;
             &lt;groupId&gt;eu.codearte&lt;/groupId&gt;
             &lt;artifactId&gt;fairyland&lt;/artifactId&gt;
-            &lt;version&gt;0.0.4&lt;/version&gt;
+            &lt;version&gt;0.0.8&lt;/version&gt;
         &lt;/dependency&gt;
     &lt;/dependencies&gt;
     ...
@@ -95,20 +95,57 @@
 
 <p>In Gradle projects (build.gradle):</p>
 
-<pre><code>repositories {
+<pre><code>{% highlight groovy %}repositories {
     mavenCentral()
     maven {
         url 'http://dl.bintray.com/codearte/public'
     }
 }
 ...
-testCompile 'eu.codearte:fairyland:0.0.4'
+testCompile 'eu.codearte:fairyland:0.0.8'
+{% endhighlight %}
+</code></pre>
+
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<p>Creating simple objects:</p>
+
+<pre><code>{% highlight java %}  Fairy fairy = Fairy.create();
+  Person person = fairy.person();
+
+  System.out.println(person.fullName());            // Chloe Barker
+  System.out.println(person.email());               // barker@yahoo.com
+  System.out.println(person.telephoneNumber());     // 690-950-802
+
+  Person adultMale = fairy.person(male(), minAge(21);
+  System.out.println(adultMale.isMale());              // true
+  System.out.println(adultMale.dateOfBirth());         // at least 21 years earlier
+{% endhighlight %}
+</code></pre>
+
+<p>Creating related objects:</p>
+
+<pre><code>  Fairy fairy = Fairy.create();
+  Company company = fairy.company();
+  System.out.println(company.name());          // Robuten Associates
+  System.out.println(company.url());           // http://www.robuteniaassociates.com
+
+  Person salesman = fairy.person(withCompany(company));
+  System.out.println(salesman.fullName());     // Juan Camacho
+  System.out.println(salesman.companyEmail()); // juan.camacho@robuteniaassociates.com
+</code></pre>
+
+<p>Locale support:</p>
+
+<pre><code>  Fairy enFairy = Fairy.create();                               // Locale.ENGLISH
+  Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));    // Polish version
 </code></pre>
 
 <h2>
-<a name="sample" class="anchor" href="#sample"><span class="octicon octicon-link"></span></a>Sample</h2>
+<a name="sample" class="anchor" href="#sample"><span class="octicon octicon-link"></span></a>Other samples</h2>
 
-<p>Look into <a href="https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/">code sample</a></p>
+<p>Look into <a href="https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/">code samples</a></p>
       </section>
 
       <footer>
