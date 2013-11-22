@@ -31,7 +31,8 @@ println "Date of birth: " + person.dateOfBirth();
 println "          Age: " + person.age();
 println "        Pesel: " + person.nationalIdentificationNumber();
 println "           ID: " + person.nationalIdentityCardNumber();
-println "  Postal Code: " + person.getAddress().getPostalCode();
+println "  Postal Code: " + person.getAddress().postalCode();
+println "  				City: " + person.getAddress().city();
 
 println ""
 

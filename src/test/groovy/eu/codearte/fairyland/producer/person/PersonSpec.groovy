@@ -1,7 +1,6 @@
 package eu.codearte.fairyland.producer.person
 
 import eu.codearte.fairyland.Fairy
-import org.apache.commons.validator.routines.DomainValidator
 import org.apache.commons.validator.routines.EmailValidator
 import org.joda.time.DateTime
 import spock.lang.Ignore
@@ -112,14 +111,23 @@ class PersonSpec extends Specification {
 		then:
 		address
 	}
+
 	def "should create address postal code"() {
 		given:
 		def person = Fairy.create().person()
 		when:
-		def postalCode = person.getAddress().getPostalCode()
+		def postalCode = person.getAddress().postalCode()
 		then:
 		postalCode
+	}
 
+	def "should create address city"() {
+		given:
+		def person = Fairy.create().person()
+		when:
+		def city = person.getAddress().city()
+		then:
+		city
 	}
 
 

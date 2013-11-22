@@ -19,4 +19,6 @@ data:
 
   postal_code: ['#####']
 
+  city: [New York, Washington]
+
   country: ['Canada', 'USA', 'Poland']
