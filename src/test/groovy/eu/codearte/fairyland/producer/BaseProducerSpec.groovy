@@ -7,6 +7,8 @@ package eu.codearte.fairyland.producer
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import java.util.regex.Pattern
+
 class BaseProducerSpec extends Specification {
 
 	def baseProducer = Spy(BaseProducer);
@@ -16,19 +18,26 @@ class BaseProducerSpec extends Specification {
 		baseProducer.randomBetween('a', 'z') >> 'x'
 	}
 
-	def "should replace # with digit 0"() {
+	def "should replace # with digit 7"() {
 		expect:
 		baseProducer.numerify("Tes#t#") == "Tes7t7"
 	}
 
-	def "should replace ? with letter a"() {
+	def "should replace ? with letter x"() {
 		expect:
 		baseProducer.letterify("Tes?t?") == "Tesxtx"
 	}
 
-	def "should replace # and ? with 0 and a respectively"() {
+	def "should replace # and ? with 7 and x respectively"() {
 		expect:
 		baseProducer.bothify("Test?#") == "Testx7"
+	}
+
+	def "should replace ? with letter from desired range"() {
+		when:
+		def result = baseProducer.letterify("Test??", 'A' as char, 'A' as char)
+		then:
+		result == "TestAA"
 	}
 
 	@Unroll
@@ -52,5 +61,7 @@ class BaseProducerSpec extends Specification {
 		2L   | 2L
 		-5L  | -2L
 		-3L  | 2L
+		2.0  | 3.0
+		-2.0 | -1.0
 	}
 }
