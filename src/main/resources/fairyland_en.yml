@@ -1,4 +1,5 @@
 data:
+  alphabet: abcdefghijklmnopqrstuvwxyz
   domains: [com, eu, biz]
   firstNames: {
     male: [Aaron, Adam, Adrian, Aiden, Alex, Alexander, Andrew, Angel, Anthony, Austin, Ayden, Benjamin, Bentley, Blake, Brandon, Brayden, Brody, Bryson, Caleb, Cameron, Carlos, Carson, Carter, Charles, Chase, Christian, Christopher, Colton, Connor, Cooper, Damian, Daniel, David, Dominic, Dylan, Easton, Eli, Elijah, Ethan, Evan, Gabriel, Gavin, Grayson, Henry, Hudson, Hunter, Ian, Isaac, Isaiah, Jace, Jack, Jackson, Jacob, James, Jason, Jaxon, Jayden, Jeremiah, John, Jonathan, Jordan, Jose, Joseph, Joshua, Josiah, Juan, Julian, Justin, Kayden, Kevin, Landon, Levi, Liam, Logan, Lucas, Luis, Luke, Mason, Matthew, Michael, Nathan, Nathaniel, Nicholas, Noah, Nolan, Oliver, Owen, Parker, Robert, Ryan, Ryder, Samuel, Sebastian, Thomas, Tristan, Tyler, William, Wyatt, Xavier, Zachary],

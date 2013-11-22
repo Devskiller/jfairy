@@ -72,10 +72,19 @@ public final class Fairy {
 		return new Fairy(locale, dataFilePrefix);
 	}
 
+	/**
+	 * Use this method for generating texts
+	 * @return A {@link eu.codearte.fairyland.producer.text.Text} instance
+	 */
 	public Text text() {
 		return injector.getInstance(Text.class);
 	}
 
+	/**
+	 * Use this method for fake persons
+	 * @param personProperties desired person features
+	 * @return A {@link eu.codearte.fairyland.producer.person.Person} instance
+	 */
 	public Person person(PersonProperties.PersonProperty... personProperties) {
 		Person person = injector.getInstance(Person.class);
 
@@ -88,10 +97,18 @@ public final class Fairy {
 		return person;
 	}
 
+	/**
+	 * Use this method to generate fake company
+	 * @return A {@link eu.codearte.fairyland.producer.company.Company} instance
+	 */
 	public Company company() {
 		return injector.getInstance(Company.class);
 	}
 
+	/**
+	 * Use this method for get standard tools
+	 * @return A {@link eu.codearte.fairyland.producer.BaseProducer} instance
+	 */
 	public BaseProducer baseProducer() {
 		return injector.getInstance(BaseProducer.class);
 	}

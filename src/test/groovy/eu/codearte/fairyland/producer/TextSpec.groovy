@@ -53,4 +53,11 @@ class TextSpec extends Specification {
 		text.paragraph()
 	}
 
+	def "should create random string"() {
+		when:
+		def randomString = text.randomString(10)
+		then:
+		randomString.length() == 10
+	}
+
 }

@@ -22,3 +22,7 @@ println text.paragraph()
 println text.paragraph(190)
 println text.limitedTo(10).paragraph(190)
 
+println "* Random string *"
+println text.randomString(10)
+println text.randomString(20)
+

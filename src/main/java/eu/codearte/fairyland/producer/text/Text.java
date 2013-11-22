@@ -94,4 +94,13 @@ public class Text {
 		return result(joinWithSpace(sentences(sentenceCount +
 				baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
 	}
+
+	/**
+	 * Generates random string with desired length
+	 * @param charsCount string length
+	 * @return random string
+	 */
+	public String randomString(int charsCount) {
+		return textProducer.randomString(charsCount);
+	}
 }
