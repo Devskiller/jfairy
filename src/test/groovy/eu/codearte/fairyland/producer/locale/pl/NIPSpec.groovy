@@ -14,30 +14,38 @@ import spock.lang.Unroll
  */
 class NIPSpec extends Specification {
 
-	def baseProducer = Mock(BaseProducer)
+	def baseProducer = new BaseProducer()
 	def generator = new NIP(baseProducer)
 
 	@Unroll
 	def "Should validate #nip as #valid"() {
 
 		expect:
-		generator.isValid(nip) == valid
+			generator.isValid(nip) == valid
 
 		where:
-		nip          | valid
-		"2684494529" | true
-		"1234567890" | false
-		"0000000000" | true
+			nip           | valid
+			"2684494529"  | true
+			"1234567890"  | false
+			"0000000000"  | true
+			"18947440810" | false
 	}
 
 	def "Should generate good NIP"() {
 
 		when:
-		def nip = generator.generate()
+			def nip = generator.generate()
 		then:
-		nip == "1010000002"
-		generator.isValid(nip)
+			nip == "1010000002"
+			generator.isValid(nip)
 
+	}
+
+	def "Should always generate proper nip"() {
+		expect:
+			generator.isValid(generator.generate())
+		where:
+			i << (1..100)
 	}
 
 }
