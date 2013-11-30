@@ -31,16 +31,6 @@ class NIPSpec extends Specification {
 			"18947440810" | false
 	}
 
-	def "Should generate good NIP"() {
-
-		when:
-			def nip = generator.generate()
-		then:
-			nip == "1010000002"
-			generator.isValid(nip)
-
-	}
-
 	def "Should always generate proper nip"() {
 		expect:
 			generator.isValid(generator.generate())

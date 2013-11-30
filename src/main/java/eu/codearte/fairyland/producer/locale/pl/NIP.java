@@ -89,14 +89,21 @@ public class NIP implements VATIdentificationNumber {
 
 	@Override
 	public String generate() {
+		int csum;
+		String base;
+		do {
+			base = generateNumber();
+			csum = calculateChecksum(base);
+		} while (csum == 10); // number with csum == 10 is invalid
+		return base + csum;
+	}
 
+	private String generateNumber() {
 		String prefix = valueOf(CODES[baseProducer.randomInt(CODES.length - 1)]);
 
 		String number = leftPad(valueOf(baseProducer.randomInt(MAX_SERIAL_NUMBER)), SERIAL_NUMBER_SIZE, "0");
 
-		String base = prefix + number;
-
-		return base + calculateChecksum(base);
+		return prefix + number;
 	}
 
 	// TODO: Move to separate module
