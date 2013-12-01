@@ -78,6 +78,7 @@ public class NIP implements VATIdentificationNumber {
 	// 1234563_18
 	private static final int CHECKSUM_CHAR_INDEX = 9;
 	static final int MODULO11 = 11;
+	public static final int TEN = 10;
 
 	private final BaseProducer baseProducer;
 
@@ -89,13 +90,14 @@ public class NIP implements VATIdentificationNumber {
 
 	@Override
 	public String generate() {
-		int csum;
-		String base;
+		int checkSum;
+		String number;
 		do {
-			base = generateNumber();
-			csum = calculateChecksum(base);
-		} while (csum == 10); // number with csum == 10 is invalid
-		return base + csum;
+			number = generateNumber();
+			checkSum = calculateChecksum(number);
+			// numbers with checkSum == 10 are invalid
+		} while (checkSum == TEN);
+		return number + checkSum;
 	}
 
 	private String generateNumber() {
