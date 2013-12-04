@@ -1,6 +1,6 @@
 package snippets
 
-import eu.codearte.fairyland.Fairy
+import org.jfairy.Fairy
 
 def text = Fairy.create().text()
 

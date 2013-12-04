@@ -56,8 +56,8 @@ repositories {
 jar {
 	manifest {
 		attributes(
-				"Application-Name": "Fairyland",
-				"Implementation-Title": "Fairyland",
+				"Application-Name": "jFairy",
+				"Implementation-Title": "jFairy",
 				"Implementation-Version": version,
 				"Implementation-Vendor": 'Codearte',
 				'Built-Date': new Date(),
@@ -76,9 +76,9 @@ uploadArchives {
 			}
 
 			pom.project {
-				name 'Fairyland'
-				description 'Fairyland - Java fake data generator'
-				url 'http://codearte.github.io/fairyland/'
+				name 'jFairy'
+				description 'jFairy - Java fake data generator'
+				url 'http://www.jfairy.org'
 				licenses {
 					license {
 						name 'The Apache Software License, Version 2.0'
@@ -88,9 +88,9 @@ uploadArchives {
 				}
 
 				scm {
-					connection 'scm:git:git@github.com:Codearte/fairyland.git'
-					developerConnection 'scm:git:git@github.com:Codearte/fairyland.git'
-					url 'https://github.com/Codearte/fairyland'
+					connection 'scm:git:git@github.com:Codearte/jfairy.git'
+					developerConnection 'scm:git:git@github.com:Codearte/jfairy.git'
+					url 'https://github.com/Codearte/jfairy'
 				}
 
 			}
@@ -108,7 +108,7 @@ sonarRunner {
 }
 
 pitest {
-	targetClasses = ['eu.codearte.fairyland.*']
+	targetClasses = ['org.jfairy.*']
 	threads = 4
 	pitestVersion = 0.31
 }
