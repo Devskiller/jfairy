@@ -1,4 +1,4 @@
-fairyland [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy)
+jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy)
 ==============
 
 Java fake data generator
