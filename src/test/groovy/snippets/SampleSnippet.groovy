@@ -24,6 +24,7 @@ println fairy.person().firstName();
 def person = fairy.person()
 println "   First name: " + person.firstName();
 println "    Last name: " + person.lastName();
+println "     Username: " + person.username();
 println "       isMale: " + person.isMale();
 println "     isFemale: " + person.isFemale();
 println "        Phone: " + person.telephoneNumber();

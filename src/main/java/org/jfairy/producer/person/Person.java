@@ -4,18 +4,19 @@
 package org.jfairy.producer.person;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.apache.commons.lang3.StringUtils;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
 import org.jfairy.producer.company.Company;
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 
+import static org.apache.commons.lang3.StringUtils.lowerCase;
+import static org.apache.commons.lang3.StringUtils.stripAccents;
 import static org.jfairy.producer.person.Person.Sex.FEMALE;
 import static org.jfairy.producer.person.Person.Sex.MALE;
-import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class Person {
 
@@ -45,6 +46,7 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String username;
 	private Sex sex;
 	private String telephoneNumber;
 	private DateTime dateOfBirth;
@@ -84,6 +86,7 @@ public class Person {
 		firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
 		lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name());
 		email = generateEmail(firstName, lastName);
+		username = generateUsername(firstName, lastName);
 		if (telephoneNumberFormat == null) {
 			telephoneNumberFormat = dataMaster.getRandomValue(TELEPHONE_NUMBER_FORMATS);
 		}
@@ -94,7 +97,7 @@ public class Person {
 		if (dateOfBirth == null) {
 			dateOfBirth = dateProducer.randomDateInThePast(age);
 		}
-		companyEmail = StringUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
+		companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
 
 	}
 
@@ -108,6 +111,10 @@ public class Person {
 
 	public String email() {
 		return email;
+	}
+
+	public String username() {
+		return username;
 	}
 
 	public String fullName() {
@@ -135,7 +142,15 @@ public class Person {
 		return age;
 	}
 
-	private String generateEmail(String firstName, Object lastName) {
+	private String generateUsername(String firstName, String lastName) {
+		if (baseProducer.trueOrFalse()) {
+			return lowerCase(stripAccents(firstName.substring(0, 1) + lastName));
+		} else {
+			return lowerCase(stripAccents(firstName + lastName.substring(0, 1)));
+		}
+	}
+
+	private String generateEmail(String firstName, String lastName) {
 		String temp = "";
 		if (baseProducer.trueOrFalse()) {
 			temp = firstName;
@@ -143,7 +158,7 @@ public class Person {
 				temp += ".";
 			}
 		}
-		return StringUtils.stripAccents(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
+		return stripAccents(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
 	}
 
 	public String nationalIdentificationNumber() {
@@ -170,7 +185,7 @@ public class Person {
 		return companyEmail;
 	}
 
-	public Address getAddress(){
+	public Address getAddress() {
 		return address;
 	}
 
