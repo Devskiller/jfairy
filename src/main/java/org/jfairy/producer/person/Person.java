@@ -4,6 +4,7 @@
 package org.jfairy.producer.person;
 
 import com.google.common.annotations.VisibleForTesting;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
@@ -47,6 +48,7 @@ public class Person {
 	private String lastName;
 	private String email;
 	private String username;
+	private String password;
 	private Sex sex;
 	private String telephoneNumber;
 	private DateTime dateOfBirth;
@@ -98,7 +100,8 @@ public class Person {
 			dateOfBirth = dateProducer.randomDateInThePast(age);
 		}
 		companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
-
+		// FIXME: Replace this with baseProducer
+		password = RandomStringUtils.randomAlphanumeric(8);
 	}
 
 	public String firstName() {
@@ -115,6 +118,10 @@ public class Person {
 
 	public String username() {
 		return username;
+	}
+
+	public String password() {
+		return password;
 	}
 
 	public String fullName() {
