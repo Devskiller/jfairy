@@ -4,6 +4,7 @@ apply plugin: 'maven'
 apply plugin: "sonar-runner"
 apply plugin: 'jacoco'
 apply plugin: 'pitest'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
