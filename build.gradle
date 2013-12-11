@@ -1,13 +1,12 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply plugin: 'maven-publish'
 apply plugin: "sonar-runner"
 apply plugin: 'jacoco'
 apply plugin: 'pitest'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
 
 buildscript {
 	repositories {
@@ -71,7 +70,7 @@ uploadArchives {
 	repositories {
 		mavenDeployer {
 			name = 'Codearte Public Repository'
-			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/fairyland'){
+			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/jfairy'){
 				authentication(userName: bintrayUser, password: bintrayKey)
 			}
 
