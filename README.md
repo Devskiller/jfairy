@@ -15,7 +15,7 @@ Installation
 
 Installation into [maven](http://maven.apache.org/) local repository
 
-    ./gradlew publishToMavenLocal
+    ./gradlew install
 
 Usage
 -----
@@ -32,9 +32,9 @@ In Maven projects (pom.xml):
         ...
         <dependencies>
             <dependency>
-                <groupId>eu.codearte</groupId>
-                <artifactId>fairyland</artifactId>
-                <version>0.0.8</version>
+                <groupId>org.jfairy</groupId>
+                <artifactId>jfairy</artifactId>
+                <version>0.1</version>
             </dependency>
         </dependencies>
         ...
@@ -49,9 +49,9 @@ In Gradle projects (build.gradle):
         }
     }
     ...
-    testCompile 'eu.codearte:fairyland:0.0.8'
+    testCompile 'org.jfairy:jfairy:0.1'
 
 Sample
 ------
 
-Look into [code sample](https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/)
+Look into [code sample](https://github.com/Codearte/jfairy/tree/master/src/test/groovy/snippets/)
