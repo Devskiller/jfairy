@@ -1,10 +1,13 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'uploadAuth'
 apply plugin: "sonar-runner"
 apply plugin: 'jacoco'
 apply plugin: 'pitest'
 apply plugin: 'idea'
+
+ext.isReleaseVersion = !project.version.endsWith("SNAPSHOT")
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -17,7 +20,13 @@ buildscript {
 	dependencies {
 		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.30.1'
 		classpath "org.pitest:pitest:0.31"
+		classpath 'org.hibernate.build.gradle:gradle-upload-auth-plugin:1.1.1'
 	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
@@ -34,6 +43,7 @@ dependencies {
 	testCompile 'cglib:cglib-nodep:2.2.2'
 	testCompile 'org.objenesis:objenesis:2.0'
 }
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
 	classifier = 'javadoc'
 	from javadoc.destinationDir
@@ -46,11 +56,6 @@ artifacts {
 	archives jar
 	archives sourceJar
 	archives javadocJar
-}
-
-
-repositories {
-	mavenCentral()
 }
 
 jar {
@@ -67,13 +72,41 @@ jar {
 	}
 }
 
+if (isReleaseVersion) {
+	//activate signing only for release versions (it is not needed for 'gradle install')
+	apply plugin: 'signing'
+
+	signing {
+		sign configurations.archives
+	}
+
+	gradle.taskGraph.whenReady { taskGraph ->
+		if (taskGraph.allTasks.any { it instanceof org.gradle.plugins.signing.Sign }) {
+			if (!project.hasProperty("signing.keyId") || !project.hasProperty("signing.secretKeyRingFile")) {
+				throw new GradleException("signing.keyId and signing.secretKeyRingFile has to be configured (e.g. in ~/.gradle/gradle.properties)")
+			}
+			Console console = System.console()
+			if (console) {
+				def keyPassword = console.readPassword("\nEnter a private key password: ")
+				ext."signing.password" = keyPassword
+			} else {
+				throw new GradleException("Unable to get console. Make sure to not running a signing task in a daemon mode (e.g. use --no-daemon).")
+			}
+		}
+	}
+}
+
 uploadArchives {
 	repositories {
 		mavenDeployer {
-			name = 'Codearte Public Repository'
-			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/jfairy'){
-				authentication(userName: bintrayUser, password: bintrayKey)
-			}
+//          //TODO: Tempararily disabled to allow publish to Central
+//			name = 'Codearte Public Repository'
+//			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/jfairy') {
+//				authentication(userName: bintrayUser, password: bintrayKey)
+//			}
+			name = 'Sonatype OSS'
+			repository(id: 'sonatype-nexus-staging', url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2')
+			snapshotRepository(id: 'sonatype-nexus-snapshots', url: 'https://oss.sonatype.org/content/repositories/snapshots')
 
 			pom.project {
 				name 'jFairy'
