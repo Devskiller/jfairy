@@ -107,6 +107,12 @@ uploadArchives {
 			repository(id: 'sonatype-nexus-staging', url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2')
 			snapshotRepository(id: 'sonatype-nexus-snapshots', url: 'https://oss.sonatype.org/content/repositories/snapshots')
 
+			beforeDeployment {
+				if (isReleaseVersion) {
+					signing.signPom it
+				}
+			}
+
 			pom.project {
 				name 'jFairy'
 				description 'jFairy - Java fake data generator'
