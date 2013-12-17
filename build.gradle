@@ -110,6 +110,7 @@ uploadArchives {
 			pom.project {
 				name 'jFairy'
 				description 'jFairy - Java fake data generator'
+				packaging 'jar'
 				url 'http://www.jfairy.org'
 				licenses {
 					license {
@@ -118,7 +119,35 @@ uploadArchives {
 						distribution 'repo'
 					}
 				}
-
+				developers {
+					developer {
+						id 'jkubrynski'
+						name 'Jakub Kubryński'
+						email 'jkubrynski ATT gmail DOTT com'
+						roles {
+							role 'despot'
+							role 'developer'
+						}
+					}
+					developer {
+						id 'mariuszs'
+						name 'Mariusz Smykuła'
+						email 'mariuszs ATT gmail DOTT com'
+						roles {
+							role 'despot'
+							role 'developer'
+						}
+					}
+					developer {
+						id 'szpak'
+						name 'Marcin Zajączkowski'
+						email 'mszpak ATT wp DOTT pl'
+						roles {
+							role 'despot'
+							role 'developer'
+						}
+					}
+				}
 				scm {
 					connection 'scm:git:git@github.com:Codearte/jfairy.git'
 					developerConnection 'scm:git:git@github.com:Codearte/jfairy.git'
