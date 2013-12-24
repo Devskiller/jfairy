@@ -3,6 +3,36 @@ jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://trav
 
 Java fake data generator
 
+Usage
+-----
+
+In Maven projects (pom.xml):
+
+    <pom>
+        ...
+        <dependencies>
+            <dependency>
+                <groupId>org.jfairy</groupId>
+                <artifactId>jfairy</artifactId>
+                <version>0.2.0</version>
+            </dependency>
+        </dependencies>
+        ...
+    </pom>
+
+In Gradle projects (build.gradle):
+
+    repositories {
+        mavenCentral()
+    }
+    ...
+    testCompile 'org.jfairy:jfairy:0.2.0'
+    
+Sample
+------
+
+Look into [code sample](https://github.com/Codearte/jfairy/tree/master/src/test/groovy/snippets/)
+
 Building
 ---------
 
@@ -16,42 +46,3 @@ Installation
 Installation into [maven](http://maven.apache.org/) local repository
 
     ./gradlew install
-
-Usage
------
-
-In Maven projects (pom.xml):
-
-    <pom>
-        ...
-        <repositories>
-            <repository>
-                <url>http://dl.bintray.com/codearte/public</url>
-            </repository>
-        </repositories>
-        ...
-        <dependencies>
-            <dependency>
-                <groupId>org.jfairy</groupId>
-                <artifactId>jfairy</artifactId>
-                <version>0.1</version>
-            </dependency>
-        </dependencies>
-        ...
-    </pom>
-
-In Gradle projects (build.gradle):
-
-    repositories {
-        mavenCentral()
-        maven {
-            url 'http://dl.bintray.com/codearte/public'
-        }
-    }
-    ...
-    testCompile 'org.jfairy:jfairy:0.1'
-
-Sample
-------
-
-Look into [code sample](https://github.com/Codearte/jfairy/tree/master/src/test/groovy/snippets/)
