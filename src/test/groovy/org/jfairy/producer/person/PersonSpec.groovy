@@ -39,7 +39,6 @@ class PersonSpec extends Specification {
 			def person = Fairy.create().person()
 		then:
 			person.firstName()
-			person.middleName()
 			person.lastName()
 			person.fullName()
 			person.email()
