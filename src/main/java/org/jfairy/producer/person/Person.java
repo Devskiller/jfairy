@@ -5,7 +5,6 @@ package org.jfairy.producer.person;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
@@ -45,6 +44,7 @@ public class Person {
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
 
 	private String firstName;
+	private String middleName;
 	private String lastName;
 	private String email;
 	private String username;
@@ -83,9 +83,10 @@ public class Person {
 
 	public void generate() {
 		if (sex == null) {
-			sex = baseProducer.trueOrFalse() ? MALE : FEMALE;
+			sex = randomBoolean() ? MALE : FEMALE;
 		}
 		firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
+		middleName = randomBoolean() ? dataMaster.getValuesOfType(FIRST_NAME, sex.name()) : "";
 		lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name());
 		email = generateEmail(firstName, lastName);
 		username = generateUsername(firstName, lastName);
@@ -104,8 +105,16 @@ public class Person {
 		password = RandomStringUtils.randomAlphanumeric(8);
 	}
 
+	private boolean randomBoolean() {
+		return baseProducer.trueOrFalse();
+	}
+
 	public String firstName() {
 		return firstName;
+	}
+
+	public String middleName() {
+		return middleName;
 	}
 
 	public String lastName() {
@@ -150,7 +159,7 @@ public class Person {
 	}
 
 	private String generateUsername(String firstName, String lastName) {
-		if (baseProducer.trueOrFalse()) {
+		if (randomBoolean()) {
 			return lowerCase(stripAccents(firstName.substring(0, 1) + lastName));
 		} else {
 			return lowerCase(stripAccents(firstName + lastName.substring(0, 1)));
@@ -159,9 +168,9 @@ public class Person {
 
 	private String generateEmail(String firstName, String lastName) {
 		String temp = "";
-		if (baseProducer.trueOrFalse()) {
+		if (randomBoolean()) {
 			temp = firstName;
-			if (baseProducer.trueOrFalse()) {
+			if (randomBoolean()) {
 				temp += ".";
 			}
 		}
