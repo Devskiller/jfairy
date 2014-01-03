@@ -3,6 +3,7 @@ package org.jfairy.producer;
 import com.google.common.base.Preconditions;
 
 import javax.inject.Singleton;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -30,22 +31,52 @@ public class BaseProducer {
 	 * Returns random element from passed List
 	 *
 	 * @param elements list to process
-	 * @return list element
+	 * @return random list element
 	 */
-	public String randomElement(List<String> elements) {
+	public <T> T randomElement(List<T> elements) {
 		return elements.get(randomBetween(0, elements.size() - 1));
+	}
+
+	/**
+	 * Returns random element from passed vararg
+	 *
+	 * @param elements objects to process
+	 * @return random element
+	 */
+	public <T> T randomElement(T... elements) {
+		return randomElement(Arrays.asList(elements));
+	}
+
+	/**
+	 * Returns random enum value
+	 * @param enumType enum class
+	 * @return random enum value
+	 */
+	public <T extends Enum<?>> T randomElement(Class<T> enumType) {
+		return enumType.getEnumConstants()[randomBetween(0, enumType.getEnumConstants().length - 1)];
 	}
 
 	/**
 	 * Creates new list being random subset of the passed list
 	 *
 	 * @param elements list to process
-	 * @param count returned list size
+	 * @param count    returned list size
 	 * @return sublist of the elements list
 	 */
-	public List<String> randomElements(List<String> elements, int count) {
+	public <T> List<T> randomElements(List<T> elements, int count) {
 		shuffle(elements, random);
 		return elements.subList(0, count % elements.size());
+	}
+
+	/**
+	 * Creates new list being random subset of the passed vararg
+	 *
+	 * @param elements objects to process
+	 * @param count    returned list size
+	 * @return sublist of the passed elements
+	 */
+	public <T> List<T> randomElements(int count, T... elements) {
+		return randomElements(Arrays.asList(elements), count);
 	}
 
 	/**
@@ -91,18 +122,18 @@ public class BaseProducer {
 		return min + (long) (random.nextDouble() * range);
 	}
 
-  /**
-   * Returns random double value
-   *
-   * @param max value of the random number to be returned.  Must be
-   *            positive.
-   * @return random {@code double} value between {@code 0} (inclusive) and {@code max} (inclusive)
-   */
-  public double randomBetween(double min, double max) {
-    double range = max - min;
-    double randomDouble = range > 0 ? this.random.nextDouble()*range : 0;
-    return min + randomDouble;
-  }
+	/**
+	 * Returns random double value
+	 *
+	 * @param max value of the random number to be returned.  Must be
+	 *            positive.
+	 * @return random {@code double} value between {@code 0} (inclusive) and {@code max} (inclusive)
+	 */
+	public double randomBetween(double min, double max) {
+		double range = max - min;
+		double randomDouble = range > 0 ? this.random.nextDouble() * range : 0;
+		return min + randomDouble;
+	}
 
 	/**
 	 * Replaces all {@code '?'} characters with random chars from [a - z] range
@@ -118,13 +149,13 @@ public class BaseProducer {
 	 * Replaces all {@code '?'} characters with random chars from [{@code from} - {@code to}] range
 	 *
 	 * @param letterString text to process
-	 * @param from start of the range
-	 * @param to end of the range
+	 * @param from         start of the range
+	 * @param to           end of the range
 	 * @return text with replaced {@code '?'} chars
 	 */
-  public String letterify(String letterString, char from, char to) {
-    return replaceSymbolWithCharsFromTo(letterString, '?', from, to);
-  }
+	public String letterify(String letterString, char from, char to) {
+		return replaceSymbolWithCharsFromTo(letterString, '?', from, to);
+	}
 
 	/**
 	 * Replaces all {@code '#'} characters with random numbers from [0 - 9] range
@@ -140,8 +171,8 @@ public class BaseProducer {
 	 * Replaces all {@code '#'} characters with random numbers from [{@code from} - {@code to}] range
 	 *
 	 * @param numberString text to process
-	 * @param from start of the range
-	 * @param to end of the range
+	 * @param from         start of the range
+	 * @param to           end of the range
 	 * @return text with replaced '#' characters
 	 */
 	public String numerify(String numberString, int from, int to) {
@@ -150,6 +181,7 @@ public class BaseProducer {
 
 	/**
 	 * Processes text with {@code numerify()} and {@code letterify()} methods
+	 *
 	 * @param string text to process
 	 * @return text with replaced '#' and '?' characters
 	 */

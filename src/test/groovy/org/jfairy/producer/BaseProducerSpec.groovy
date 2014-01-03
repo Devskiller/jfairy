@@ -62,4 +62,22 @@ class BaseProducerSpec extends Specification {
 		2.0  | 3.0
 		-2.0 | -1.0
 	}
+
+	def "should retrieve random enum element"() {
+		setup:
+		baseProducer.randomBetween(0,2) >> 1
+		expect:
+		TestEnum.B == baseProducer.randomElement(TestEnum)
+	}
+
+	def "should retrieve random vararg element"() {
+		setup:
+		baseProducer.randomBetween(0,2) >> 1
+		expect:
+		'B' == baseProducer.randomElement('A', 'B', 'C')
+	}
+
+	static enum TestEnum {
+		A, B, C
+	}
 }
