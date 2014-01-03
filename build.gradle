@@ -85,11 +85,11 @@ if (isReleaseVersion) {
 				throw new GradleException("signing.keyId and signing.secretKeyRingFile has to be configured (e.g. in ~/.gradle/gradle.properties)")
 			}
 			Console console = System.console()
-			if (console) {
+			if (console && !project.hasProperty("signing.password")) {
 				def keyPassword = console.readPassword("\nEnter a private key password: ")
 				ext."signing.password" = keyPassword
-			} else {
-				throw new GradleException("Unable to get console. Make sure to not running a signing task in a daemon mode (e.g. use --no-daemon).")
+			} else if (!project.hasProperty("signing.password")) {
+				throw new GradleException("No signing.password configured (e.g. in ~/.gradle/gradle.properties). Also unable to get console. Make sure to not running a signing task in a daemon mode (e.g. use --no-daemon).")
 			}
 		}
 	}
@@ -98,14 +98,10 @@ if (isReleaseVersion) {
 uploadArchives {
 	repositories {
 		mavenDeployer {
-//          //TODO: Tempararily disabled to allow publish to Central
-//			name = 'Codearte Public Repository'
-//			repository(id: 'codearte-repository', url: 'https://api.bintray.com/maven/codearte/public/jfairy') {
-//				authentication(userName: bintrayUser, password: bintrayKey)
-//			}
+			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+				authentication(userName: sonatypeUsername, password: sonatypePassword)
+			}
 			name = 'Sonatype OSS'
-			repository(id: 'sonatype-nexus-staging', url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2')
-			snapshotRepository(id: 'sonatype-nexus-snapshots', url: 'https://oss.sonatype.org/content/repositories/snapshots')
 
 			beforeDeployment {
 				if (isReleaseVersion) {
