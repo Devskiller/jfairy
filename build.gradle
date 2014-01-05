@@ -17,8 +17,7 @@ buildscript {
 		mavenLocal()
 	}
 	dependencies {
-		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.30.1'
-		classpath "org.pitest:pitest:0.31"
+		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.32.0'
 		classpath 'org.hibernate.build.gradle:gradle-upload-auth-plugin:1.1.1'
 	}
 }
@@ -171,9 +170,7 @@ sonarRunner {
 }
 
 pitest {
-	targetClasses = ['org.jfairy.*']
 	threads = 4
-	pitestVersion = 0.31
 }
 
 test {
