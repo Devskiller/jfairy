@@ -14,7 +14,7 @@ In Maven projects (pom.xml):
             <dependency>
                 <groupId>org.jfairy</groupId>
                 <artifactId>jfairy</artifactId>
-                <version>0.2.0</version>
+                <version>0.2.2</version>
             </dependency>
         </dependencies>
         ...
@@ -26,7 +26,7 @@ In Gradle projects (build.gradle):
         mavenCentral()
     }
     ...
-    testCompile 'org.jfairy:jfairy:0.2.0'
+    testCompile 'org.jfairy:jfairy:0.2.2'
     
 Sample
 ------
