@@ -87,6 +87,10 @@ public class DataMaster {
 		Enumeration<URL> resources =
 				getClass().getClassLoader().getResources(path);
 
+        if (!resources.hasMoreElements()) {
+            throw new IllegalArgumentException(String.format("File %s was not found on classpath", path));
+        }
+
 		Yaml yaml = new Yaml();
 		while (resources.hasMoreElements()) {
 			appendData(yaml.loadAs(resources.nextElement().openStream(), Data.class));

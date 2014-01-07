@@ -3,10 +3,8 @@ package snippets
 import org.jfairy.Fairy
 import org.jfairy.producer.person.PersonProperties
 
-import static org.jfairy.Fairy.create
-
 println "\n * With context"
-def fairy = create(Locale.forLanguageTag("pl"))
+def fairy = Fairy.create(Locale.forLanguageTag("en"))
 3.times {
 	def person = fairy.person()
 
@@ -15,8 +13,8 @@ def fairy = create(Locale.forLanguageTag("pl"))
 }
 
 // Print word
-println create().text().word(3)
-println create().text().sentence(5)
+println fairy.text().word(3)
+println fairy.text().sentence(5)
 
 println fairy.person().firstName();
 println fairy.person().firstName();
@@ -35,7 +33,7 @@ println "          Age: " + person.age();
 println "        Pesel: " + person.nationalIdentificationNumber();
 println "           ID: " + person.nationalIdentityCardNumber();
 println "  Postal Code: " + person.getAddress().postalCode();
-println "  				City: " + person.getAddress().city();
+println "  		  City: " + person.getAddress().city();
 
 println ""
 
@@ -50,12 +48,11 @@ println ""
 println fairy.person().nationalIdentityCardNumber()
 println fairy.person().nationalIdentificationNumber()
 
-def create = Fairy.create()
-def company = create.company()
+def company = fairy.company()
 println "Company: " + company.name()
 println "URL: " + company.url()
 println "VAT: " + company.vatIdentificationNumber()
-company = create.company()
+company = fairy.company()
 println "Company: " + company.name()
 println "URL: " + company.url()
 println "VAT: " + company.vatIdentificationNumber()
