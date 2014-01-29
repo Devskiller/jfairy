@@ -10,7 +10,7 @@ import spock.lang.Specification
 
 class DataMasterSpec extends Specification {
 
-	def baseProducer = Spy(BaseProducer);
+	def baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
 	def data = Spy(DataMaster, constructorArgs: [baseProducer])
 
 	def setup() {

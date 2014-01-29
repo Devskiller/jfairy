@@ -8,7 +8,7 @@ class NetworkSpec extends Specification {
 
 	def ipValidator = InetAddressValidator.getInstance();
 
-	def ipNumber = new IPNumber(new BaseProducer());
+	def ipNumber = new IPNumber(new BaseProducer(new Random()));
 	def network = new Network(ipNumber)
 
 	def "Should generate proper ip number"() {

@@ -1,11 +1,13 @@
 package org.jfairy.producer;
 
 import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
 
-import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import javax.inject.Singleton;
 
 import static java.util.Collections.shuffle;
 
@@ -14,8 +16,9 @@ public class BaseProducer {
 
 	private final Random random;
 
-	public BaseProducer() {
-		this.random = new Random();
+	@Inject
+	public BaseProducer(Random random) {
+		this.random = random;
 	}
 
 	/**

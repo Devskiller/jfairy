@@ -23,7 +23,7 @@ class DateProducerSpec extends Specification {
 	private static final SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.getMillis()
 	private static final FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.getMillis()
 
-	private baseProducer = Spy(BaseProducer)
+	private baseProducer = Spy(BaseProducer, constructorArgs: [new Random()])
 	private timeProviderMock = Mock(TimeProvider)
 	private DateProducer sut = new DateProducer(baseProducer, timeProviderMock)
 
