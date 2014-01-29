@@ -14,7 +14,7 @@ import spock.lang.Unroll
  */
 class NIPSpec extends Specification {
 
-	def baseProducer = new BaseProducer()
+	def baseProducer = new BaseProducer(new Random())
 	def generator = new NIP(baseProducer)
 
 	@Unroll

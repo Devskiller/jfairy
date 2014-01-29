@@ -18,7 +18,7 @@ class CreditCardProducerSpec extends Specification {
 	private DateProducer dateProducer
 
 	def setup() {
-		dataMaster = new DataMaster(new BaseProducer())
+		dataMaster = new DataMaster(new BaseProducer(new Random()))
 		dateProducer = Mock(DateProducer)
 		dataMaster.readResources("fairyland.yml")
 	}
