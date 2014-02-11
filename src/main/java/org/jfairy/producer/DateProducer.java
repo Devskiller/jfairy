@@ -64,4 +64,12 @@ public class DateProducer {
 		DateTime now = timeProvider.getCurrentDate();
 		return new DateTime(baseProducer.randomBetween(now.getMillis(), now.plus(futurePeriod).getMillis()));
 	}
+
+	public DateTime randomDateInTheFuture(int years) {
+		return randomDateBetweenNowAndFuturePeriod(Period.years(years));
+	}
+
+	public DateTime randomDateInTheFuture() {
+		return randomDateInTheFuture(100);
+	}
 }

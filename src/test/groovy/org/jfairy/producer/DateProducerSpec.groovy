@@ -34,77 +34,92 @@ class DateProducerSpec extends Specification {
 
 	def "should generate date in the past"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
-				SOME_DATE_IN_THE_PAST_IN_MILLIS
+			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+					SOME_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-		def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
+			def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
 		then:
-		dateInThePast < CURRENT_DATE
-		dateInThePast > FIVE_YEARS_EARLIER_DATE
-		dateInThePast == SOME_DATE_IN_THE_PAST
+			dateInThePast < CURRENT_DATE
+			dateInThePast > FIVE_YEARS_EARLIER_DATE
+			dateInThePast == SOME_DATE_IN_THE_PAST
 	}
 
 	def "should fail generate date in the past if passed value is negative"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
-				SOME_DATE_IN_THE_PAST_IN_MILLIS
+			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+					SOME_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-		sut.randomDateInThePast(-MAX_YEARS_IN_THE_PAST)
+			sut.randomDateInThePast(-MAX_YEARS_IN_THE_PAST)
 		then:
-		thrown IllegalArgumentException
+			thrown IllegalArgumentException
 	}
 
 	def "should be able to reach minimum date for date in the past"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
-				FIVE_YEARS_EARLIER_DATE_IN_MILLIS
+			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+					FIVE_YEARS_EARLIER_DATE_IN_MILLIS
 		when:
-		def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
+			def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
 		then:
-		dateInThePast == FIVE_YEARS_EARLIER_DATE
+			dateInThePast == FIVE_YEARS_EARLIER_DATE
 	}
 
 	def "maximum date should be before now with defined offset for date in the past"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
-				LATEST_DATE_IN_THE_PAST_IN_MILLIS
+			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+					LATEST_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-		def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
+			def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
 		then:
-		dateInThePast == LATEST_DATE_IN_THE_PAST
+			dateInThePast == LATEST_DATE_IN_THE_PAST
 	}
 
 	@Unroll
 	def "should generate date between years #fromYear - #toYear"() {
 		given:
-		baseProducer.randomBetween(_, _) >> { args -> (args[1] + args[0]) / 2 }
+			baseProducer.randomBetween(_, _) >> { args -> (args[1] + args[0]) / 2 }
 		expect:
-		sut.randomDateBetweenYears(fromYear, toYear) == expectedDate
+			sut.randomDateBetweenYears(fromYear, toYear) == expectedDate
 		where:
-		fromYear | toYear || expectedDate
-		2009     | 2010   || new DateTime("2009-12-31T23:59:59.999")
-		2010     | 2010   || new DateTime("2010-07-02T12:59:59.999")
-		2015     | 2020   || new DateTime("2017-12-31T23:59:59.999")
+			fromYear | toYear || expectedDate
+			2009     | 2010   || new DateTime("2009-12-31T23:59:59.999")
+			2010     | 2010   || new DateTime("2010-07-02T12:59:59.999")
+			2015     | 2020   || new DateTime("2017-12-31T23:59:59.999")
 	}
 
 	def "should generate date between specified year and now"() {
 		given:
-		baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
-				SOME_DATE_IN_THE_PAST_IN_MILLIS
+			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
+					SOME_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-		def dateInThePast = sut.randomDateBetweenYearAndNow(2008)
+			def dateInThePast = sut.randomDateBetweenYearAndNow(2008)
 		then:
-		dateInThePast < CURRENT_DATE
-		dateInThePast > FIVE_YEARS_EARLIER_DATE
-		dateInThePast == SOME_DATE_IN_THE_PAST
+			dateInThePast < CURRENT_DATE
+			dateInThePast > FIVE_YEARS_EARLIER_DATE
+			dateInThePast == SOME_DATE_IN_THE_PAST
 	}
 
 	def "should generate date between now and specified period"() {
 		when:
-		def dateInFuturePeriod = sut.randomDateBetweenNowAndFuturePeriod(Period.months(12))
+			def dateInFuturePeriod = sut.randomDateBetweenNowAndFuturePeriod(Period.months(12))
 		then:
-		dateInFuturePeriod >= CURRENT_DATE
-		dateInFuturePeriod <= ONE_YEAR_LATER
+			dateInFuturePeriod >= CURRENT_DATE
+			dateInFuturePeriod <= ONE_YEAR_LATER
+	}
+
+	def "should generate date between now and future offset"() {
+		when:
+			def dateInFuturePeriod = sut.randomDateInTheFuture(1)
+		then:
+			dateInFuturePeriod >= CURRENT_DATE
+			dateInFuturePeriod <= ONE_YEAR_LATER
+	}
+
+	def "should generate date in future"() {
+		when:
+			def dateInFuturePeriod = sut.randomDateInTheFuture()
+		then:
+			dateInFuturePeriod >= CURRENT_DATE
 	}
 
 }
