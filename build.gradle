@@ -8,6 +8,7 @@ apply plugin: 'pitest'
 apply plugin: 'idea'
 
 ext.isReleaseVersion = !project.version.endsWith("SNAPSHOT")
+ext.shouldJacocoBeEnabled = determineIfJacocoShouldBeEnabled()
 
 sourceCompatibility = 1.6
 
@@ -175,8 +176,19 @@ pitest {
 
 test {
 	ignoreFailures = true
+	jacoco {
+		//Required to not measure code coverage in normal builds
+		enabled = shouldJacocoBeEnabled
+	}
 }
 
 wrapper {
 	gradleVersion '1.10'
+}
+
+boolean determineIfJacocoShouldBeEnabled() {
+    //MZA: A little bit fragile, Better ideas are welcome.
+    def shouldBeEnabled = gradle.startParameter.taskNames.contains("sonarRunner") || gradle.startParameter.taskNames.contains("jacocoTestReport")
+    logger.debug "Is JaCoCo enabled: $shouldBeEnabled"
+    shouldBeEnabled
 }
