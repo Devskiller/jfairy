@@ -85,6 +85,7 @@ public class BaseProducer {
 	/**
 	 * Returns random int value
 	 *
+	 * @param min value of the random number to be returned.  Must be positive.
 	 * @param max value of the random number to be returned.  Must be positive.
 	 * @return random {@code int} value between {@code min} (inclusive) and {@code max} (inclusive)
 	 */
@@ -111,8 +112,8 @@ public class BaseProducer {
 
 	/**
 	 * Returns random long value from a range (including both range boundaries).
-	 * <p/>
-	 * It required to satisfied condition min <= max.
+	 *
+	 * It required to satisfied condition min &lt;= max.
 	 *
 	 * @param min lower bound of a range
 	 * @param max higher bound of a range

@@ -136,7 +136,6 @@ public class DataMaster {
 			return super.put(loweredKey, valueToInsert);
 		}
 
-		//FIXME: Dirty hack to make this class Java 8 compatible - a deeper refactoring is needed
 		@Override
 		public void putAll(Map<? extends String, ?> map) {
 			for (Map.Entry<? extends String, ?> entry : map.entrySet()) {
