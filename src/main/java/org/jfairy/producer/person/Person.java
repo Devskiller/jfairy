@@ -4,6 +4,7 @@
 package org.jfairy.producer.person;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.inject.assistedinject.Assisted;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
@@ -65,7 +66,8 @@ public class Person {
 				  Address address,
 				  NationalIdentificationNumber nationalIdentificationNumber,
 				  NationalIdentityCardNumber nationalIdentityCardNumber,
-				  Company company) {
+				  Company company,
+					@Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
@@ -75,13 +77,17 @@ public class Person {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		//fixme - should be created only if needed
 		this.company = company;
+		for (PersonProperties.PersonProperty personProperty : personProperties) {
+			personProperty.apply(this);
+		}
+		generate();
 	}
 
 	public void telephoneNumberFormat(String telephoneNumberFormat) {
 		this.telephoneNumberFormat = telephoneNumberFormat;
 	}
 
-	public void generate() {
+	private void generate() {
 		if (sex == null) {
 			sex = randomBoolean() ? MALE : FEMALE;
 		}

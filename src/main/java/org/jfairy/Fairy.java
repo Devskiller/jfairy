@@ -4,6 +4,7 @@
 package org.jfairy;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
@@ -12,6 +13,7 @@ import org.jfairy.producer.company.Company;
 import org.jfairy.producer.net.Network;
 import org.jfairy.producer.payment.CreditCardProducer;
 import org.jfairy.producer.person.Person;
+import org.jfairy.producer.person.PersonFactory;
 import org.jfairy.producer.person.PersonProperties;
 import org.jfairy.producer.text.Text;
 
@@ -169,15 +171,8 @@ public final class Fairy {
 	 * @return A {@link org.jfairy.producer.person.Person} instance
 	 */
 	public Person person(PersonProperties.PersonProperty... personProperties) {
-		Person person = injector.getInstance(Person.class);
-
-		for (PersonProperties.PersonProperty personProperty : personProperties) {
-			injector.injectMembers(personProperty);
-			personProperty.apply(person);
-		}
-
-		person.generate();
-		return person;
+		PersonFactory personFactory = injector.getInstance(PersonFactory.class);
+		return personFactory.producePerson(personProperties);
 	}
 
 	/**
