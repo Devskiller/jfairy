@@ -31,5 +31,6 @@ class FairyModule extends AbstractModule {
 		bind(NationalIdentityCardNumber.class).to(PolishIdentityCardNumber.class);
 		bind(VATIdentificationNumber.class).to(NIP.class);
 		install(new FactoryModuleBuilder().build(PersonFactory.class));
+		install(new FactoryModuleBuilder().build(FairyFactory.class));
 	}
 }

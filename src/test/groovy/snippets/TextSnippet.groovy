@@ -2,7 +2,7 @@ package snippets
 
 import org.jfairy.Fairy
 
-def text = Fairy.create().text()
+def text = Fairy.create().textProducer()
 
 println "* Lorem ipsum *"
 println text.loremIpsum()

@@ -7,9 +7,9 @@ class FairySpec extends Specification {
 	def "Second person should be different without fairy instance"() {
 
 		given:
-			def person = Fairy.create().person();
+			def person = Bootstrap.create().person();
 		when:
-			person = Fairy.create().person();
+			person = Bootstrap.create().person();
 		then:
 			person.fullName() != old(person.fullName())
 	}
@@ -17,7 +17,7 @@ class FairySpec extends Specification {
 	def "Second person should be different with one fairy"() {
 
 		given:
-			def fairy = Fairy.create()
+			def fairy = Bootstrap.create()
 			def person = fairy.person();
 		when:
 			person = fairy.person();
@@ -28,8 +28,8 @@ class FairySpec extends Specification {
 	def "Second person should be the same with the same random seed"() {
 
 		given:
-			def firstFairy = Fairy.builder().withRandomSeed(10).build()
-			def secondFairy = Fairy.builder().withRandomSeed(10).build()
+			def firstFairy = Bootstrap.builder().withRandomSeed(10).build()
+			def secondFairy = Bootstrap.builder().withRandomSeed(10).build()
 
 			def firstPerson = firstFairy.person()
 			def secondPerson = secondFairy.person()
@@ -46,8 +46,8 @@ class FairySpec extends Specification {
 	def "Second person should be different with different random seeds"() {
 
 		given:
-			def firstFairy = Fairy.builder().withRandomSeed(10).build()
-			def secondFairy = Fairy.builder().withRandomSeed(20).build()
+			def firstFairy = Bootstrap.builder().withRandomSeed(10).build()
+			def secondFairy = Bootstrap.builder().withRandomSeed(20).build()
 
 			def firstPerson = firstFairy.person()
 			def secondPerson = secondFairy.person();

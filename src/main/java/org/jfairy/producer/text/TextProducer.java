@@ -1,69 +1,110 @@
 /*
- * Copyright (c) 2013. Codearte
+ * Copyright (c) 2013 Codearte
  */
 package org.jfairy.producer.text;
 
-import org.jfairy.data.DataMaster;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import org.jfairy.producer.BaseProducer;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.replaceChars;
-import static org.apache.commons.lang3.StringUtils.split;
-import static org.apache.commons.lang3.StringUtils.uncapitalize;
+import static org.apache.commons.lang3.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.endsWith;
+import static org.apache.commons.lang3.StringUtils.left;
+import static org.apache.commons.lang3.StringUtils.removeEnd;
 import static org.jfairy.producer.text.TextUtils.joinWithSpace;
 
-class TextProducer {
+public class TextProducer {
 
-	private static final String DATA = "text";
-	private static final String ALPHABET = "alphabet";
+	private static final int DEFAULT_WORD_COUNT = 3;
+	private static final int DEFAULT_WORD_COUNT_IN_SENTENCE = 3;
+	private static final int DEFAULT_SENTENCE_COUNT = 3;
+	private static final int WORD_COUNT_PRECISION_IN_SENTENCE = 6;
+	private static final int SENTENCE_COUNT_PRECISION_MIN = 1;
+	private static final int SENTENCE_COUNT_PRECISION_MAX = 3;
 
+	private final TextProducerInternal textProducerInternal;
 	private final BaseProducer baseProducer;
 
-	private final String loremIpsum;
-	private final List<String> words;
-	private final String alphabet;
-	private final int maxAlphabetIndex;
+	private int limit = 0;
 
 	@Inject
-	public TextProducer(DataMaster dataMaster, BaseProducer baseProducer) {
+	public TextProducer(TextProducerInternal textProducerInternal, BaseProducer baseProducer) {
+		this.textProducerInternal = textProducerInternal;
 		this.baseProducer = baseProducer;
-		loremIpsum = dataMaster.getString(DATA);
-		words = asList(split(loremIpsum, ' '));
-		alphabet = dataMaster.getString(ALPHABET);
-		maxAlphabetIndex = alphabet.length() - 1;
 	}
 
-	public String getLoremIpsum() {
-		return loremIpsum;
+	public TextProducer limitedTo(int limit) {
+		this.limit = limit;
+		return this;
 	}
 
-	public String rawWords(int count, int precision) {
-		List<String> result = readRawWords(count, precision);
-		return joinWithSpace(result);
-	}
-
-	public String cleanWords(int count) {
-		List<String> result = newArrayList();
-		for (String part : readRawWords(count, 0)) {
-			result.add(uncapitalize(replaceChars(part, "., ", "")));
+	public String result(String result) {
+		if (limit > 0) {
+			return left(result, limit);
+		} else {
+			return result;
 		}
-		return joinWithSpace(result);
 	}
 
+	public String loremIpsum() {
+		return result(textProducerInternal.getLoremIpsum());
+	}
+
+	public String word() {
+		return result(word(DEFAULT_WORD_COUNT));
+	}
+
+	public String word(int count) {
+		return result(textProducerInternal.cleanWords(count));
+	}
+
+	public String sentence() {
+		return result(sentence(DEFAULT_WORD_COUNT_IN_SENTENCE));
+	}
+
+	public String sentence(int wordCount) {
+		String randomWords = textProducerInternal.rawWords(wordCount, WORD_COUNT_PRECISION_IN_SENTENCE);
+		List<String> sentences = newArrayList();
+		for (String sentence : Splitter.on(". ").split(randomWords)) {
+			sentences.add(capitalize(sentence));
+		}
+		String sentence = capitalize(Joiner.on(". ").join(sentences));
+		sentence = removeEnd(sentence, ",");
+		if (!endsWith(sentence, ".")) {
+			sentence += ".";
+		}
+		return result(sentence);
+	}
+
+	private List<String> sentences(int sentenceCount) {
+		List<String> sentences = new ArrayList<String>(sentenceCount);
+		for (int i = 0; i < sentenceCount; i++) {
+			sentences.add(sentence());
+		}
+		return sentences;
+	}
+
+	public String paragraph() {
+		return result(paragraph(DEFAULT_SENTENCE_COUNT));
+	}
+
+	public String paragraph(int sentenceCount) {
+		return result(joinWithSpace(sentences(sentenceCount +
+				baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
+	}
+
+	/**
+	 * Generates random string with desired length
+	 *
+	 * @param charsCount string length
+	 * @return random string
+	 */
 	public String randomString(int charsCount) {
-		StringBuilder sb = new StringBuilder(charsCount);
-		for (int i = 0; i < charsCount; i++) {
-			sb.append(alphabet.charAt(baseProducer.randomInt(maxAlphabetIndex)));
-		}
-		return sb.toString();
+		return textProducerInternal.randomString(charsCount);
 	}
-
-	private List<String> readRawWords(int count, int precision) {
-		return baseProducer.randomElements(words, baseProducer.randomBetween(count, count + precision));
-	}
-
 }

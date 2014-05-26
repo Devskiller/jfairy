@@ -1,6 +1,7 @@
 package org.jfairy.producer.person
 
 import org.apache.commons.validator.routines.EmailValidator
+import org.jfairy.Bootstrap
 import org.jfairy.Fairy
 import org.joda.time.DateTime
 import spock.lang.Ignore
@@ -12,18 +13,23 @@ import static org.jfairy.producer.person.PersonProperties.telephoneFormat
 
 class PersonSpec extends Specification {
 
-	def emailValidator = EmailValidator.getInstance();
+	def emailValidator = EmailValidator.getInstance()
+	def Fairy fairy = Bootstrap.create()
+
+	def setup() {
+		Bootstrap.create()
+	}
 
 	def "should instantiate PersonProducer producer with person"() {
 		when:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		then:
 			person instanceof Person
 	}
 
 	def "should be sure that fullName is proper"() {
 		when:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		then:
 			"${person.firstName()} ${person.lastName()}" == person.fullName()
 	}
@@ -31,14 +37,14 @@ class PersonSpec extends Specification {
 	@Ignore
 	def "second generated name should be different"() {
 		setup:
-			def fairy = Fairy.create()
+			def fairy = fairy
 		expect:
 			fairy.person().firstName() != fairy.person().firstName()
 	}
 
 	def "should be sure that data exists"() {
 		when:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		then:
 			person.firstName()
 			person.lastName()
@@ -53,49 +59,49 @@ class PersonSpec extends Specification {
 
 	def "should create female"() {
 		when:
-			def person = Fairy.create().person(female())
+			def person = fairy.person(female())
 		then:
 			person.isFemale()
 	}
 
 	def "should create male"() {
 		when:
-			def person = Fairy.create().person(male())
+			def person = fairy.person(male())
 		then:
 			person.isMale()
 	}
 
 	def "should create telephone number"() {
 		when:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		then:
 			person.telephoneNumber()
 	}
 
 	def "should create telephone number in defined format"() {
 		when:
-			def person = Fairy.create().person(telephoneFormat("###--###"))
+			def person = fairy.person(telephoneFormat("###--###"))
 		then:
 			person.telephoneNumber() ==~ /\d\d\d--\d\d\d/
 	}
 
 	def "should create birth date"() {
 		when:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		then:
 			person.dateOfBirth().isBefore(DateTime.now())
 	}
 
 	def "should create age"() {
 		when:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		then:
 			person.age()
 	}
 
 	def "should create company email"() {
 		given:
-			def fairy = Fairy.create()
+			def fairy = fairy
 
 		when:
 			def person = fairy.person()
@@ -107,7 +113,7 @@ class PersonSpec extends Specification {
 
 	def "should create address"() {
 		given:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		when:
 			def address = person.getAddress()
 		then:
@@ -116,7 +122,7 @@ class PersonSpec extends Specification {
 
 	def "should create address postal code"() {
 		given:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		when:
 			def postalCode = person.getAddress().postalCode()
 		then:
@@ -125,7 +131,7 @@ class PersonSpec extends Specification {
 
 	def "should create address city"() {
 		given:
-			def person = Fairy.create().person()
+			def person = fairy.person()
 		when:
 			def city = person.getAddress().city()
 		then:
@@ -135,7 +141,7 @@ class PersonSpec extends Specification {
 	def "Should generate middle name only sometimes"() {
 		given:
 			def persons = []
-			(1..100).each { persons.add(Fairy.create().person()) }
+			(1..100).each { persons.add(fairy.person()) }
 		when:
 			def allWithoutMiddleName = persons.findAll { p -> p.middleName().isEmpty() }
 			def allWithMiddleName = persons.findAll { p -> !p.middleName().isEmpty() }

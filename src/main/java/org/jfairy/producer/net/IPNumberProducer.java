@@ -3,7 +3,7 @@ package org.jfairy.producer.net;
 import com.google.inject.Inject;
 import org.jfairy.producer.BaseProducer;
 
-class IPNumber {
+class IPNumberProducer {
 
 	private static final String IP_FORMAT = "%s.%s.%s.%s";
 	private static final int MAX = 0xFF;
@@ -11,7 +11,7 @@ class IPNumber {
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public IPNumber(BaseProducer baseProducer) {
+	public IPNumberProducer(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 

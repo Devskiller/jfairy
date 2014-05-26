@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * @author jkubrynski@gmail.com
  * @since 2013-11-17
  */
-public class CreditCardProducer {
+public class CreditCard {
 
 	private static final Period DEFAULT_VALIDITY = Period.months(36);
 	private static final String DATA_KEY = "cardVendors";
@@ -22,7 +22,7 @@ public class CreditCardProducer {
 	private DateTime expiryDate;
 
 	@Inject
-	public CreditCardProducer(DataMaster dataMaster, DateProducer dateProducer) {
+	public CreditCard(DataMaster dataMaster, DateProducer dateProducer) {
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		generate();

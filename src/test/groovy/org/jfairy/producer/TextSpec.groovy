@@ -1,20 +1,20 @@
 package org.jfairy.producer
 
-import org.jfairy.Fairy
-import org.jfairy.producer.text.Text
+import org.jfairy.Bootstrap
+import org.jfairy.producer.text.TextProducer
 import spock.lang.Specification
 
 class TextSpec extends Specification {
 
-	private Text text;
+	private TextProducer text;
 
 	def setup() {
-		text = Fairy.create().text()
+		text = Bootstrap.create().textProducer()
 	}
 
 	def "should instantiate Text producer with Text object"() {
 		expect:
-			text instanceof Text
+			text instanceof TextProducer
 	}
 
 	def "should be sure that data exists"() {

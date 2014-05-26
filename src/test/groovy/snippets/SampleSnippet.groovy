@@ -13,8 +13,8 @@ def fairy = Fairy.create(Locale.forLanguageTag("en"))
 }
 
 // Print word
-println fairy.text().word(3)
-println fairy.text().sentence(5)
+println fairy.textProducer().word(3)
+println fairy.textProducer().sentence(5)
 
 println fairy.person().firstName();
 println fairy.person().firstName();

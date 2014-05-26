@@ -112,7 +112,6 @@ public class BaseProducer {
 
 	/**
 	 * Returns random long value from a range (including both range boundaries).
-	 * <p/>
 	 * It required to satisfied condition min &lt;= max.
 	 *
 	 * @param min lower bound of a range
