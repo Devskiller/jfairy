@@ -27,8 +27,8 @@ import java.util.Random;
  * <ul>
  * <li><tt>locale</tt>: Specifies the locale for the random data file.</li>
  * <li><tt>filePrefix</tt>: Specifies the file prefix.
- * (So if you specify "fairyland" here and English for Locale, the data file will be
- * "fairyland_en.yml" under the classpath.)
+ * (So if you specify "jfairy" here and English for Locale, the data file will be
+ * "jfairy_en.yml" under the classpath.)
  * </li>
  * <li><tt>random</tt>: The Random object to use.</li>
  * <li><tt>randomSeed</tt>: A specific random seed to use. Use this if you want the resulting
@@ -42,7 +42,7 @@ import java.util.Random;
  */
 public final class Fairy {
 
-	private static final String DATA_FILE_PREFIX = "fairyland";
+	private static final String DATA_FILE_PREFIX = "jfairy";
 
 	private final Injector injector;
 
@@ -81,7 +81,7 @@ public final class Fairy {
 		/**
 		 * Sets the data file prefix for the resulting Fairy.
 		 *
-		 * @param filePrefix The prefix of the file (such as "fairyland" for "fairyland_en.yml").
+		 * @param filePrefix The prefix of the file (such as "jfairy" for "jfairy_en.yml").
 		 * @return the same Builder (for chaining).
 		 */
 		public Builder withFilePrefix(String filePrefix) {
@@ -130,7 +130,7 @@ public final class Fairy {
 	}
 
 	/**
-	 * Use this factory method to create dataset containing default fairyland.yml and fairyland_{langCode}.yml files
+	 * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
 	 * merged with custom files with the same name
 	 *
 	 * @return Fairy instance
@@ -140,7 +140,7 @@ public final class Fairy {
 	}
 
 	/**
-	 * Use this factory method to create dataset containing default fairyland.yml and fairyland_{langCode}.yml files
+	 * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
 	 * merged with custom files with the same name
 	 *
 	 * @param locale will be used to assess langCode for data file
@@ -154,7 +154,7 @@ public final class Fairy {
 	 * Use this factory method to create your own dataset overriding bundled one
 	 *
 	 * @param locale         will be used to assess langCode for data file
-	 * @param dataFilePrefix prefix of the data file - final pattern will be fairyland.yml and dataFilePrefix_{langCode}.yml
+	 * @param dataFilePrefix prefix of the data file - final pattern will be jfairy.yml and dataFilePrefix_{langCode}.yml
 	 * @return Fairy instance
 	 */
 	public static Fairy create(Locale locale, String dataFilePrefix) {

@@ -20,7 +20,7 @@ class DataMasterSpec extends Specification {
 	def "should read first names"() {
 		when:
 			DataMaster dataMaster = new DataMaster();
-			dataMaster.readResources("fairyland_en.yml")
+			dataMaster.readResources("jfairy_en.yml")
 
 			def firstNames = dataMaster.getStringMap(Person.FIRST_NAME)
 		then:
