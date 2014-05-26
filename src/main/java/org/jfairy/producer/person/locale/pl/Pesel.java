@@ -14,7 +14,7 @@ import static java.lang.String.format;
 /**
  * PESEL - Polish Powszechny Elektroniczny System Ewidencji Ludności,
  * Universal Electronic System for Registration of the Population)
- *
+ * <p/>
  * More info: http://en.wikipedia.org/wiki/PESEL
  */
 public class Pesel implements NationalIdentificationNumber {

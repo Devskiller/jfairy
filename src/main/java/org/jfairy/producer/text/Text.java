@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.apache.commons.lang3.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.endsWith;
+import static org.apache.commons.lang3.StringUtils.left;
+import static org.apache.commons.lang3.StringUtils.removeEnd;
 import static org.jfairy.producer.text.TextUtils.joinWithSpace;
-import static org.apache.commons.lang3.StringUtils.*;
 
 public class Text {
 
@@ -97,6 +100,7 @@ public class Text {
 
 	/**
 	 * Generates random string with desired length
+	 *
 	 * @param charsCount string length
 	 * @return random string
 	 */

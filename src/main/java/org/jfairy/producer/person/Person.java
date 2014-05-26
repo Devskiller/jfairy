@@ -61,13 +61,13 @@ public class Person {
 	// FIXME: Too many parameters
 	@Inject
 	public Person(DataMaster dataMaster,
-				  DateProducer dateProducer,
-				  BaseProducer baseProducer,
-				  Address address,
-				  NationalIdentificationNumber nationalIdentificationNumber,
-				  NationalIdentityCardNumber nationalIdentityCardNumber,
-				  Company company,
-					@Assisted PersonProperties.PersonProperty... personProperties) {
+								DateProducer dateProducer,
+								BaseProducer baseProducer,
+								Address address,
+								NationalIdentificationNumber nationalIdentificationNumber,
+								NationalIdentityCardNumber nationalIdentityCardNumber,
+								Company company,
+								@Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;

@@ -1,12 +1,14 @@
 package org.jfairy.producer.person
 
-import org.jfairy.Fairy
 import org.apache.commons.validator.routines.EmailValidator
+import org.jfairy.Fairy
 import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
 
-import static org.jfairy.producer.person.PersonProperties.*
+import static org.jfairy.producer.person.PersonProperties.female
+import static org.jfairy.producer.person.PersonProperties.male
+import static org.jfairy.producer.person.PersonProperties.telephoneFormat
 
 class PersonSpec extends Specification {
 

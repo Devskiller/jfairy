@@ -1,10 +1,10 @@
 package org.jfairy.producer
 
-import org.jfairy.Fairy
-import org.jfairy.producer.locale.pl.NIP
 import org.apache.commons.validator.routines.DomainValidator
 import org.apache.commons.validator.routines.EmailValidator
 import org.apache.commons.validator.routines.UrlValidator
+import org.jfairy.Fairy
+import org.jfairy.producer.locale.pl.NIP
 import spock.lang.Specification
 
 /**
@@ -19,19 +19,19 @@ class CompanySpec extends Specification {
 
 	def "should instantiate Company producer"() {
 		when:
-		def company = Fairy.create().company()
+			def company = Fairy.create().company()
 		then:
-		company
+			company
 	}
 
 	def "should be sure that data exists"() {
 		when:
-		def company = Fairy.create().company()
+			def company = Fairy.create().company()
 		then:
-		company.name()
-		domainValidator.isValid(company.domain())
-		emailValidator.isValid(company.email())
-		urlValidator.isValid(company.url())
-		NIP.isValid(company.vatIdentificationNumber())
+			company.name()
+			domainValidator.isValid(company.domain())
+			emailValidator.isValid(company.email())
+			urlValidator.isValid(company.url())
+			NIP.isValid(company.vatIdentificationNumber())
 	}
 }

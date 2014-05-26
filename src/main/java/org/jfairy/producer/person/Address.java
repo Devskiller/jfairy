@@ -21,7 +21,7 @@ public class Address {
 		city = dataMaster.getRandomValue(CITY);
 	}
 
-	public String postalCode(){
+	public String postalCode() {
 		return baseProducer.numerify(postalCodeFormat);
 	}
 

@@ -14,50 +14,50 @@ class TextSpec extends Specification {
 
 	def "should instantiate Text producer with Text object"() {
 		expect:
-		text instanceof Text
+			text instanceof Text
 	}
 
 	def "should be sure that data exists"() {
 		expect:
-		text.loremIpsum()
-		text.word()
-		text.word(100)
-		text.sentence()
-		text.sentence(100)
-		text.paragraph()
-		text.paragraph(100)
+			text.loremIpsum()
+			text.word()
+			text.word(100)
+			text.sentence()
+			text.sentence(100)
+			text.paragraph()
+			text.paragraph(100)
 	}
 
 	def "should limit generated text"() {
 		when:
-		text.limitedTo(10)
+			text.limitedTo(10)
 		then:
-		text.loremIpsum().length() == 10
-		text.word(100).length() == 10
-		text.sentence(100).length() == 10
-		text.paragraph(100).length() == 10
+			text.loremIpsum().length() == 10
+			text.word(100).length() == 10
+			text.sentence(100).length() == 10
+			text.paragraph(100).length() == 10
 	}
 
 	def "should generate word"() {
 		expect:
-		text.word()
+			text.word()
 	}
 
 	def "should generate sentence"() {
 		expect:
-		text.sentence()
+			text.sentence()
 	}
 
 	def "should generate paragraph"() {
 		expect:
-		text.paragraph()
+			text.paragraph()
 	}
 
 	def "should create random string"() {
 		when:
-		def randomString = text.randomString(10)
+			def randomString = text.randomString(10)
 		then:
-		randomString.length() == 10
+			randomString.length() == 10
 	}
 
 }

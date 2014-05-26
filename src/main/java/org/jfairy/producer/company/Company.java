@@ -1,9 +1,9 @@
 package org.jfairy.producer.company;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.VATIdentificationNumber;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 

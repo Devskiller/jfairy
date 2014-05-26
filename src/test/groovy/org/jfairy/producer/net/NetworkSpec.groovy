@@ -1,7 +1,7 @@
 package org.jfairy.producer.net
 
-import org.jfairy.producer.BaseProducer
 import org.apache.commons.validator.routines.InetAddressValidator
+import org.jfairy.producer.BaseProducer
 import spock.lang.Specification
 
 class NetworkSpec extends Specification {
@@ -15,8 +15,8 @@ class NetworkSpec extends Specification {
 		def ip = network.ipAddress()
 
 		expect:
-		ip
-		ipValidator.isValid(ip)
+			ip
+			ipValidator.isValid(ip)
 
 	}
 }

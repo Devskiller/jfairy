@@ -18,15 +18,15 @@ import java.util.Random;
  */
 class FairyModule extends AbstractModule {
 
-    private final Random random;
+	private final Random random;
 
-    public FairyModule(Random random) {
-        this.random = random;
-    }
+	public FairyModule(Random random) {
+		this.random = random;
+	}
 
 	@Override
 	protected void configure() {
-        bind(Random.class).toInstance(random);
+		bind(Random.class).toInstance(random);
 		bind(NationalIdentificationNumber.class).to(Pesel.class);
 		bind(NationalIdentityCardNumber.class).to(PolishIdentityCardNumber.class);
 		bind(VATIdentificationNumber.class).to(NIP.class);

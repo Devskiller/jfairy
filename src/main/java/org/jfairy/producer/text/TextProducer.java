@@ -10,9 +10,11 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.jfairy.producer.text.TextUtils.joinWithSpace;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.replaceChars;
+import static org.apache.commons.lang3.StringUtils.split;
+import static org.apache.commons.lang3.StringUtils.uncapitalize;
+import static org.jfairy.producer.text.TextUtils.joinWithSpace;
 
 class TextProducer {
 

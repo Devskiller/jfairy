@@ -3,9 +3,7 @@ package org.jfairy.producer.net;
 import com.google.inject.Inject;
 
 /**
- *
  * TODO: Add emails
- *
  */
 public class Network {
 

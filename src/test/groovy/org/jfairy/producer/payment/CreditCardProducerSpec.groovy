@@ -25,27 +25,27 @@ class CreditCardProducerSpec extends Specification {
 
 	def "should return credit card provider"() {
 		when:
-		CreditCardProducer cardProducer = new CreditCardProducer(dataMaster, dateProducer)
+			CreditCardProducer cardProducer = new CreditCardProducer(dataMaster, dateProducer)
 		then:
-		cardProducer.vendor()
+			cardProducer.vendor()
 	}
 
 	def "should return card expiry date"() {
 		given:
-		dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
+			dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
 		when:
-		CreditCardProducer cardProducer = new CreditCardProducer(dataMaster, dateProducer)
+			CreditCardProducer cardProducer = new CreditCardProducer(dataMaster, dateProducer)
 		then:
-		cardProducer.expiryDate() == EXPIRY_DATE
+			cardProducer.expiryDate() == EXPIRY_DATE
 	}
 
 	def "should return card expiry date string"() {
 		given:
-		dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
+			dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
 		when:
-		CreditCardProducer cardProducer = new CreditCardProducer(dataMaster, dateProducer)
+			CreditCardProducer cardProducer = new CreditCardProducer(dataMaster, dateProducer)
 		then:
-		cardProducer.expiryDateAsString() == "02/09"
+			cardProducer.expiryDateAsString() == "02/09"
 	}
 
 

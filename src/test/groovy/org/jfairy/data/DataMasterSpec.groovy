@@ -19,35 +19,35 @@ class DataMasterSpec extends Specification {
 
 	def "should read first names"() {
 		when:
-		DataMaster dataMaster = new DataMaster();
-		dataMaster.readResources("fairyland_en.yml")
+			DataMaster dataMaster = new DataMaster();
+			dataMaster.readResources("fairyland_en.yml")
 
-		def firstNames = dataMaster.getStringMap(Person.FIRST_NAME)
+			def firstNames = dataMaster.getStringMap(Person.FIRST_NAME)
 		then:
-		firstNames.size() > 0
-		firstNames.keySet().size() > 0
+			firstNames.size() > 0
+			firstNames.keySet().size() > 0
 	}
 
 	def "should return men"() {
 		setup:
-		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-		def male = data.getValuesOfType(Person.FIRST_NAME, "male");
+			def male = data.getValuesOfType(Person.FIRST_NAME, "male");
 
 		then:
-		male == "Mark"
+			male == "Mark"
 	}
 
 	def "should return one of women"() {
 		setup:
-		data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-		def female = data.getValuesOfType(Person.FIRST_NAME, "female");
+			def female = data.getValuesOfType(Person.FIRST_NAME, "female");
 
 		then:
-		female == "Ana" || "Ivon"
+			female == "Ana" || "Ivon"
 	}
 
 }

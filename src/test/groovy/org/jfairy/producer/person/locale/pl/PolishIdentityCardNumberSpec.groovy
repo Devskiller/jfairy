@@ -9,7 +9,9 @@ import org.jfairy.producer.DateProducer
 import org.joda.time.DateTime
 import spock.lang.Specification
 
-import static org.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.*
+import static org.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.ISSUING_BEGIN
+import static org.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.LETTER_WEIGHT
+import static org.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.MAX_DIGITS_PART_VALUE
 
 /**
  * @author mariuszs
@@ -26,13 +28,13 @@ class PolishIdentityCardNumberSpec extends Specification {
 	void "should generate proper id number"() {
 		def max = (2013 - ISSUING_BEGIN) * LETTER_WEIGHT
 		setup:
-		baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A' .. 'Z').size() // ABA
-		baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
+			baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
+			baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
 		when:
-		PolishIdentityCardNumber generator = new PolishIdentityCardNumber(dateGenerator, baseProducer)
-		def id = generator.generate(DateTime.parse("2013-12-12"))
+			PolishIdentityCardNumber generator = new PolishIdentityCardNumber(dateGenerator, baseProducer)
+			def id = generator.generate(DateTime.parse("2013-12-12"))
 		then:
-		id == "ABA300000"
-		generator.isValid(id)
+			id == "ABA300000"
+			generator.isValid(id)
 	}
 }

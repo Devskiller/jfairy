@@ -3,11 +3,10 @@ package org.jfairy.producer;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 
+import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import javax.inject.Singleton;
 
 import static java.util.Collections.shuffle;
 
@@ -52,6 +51,7 @@ public class BaseProducer {
 
 	/**
 	 * Returns random enum value
+	 *
 	 * @param enumType enum class
 	 * @return random enum value
 	 */
@@ -112,7 +112,7 @@ public class BaseProducer {
 
 	/**
 	 * Returns random long value from a range (including both range boundaries).
-	 *
+	 * <p/>
 	 * It required to satisfied condition min &lt;= max.
 	 *
 	 * @param min lower bound of a range
