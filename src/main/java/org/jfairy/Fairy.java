@@ -15,6 +15,7 @@ import org.jfairy.producer.person.PersonProperties;
 import org.jfairy.producer.text.TextProducer;
 
 import javax.inject.Provider;
+import java.util.Random;
 
 public final class Fairy {
 
@@ -36,6 +37,14 @@ public final class Fairy {
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 		this.creditCardProvider = creditCardProvider;
+	}
+
+	public static Fairy create(){
+		return Bootstrap.create();
+	}
+
+	public static Bootstrap.Builder builder() {
+		return Bootstrap.builder();
 	}
 
 	/**

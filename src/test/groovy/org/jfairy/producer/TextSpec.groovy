@@ -1,6 +1,7 @@
 package org.jfairy.producer
 
 import org.jfairy.Bootstrap
+import org.jfairy.Fairy
 import org.jfairy.producer.text.TextProducer
 import spock.lang.Specification
 
@@ -9,7 +10,7 @@ class TextSpec extends Specification {
 	private TextProducer text;
 
 	def setup() {
-		text = Bootstrap.create().textProducer()
+		text = Fairy.create().textProducer()
 	}
 
 	def "should instantiate Text producer with Text object"() {
