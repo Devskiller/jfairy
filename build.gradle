@@ -6,6 +6,7 @@ apply plugin: "sonar-runner"
 apply plugin: 'jacoco'
 apply plugin: 'pitest'
 apply plugin: 'idea'
+apply plugin: 'versions'
 
 ext.isReleaseVersion = !project.version.endsWith("SNAPSHOT")
 ext.shouldJacocoBeEnabled = determineIfJacocoShouldBeEnabled()
@@ -16,10 +17,12 @@ buildscript {
 	repositories {
 		mavenCentral()
 		mavenLocal()
+        maven { url "https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo" }
 	}
 	dependencies {
-		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.32.0'
+		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.0.0'
 		classpath 'org.hibernate.build.gradle:gradle-upload-auth-plugin:1.1.1'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-2'
 	}
 }
 
@@ -30,7 +33,7 @@ repositories {
 
 dependencies {
 	compile 'org.yaml:snakeyaml:[1.0,2.0)'
-	compile 'org.apache.commons:commons-lang3:3.2'
+	compile 'org.apache.commons:commons-lang3:3.3.2'
 	compile 'com.google.guava:guava:[15.0,)'
 	compile 'org.slf4j:slf4j-api:1.7.7'
 	compile 'joda-time:joda-time:2.3'
@@ -38,7 +41,7 @@ dependencies {
 	compile 'com.google.inject.extensions:guice-assistedinject:3.0'
 	testCompile 'commons-validator:commons-validator:1.4.0'
 	testCompile 'ch.qos.logback:logback-classic:1.1.2'
-	testCompile 'org.codehaus.groovy:groovy-all:2.3.0'
+	testCompile 'org.codehaus.groovy:groovy-all:2.3.1'
 	testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 	testCompile 'cglib:cglib-nodep:2.2.2'
 	testCompile 'org.objenesis:objenesis:2.1'
