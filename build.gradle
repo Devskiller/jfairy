@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-	compile 'org.yaml:snakeyaml:[1.0,2.0)'
+	compile 'org.yaml:snakeyaml:[1.9,2.0)'
 	compile 'org.apache.commons:commons-lang3:3.3.2'
 	compile 'com.google.guava:guava:[15.0,)'
 	compile 'org.slf4j:slf4j-api:1.7.7'
