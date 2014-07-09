@@ -13,20 +13,27 @@ public class Address {
 
 	private final String postalCodeFormat;
 	private final String city;
+	private final String postalCode;
 
 	@Inject
 	public Address(DataMaster dataMaster, BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 		postalCodeFormat = dataMaster.getRandomValue(POSTAL_CODE_FORMAT);
 		city = dataMaster.getRandomValue(CITY);
+		postalCode = baseProducer.numerify(postalCodeFormat);
 	}
 
 	public String postalCode() {
-		return baseProducer.numerify(postalCodeFormat);
+		return postalCode;
 	}
 
 	public String city() {
 		return city;
 	}
 
+	@Override
+	public String toString() {
+		return postalCode + " " + city;
+	}
 }
+

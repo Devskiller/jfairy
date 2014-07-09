@@ -1,17 +1,9 @@
-/*
- * Copyright (c) 2013 Codearte and authors
- */
-
 package org.jfairy.producer.locale.pl
 
 import org.jfairy.producer.BaseProducer
 import spock.lang.Specification
 import spock.lang.Unroll
 
-/**
- * @author mariuszs
- * @since 02.11.13.
- */
 class NIPSpec extends Specification {
 
 	def baseProducer = new BaseProducer(new Random())

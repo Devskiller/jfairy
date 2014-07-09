@@ -15,7 +15,7 @@ import org.jfairy.producer.person.PersonProperties;
 import org.jfairy.producer.text.TextProducer;
 
 import javax.inject.Provider;
-import java.util.Random;
+import java.util.Locale;
 
 public final class Fairy {
 
@@ -29,7 +29,7 @@ public final class Fairy {
 
 	@Inject
 	Fairy(TextProducer textProducer, PersonFactory personFactory, Provider<Company> company, NetworkProducer networkProducer,
-				BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider) {
+		  BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider) {
 		this.textProducer = textProducer;
 		this.personFactory = personFactory;
 		this.company = company;
@@ -39,9 +39,14 @@ public final class Fairy {
 		this.creditCardProvider = creditCardProvider;
 	}
 
-	public static Fairy create(){
+	public static Fairy create() {
 		return Bootstrap.create();
 	}
+
+	public static Fairy create(Locale locale) {
+		return Bootstrap.create(locale);
+	}
+
 
 	public static Bootstrap.Builder builder() {
 		return Bootstrap.builder();
