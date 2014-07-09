@@ -11,7 +11,7 @@ class Foo {
         def person = Fairy.create(Locale.default).person();
 
         println person.address
-        println person.address.postalCode()
+        println person.address.postalCode
     }
 
 }

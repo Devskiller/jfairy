@@ -1,33 +1,20 @@
 package org.jfairy.producer.person;
 
-import com.google.inject.Inject;
-import org.jfairy.data.DataMaster;
-import org.jfairy.producer.BaseProducer;
-
 public class Address {
 
-	private static final String POSTAL_CODE_FORMAT = "postal_code";
-	private static final String CITY = "city";
-
-	private final BaseProducer baseProducer;
-
-	private final String postalCodeFormat;
-	private final String city;
 	private final String postalCode;
+	private final String city;
 
-	@Inject
-	public Address(DataMaster dataMaster, BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-		postalCodeFormat = dataMaster.getRandomValue(POSTAL_CODE_FORMAT);
-		city = dataMaster.getRandomValue(CITY);
-		postalCode = baseProducer.numerify(postalCodeFormat);
+	public Address(String postalCode, String city) {
+		this.postalCode = postalCode;
+		this.city = city;
 	}
 
-	public String postalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public String city() {
+	public String getCity() {
 		return city;
 	}
 
@@ -36,4 +23,3 @@ public class Address {
 		return postalCode + " " + city;
 	}
 }
-

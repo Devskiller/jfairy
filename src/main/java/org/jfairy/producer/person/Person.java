@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2013 Codearte
- */
 package org.jfairy.producer.person;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -40,9 +37,9 @@ public class Person {
 	private final DataMaster dataMaster;
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
-	private final Address address;
 	private final NationalIdentificationNumber nationalIdentificationNumber;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
+	private final AddressProvider addressProvider;
 
 	private String firstName;
 	private String middleName;
@@ -61,20 +58,21 @@ public class Person {
 	// FIXME: Too many parameters
 	@Inject
 	public Person(DataMaster dataMaster,
-								DateProducer dateProducer,
-								BaseProducer baseProducer,
-								Address address,
-								NationalIdentificationNumber nationalIdentificationNumber,
-								NationalIdentityCardNumber nationalIdentityCardNumber,
-								Company company,
-								@Assisted PersonProperties.PersonProperty... personProperties) {
+				  DateProducer dateProducer,
+				  BaseProducer baseProducer,
+				  NationalIdentificationNumber nationalIdentificationNumber,
+				  NationalIdentityCardNumber nationalIdentityCardNumber,
+				  AddressProvider addressProvider,
+				  Company company,
+
+				  @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
-		this.address = address;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
+		this.addressProvider = addressProvider;
 		//fixme - should be created only if needed
 		this.company = company;
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
@@ -208,7 +206,7 @@ public class Person {
 	}
 
 	public Address getAddress() {
-		return address;
+		return addressProvider.get();
 	}
 
 }
