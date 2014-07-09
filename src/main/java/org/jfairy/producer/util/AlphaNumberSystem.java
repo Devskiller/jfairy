@@ -1,16 +1,8 @@
-/*
- * Copyright (c) 2013 Codearte and authors
- */
-
 package org.jfairy.producer.util;
 
-/**
- * @author mariuszs
- * @since 01.11.13.
- */
 public final class AlphaNumberSystem {
 
-	static final char[] DIGITS = {
+	private static final char[] DIGITS = {
 			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 			'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 	};

@@ -5,7 +5,7 @@ import com.google.inject.Provider;
 import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
 
-public class AddressProvider implements Provider<Address> {
+class AddressProvider implements Provider<Address> {
 
 	private static final String POSTAL_CODE_FORMAT = "postal_code";
 	private static final String CITY = "city";

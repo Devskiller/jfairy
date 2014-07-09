@@ -1,7 +1,6 @@
 package org.jfairy.producer.person;
 
 import org.jfairy.producer.company.Company;
-import org.jfairy.producer.company.CompanyProvider;
 import org.joda.time.DateTime;
 
 import static org.jfairy.producer.person.Person.Sex.FEMALE;
@@ -10,7 +9,7 @@ import static org.jfairy.producer.person.Person.Sex.MALE;
 public class Person {
 
 	public static enum Sex {
-		MALE, FEMALE;
+		MALE, FEMALE
 	}
 
 	private final Address address;
@@ -50,7 +49,7 @@ public class Person {
 	}
 
 	public String nationalIdentificationNumber() {
-		return  nationalIdentificationNumber;
+		return nationalIdentificationNumber;
 	}
 
 	public String firstName() {

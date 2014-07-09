@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
 import org.jfairy.producer.company.Company;
+import org.jfairy.producer.company.CompanyFactory;
 import org.jfairy.producer.company.CompanyProvider;
 import org.jfairy.producer.net.NetworkProducer;
 import org.jfairy.producer.payment.CreditCard;
@@ -22,22 +23,22 @@ public final class Fairy {
 
 	private final TextProducer textProducer;
 	private final PersonFactory personFactory;
-	private final Provider<CompanyProvider> companyProvider;
 	private final NetworkProducer networkProducer;
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 	private final Provider<CreditCard> creditCardProvider;
+	private final CompanyFactory companyFactory;
 
 	@Inject
-	Fairy(TextProducer textProducer, PersonFactory personFactory, Provider<CompanyProvider> company, NetworkProducer networkProducer,
-		  BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider) {
+	Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
+		  BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider, CompanyFactory companyFactory) {
 		this.textProducer = textProducer;
 		this.personFactory = personFactory;
-		this.companyProvider = company;
 		this.networkProducer = networkProducer;
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 		this.creditCardProvider = creditCardProvider;
+		this.companyFactory = companyFactory;
 	}
 
 	public static Fairy create() {
@@ -78,7 +79,7 @@ public final class Fairy {
 	 * @return A {@link org.jfairy.producer.company.CompanyProvider} instance
 	 */
 	public Company company() {
-		return companyProvider.get().get();
+		return companyFactory.produceCompany().get();
 	}
 
 	/**

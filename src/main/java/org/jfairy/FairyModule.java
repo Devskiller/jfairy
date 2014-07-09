@@ -3,6 +3,7 @@ package org.jfairy;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import org.jfairy.producer.VATIdentificationNumber;
+import org.jfairy.producer.company.CompanyFactory;
 import org.jfairy.producer.locale.pl.NIP;
 import org.jfairy.producer.person.NationalIdentificationNumber;
 import org.jfairy.producer.person.NationalIdentityCardNumber;
@@ -32,5 +33,6 @@ class FairyModule extends AbstractModule {
 		bind(VATIdentificationNumber.class).to(NIP.class);
 		install(new FactoryModuleBuilder().build(PersonFactory.class));
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
+		install(new FactoryModuleBuilder().build(CompanyFactory.class));
 	}
 }

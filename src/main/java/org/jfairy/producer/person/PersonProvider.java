@@ -20,8 +20,8 @@ import static org.jfairy.producer.person.Person.Sex.MALE;
 
 public class PersonProvider implements Provider<Person> {
 
-	public static final int MIN_AGE = 1;
-	public static final int MAX_AGE = 100;
+	static final int MIN_AGE = 1;
+	static final int MAX_AGE = 100;
 
 	private Person.Sex sex;
 	private String telephoneNumberFormat;

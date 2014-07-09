@@ -2,7 +2,6 @@ package org.jfairy.producer.person;
 
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.company.Company;
-import org.jfairy.producer.company.CompanyProvider;
 
 import javax.inject.Inject;
 
