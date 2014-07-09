@@ -8,6 +8,7 @@ import org.jfairy.data.DataMaster;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
 import org.jfairy.producer.company.Company;
+import org.jfairy.producer.company.CompanyProvider;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -102,7 +103,7 @@ public class PersonProvider implements Provider<Person> {
 						  NationalIdentificationNumber nationalIdentificationNumber,
 						  NationalIdentityCardNumber nationalIdentityCardNumber,
 						  AddressProvider addressProvider,
-						  Company company,
+						  CompanyProvider companyProvider,
 
 						  @Assisted PersonProperties.PersonProperty... personProperties) {
 
@@ -113,7 +114,7 @@ public class PersonProvider implements Provider<Person> {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.addressProvider = addressProvider;
 		//fixme - should be created only if needed
-		this.company = company;
+		this.company = companyProvider.get();
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
 			personProperty.apply(this);
 		}

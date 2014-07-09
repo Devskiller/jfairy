@@ -32,6 +32,6 @@ class CompanySpec extends Specification {
 			domainValidator.isValid(company.domain())
 			emailValidator.isValid(company.email())
 			urlValidator.isValid(company.url())
-			NIP.isValid(company.vatIdentificationNumber())
+			NIP.isValid(company.vatIdentificationNumber)
 	}
 }

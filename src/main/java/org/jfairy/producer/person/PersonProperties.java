@@ -2,6 +2,7 @@ package org.jfairy.producer.person;
 
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.company.Company;
+import org.jfairy.producer.company.CompanyProvider;
 
 import javax.inject.Inject;
 
@@ -65,8 +66,8 @@ public final class PersonProperties {
 	public static PersonProperty withCompany(final Company company) {
 		return new PersonProperty() {
 			@Override
-			public void apply(PersonProvider person) {
-				person.setCompany(company);
+			public void apply(PersonProvider personProvider) {
+				personProvider.setCompany(company);
 			}
 		};
 	}

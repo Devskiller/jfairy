@@ -1,6 +1,7 @@
 package org.jfairy.producer.person;
 
 import org.jfairy.producer.company.Company;
+import org.jfairy.producer.company.CompanyProvider;
 import org.joda.time.DateTime;
 
 import static org.jfairy.producer.person.Person.Sex.FEMALE;
