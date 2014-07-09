@@ -197,3 +197,4 @@ boolean determineIfJacocoShouldBeEnabled() {
 	logger.debug "Is JaCoCo enabled: $shouldBeEnabled"
 	shouldBeEnabled
 }
+
