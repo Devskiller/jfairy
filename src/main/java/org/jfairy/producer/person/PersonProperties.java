@@ -19,7 +19,7 @@ public final class PersonProperties {
 		@Inject
 		private BaseProducer baseProducer;
 
-		public abstract void apply(Person person);
+		public abstract void apply(PersonProvider person);
 
 		protected BaseProducer getBaseProducer() {
 			return baseProducer;
@@ -29,7 +29,7 @@ public final class PersonProperties {
 	public static PersonProperty male() {
 		return new PersonProperty() {
 			@Override
-			public void apply(Person person) {
+			public void apply(PersonProvider person) {
 				person.setSex(Person.Sex.MALE);
 			}
 		};
@@ -38,7 +38,7 @@ public final class PersonProperties {
 	public static PersonProperty female() {
 		return new PersonProperty() {
 			@Override
-			public void apply(Person person) {
+			public void apply(PersonProvider person) {
 				person.setSex(Person.Sex.FEMALE);
 			}
 		};
@@ -47,8 +47,8 @@ public final class PersonProperties {
 	public static PersonProperty minAge(final int minAge) {
 		return new PersonProperty() {
 			@Override
-			public void apply(Person person) {
-				person.setAge(getBaseProducer().randomBetween(minAge, Person.MAX_AGE));
+			public void apply(PersonProvider person) {
+				person.setAge(getBaseProducer().randomBetween(minAge, PersonProvider.MAX_AGE));
 			}
 		};
 	}
@@ -56,7 +56,7 @@ public final class PersonProperties {
 	public static PersonProperty telephoneFormat(final String telephoneFormat) {
 		return new PersonProperty() {
 			@Override
-			public void apply(Person person) {
+			public void apply(PersonProvider person) {
 				person.telephoneNumberFormat(telephoneFormat);
 			}
 		};
@@ -65,7 +65,7 @@ public final class PersonProperties {
 	public static PersonProperty withCompany(final Company company) {
 		return new PersonProperty() {
 			@Override
-			public void apply(Person person) {
+			public void apply(PersonProvider person) {
 				person.setCompany(company);
 			}
 		};

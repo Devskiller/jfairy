@@ -68,7 +68,7 @@ public final class Fairy {
 	 * @return A {@link org.jfairy.producer.person.Person} instance
 	 */
 	public Person person(PersonProperties.PersonProperty... personProperties) {
-		return personFactory.producePerson(personProperties);
+		return personFactory.producePerson(personProperties).get();
 	}
 
 	/**

@@ -124,7 +124,7 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def postalCode = person.getAddress().postalCode()
+			def postalCode = person.getAddress().postalCode
 		then:
 			postalCode
 	}
@@ -133,7 +133,7 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def city = person.getAddress().city()
+			def city = person.getAddress().city
 		then:
 			city
 	}

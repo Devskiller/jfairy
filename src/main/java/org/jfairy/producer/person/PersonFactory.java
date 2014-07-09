@@ -5,6 +5,6 @@ package org.jfairy.producer.person;
  */
 public interface PersonFactory {
 
-	Person producePerson(PersonProperties.PersonProperty... personProperties);
+	PersonProvider producePerson(PersonProperties.PersonProperty... personProperties);
 
 }

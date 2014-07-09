@@ -6,6 +6,7 @@ package org.jfairy.data
 
 import org.jfairy.producer.BaseProducer
 import org.jfairy.producer.person.Person
+import org.jfairy.producer.person.PersonProvider
 import spock.lang.Specification
 
 class DataMasterSpec extends Specification {
@@ -22,7 +23,7 @@ class DataMasterSpec extends Specification {
 			DataMaster dataMaster = new DataMaster();
 			dataMaster.readResources("jfairy_en.yml")
 
-			def firstNames = dataMaster.getStringMap(Person.FIRST_NAME)
+			def firstNames = dataMaster.getStringMap(PersonProvider.FIRST_NAME)
 		then:
 			firstNames.size() > 0
 			firstNames.keySet().size() > 0
@@ -30,10 +31,10 @@ class DataMasterSpec extends Specification {
 
 	def "should return men"() {
 		setup:
-			data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getStringMap(PersonProvider.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-			def male = data.getValuesOfType(Person.FIRST_NAME, "male");
+			def male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male");
 
 		then:
 			male == "Mark"
@@ -41,10 +42,10 @@ class DataMasterSpec extends Specification {
 
 	def "should return one of women"() {
 		setup:
-			data.getStringMap(Person.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getStringMap(PersonProvider.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-			def female = data.getValuesOfType(Person.FIRST_NAME, "female");
+			def female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female");
 
 		then:
 			female == "Ana" || "Ivon"
