@@ -36,13 +36,14 @@ public class PersonProvider implements Provider<Person> {
 	private Integer age;
 	private DateTime dateOfBirth;
 	private Company company;
-
 	private final DataMaster dataMaster;
+
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 	private final NationalIdentificationNumber nationalIdentificationNumber;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
 	private final AddressProvider addressProvider;
+	private final CompanyProvider companyProvider;
 
 	@Inject
 	public PersonProvider(DataMaster dataMaster,
@@ -61,8 +62,8 @@ public class PersonProvider implements Provider<Person> {
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.addressProvider = addressProvider;
+		this.companyProvider = companyProvider;
 		//fixme - should be created only if needed
-		this.company = companyProvider.get();
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
 			personProperty.apply(this);
 		}
@@ -73,6 +74,10 @@ public class PersonProvider implements Provider<Person> {
 
 		if (sex == null) {
 			sex = randomBoolean() ? MALE : FEMALE;
+		}
+
+		if (company == null){
+			company = companyProvider.get();
 		}
 
 		String firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
