@@ -4,7 +4,7 @@ import org.iban4j.IbanUtil
 import org.jfairy.producer.BaseProducer
 import spock.lang.Specification
 
-class IBANProducerSpec extends Specification {
+class IBANSpec extends Specification {
     private baseProducer
 
 
@@ -21,12 +21,13 @@ class IBANProducerSpec extends Specification {
      */
     def "should return valid iban"() {
         when:
-            IBAN iban = new IBAN(baseProducer)
-            iban.accountNumber = "00234573201"
-            iban.countryCode = "AT"
+            IBANProvider iban = new IBANProvider(baseProducer,
+					IBANProperties.accountNumber("00234573201"),
+					IBANProperties.country("AT")
+			);
 
         then:
-            IbanUtil.validate(iban.iban);
+            IbanUtil.validate(iban.get().ibanNumber);
     }
 
     /**
@@ -41,8 +42,8 @@ class IBANProducerSpec extends Specification {
 
     def "should return valid polish iban"() {
         when:
-            IBAN iban = new IBAN(baseProducer)
+            IBANProvider iban = new IBANProvider(baseProducer)
         then:
-            IbanUtil.validate(iban.iban);
+            IbanUtil.validate(iban.get().ibanNumber);
     }
 }

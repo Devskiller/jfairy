@@ -8,7 +8,6 @@ import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
 import org.jfairy.producer.company.Company;
 import org.jfairy.producer.company.CompanyFactory;
-import org.jfairy.producer.company.CompanyProvider;
 import org.jfairy.producer.net.NetworkProducer;
 import org.jfairy.producer.payment.CreditCard;
 import org.jfairy.producer.person.Person;
@@ -70,7 +69,7 @@ public final class Fairy {
 	 * @return A {@link org.jfairy.producer.person.Person} instance
 	 */
 	public Person person(PersonProperties.PersonProperty... personProperties) {
-		return personFactory.producePerson(personProperties).get();
+		return personFactory.producePersonProvider(personProperties).get();
 	}
 
 	/**

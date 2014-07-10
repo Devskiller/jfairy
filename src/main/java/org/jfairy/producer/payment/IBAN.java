@@ -1,177 +1,74 @@
 package org.jfairy.producer.payment;
 
-import org.apache.commons.lang3.StringUtils;
-import org.iban4j.CountryCode;
-import org.iban4j.Iban;
-import org.iban4j.bban.BbanStructure;
-import org.iban4j.bban.BbanStructureEntry;
-import org.jfairy.producer.BaseProducer;
-
-import javax.inject.Inject;
-import java.math.BigInteger;
-
-/**
- * ALPHA: Under development
- */
 public class IBAN {
 
-    private final BaseProducer baseProducer;
+	private final String accountNumber;
+	private final String identificationNumber;
+	private final String branchCode;
+	private final String checkDigit;
+	private final String accountType;
+	private final String bankCode;
+	private final String bban;
+	private final String country;
+	private final String nationalCheckDigit;
+	private final String ownerAccountType;
+	private final String ibanNumber;
 
-    private String accountNumber;
-    private String identificationNumber;
-    private String branchCode;
-    private String checkDigit;
-    private String accountType;
-    private String bankCode;
-    private String bban;
-    private CountryCode countryCode;
-    private String nationalCheckDigit;
-    private String ownerAccountType;
-    private String ibanNumber;
+	public IBAN(String accountNumber, String identificationNumber, String branchCode, String checkDigit, String accountType, String bankCode, String bban, String country, String nationalCheckDigit, String ownerAccountType, String ibanNumber) {
+		this.accountNumber = accountNumber;
+		this.identificationNumber = identificationNumber;
+		this.branchCode = branchCode;
+		this.checkDigit = checkDigit;
+		this.accountType = accountType;
+		this.bankCode = bankCode;
+		this.bban = bban;
+		this.country = country;
+		this.nationalCheckDigit = nationalCheckDigit;
+		this.ownerAccountType = ownerAccountType;
+		this.ibanNumber = ibanNumber;
+	}
 
-    @Inject
-    public IBAN(BaseProducer baseProducer) {
-        this.baseProducer = baseProducer;
-        generate();
-    }
+	public String getAccountNumber() {
+		return accountNumber;
+	}
 
-    private static BbanStructureEntry extractBbanEntry(final CountryCode countryCode, final BbanStructureEntry.EntryType entryType) {
+	public String getIdentificationNumber() {
+		return identificationNumber;
+	}
 
-        for (BbanStructureEntry entry : BbanStructure.forCountry(countryCode).getEntries()) {
-            if (entry.getEntryType() == entryType) {
-                return entry;
-            }
-        }
-        return null;
-    }
+	public String getBranchCode() {
+		return branchCode;
+	}
 
-    public final void generate() {
-        try {
+	public String getCheckDigit() {
+		return checkDigit;
+	}
 
-            if (countryCode == null) {
-                countryCode = CountryCode.PL;
-            }
+	public String getAccountType() {
+		return accountType;
+	}
 
-            if (StringUtils.isBlank(accountNumber)) {
-                accountNumber = generateRequiredData(BbanStructureEntry.EntryType.c);
-            }
-            if (StringUtils.isBlank(bankCode)) {
-                bankCode = generateRequiredData(BbanStructureEntry.EntryType.b);
-            }
-            if (StringUtils.isBlank(branchCode)) {
-                branchCode = generateRequiredData(BbanStructureEntry.EntryType.s);
-            }
-            if (StringUtils.isBlank(nationalCheckDigit)) {
-                nationalCheckDigit = generateRequiredData(BbanStructureEntry.EntryType.x);
-            }
+	public String getBankCode() {
+		return bankCode;
+	}
 
-            Iban iban = new Iban.Builder()
-                .countryCode(CountryCode.PL)
-                .bankCode(bankCode)
-                .branchCode(branchCode)
-                .nationalCheckDigit(nationalCheckDigit)
-                .accountNumber(accountNumber)
-                .build();
+	public String getBban() {
+		return bban;
+	}
 
-            identificationNumber = iban.getIdentificationNumber();
-            branchCode = iban.getBranchCode();
-            checkDigit = iban.getCheckDigit();
-            accountType = iban.getAccountType();
-            bankCode = iban.getBankCode();
-            bban = iban.getBban();
-            countryCode = iban.getCountryCode();
-            nationalCheckDigit = iban.getNationalCheckDigit();
-            ownerAccountType = iban.getOwnerAccountType();
-            accountNumber = iban.getAccountNumber();
-            ibanNumber = iban.toString();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+	public String getCountry() {
+		return country;
+	}
 
-    }
+	public String getNationalCheckDigit() {
+		return nationalCheckDigit;
+	}
 
-    private String generateRequiredData(BbanStructureEntry.EntryType type) {
-        String value = "";
-        BbanStructureEntry entry = extractBbanEntry(countryCode, type);
-        if (entry != null) {
-            int length = entry.getLength();
-            value = "" + baseProducer.randomBetween(0L, BigInteger.TEN.pow(length).longValue() - 1);
-            value = StringUtils.leftPad(value, length, "0");
-//            System.out.println(type.toString() + "/len" + length + " -> " + value);
-        }
-        return value;
-    }
+	public String getOwnerAccountType() {
+		return ownerAccountType;
+	}
 
-    public void setNationalCheckDigit(String nationalCheckDigit) {
-        this.nationalCheckDigit = nationalCheckDigit;
-        generate();
-    }
-
-    public void setBranchCode(String branchCode) {
-        this.branchCode = branchCode;
-        generate();
-    }
-
-    public String getIban() {
-        return ibanNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-        generate();
-    }
-
-    public void setBankCode(String bankCode) {
-        this.bankCode = bankCode;
-        generate();
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = CountryCode.valueOf(countryCode);
-        generate();
-    }
-
-    public String iban() {
-        return accountNumber;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public String getIdentificationNumber() {
-        return identificationNumber;
-    }
-
-    public String getBranchCode() {
-        return branchCode;
-    }
-
-    public String getCheckDigit() {
-        return checkDigit;
-    }
-
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public String getBankCode() {
-        return bankCode;
-    }
-
-    public String getBban() {
-        return bban;
-    }
-
-    public String getCountryCode() {
-        return countryCode.getName();
-    }
-
-    public String getNationalCheckDigit() {
-        return nationalCheckDigit;
-    }
-
-    public String getOwnerAccountType() {
-        return ownerAccountType;
-    }
+	public String getIbanNumber() {
+		return ibanNumber;
+	}
 }

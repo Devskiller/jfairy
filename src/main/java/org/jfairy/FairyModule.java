@@ -5,6 +5,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import org.jfairy.producer.VATIdentificationNumber;
 import org.jfairy.producer.company.CompanyFactory;
 import org.jfairy.producer.locale.pl.NIP;
+import org.jfairy.producer.payment.IBANFactory;
 import org.jfairy.producer.person.NationalIdentityCardNumber;
 import org.jfairy.producer.person.PersonFactory;
 import org.jfairy.producer.person.locale.pl.PeselFactory;
@@ -27,7 +28,6 @@ class FairyModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(Random.class).toInstance(random);
-//		bind(NationalIdentificationNumber.class).to(PeselProvider.class);
 		bind(NationalIdentityCardNumber.class).to(PolishIdentityCardNumber.class);
 		bind(VATIdentificationNumber.class).to(NIP.class);
 
@@ -35,5 +35,6 @@ class FairyModule extends AbstractModule {
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
 		install(new FactoryModuleBuilder().build(CompanyFactory.class));
 		install(new FactoryModuleBuilder().build(PeselFactory.class));
+		install(new FactoryModuleBuilder().build(IBANFactory.class));
 	}
 }
