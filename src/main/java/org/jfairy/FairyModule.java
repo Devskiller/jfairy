@@ -5,10 +5,9 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import org.jfairy.producer.VATIdentificationNumber;
 import org.jfairy.producer.company.CompanyFactory;
 import org.jfairy.producer.locale.pl.NIP;
-import org.jfairy.producer.person.NationalIdentificationNumber;
 import org.jfairy.producer.person.NationalIdentityCardNumber;
 import org.jfairy.producer.person.PersonFactory;
-import org.jfairy.producer.person.locale.pl.Pesel;
+import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberFactory;
 import org.jfairy.producer.person.locale.pl.PolishIdentityCardNumber;
 
 import java.util.Random;
@@ -28,11 +27,13 @@ class FairyModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(Random.class).toInstance(random);
-		bind(NationalIdentificationNumber.class).to(Pesel.class);
+//		bind(NationalIdentificationNumber.class).to(PeselProvider.class);
 		bind(NationalIdentityCardNumber.class).to(PolishIdentityCardNumber.class);
 		bind(VATIdentificationNumber.class).to(NIP.class);
+
 		install(new FactoryModuleBuilder().build(PersonFactory.class));
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
 		install(new FactoryModuleBuilder().build(CompanyFactory.class));
+		install(new FactoryModuleBuilder().build(NationalIdentificationNumberFactory.class));
 	}
 }

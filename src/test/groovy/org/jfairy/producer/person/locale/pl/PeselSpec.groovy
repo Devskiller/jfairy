@@ -7,13 +7,14 @@ import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static org.jfairy.producer.person.locale.pl.Pesel.isValid
+import static PeselProvider.isValid
+import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.issueDate
+import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.sex
 
 class PeselSpec extends Specification {
 
 	def randomGenerator = Mock(BaseProducer);
 	def dateGenerator = Mock(DateProducer);
-	def Pesel generator = new Pesel(dateGenerator, randomGenerator);
 
 	@Unroll
 	def "should validate #pesel as #valid"() {
@@ -34,11 +35,16 @@ class PeselSpec extends Specification {
 
 	@Unroll
 	def "should generate good pesel"() {
-		expect:
-			def pesel = generator.generate(DateTime.parse(date), Person.Sex.MALE);
 
-			pesel.startsWith(prefix)
-			isValid(pesel)
+		expect:
+			def PeselProvider generator = new PeselProvider(dateGenerator, randomGenerator,
+					issueDate(DateTime.parse(date)),
+					sex( Person.Sex.MALE));
+
+			def pesel = generator.get();
+
+			pesel.getValue().startsWith(prefix)
+			isValid(pesel.getValue())
 
 		where:
 			date         | prefix

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2013 Codearte and authors
- */
-
 package org.jfairy.producer.locale.pl;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -16,10 +12,6 @@ import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
-/**
- * @author mariuszs
- * @since 02.11.13.
- */
 public class NIP implements VATIdentificationNumber {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NIP.class);

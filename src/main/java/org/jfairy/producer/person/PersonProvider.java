@@ -9,6 +9,8 @@ import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
 import org.jfairy.producer.company.Company;
 import org.jfairy.producer.company.CompanyProvider;
+import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberFactory;
+import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -40,7 +42,7 @@ public class PersonProvider implements Provider<Person> {
 
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
-	private final NationalIdentificationNumber nationalIdentificationNumber;
+	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
@@ -49,7 +51,7 @@ public class PersonProvider implements Provider<Person> {
 	public PersonProvider(DataMaster dataMaster,
 						  DateProducer dateProducer,
 						  BaseProducer baseProducer,
-						  NationalIdentificationNumber nationalIdentificationNumber,
+						  NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
 						  NationalIdentityCardNumber nationalIdentityCardNumber,
 						  AddressProvider addressProvider,
 						  CompanyProvider companyProvider,
@@ -59,11 +61,11 @@ public class PersonProvider implements Provider<Person> {
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
-		this.nationalIdentificationNumber = nationalIdentificationNumber;
+		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.addressProvider = addressProvider;
 		this.companyProvider = companyProvider;
-		//fixme - should be created only if needed
+
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
 			personProperty.apply(this);
 		}
@@ -76,6 +78,7 @@ public class PersonProvider implements Provider<Person> {
 			sex = randomBoolean() ? MALE : FEMALE;
 		}
 
+		//fixme - should be created only if needed
 		if (company == null){
 			company = companyProvider.get();
 		}
@@ -99,9 +102,10 @@ public class PersonProvider implements Provider<Person> {
 		// FIXME: Replace this with baseProducer
 		String password = RandomStringUtils.randomAlphanumeric(8);
 
-		return new Person(firstName, middleName, lastName, addressProvider.get(), email, username
-				, password, sex, telephoneNumber, dateOfBirth, age,
-				nationalIdentityCardNumber.generate(), nationalIdentificationNumber(), company, companyEmail);
+		return new Person(firstName, middleName, lastName, addressProvider.get(), email,
+				username, password, sex, telephoneNumber, dateOfBirth, age,
+				nationalIdentityCardNumber.generate(), nationalIdentificationNumber(),
+				company, companyEmail);
 	}
 
 	private boolean randomBoolean() {
@@ -109,7 +113,9 @@ public class PersonProvider implements Provider<Person> {
 	}
 
 	private String nationalIdentificationNumber() {
-		return nationalIdentificationNumber.generate(new DateTime(dateOfBirth), sex);
+		return nationalIdentificationNumberFactory.produceNationalIdentificationNumber(
+				NationalIdentificationNumberProperties.issueDate(dateOfBirth),
+				NationalIdentificationNumberProperties.sex(sex)).get().getValue();
 	}
 
 	private String generateEmail(String firstName, String lastName) {

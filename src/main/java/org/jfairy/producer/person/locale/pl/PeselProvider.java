@@ -1,8 +1,9 @@
 package org.jfairy.producer.person.locale.pl;
 
+import com.google.inject.Provider;
+import com.google.inject.assistedinject.Assisted;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
-import org.jfairy.producer.person.NationalIdentificationNumber;
 import org.jfairy.producer.person.Person;
 import org.joda.time.DateTime;
 
@@ -16,7 +17,7 @@ import static java.lang.String.format;
  * Universal Electronic System for Registration of the Population)
  * More info: http://en.wikipedia.org/wiki/PESEL
  */
-public class Pesel implements NationalIdentificationNumber {
+public class PeselProvider implements Provider<NationalIdentificationNumber> {
 
 	private static final int PESEL_LENGTH = 11;
 	private static final int VALIDITY_IN_YEARS = 10;
@@ -31,35 +32,59 @@ public class Pesel implements NationalIdentificationNumber {
 
 	private static final int[] SEX_FIELDS = {0, 2, 4, 6, 8};
 
-	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
+	private final DateProducer dateProducer;
+	private DateTime issueDate;
+	private Person.Sex sex;
 
 	@Inject
-	public Pesel(DateProducer dateProducer, BaseProducer baseProducer) {
+	public PeselProvider(DateProducer dateProducer, BaseProducer baseProducer,
+						 @Assisted
+						 NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
+
+		with(properties);
+
+	}
+
+	public void with(NationalIdentificationNumberProperties.Property[] properties) {
+		for (NationalIdentificationNumberProperties.Property property : properties) {
+			property.apply(this);
+		}
 	}
 
 	@Override
-	public String generate() {
+	public NationalIdentificationNumber get() {
 
-		DateTime date = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS);
-		Person.Sex sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
+		if (issueDate == null) {
+			issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS);
+		}
+		if (sex == null) {
+			sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
+		}
 
-		return generate(date, sex);
+		return new NationalIdentificationNumber(generate());
 	}
 
-	@Override
-	public String generate(DateTime date, Person.Sex sex) {
-		int year = date.getYearOfCentury();
-		int month = calculateMonth(date.getMonthOfYear(), date.getYear());
-		int day = date.getDayOfMonth();
+	private String generate() {
+		int year = issueDate.getYearOfCentury();
+		int month = calculateMonth(issueDate.getMonthOfYear(), issueDate.getYear());
+		int day = issueDate.getDayOfMonth();
 		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
 		String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
 
 		return pesel + calculateChecksum(pesel);
+	}
+
+	public void setIssueDate(DateTime issueDate) {
+		this.issueDate = issueDate;
+	}
+
+	public void setSex(Person.Sex sex) {
+		this.sex = sex;
 	}
 
 	/**
@@ -98,5 +123,4 @@ public class Pesel implements NationalIdentificationNumber {
 		checksum = TEN - (sum % TEN);
 		return checksum % TEN;
 	}
-
 }
