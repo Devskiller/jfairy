@@ -22,14 +22,50 @@ public class PersonProvider implements Provider<Person> {
 
 	static final int MIN_AGE = 1;
 	static final int MAX_AGE = 100;
+	@VisibleForTesting
+	static final String FIRST_NAME = "firstNames";
+	@VisibleForTesting
+	static final String LAST_NAME = "lastNames";
+	@VisibleForTesting
+	static final String PERSONAL_EMAIL = "personalEmails";
+	@VisibleForTesting
+	static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
 
 	private Person.Sex sex;
 	private String telephoneNumberFormat;
 	private Integer age;
 	private DateTime dateOfBirth;
+	private Company company;
 
-	private boolean randomBoolean() {
-		return baseProducer.trueOrFalse();
+	private final DataMaster dataMaster;
+	private final DateProducer dateProducer;
+	private final BaseProducer baseProducer;
+	private final NationalIdentificationNumber nationalIdentificationNumber;
+	private final NationalIdentityCardNumber nationalIdentityCardNumber;
+	private final AddressProvider addressProvider;
+
+	@Inject
+	public PersonProvider(DataMaster dataMaster,
+						  DateProducer dateProducer,
+						  BaseProducer baseProducer,
+						  NationalIdentificationNumber nationalIdentificationNumber,
+						  NationalIdentityCardNumber nationalIdentityCardNumber,
+						  AddressProvider addressProvider,
+						  CompanyProvider companyProvider,
+
+						  @Assisted PersonProperties.PersonProperty... personProperties) {
+
+		this.dataMaster = dataMaster;
+		this.dateProducer = dateProducer;
+		this.baseProducer = baseProducer;
+		this.nationalIdentificationNumber = nationalIdentificationNumber;
+		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
+		this.addressProvider = addressProvider;
+		//fixme - should be created only if needed
+		this.company = companyProvider.get();
+		for (PersonProperties.PersonProperty personProperty : personProperties) {
+			personProperty.apply(this);
+		}
 	}
 
 	@Override
@@ -60,10 +96,14 @@ public class PersonProvider implements Provider<Person> {
 
 		return new Person(firstName, middleName, lastName, addressProvider.get(), email, username
 				, password, sex, telephoneNumber, dateOfBirth, age,
-				nationalIdentityCardNumber.generate(), nationalIdentificationNumber.generate(), company, companyEmail);
+				nationalIdentityCardNumber.generate(), nationalIdentificationNumber(), company, companyEmail);
 	}
 
-	public String nationalIdentificationNumber() {
+	private boolean randomBoolean() {
+		return baseProducer.trueOrFalse();
+	}
+
+	private String nationalIdentificationNumber() {
 		return nationalIdentificationNumber.generate(new DateTime(dateOfBirth), sex);
 	}
 
@@ -76,48 +116,6 @@ public class PersonProvider implements Provider<Person> {
 			}
 		}
 		return stripAccents(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
-	}
-
-	@VisibleForTesting
-	static final String FIRST_NAME = "firstNames";
-
-	@VisibleForTesting
-	static final String LAST_NAME = "lastNames";
-	@VisibleForTesting
-	static final String PERSONAL_EMAIL = "personalEmails";
-	@VisibleForTesting
-	static final String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
-	private final DataMaster dataMaster;
-
-	private final DateProducer dateProducer;
-	private final BaseProducer baseProducer;
-	private final NationalIdentificationNumber nationalIdentificationNumber;
-	private final NationalIdentityCardNumber nationalIdentityCardNumber;
-	private final AddressProvider addressProvider;
-	private Company company;
-
-	@Inject
-	public PersonProvider(DataMaster dataMaster,
-						  DateProducer dateProducer,
-						  BaseProducer baseProducer,
-						  NationalIdentificationNumber nationalIdentificationNumber,
-						  NationalIdentityCardNumber nationalIdentityCardNumber,
-						  AddressProvider addressProvider,
-						  CompanyProvider companyProvider,
-
-						  @Assisted PersonProperties.PersonProperty... personProperties) {
-
-		this.dataMaster = dataMaster;
-		this.dateProducer = dateProducer;
-		this.baseProducer = baseProducer;
-		this.nationalIdentificationNumber = nationalIdentificationNumber;
-		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
-		this.addressProvider = addressProvider;
-		//fixme - should be created only if needed
-		this.company = companyProvider.get();
-		for (PersonProperties.PersonProperty personProperty : personProperties) {
-			personProperty.apply(this);
-		}
 	}
 
 	public void setSex(Person.Sex sex) {
