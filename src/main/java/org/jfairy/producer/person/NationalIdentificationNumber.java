@@ -1,4 +1,4 @@
-package org.jfairy.producer.person.locale.pl;
+package org.jfairy.producer.person;
 
 public class NationalIdentificationNumber {
 

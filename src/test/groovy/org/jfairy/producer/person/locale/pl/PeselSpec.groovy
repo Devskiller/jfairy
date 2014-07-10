@@ -8,8 +8,8 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import static PeselProvider.isValid
-import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.dateOfBirth
-import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.sex
+import static PeselProperties.dateOfBirth
+import static PeselProperties.sex
 
 class PeselSpec extends Specification {
 

@@ -7,7 +7,7 @@ import org.jfairy.producer.company.CompanyFactory;
 import org.jfairy.producer.locale.pl.NIP;
 import org.jfairy.producer.person.NationalIdentityCardNumber;
 import org.jfairy.producer.person.PersonFactory;
-import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberFactory;
+import org.jfairy.producer.person.locale.pl.PeselFactory;
 import org.jfairy.producer.person.locale.pl.PolishIdentityCardNumber;
 
 import java.util.Random;
@@ -34,6 +34,6 @@ class FairyModule extends AbstractModule {
 		install(new FactoryModuleBuilder().build(PersonFactory.class));
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
 		install(new FactoryModuleBuilder().build(CompanyFactory.class));
-		install(new FactoryModuleBuilder().build(NationalIdentificationNumberFactory.class));
+		install(new FactoryModuleBuilder().build(PeselFactory.class));
 	}
 }

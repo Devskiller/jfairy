@@ -4,7 +4,6 @@
 
 package org.jfairy.producer
 
-import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties
 import spock.lang.Specification
 import spock.lang.Unroll
 

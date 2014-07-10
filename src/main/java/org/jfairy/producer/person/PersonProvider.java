@@ -9,8 +9,8 @@ import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
 import org.jfairy.producer.company.Company;
 import org.jfairy.producer.company.CompanyProvider;
-import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberFactory;
-import org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties;
+import org.jfairy.producer.person.locale.pl.PeselFactory;
+import org.jfairy.producer.person.locale.pl.PeselProperties;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -42,7 +42,7 @@ public class PersonProvider implements Provider<Person> {
 
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
-	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
+	private final PeselFactory peselFactory;
 	private final NationalIdentityCardNumber nationalIdentityCardNumber;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
@@ -51,7 +51,7 @@ public class PersonProvider implements Provider<Person> {
 	public PersonProvider(DataMaster dataMaster,
 						  DateProducer dateProducer,
 						  BaseProducer baseProducer,
-						  NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
+						  PeselFactory peselFactory,
 						  NationalIdentityCardNumber nationalIdentityCardNumber,
 						  AddressProvider addressProvider,
 						  CompanyProvider companyProvider,
@@ -61,7 +61,7 @@ public class PersonProvider implements Provider<Person> {
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
-		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
+		this.peselFactory = peselFactory;
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.addressProvider = addressProvider;
 		this.companyProvider = companyProvider;
@@ -113,9 +113,9 @@ public class PersonProvider implements Provider<Person> {
 	}
 
 	private String nationalIdentificationNumber() {
-		return nationalIdentificationNumberFactory.produceNationalIdentificationNumber(
-				NationalIdentificationNumberProperties.dateOfBirth(dateOfBirth),
-				NationalIdentificationNumberProperties.sex(sex)).get().getValue();
+		return peselFactory.producePeselProvider(
+				PeselProperties.dateOfBirth(dateOfBirth),
+				PeselProperties.sex(sex)).get().getValue();
 	}
 
 	private String generateEmail(String firstName, String lastName) {

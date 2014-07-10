@@ -4,6 +4,7 @@ import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import org.jfairy.producer.BaseProducer;
 import org.jfairy.producer.DateProducer;
+import org.jfairy.producer.person.NationalIdentificationNumber;
 import org.jfairy.producer.person.Person;
 import org.joda.time.DateTime;
 
@@ -40,7 +41,7 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 	@Inject
 	public PeselProvider(DateProducer dateProducer, BaseProducer baseProducer,
 						 @Assisted
-						 NationalIdentificationNumberProperties.Property... properties) {
+						 PeselProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -48,8 +49,8 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 
 	}
 
-	public void with(NationalIdentificationNumberProperties.Property[] properties) {
-		for (NationalIdentificationNumberProperties.Property property : properties) {
+	public void with(PeselProperties.Property[] properties) {
+		for (PeselProperties.Property property : properties) {
 			property.apply(this);
 		}
 	}
