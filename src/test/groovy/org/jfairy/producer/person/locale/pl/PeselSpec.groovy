@@ -8,7 +8,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import static PeselProvider.isValid
-import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.issueDate
+import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.dateOfBirth
 import static org.jfairy.producer.person.locale.pl.NationalIdentificationNumberProperties.sex
 
 class PeselSpec extends Specification {
@@ -38,7 +38,7 @@ class PeselSpec extends Specification {
 
 		expect:
 			def PeselProvider generator = new PeselProvider(dateGenerator, randomGenerator,
-					issueDate(DateTime.parse(date)),
+					dateOfBirth(DateTime.parse(date)),
 					sex( Person.Sex.MALE));
 
 			def pesel = generator.get();

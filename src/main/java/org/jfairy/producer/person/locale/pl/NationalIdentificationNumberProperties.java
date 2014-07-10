@@ -13,11 +13,11 @@ public final class NationalIdentificationNumberProperties {
 		public abstract void apply(PeselProvider nationalIdentificationNumberProvider);
 	}
 
-	public static Property issueDate(final DateTime issueDate) {
+	public static Property dateOfBirth(final DateTime dateOfBirth) {
 		return new Property() {
 			@Override
 			public void apply(PeselProvider nationalIdentificationNumberProvider) {
-				nationalIdentificationNumberProvider.setIssueDate(issueDate);
+				nationalIdentificationNumberProvider.setIssueDate(dateOfBirth);
 			}
 		};
 	}

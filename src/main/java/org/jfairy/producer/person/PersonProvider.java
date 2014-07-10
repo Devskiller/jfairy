@@ -114,7 +114,7 @@ public class PersonProvider implements Provider<Person> {
 
 	private String nationalIdentificationNumber() {
 		return nationalIdentificationNumberFactory.produceNationalIdentificationNumber(
-				NationalIdentificationNumberProperties.issueDate(dateOfBirth),
+				NationalIdentificationNumberProperties.dateOfBirth(dateOfBirth),
 				NationalIdentificationNumberProperties.sex(sex)).get().getValue();
 	}
 
