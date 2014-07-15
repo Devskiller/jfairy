@@ -88,6 +88,10 @@ public class Person {
 		return sex == FEMALE;
 	}
 
+    public Sex sex() {
+        return sex;
+    }
+
 	public String telephoneNumber() {
 		return telephoneNumber;
 	}
