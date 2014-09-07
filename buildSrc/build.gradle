@@ -1,0 +1,10 @@
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	localGroovy()
+	gradleApi()
+    compile "org.codehaus.sonar.runner:sonar-runner-api:2.4"
+}
