@@ -8,25 +8,29 @@ Usage
 
 In Maven projects (pom.xml):
 
-    <pom>
-        ...
-        <dependencies>
-            <dependency>
-                <groupId>org.jfairy</groupId>
-                <artifactId>jfairy</artifactId>
-                <version>0.2.4</version>
-            </dependency>
-        </dependencies>
-        ...
-    </pom>
+```xml
+<pom>
+    ...
+    <dependencies>
+        <dependency>
+            <groupId>org.jfairy</groupId>
+            <artifactId>jfairy</artifactId>
+            <version>0.2.4</version>
+        </dependency>
+    </dependencies>
+    ...
+</pom>
+```
 
 In Gradle projects (build.gradle):
 
-    repositories {
-        mavenCentral()
-    }
-    ...
-    testCompile 'org.jfairy:jfairy:0.2.4'
+```gradle
+repositories {
+   mavenCentral()
+}
+...
+testCompile 'org.jfairy:jfairy:0.2.4'
+```
     
 Sample
 ------
