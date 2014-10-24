@@ -1,4 +1,4 @@
-jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy)
+jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy/badge.svg)
 ==============
 
 Java fake data generator
