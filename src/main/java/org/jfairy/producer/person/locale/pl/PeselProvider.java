@@ -115,13 +115,19 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 	}
 
 	private static int calculateChecksum(String pesel) {
-		int sum = 0, checksum;
+		int sum = 0;
 		int i = 0;
 		for (int weight : WEIGHTS) {
-			int digit = (int) pesel.charAt(i);
+			int digit = Character.digit(pesel.charAt(i++), 10);
 			sum += digit * weight;
 		}
-		checksum = TEN - (sum % TEN);
-		return checksum % TEN;
+		
+		int checksum = (sum % TEN);
+		
+		if (0 == checksum) {
+			return 0;
+		}
+		
+		return TEN - checksum;
 	}
 }
