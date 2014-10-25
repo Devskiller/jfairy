@@ -15,7 +15,7 @@ In Maven projects (pom.xml):
         <dependency>
             <groupId>org.jfairy</groupId>
             <artifactId>jfairy</artifactId>
-            <version>0.2.4</version>
+            <version>0.2.5</version>
         </dependency>
     </dependencies>
     ...
@@ -24,7 +24,7 @@ In Maven projects (pom.xml):
 
 In Gradle projects (build.gradle):
 
-```gradle
+```groovy
 repositories {
    mavenCentral()
 }
