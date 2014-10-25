@@ -29,7 +29,7 @@ repositories {
    mavenCentral()
 }
 ...
-testCompile 'org.jfairy:jfairy:0.2.4'
+testCompile 'org.jfairy:jfairy:0.2.5'
 ```
     
 Sample
