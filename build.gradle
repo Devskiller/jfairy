@@ -2,10 +2,9 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'uploadAuth'
-//apply plugin: "sonar-runner"
-//Workaround for incompatibility with Sonar 4.4 - see https://issues.gradle.org/browse/GRADLE-3062
-apply plugin: 'sonarqube-runner'
+apply plugin: "sonar-runner"
 apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'pitest'
 apply plugin: 'idea'
 apply plugin: 'versions'
@@ -19,12 +18,13 @@ buildscript {
 	repositories {
 		mavenCentral()
 		mavenLocal()
-        maven { url "https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo" }
+		maven { url "https://github.com/ben-manes/gradle-versions-plugin/raw/mvnrepo" }
 	}
 	dependencies {
 		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.0.0'
 		classpath 'org.hibernate.build.gradle:gradle-upload-auth-plugin:1.1.1'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-2'
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.5-beta-2'
+		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
 	}
 }
 
@@ -189,8 +189,15 @@ test {
 	}
 }
 
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		csv.enabled true
+	}
+}
+
 wrapper {
-	gradleVersion '2.0'
+	gradleVersion '2.2-rc-1'
 }
 
 boolean determineIfJacocoShouldBeEnabled() {
@@ -199,4 +206,3 @@ boolean determineIfJacocoShouldBeEnabled() {
 	logger.debug "Is JaCoCo enabled: $shouldBeEnabled"
 	shouldBeEnabled
 }
-

@@ -5,5 +5,9 @@ jdk:
  - openjdk7
  - oraclejdk8
 
+env:
+- TERM=dumb
+
 install: ./gradlew assemble --stacktrace --info
-script: ./gradlew check --stacktrace --info
+script: ./gradlew check jacocoTestReport --stacktrace --info --continue
+after_success: ./gradlew coveralls --stacktrace --info

@@ -1,4 +1,4 @@
-jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy)
+jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Codearte/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
 ==============
 
 Java fake data generator
