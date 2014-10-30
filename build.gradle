@@ -2,9 +2,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'uploadAuth'
-//apply plugin: "sonar-runner"
-//Workaround for incompatibility with Sonar 4.4 - see https://issues.gradle.org/browse/GRADLE-3062
-apply plugin: 'sonarqube-runner'
+apply plugin: "sonar-runner"
 apply plugin: 'jacoco'
 apply plugin: 'pitest'
 apply plugin: 'idea'
@@ -190,7 +188,7 @@ test {
 }
 
 wrapper {
-	gradleVersion '2.0'
+	gradleVersion '2.2-rc-1'
 }
 
 boolean determineIfJacocoShouldBeEnabled() {
