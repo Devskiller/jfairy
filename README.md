@@ -16,6 +16,7 @@ In Maven projects (pom.xml):
             <groupId>org.jfairy</groupId>
             <artifactId>jfairy</artifactId>
             <version>0.2.5</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     ...
