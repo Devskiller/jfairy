@@ -198,7 +198,7 @@ jacocoTestReport {
 }
 
 wrapper {
-	gradleVersion '2.2-rc-1'
+	gradleVersion '2.2'
 }
 
 boolean determineIfJacocoShouldBeEnabled() {
