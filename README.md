@@ -1,53 +1,72 @@
-jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Codearte/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
+# jFairy by Codearte
 ==============
 
-Java fake data generator
+jFairy [![Build Status](https://travis-ci.org/Codearte/jfairy.png)](https://travis-ci.org/Codearte/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Codearte/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
 
-Usage
------
+Java fake data generator. Based on Wikipedia:
 
-In Maven projects (pom.xml):
+> Fairyland, in folklore, is the fabulous land or abode of fairies or fays.
 
-```xml
-<pom>
-    ...
-    <dependencies>
-        <dependency>
-            <groupId>org.jfairy</groupId>
-            <artifactId>jfairy</artifactId>
-            <version>0.2.5</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    ...
-</pom>
+## Usage
+
+Creating simple objects:
+
+```java
+Fairy fairy = Fairy.create();
+Person person = fairy.person();
+
+System.out.println(person.fullName());            
+// Chloe Barker
+System.out.println(person.email());               
+// barker@yahoo.com
+System.out.println(person.telephoneNumber());     
+// 690-950-802
+
+Person adultMale = fairy.person(male(), minAge(21));
+System.out.println(adultMale.isMale());           
+// true
+System.out.println(adultMale.dateOfBirth());      
+// at least 21 years earlier
 ```
 
-In Gradle projects (build.gradle):
+Creating related objects:
 
-```groovy
-repositories {
-   mavenCentral()
-}
-...
-testCompile 'org.jfairy:jfairy:0.2.5'
+```java
+Fairy fairy = Fairy.create();
+Company company = fairy.company();
+System.out.println(company.name());          
+// Robuten Associates
+System.out.println(company.url());           
+// http://www.robuteniaassociates.com
+
+Person salesman = fairy.person(withCompany(company));
+System.out.println(salesman.fullName());     
+// Juan Camacho
+System.out.println(salesman.companyEmail()); 
+// juan.camacho@robuteniaassociates.com
 ```
-    
-Sample
-------
 
-Look into [code sample](https://github.com/Codearte/jfairy/tree/master/src/test/groovy/snippets/)
+Locale support:
 
-Building
----------
+```java
+Fairy enFairy = Fairy.create();                               
+// Locale.ENGLISH is default
+Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));    
+// Polish version
+```
 
-This project can be built using [gradle](http://www.gradle.org/) command:
+## Other samples
+
+Look into [code samples](https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/)
+
+## Building
+
+This project can be built using gradle command:
 
     ./gradlew build
 
-Installation
-------------
+## Installation
 
-Installation into [maven](http://maven.apache.org/) local repository
+Installation into maven local repository
 
-    ./gradlew install
+    ./gradlew publishToMavenLocal
