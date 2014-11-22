@@ -3,11 +3,11 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=740" />
+    <meta name="viewport" content="width=640">
 
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
 
     <script type="text/javascript" src="javascripts/modernizr.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -21,7 +21,7 @@
   </head>
 
   <body>
-    <a id="forkme_banner" href="https://github.com/Codearte/fairyland">View on GitHub</a>
+    <a id="forkme_banner" href="https://github.com/Codearte/jfairy">View on GitHub</a>
     <div class="shell">
 
       <header>
@@ -37,7 +37,7 @@
 
       <section id="downloads">
         <span class="inner">
-          <a href="https://github.com/Codearte/fairyland/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/Codearte/fairyland/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+          <a href="https://github.com/Codearte/jfairy/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/Codearte/jfairy/tarball/master" class="tgz"><em>download</em> .TGZ</a>
         </span>
       </section>
 
@@ -47,109 +47,87 @@
 
       <section id="main_content">
         <h1>
-<a name="fairyland-" class="anchor" href="#fairyland-"><span class="octicon octicon-link"></span></a>fairyland <a href="https://travis-ci.org/Codearte/fairyland"><img src="https://travis-ci.org/Codearte/fairyland.png" alt="Build Status"></a>
-</h1>
+<a id="jfairy-by-codearte" class="anchor" href="#jfairy-by-codearte" aria-hidden="true"><span class="octicon octicon-link"></span></a>jFairy by Codearte</h1>
 
-<p style="text-align: center"><script type="text/javascript" src="http://www.ohloh.net/p/711058/widgets/project_thin_badge.js"></script></p>
-<p>Java fake data generator. Based on Wikipedia: <blockquote cite="http://en.wikipedia.org/wiki/Fairyland">Fairyland, in folklore, is the fabulous land or abode of fairies or fays.</blockquote></p>
+<h1></h1>
+
+<p>jFairy <a href="https://travis-ci.org/Codearte/jfairy"><img src="https://travis-ci.org/Codearte/jfairy.png" alt="Build Status"></a> <a href="https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy"><img src="https://maven-badges.herokuapp.com/maven-central/org.jfairy/jfairy/badge.svg" alt="Maven Central"></a> <a href="https://coveralls.io/r/Codearte/jfairy"><img src="https://img.shields.io/coveralls/Codearte/jfairy.svg" alt="Coverage Status"></a></p>
+
+<p>Java fake data generator. Based on Wikipedia:</p>
+
+<blockquote>
+<p>Fairyland, in folklore, is the fabulous land or abode of fairies or fays.</p>
+</blockquote>
 
 <h2>
-<a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>This project can be built using <a href="http://www.gradle.org/">gradle</a> command:</p>
+<p>Creating simple objects:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-stj">Fairy</span> fairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create();
+<span class="pl-stj">Person</span> person <span class="pl-k">=</span> fairy<span class="pl-k">.</span>person();
+
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(person<span class="pl-k">.</span>fullName());            
+<span class="pl-c">// Chloe Barker</span>
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(person<span class="pl-k">.</span>email());               
+<span class="pl-c">// barker@yahoo.com</span>
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(person<span class="pl-k">.</span>telephoneNumber());     
+<span class="pl-c">// 690-950-802</span>
+
+<span class="pl-stj">Person</span> adultMale <span class="pl-k">=</span> fairy<span class="pl-k">.</span>person(male(), minAge(<span class="pl-c1">21</span>));
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(adultMale<span class="pl-k">.</span>isMale());           
+<span class="pl-c">// true</span>
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(adultMale<span class="pl-k">.</span>dateOfBirth());      
+<span class="pl-c">// at least 21 years earlier</span></pre></div>
+
+<p>Creating related objects:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-stj">Fairy</span> fairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create();
+<span class="pl-stj">Company</span> company <span class="pl-k">=</span> fairy<span class="pl-k">.</span>company();
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(company<span class="pl-k">.</span>name());          
+<span class="pl-c">// Robuten Associates</span>
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(company<span class="pl-k">.</span>url());           
+<span class="pl-c">// http://www.robuteniaassociates.com</span>
+
+<span class="pl-stj">Person</span> salesman <span class="pl-k">=</span> fairy<span class="pl-k">.</span>person(withCompany(company));
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(salesman<span class="pl-k">.</span>fullName());     
+<span class="pl-c">// Juan Camacho</span>
+<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(salesman<span class="pl-k">.</span>companyEmail()); 
+<span class="pl-c">// juan.camacho@robuteniaassociates.com</span></pre></div>
+
+<p>Locale support:</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-stj">Fairy</span> enFairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create();                               
+<span class="pl-c">// Locale.ENGLISH is default</span>
+<span class="pl-stj">Fairy</span> plFairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create(<span class="pl-stj">Locale</span><span class="pl-k">.</span>forLanguageTag(<span class="pl-s1"><span class="pl-pds">"</span>pl<span class="pl-pds">"</span></span>));    
+<span class="pl-c">// Polish version</span></pre></div>
+
+<h2>
+<a id="other-samples" class="anchor" href="#other-samples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other samples</h2>
+
+<p>Look into <a href="https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/">code samples</a></p>
+
+<h2>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
+
+<p>This project can be built using gradle command:</p>
 
 <pre><code>./gradlew build
 </code></pre>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Installation into <a href="http://maven.apache.org/">maven</a> local repository</p>
+<p>Installation into maven local repository</p>
 
 <pre><code>./gradlew publishToMavenLocal
 </code></pre>
-
-<h2>
-<a name="embedding" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Adding into project</h2>
-
-<p>In Maven projects (pom.xml):</p>
-
-        <div class="highlight highlight-xml"><pre><span class="nt">&lt;pom&gt;</span>
-    ...
-    <span class="nt">&lt;repositories&gt;</span>
-        <span class="nt">&lt;repository&gt;</span>
-            <span class="nt">&lt;url&gt;</span>http://dl.bintray.com/codearte/public<span class="nt">&lt;/url&gt;</span>
-        <span class="nt">&lt;/repository&gt;</span>
-    <span class="nt">&lt;/repositories&gt;</span>
-    ...
-    <span class="nt">&lt;dependencies&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>eu.codearte<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>fairyland<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.0.8<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;/dependencies&gt;</span>
-    ...
-<span class="nt">&lt;/pom&gt;</span>
-</pre></div>
-
-<p>In Gradle projects (build.gradle):</p>
-
-        <div class="highlight highlight-groovy"><pre><span class="n">repositories</span> <span class="o">{</span>
-    <span class="n">mavenCentral</span><span class="o">()</span>
-    <span class="n">maven</span> <span class="o">{</span>
-        <span class="n">url</span> <span class="s1">'http://dl.bintray.com/codearte/public'</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-...
-testCompile 'eu.codearte:fairyland:0.0.8'
-</pre></div>
-
-
-<h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
-<p>Creating simple objects:</p>
-
-<div class="highlight highlight-java"><pre><span class="n">Fairy</span> <span class="n">fairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
-<span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">person</span><span class="o">();</span>
-
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">fullName</span><span class="o">());</span>            <span class="c1">// Chloe Barker</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">email</span><span class="o">());</span>               <span class="c1">// barker@yahoo.com</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">.</span><span class="na">telephoneNumber</span><span class="o">());</span>     <span class="c1">// 690-950-802</span>
-
-<span class="n">Person</span> <span class="n">adultMale</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">person</span><span class="o">(</span><span class="n">male</span><span class="o">(),</span> <span class="n">minAge</span><span class="o">(</span><span class="mi">21</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">adultMale</span><span class="o">.</span><span class="na">isMale</span><span class="o">());</span>           <span class="c1">// true</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">adultMale</span><span class="o">.</span><span class="na">dateOfBirth</span><span class="o">());</span>      <span class="c1">// at least 21 years earlier</span>
-</pre></div>
-
-<p>Creating related objects:</p>
-
-<div class="highlight highlight-java"><pre><span class="n">Fairy</span> <span class="n">fairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
-<span class="n">Company</span> <span class="n">company</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">company</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">company</span><span class="o">.</span><span class="na">name</span><span class="o">());</span>          <span class="c1">// Robuten Associates</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">company</span><span class="o">.</span><span class="na">url</span><span class="o">());</span>           <span class="c1">// http://www.robuteniaassociates.com</span>
-
-<span class="n">Person</span> <span class="n">salesman</span> <span class="o">=</span> <span class="n">fairy</span><span class="o">.</span><span class="na">person</span><span class="o">(</span><span class="n">withCompany</span><span class="o">(</span><span class="n">company</span><span class="o">));</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">salesman</span><span class="o">.</span><span class="na">fullName</span><span class="o">());</span>     <span class="c1">// Juan Camacho</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">salesman</span><span class="o">.</span><span class="na">companyEmail</span><span class="o">());</span> <span class="c1">// juan.camacho@robuteniaassociates.com</span>
-</pre></div>
-
-<p>Locale support:</p>
-
-<div class="highlight highlight-java"><pre><span class="n">Fairy</span> <span class="n">enFairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>                               <span class="c1">// Locale.ENGLISH</span>
-<span class="n">Fairy</span> <span class="n">plFairy</span> <span class="o">=</span> <span class="n">Fairy</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">Locale</span><span class="o">.</span><span class="na">forLanguageTag</span><span class="o">(</span><span class="s">"pl"</span><span class="o">));</span>    <span class="c1">// Polish version</span>
-</pre></div>
-
-<h2>
-<a name="sample" class="anchor" href="#sample"><span class="octicon octicon-link"></span></a>Other samples</h2>
-
-<p>Look into <a href="https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/">code samples</a></p>
       </section>
 
       <footer>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/Codearte">Codearte</a> can be found on <a href="https://github.com/Codearte/fairyland">GitHub</a></p>
+            <p>this project by <a href="https://github.com/Codearte">Codearte</a> can be found on <a href="https://github.com/Codearte/jfairy">GitHub</a></p>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
@@ -160,6 +138,16 @@ testCompile 'eu.codearte:fairyland:0.0.8'
 
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-55892824-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
