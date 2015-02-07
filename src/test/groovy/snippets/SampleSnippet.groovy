@@ -21,7 +21,7 @@ println fairy.person().firstName();
 
 def person = fairy.person()
 println "   First name: " + person.firstName();
-println "   Middle name: " + person.middleName();
+println "  Middle name: " + person.middleName();
 println "    Last name: " + person.lastName();
 println "     Username: " + person.username();
 println "     Password: " + person.password();
@@ -32,8 +32,8 @@ println "Date of birth: " + person.dateOfBirth();
 println "          Age: " + person.age();
 println "        Pesel: " + person.nationalIdentificationNumber();
 println "           ID: " + person.nationalIdentityCardNumber();
-println "  Postal Code: " + person.getAddress().postalCode();
-println "  		  City: " + person.getAddress().city();
+println "  Postal Code: " + person.address.postalCode;
+println "  		  City: " + person.address.city;
 
 println ""
 
