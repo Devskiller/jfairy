@@ -183,7 +183,6 @@ pitest {
 }
 
 test {
-	ignoreFailures = true
 	jacoco {
 		//Required to not measure code coverage in normal builds
 		enabled = shouldJacocoBeEnabled
