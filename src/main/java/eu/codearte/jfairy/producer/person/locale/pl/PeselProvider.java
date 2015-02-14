@@ -40,8 +40,8 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 
 	@Inject
 	public PeselProvider(DateProducer dateProducer, BaseProducer baseProducer,
-						 @Assisted
-						 PeselProperties.Property... properties) {
+	                     @Assisted
+	                     PeselProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -121,13 +121,13 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 			int digit = Character.digit(pesel.charAt(i++), 10);
 			sum += digit * weight;
 		}
-		
+
 		int checksum = (sum % TEN);
-		
+
 		if (0 == checksum) {
 			return 0;
 		}
-		
+
 		return TEN - checksum;
 	}
 }

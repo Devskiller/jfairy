@@ -1,8 +1,8 @@
 package eu.codearte.jfairy.producer.person
 
-import org.apache.commons.validator.routines.EmailValidator
 import eu.codearte.jfairy.Bootstrap
 import eu.codearte.jfairy.Fairy
+import org.apache.commons.validator.routines.EmailValidator
 import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification

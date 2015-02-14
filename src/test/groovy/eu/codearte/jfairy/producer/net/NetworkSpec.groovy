@@ -1,7 +1,7 @@
 package eu.codearte.jfairy.producer.net
 
-import org.apache.commons.validator.routines.InetAddressValidator
 import eu.codearte.jfairy.producer.BaseProducer
+import org.apache.commons.validator.routines.InetAddressValidator
 import spock.lang.Specification
 
 class NetworkSpec extends Specification {

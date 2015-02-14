@@ -7,11 +7,11 @@ import eu.codearte.jfairy.Fairy
  */
 class Foo {
 
-    public static void main(String[] args) {
-        def person = Fairy.create(Locale.default).person();
+	public static void main(String[] args) {
+		def person = Fairy.create(Locale.default).person();
 
-        println person.address
-        println person.address.postalCode
-    }
+		println person.address
+		println person.address.postalCode
+	}
 
 }

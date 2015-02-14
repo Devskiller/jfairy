@@ -2,12 +2,12 @@ package eu.codearte.jfairy.producer.payment;
 
 import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
+import eu.codearte.jfairy.producer.BaseProducer;
 import org.apache.commons.lang3.StringUtils;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.iban4j.bban.BbanStructure;
 import org.iban4j.bban.BbanStructureEntry;
-import eu.codearte.jfairy.producer.BaseProducer;
 
 import javax.inject.Inject;
 import java.math.BigInteger;
@@ -28,8 +28,8 @@ public class IBANProvider implements Provider<IBAN> {
 	@Inject
 	public IBANProvider(BaseProducer baseProducer,
 
-						@Assisted
-						IBANProperties.Property... properties) {
+	                    @Assisted
+	                    IBANProperties.Property... properties) {
 
 		this.baseProducer = baseProducer;
 

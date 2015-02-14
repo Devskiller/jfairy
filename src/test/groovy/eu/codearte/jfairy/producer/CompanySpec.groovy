@@ -1,10 +1,10 @@
 package eu.codearte.jfairy.producer
 
+import eu.codearte.jfairy.Bootstrap
+import eu.codearte.jfairy.producer.locale.pl.NIP
 import org.apache.commons.validator.routines.DomainValidator
 import org.apache.commons.validator.routines.EmailValidator
 import org.apache.commons.validator.routines.UrlValidator
-import eu.codearte.jfairy.Bootstrap
-import eu.codearte.jfairy.producer.locale.pl.NIP
 import spock.lang.Specification
 
 /**

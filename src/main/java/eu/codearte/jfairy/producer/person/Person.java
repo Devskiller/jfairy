@@ -29,8 +29,8 @@ public class Person {
 	private final String nationalIdentificationNumber;
 
 	public Person(String firstName, String middleName, String lastName, Address address, String email, String username,
-				  String password, Sex sex, String telephoneNumber, DateTime dateOfBirth, Integer age,
-				  String nationalIdentityCardNumber, String nationalIdentificationNumber, Company company, String companyEmail) {
+	              String password, Sex sex, String telephoneNumber, DateTime dateOfBirth, Integer age,
+	              String nationalIdentityCardNumber, String nationalIdentificationNumber, Company company, String companyEmail) {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.address = address;
 		this.firstName = firstName;
@@ -88,9 +88,9 @@ public class Person {
 		return sex == FEMALE;
 	}
 
-    public Sex sex() {
-        return sex;
-    }
+	public Sex sex() {
+		return sex;
+	}
 
 	public String telephoneNumber() {
 		return telephoneNumber;
