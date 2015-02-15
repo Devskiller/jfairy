@@ -3,31 +3,29 @@
  */
 package eu.codearte.jfairy.producer.text;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
 import eu.codearte.jfairy.producer.BaseProducer;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static org.apache.commons.lang3.StringUtils.capitalize;
-import static org.apache.commons.lang3.StringUtils.endsWith;
-import static org.apache.commons.lang3.StringUtils.left;
-import static org.apache.commons.lang3.StringUtils.removeEnd;
 import static eu.codearte.jfairy.producer.text.TextUtils.joinWithSpace;
+import static org.apache.commons.lang3.StringUtils.left;
 
 public class TextProducer {
 
 	private static final int DEFAULT_WORD_COUNT = 3;
+
 	private static final int DEFAULT_WORD_COUNT_IN_SENTENCE = 3;
+
 	private static final int DEFAULT_SENTENCE_COUNT = 3;
-	private static final int WORD_COUNT_PRECISION_IN_SENTENCE = 6;
+
 	private static final int SENTENCE_COUNT_PRECISION_MIN = 1;
+
 	private static final int SENTENCE_COUNT_PRECISION_MAX = 3;
 
 	private final TextProducerInternal textProducerInternal;
+
 	private final BaseProducer baseProducer;
 
 	private int limit = 0;
@@ -52,7 +50,11 @@ public class TextProducer {
 	}
 
 	public String loremIpsum() {
-		return result(textProducerInternal.getLoremIpsum());
+		return result(textProducerInternal.loremIpsum());
+	}
+
+	public String text() {
+		return result(textProducerInternal.text());
 	}
 
 	public String word() {
@@ -63,22 +65,29 @@ public class TextProducer {
 		return result(textProducerInternal.cleanWords(count));
 	}
 
+	public String latinWord() {
+		return result(latinWord(DEFAULT_WORD_COUNT));
+	}
+
+	public String latinWord(int count) {
+		return result(textProducerInternal.cleanLatinWords(count));
+	}
+
+	public String latinSentence() {
+		return result(latinSentence(DEFAULT_SENTENCE_COUNT));
+	}
+
+	public String latinSentence(int wordCount) {
+		return result(textProducerInternal.latinSentence(wordCount));
+	}
+
 	public String sentence() {
 		return result(sentence(DEFAULT_WORD_COUNT_IN_SENTENCE));
 	}
 
 	public String sentence(int wordCount) {
-		String randomWords = textProducerInternal.rawWords(wordCount, WORD_COUNT_PRECISION_IN_SENTENCE);
-		List<String> sentences = newArrayList();
-		for (String sentence : Splitter.on(". ").split(randomWords)) {
-			sentences.add(capitalize(sentence));
-		}
-		String sentence = capitalize(Joiner.on(". ").join(sentences));
-		sentence = removeEnd(sentence, ",");
-		if (!endsWith(sentence, ".")) {
-			sentence += ".";
-		}
-		return result(sentence);
+		return result(textProducerInternal.sentence(wordCount));
+
 	}
 
 	private List<String> sentences(int sentenceCount) {

@@ -20,10 +20,15 @@ class TextSpec extends Specification {
 	def "should be sure that data exists"() {
 		expect:
 			text.loremIpsum()
+			text.text()
 			text.word()
 			text.word(100)
+			text.latinWord()
+			text.latinWord(100)
 			text.sentence()
 			text.sentence(100)
+			text.latinSentence()
+			text.latinSentence(100)
 			text.paragraph()
 			text.paragraph(100)
 	}
@@ -38,14 +43,34 @@ class TextSpec extends Specification {
 			text.paragraph(100).length() == 10
 	}
 
+	def "should generate Lorem Ipsum"() {
+		expect:
+			text.loremIpsum()
+	}
+
+	def "should generate localised text"() {
+		expect:
+			text.text()
+	}
+
 	def "should generate word"() {
 		expect:
 			text.word()
 	}
 
+	def "should generate latin word"() {
+		expect:
+			text.latinWord()
+	}
+
 	def "should generate sentence"() {
 		expect:
 			text.sentence()
+	}
+
+	def "should generate latin sentence"() {
+		expect:
+			text.latinSentence()
 	}
 
 	def "should generate paragraph"() {

@@ -3,7 +3,6 @@ package eu.codearte.jfairy.producer.person;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
-import org.apache.commons.lang3.RandomStringUtils;
 import eu.codearte.jfairy.data.DataMaster;
 import eu.codearte.jfairy.producer.BaseProducer;
 import eu.codearte.jfairy.producer.DateProducer;
@@ -11,14 +10,15 @@ import eu.codearte.jfairy.producer.company.Company;
 import eu.codearte.jfairy.producer.company.CompanyProvider;
 import eu.codearte.jfairy.producer.person.locale.pl.PeselFactory;
 import eu.codearte.jfairy.producer.person.locale.pl.PeselProperties;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 
-import static org.apache.commons.lang3.StringUtils.lowerCase;
-import static org.apache.commons.lang3.StringUtils.stripAccents;
 import static eu.codearte.jfairy.producer.person.Person.Sex.FEMALE;
 import static eu.codearte.jfairy.producer.person.Person.Sex.MALE;
+import static org.apache.commons.lang3.StringUtils.lowerCase;
+import static org.apache.commons.lang3.StringUtils.stripAccents;
 
 public class PersonProvider implements Provider<Person> {
 
@@ -49,14 +49,14 @@ public class PersonProvider implements Provider<Person> {
 
 	@Inject
 	public PersonProvider(DataMaster dataMaster,
-						  DateProducer dateProducer,
-						  BaseProducer baseProducer,
-						  PeselFactory peselFactory,
-						  NationalIdentityCardNumber nationalIdentityCardNumber,
-						  AddressProvider addressProvider,
-						  CompanyProvider companyProvider,
+	                      DateProducer dateProducer,
+	                      BaseProducer baseProducer,
+	                      PeselFactory peselFactory,
+	                      NationalIdentityCardNumber nationalIdentityCardNumber,
+	                      AddressProvider addressProvider,
+	                      CompanyProvider companyProvider,
 
-						  @Assisted PersonProperties.PersonProperty... personProperties) {
+	                      @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
@@ -79,7 +79,7 @@ public class PersonProvider implements Provider<Person> {
 		}
 
 		//fixme - should be created only if needed
-		if (company == null){
+		if (company == null) {
 			company = companyProvider.get();
 		}
 

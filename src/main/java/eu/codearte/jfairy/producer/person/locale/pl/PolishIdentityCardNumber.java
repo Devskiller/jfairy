@@ -4,6 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 import eu.codearte.jfairy.producer.BaseProducer;
 import eu.codearte.jfairy.producer.DateProducer;
 import eu.codearte.jfairy.producer.person.NationalIdentityCardNumber;
+import eu.codearte.jfairy.producer.util.AlphaNumberSystem;
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -13,8 +14,6 @@ import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
 import static org.apache.commons.lang3.StringUtils.leftPad;
-
-import eu.codearte.jfairy.producer.util.AlphaNumberSystem;
 
 /**
  * Polish Identity Card Number

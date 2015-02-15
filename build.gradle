@@ -157,6 +157,15 @@ uploadArchives {
 							role 'developer'
 						}
 					}
+					developer {
+						id 'olga.maciaszek'
+						name 'Olga Maciaszek-Sharma'
+						email 'olga.maciaszek ATT gmail DOTT com'
+						roles {
+                            role 'developer'
+							role 'qa engineer'
+						}
+					}
 				}
 				scm {
 					connection 'scm:git:git@github.com:Codearte/jfairy.git'

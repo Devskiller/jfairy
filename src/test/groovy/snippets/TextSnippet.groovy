@@ -7,10 +7,23 @@ def text = Fairy.create().textProducer()
 println "* Lorem ipsum *"
 println text.loremIpsum()
 
+println "* Localised text *"
+println text.text()
+
+println "* Latin words *"
+println text.latinWord(1)
+println text.latinWord()
+println text.latinWord(190)
+
 println "* Words *"
 println text.word(1)
 println text.word()
 println text.word(190)
+
+println "* Latin sentences *"
+println text.latinSentence(1)
+println text.latinSentence()
+println text.latinSentence(190)
 
 println "* Sentences *"
 println text.sentence()

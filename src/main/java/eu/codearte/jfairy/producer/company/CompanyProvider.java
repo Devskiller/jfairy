@@ -1,10 +1,10 @@
 package eu.codearte.jfairy.producer.company;
 
 import com.google.inject.Provider;
-import org.apache.commons.lang3.StringUtils;
 import eu.codearte.jfairy.data.DataMaster;
 import eu.codearte.jfairy.producer.BaseProducer;
 import eu.codearte.jfairy.producer.VATIdentificationNumber;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 
