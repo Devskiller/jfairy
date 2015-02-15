@@ -8,6 +8,6 @@ appender("CONSOLE", ConsoleAppender) {
 		pattern = "%-4relative [%thread] - %msg%n"
 	}
 }
-logger("eu.codearte.jfairy", TRACE, ["CONSOLE"])
+logger("io.codearte.jfairy", TRACE, ["CONSOLE"])
 
 root(TRACE, ["CONSOLE"])

@@ -1,6 +1,6 @@
 package snippets
 
-import eu.codearte.jfairy.Fairy
+import io.codearte.jfairy.Fairy
 
 /**
  * @author Mariusz Smykuła
