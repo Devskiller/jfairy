@@ -162,7 +162,7 @@ class PersonSpec extends Specification {
 			allWithMiddleName.size() > 0
 	}
 
-	def "should generate apartmentNumber only sometimes"() {
+	def "should generate apartment number only sometimes"() {
 		given:
 			def persons = []
 			(1..50).each { persons.add(fairy.person()) }
@@ -172,7 +172,13 @@ class PersonSpec extends Specification {
 		then:
 			allWithoutApartmentNumber.size() > 0
 			allWithApartmentNumber.size() > 0
+	}
 
+	def "should create passport number"() {
+		given:
+			def person = fairy.person()
+		expect:
+			person.passportNumber()
 	}
 
 

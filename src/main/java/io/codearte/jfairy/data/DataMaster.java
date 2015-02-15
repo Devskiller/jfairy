@@ -42,6 +42,11 @@ public class DataMaster {
 	}
 
 	@SuppressWarnings("unchecked")
+	public Map<String, Integer> getIntegerValueMap(String key) {
+		return (Map<String, Integer>) getData(key, Map.class);
+	}
+
+	@SuppressWarnings("unchecked")
 	public Map<String, List<String>> getStringMap(String key) {
 		return (Map<String, List<String>>) getData(key, Map.class);
 	}

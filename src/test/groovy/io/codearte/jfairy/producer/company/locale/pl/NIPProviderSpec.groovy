@@ -1,13 +1,13 @@
-package io.codearte.jfairy.producer.locale.pl
+package io.codearte.jfairy.producer.company.locale.pl
 
 import io.codearte.jfairy.producer.BaseProducer
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class NIPSpec extends Specification {
+class NIPProviderSpec extends Specification {
 
 	def baseProducer = new BaseProducer(new Random())
-	def generator = new NIP(baseProducer)
+	def generator = new NIPProvider(baseProducer)
 
 	@Unroll
 	def "Should validate #nip as #valid"() {
@@ -25,7 +25,7 @@ class NIPSpec extends Specification {
 
 	def "Should always generate proper nip"() {
 		expect:
-			generator.isValid(generator.generate())
+			generator.isValid(generator.get())
 		where:
 			i << (1..100)
 	}

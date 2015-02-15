@@ -1,8 +1,8 @@
-package io.codearte.jfairy.producer.locale.pl;
+package io.codearte.jfairy.producer.company.locale.pl;
 
 import com.google.common.annotations.VisibleForTesting;
 import io.codearte.jfairy.producer.BaseProducer;
-import io.codearte.jfairy.producer.VATIdentificationNumber;
+import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +12,9 @@ import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
-public class NIP implements VATIdentificationNumber {
+public class NIPProvider implements VATIdentificationNumberProvider {
 
-	private static final Logger LOG = LoggerFactory.getLogger(NIP.class);
+	private static final Logger LOG = LoggerFactory.getLogger(NIPProvider.class);
 
 	// ex 1234563218
 	private static final int NIP_LENGTH = 10;
@@ -75,13 +75,13 @@ public class NIP implements VATIdentificationNumber {
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public NIP(BaseProducer baseProducer) {
+	public NIPProvider(BaseProducer baseProducer) {
 
 		this.baseProducer = baseProducer;
 	}
 
 	@Override
-	public String generate() {
+	public String get() {
 		int checkSum;
 		String number;
 		do {
