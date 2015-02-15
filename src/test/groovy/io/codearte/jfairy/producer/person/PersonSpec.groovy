@@ -7,9 +7,9 @@ import org.joda.time.DateTime
 import spock.lang.Ignore
 import spock.lang.Specification
 
-import static PersonProperties.female
-import static PersonProperties.male
-import static PersonProperties.telephoneFormat
+import static io.codearte.jfairy.producer.person.PersonProperties.female
+import static io.codearte.jfairy.producer.person.PersonProperties.male
+import static io.codearte.jfairy.producer.person.PersonProperties.telephoneFormat
 
 class PersonSpec extends Specification {
 
@@ -53,6 +53,7 @@ class PersonSpec extends Specification {
 			person.isMale() || person.isFemale()
 			person.nationalIdentificationNumber()
 			person.nationalIdentityCardNumber()
+			person.address
 
 			emailValidator.isValid(person.email())
 	}
@@ -115,7 +116,7 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def address = person.getAddress()
+			def address = person.address
 		then:
 			address
 	}
@@ -124,7 +125,7 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def postalCode = person.getAddress().postalCode
+			def postalCode = person.address.postalCode
 		then:
 			postalCode
 	}
@@ -133,12 +134,23 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def city = person.getAddress().city
+			def city = person.address.city
 		then:
 			city
 	}
 
-	def "Should generate middle name only sometimes"() {
+	def "should create street address"() {
+		given:
+			def person = fairy.person()
+		when:
+			def address = person.getAddress()
+		then:
+			address.street()
+			address.streetNumber().isNumber()
+			(address.apartmentNumber().isNumber() || address.apartmentNumber() == "")
+	}
+
+	def "should generate middle name only sometimes"() {
 		given:
 			def persons = []
 			(1..100).each { persons.add(fairy.person()) }
@@ -148,6 +160,25 @@ class PersonSpec extends Specification {
 		then:
 			allWithoutMiddleName.size() > 0
 			allWithMiddleName.size() > 0
+	}
+
+	def "should generate apartment number only sometimes"() {
+		given:
+			def persons = []
+			(1..50).each { persons.add(fairy.person()) }
+		when:
+			def allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber().isEmpty() }
+			def allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber().isEmpty() }
+		then:
+			allWithoutApartmentNumber.size() > 0
+			allWithApartmentNumber.size() > 0
+	}
+
+	def "should create passport number"() {
+		given:
+			def person = fairy.person()
+		expect:
+			person.passportNumber()
 	}
 
 

@@ -20,6 +20,8 @@ data:
 
   postal_code: ['#####']
 
-  city: [New York, Washington]
+  city: [New York, Washington, San Francisco, Miami]
+
+  street: [Atkins Avenue, Aster Court, Cove Lane, Ford Street, Highland Place, Herzi Street, Tabor Court, Stillwell Avenue, Summer Place, Washington Walk]
 
   country: ['Canada', 'USA', 'Poland']

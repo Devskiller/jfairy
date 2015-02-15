@@ -55,4 +55,5 @@ class FairySpec extends Specification {
 		expect:
 			!firstPerson.fullName().equals(secondPerson.fullName())
 	}
+
 }

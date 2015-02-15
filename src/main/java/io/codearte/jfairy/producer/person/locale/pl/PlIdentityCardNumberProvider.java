@@ -3,7 +3,7 @@ package io.codearte.jfairy.producer.person.locale.pl;
 import com.google.common.annotations.VisibleForTesting;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
-import io.codearte.jfairy.producer.person.NationalIdentityCardNumber;
+import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.util.AlphaNumberSystem;
 import org.joda.time.DateTime;
 
@@ -18,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
 /**
  * Polish Identity Card Number
  */
-public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
+public class PlIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	@VisibleForTesting
 	static final int ISSUING_BEGIN = 2000;
@@ -43,21 +43,20 @@ public class PolishIdentityCardNumber implements NationalIdentityCardNumber {
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public PolishIdentityCardNumber(DateProducer dateProducer, BaseProducer baseProducer) {
+	public PlIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 	}
 
 	@Override
-	public String generate() {
+	public String get() {
 
 		DateTime dateTime = dateProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN);
 
-		return generate(dateTime);
+		return get(dateTime);
 	}
 
-	@Override
-	public String generate(DateTime date) {
+	public String get(DateTime date) {
 
 		checkArgument(date.getYear() >= ISSUING_BEGIN, "Polish ID was introduced in 2000");
 

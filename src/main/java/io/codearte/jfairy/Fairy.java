@@ -3,7 +3,7 @@
  */
 package io.codearte.jfairy;
 
-import com.google.inject.Inject;
+
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.company.Company;
@@ -15,6 +15,7 @@ import io.codearte.jfairy.producer.person.PersonFactory;
 import io.codearte.jfairy.producer.person.PersonProperties;
 import io.codearte.jfairy.producer.text.TextProducer;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
 import java.util.Locale;
 
