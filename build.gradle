@@ -22,7 +22,7 @@ sourceCompatibility = 1.6
 buildscript {
 	repositories {
 		mavenCentral()
-                jcenter()
+		jcenter()
 		mavenLocal()
 	}
 	dependencies {

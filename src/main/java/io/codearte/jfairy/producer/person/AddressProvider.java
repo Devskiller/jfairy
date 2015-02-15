@@ -1,16 +1,21 @@
 package io.codearte.jfairy.producer.person;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
 
-class AddressProvider implements Provider<Address> {
+import javax.inject.Inject;
+
+public class AddressProvider implements Provider<Address> {
 
 	private static final String POSTAL_CODE_FORMAT = "postal_code";
+
 	private static final String CITY = "city";
 
+	private static final String STREET = "street";
+
 	private final BaseProducer baseProducer;
+
 	private final DataMaster dataMaster;
 
 	@Inject
@@ -24,9 +29,12 @@ class AddressProvider implements Provider<Address> {
 		String postalCodeFormat = dataMaster.getRandomValue(POSTAL_CODE_FORMAT);
 
 		String city = dataMaster.getRandomValue(CITY);
+		String street = dataMaster.getRandomValue(STREET);
 		String postalCode = baseProducer.numerify(postalCodeFormat);
+		String streetNumber = String.valueOf(baseProducer.randomInt(25));
+		String apartmentNumber = baseProducer.trueOrFalse() ? String.valueOf(baseProducer.randomInt(350)) : "";
 
-		return new Address(postalCode, city);
+		return new Address(postalCode, city, street, streetNumber, apartmentNumber);
 	}
 
 }
