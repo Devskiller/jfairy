@@ -7,8 +7,11 @@ apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'pitest'
 apply plugin: 'idea'
-apply plugin: 'axion-release'
+apply plugin: 'pl.allegro.tech.build.axion-release'
 
+scmVersion {
+	createReleaseCommit true
+}
 project.version = scmVersion.version
 
 ext.isReleaseVersion = !project.version.endsWith("SNAPSHOT")
@@ -19,13 +22,14 @@ sourceCompatibility = 1.6
 buildscript {
 	repositories {
 		mavenCentral()
+                jcenter()
 		mavenLocal()
 	}
 	dependencies {
 		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.0.0'
 		classpath 'org.hibernate.build.gradle:gradle-upload-auth-plugin:1.1.1'
 		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
-		classpath 'pl.allegro.tech.build:axion-release-plugin:0.9.3'
+		classpath 'pl.allegro.tech.build:axion-release-plugin:1.1.0'
 	}
 }
 
@@ -162,7 +166,7 @@ uploadArchives {
 						name 'Olga Maciaszek-Sharma'
 						email 'olga.maciaszek ATT gmail DOTT com'
 						roles {
-                            role 'developer'
+							role 'developer'
 							role 'qa engineer'
 						}
 					}
