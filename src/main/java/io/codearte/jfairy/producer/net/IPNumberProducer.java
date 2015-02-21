@@ -1,7 +1,8 @@
 package io.codearte.jfairy.producer.net;
 
-import com.google.inject.Inject;
 import io.codearte.jfairy.producer.BaseProducer;
+
+import javax.inject.Inject;
 
 class IPNumberProducer {
 

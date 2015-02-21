@@ -1,8 +1,8 @@
 package io.codearte.jfairy.producer;
 
 import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
