@@ -2,16 +2,17 @@
  * Copyright (c) 2013 Codearte and authors
  */
 
-package io.codearte.jfairy.producer.person.locale.pl
+package io.codearte.jfairy.producer.person.locale
 
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
+import io.codearte.jfairy.producer.person.locale.pl.PolishIdentityCardNumber
 import org.joda.time.DateTime
 import spock.lang.Specification
 
-import static PolishIdentityCardNumber.ISSUING_BEGIN
-import static PolishIdentityCardNumber.LETTER_WEIGHT
-import static PolishIdentityCardNumber.MAX_DIGITS_PART_VALUE
+import static io.codearte.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.ISSUING_BEGIN
+import static io.codearte.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.LETTER_WEIGHT
+import static io.codearte.jfairy.producer.person.locale.pl.PolishIdentityCardNumber.MAX_DIGITS_PART_VALUE
 
 /**
  * @author mariuszs
