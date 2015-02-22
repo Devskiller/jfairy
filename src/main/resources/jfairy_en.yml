@@ -20,7 +20,7 @@ data:
 
   postal_code: ['#####']
 
-  city: [New York, Washington, San Francisco, Miami]
+  city: [New York, Washington, Chicago, Philadelphia, Seattle, Portland, San Francisco, Los Angeles, San Antonio, Dallas, Memphis, St Louis, Denver, Salt Lake City, Miami, Orlando, Cleveland, Oklahoma City, Boston, Phoenix, Charlotte, New Orleans]
 
   street: [Atkins Avenue, Aster Court, Cove Lane, Ford Street, Highland Place, Herzi Street, Tabor Court, Stillwell Avenue, Summer Place, Washington Walk]
 
