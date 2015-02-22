@@ -20,6 +20,6 @@ data:
 
   postal_code: ['#####']
 
-  city: [New York, Washington]
+  city: [New York, Washington, Chicago, Philadelphia, Seattle, Portland, San Francisco, Los Angeles, San Antonio, Dallas, Memphis, St Louis, Denver, Salt Lake City, Miami, Orlando, Cleveland, Oklahoma City, Boston, Phoenix, Charlotte, New Orleans]
 
   country: ['Canada', 'USA', 'Poland']
