@@ -1,6 +1,6 @@
 package io.codearte.jfairy.producer.net;
 
-import com.google.inject.Inject;
+import javax.inject.Inject;
 
 /**
  * TODO: Add emails

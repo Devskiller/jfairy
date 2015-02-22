@@ -23,4 +23,6 @@ data:
 
   city: [Białystok, Bielsko-Biała, Bydgoszcz, Bytom, Chorzów, Częstochowa, Dąbrowa Górnicza, Elbląg, Gdańsk, Gdynia, Gliwice, Gorzów Wielkopolski, Grudziądz, Jastrzębie Zdrój, Jaworzno, Kalisz, Katowice, Kielce, Koszalin, Kraków, Legnica, Lublin, Łódź, Olsztyn, Opole, Poznań, Płock, Radom, Ruda Śląska, Rybnik, Rzeszów, Sosnowiec, Szczecin, Słupsk, Tarnów, Toruń, Tychy, Warszawa, Wałbrzych, Wrocław, Włocławek, Zabrze, Zielona Góra]
 
+  street: [Ogrodowa, A. Mickiewicza, Chłodna, Targowa, Prosta, Biała, Żelazna, Miedziana, Złota, Kacza, Browarna]
+
   country: ['Polska']

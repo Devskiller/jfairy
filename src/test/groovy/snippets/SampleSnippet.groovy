@@ -16,24 +16,27 @@ def fairy = Fairy.create(Locale.forLanguageTag("en"))
 println fairy.textProducer().word(3)
 println fairy.textProducer().sentence(5)
 
-println fairy.person().firstName();
-println fairy.person().firstName();
+println fairy.person().firstName()
+println fairy.person().firstName()
 
 def person = fairy.person()
-println "   First name: " + person.firstName();
-println "  Middle name: " + person.middleName();
-println "    Last name: " + person.lastName();
-println "     Username: " + person.username();
-println "     Password: " + person.password();
-println "       isMale: " + person.isMale();
-println "     isFemale: " + person.isFemale();
-println "        Phone: " + person.telephoneNumber();
-println "Date of birth: " + person.dateOfBirth();
-println "          Age: " + person.age();
-println "        Pesel: " + person.nationalIdentificationNumber();
-println "           ID: " + person.nationalIdentityCardNumber();
-println "  Postal Code: " + person.address.postalCode;
-println "  		  City: " + person.address.city;
+println "   First name: " + person.firstName()
+println "  Middle name: " + person.middleName()
+println "    Last name: " + person.lastName()
+println "     Username: " + person.username()
+println "     Password: " + person.password()
+println "       isMale: " + person.isMale()
+println "     isFemale: " + person.isFemale()
+println "        Phone: " + person.telephoneNumber()
+println "Date of birth: " + person.dateOfBirth()
+println "          Age: " + person.age()
+println "        Pesel: " + person.nationalIdentificationNumber()
+println "           ID: " + person.nationalIdentityCardNumber()
+println "  Postal Code: " + person.address.postalCode
+println "  		  City: " + person.address.city
+println "       Street: " + person.address.street()
+println "Street number:" + person.address.streetNumber()
+println " Full address: " + person.address.toString()
 
 println ""
 
