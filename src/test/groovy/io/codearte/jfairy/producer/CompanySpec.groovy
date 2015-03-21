@@ -1,7 +1,6 @@
 package io.codearte.jfairy.producer
 
 import io.codearte.jfairy.Bootstrap
-import io.codearte.jfairy.producer.locale.pl.NIP
 import org.apache.commons.validator.routines.DomainValidator
 import org.apache.commons.validator.routines.EmailValidator
 import org.apache.commons.validator.routines.UrlValidator
@@ -32,6 +31,7 @@ class CompanySpec extends Specification {
 			domainValidator.isValid(company.domain())
 			emailValidator.isValid(company.email())
 			urlValidator.isValid(company.url())
-			NIP.isValid(company.vatIdentificationNumber)
+			company.vatIdentificationNumber()
 	}
+
 }

@@ -41,27 +41,29 @@ public class PersonProvider implements Provider<Person> {
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 	private final PeselFactory peselFactory;
-	private final NationalIdentityCardNumber nationalIdentityCardNumber;
+	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
+	private final PassportNumberProvider passportNumberProvider;
 
 	@Inject
 	public PersonProvider(DataMaster dataMaster,
 	                      DateProducer dateProducer,
 	                      BaseProducer baseProducer,
 	                      PeselFactory peselFactory,
-	                      NationalIdentityCardNumber nationalIdentityCardNumber,
+	                      NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
 	                      AddressProvider addressProvider,
 	                      CompanyProvider companyProvider,
-
+	                      PassportNumberProvider passportNumberProvider,
 	                      @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 		this.peselFactory = peselFactory;
-		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
+		this.nationalIdentityCardNumberProvider = nationalIdentityCardNumberProvider;
 		this.addressProvider = addressProvider;
+		this.passportNumberProvider = passportNumberProvider;
 		this.companyProvider = companyProvider;
 
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
@@ -102,7 +104,7 @@ public class PersonProvider implements Provider<Person> {
 
 		return new Person(firstName, middleName, lastName, addressProvider.get(), email,
 				username, password, sex, telephoneNumber, dateOfBirth, age,
-				nationalIdentityCardNumber.generate(), nationalIdentificationNumber(),
+				nationalIdentityCardNumberProvider.get(), nationalIdentificationNumber(), passportNumberProvider.get(),
 				company, companyEmail);
 	}
 

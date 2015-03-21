@@ -47,6 +47,7 @@ dependencies {
 	compile 'com.google.inject:guice:3.0'
 	compile 'com.google.inject.extensions:guice-assistedinject:3.0'
 	compile 'org.iban4j:iban4j:2.1.1'
+	compile 'org.reflections:reflections:0.9.9'
 	testCompile 'commons-validator:commons-validator:1.4.0'
 	testCompile 'ch.qos.logback:logback-classic:1.1.2'
 	testCompile 'org.codehaus.groovy:groovy-all:2.3.4'

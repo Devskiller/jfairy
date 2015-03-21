@@ -3,6 +3,7 @@ package io.codearte.jfairy;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.producer.util.LanguageCode;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -32,7 +33,10 @@ public class Bootstrap {
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
 	public static Fairy createFairy(Locale locale, String filePrefix, Random random) {
-		Injector injector = Guice.createInjector(new FairyModule(random));
+
+		FairyModule fairyModule = getFairyModuleForLocale(locale, random);
+
+		Injector injector = Guice.createInjector(fairyModule);
 
 		DataMaster dataMaster = injector.getInstance(DataMaster.class);
 		try {
@@ -152,4 +156,16 @@ public class Bootstrap {
 		}
 	}
 
+
+	private static FairyModule getFairyModuleForLocale(Locale locale, Random random) {
+		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
+		switch (code) {
+			case PL:
+				return new PlFairyModule(random);
+			case EN:
+				return new EnFairyModule(random);
+			default:
+				return new EnFairyModule(random);
+		}
+	}
 }

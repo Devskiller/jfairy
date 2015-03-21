@@ -3,7 +3,7 @@ package io.codearte.jfairy.producer.company;
 import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
-import io.codearte.jfairy.producer.VATIdentificationNumber;
+import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -18,13 +18,13 @@ public class CompanyProvider implements Provider<Company> {
 	private BaseProducer baseProducer;
 	private DataMaster dataMaster;
 
-	private final VATIdentificationNumber vatIdentificationNumber;
+	private final VATIdentificationNumberProvider vatIdentificationNumberProvider;
 
 	@Inject
-	public CompanyProvider(BaseProducer baseProducer, DataMaster dataMaster, VATIdentificationNumber vatIdentificationNumber) {
+	public CompanyProvider(BaseProducer baseProducer, DataMaster dataMaster, VATIdentificationNumberProvider vatIdentificationNumberProvider) {
 		this.baseProducer = baseProducer;
 		this.dataMaster = dataMaster;
-		this.vatIdentificationNumber = vatIdentificationNumber;
+		this.vatIdentificationNumberProvider = vatIdentificationNumberProvider;
 	}
 
 
@@ -39,6 +39,6 @@ public class CompanyProvider implements Provider<Company> {
 				+ "." + dataMaster.getRandomValue(DOMAIN);
 		String email = dataMaster.getRandomValue(COMPANY_EMAIL);
 
-		return new Company(name, domain, email, vatIdentificationNumber.generate());
+		return new Company(name, domain, email, vatIdentificationNumberProvider.get());
 	}
 }
