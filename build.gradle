@@ -8,11 +8,17 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'pitest'
 apply plugin: 'idea'
 apply plugin: 'pl.allegro.tech.build.axion-release'
+apply plugin: 'io.codearte.nexus-staging'
 
 scmVersion {
 	createReleaseCommit true
 }
 project.version = scmVersion.version
+
+nexusStaging {
+	packageGroup = "io.codearte"
+	stagingProfileId = '93c08fdebde1ff'
+}
 
 ext.isReleaseVersion = !project.version.endsWith("SNAPSHOT")
 ext.shouldJacocoBeEnabled = determineIfJacocoShouldBeEnabled()
@@ -29,7 +35,8 @@ buildscript {
 		classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.0.0'
 		classpath 'org.hibernate.build.gradle:gradle-upload-auth-plugin:1.1.1'
 		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
-		classpath 'pl.allegro.tech.build:axion-release-plugin:1.1.0'
+		classpath 'pl.allegro.tech.build:axion-release-plugin:1.2.2'
+		classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.1"
 	}
 }
 
@@ -112,7 +119,7 @@ uploadArchives {
 	repositories {
 		mavenDeployer {
 			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-				authentication(userName: sonatypeUsername, password: sonatypePassword)
+				authentication(userName: nexusUsername, password: nexusPassword)
 			}
 			name = 'Sonatype OSS'
 
