@@ -20,7 +20,6 @@ class SocialSecurityNumberProviderSpec extends Specification {
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("en"))
 		socialSecurityNumber = fairy.person().nationalIdentityCardNumber()
-		println socialSecurityNumber
 	}
 
 	def "should generate number with 11 characters"() {
