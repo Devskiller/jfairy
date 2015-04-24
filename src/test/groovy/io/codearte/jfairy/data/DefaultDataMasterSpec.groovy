@@ -8,10 +8,10 @@ import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.person.PersonProvider
 import spock.lang.Specification
 
-class DataMasterSpec extends Specification {
+class DefaultDataMasterSpec extends Specification {
 
 	def baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
-	def data = Spy(DataMaster, constructorArgs: [baseProducer])
+	def data = Spy(DefaultDataMaster, constructorArgs: [baseProducer])
 
 	def setup() {
 		baseProducer.randomBetween() >> 0
@@ -19,7 +19,7 @@ class DataMasterSpec extends Specification {
 
 	def "should read first names"() {
 		when:
-			DataMaster dataMaster = new DataMaster();
+			DataMaster dataMaster = new DefaultDataMaster();
 			dataMaster.readResources("jfairy_en.yml")
 
 			def firstNames = dataMaster.getStringMap(PersonProvider.FIRST_NAME)

@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.payment
 
 import io.codearte.jfairy.data.DataMaster
+import io.codearte.jfairy.data.DefaultDataMaster
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
 import org.joda.time.DateTime
@@ -18,7 +19,7 @@ class CreditCardProducerSpec extends Specification {
 	private DateProducer dateProducer
 
 	def setup() {
-		dataMaster = new DataMaster(new BaseProducer(new Random()))
+		dataMaster = new DefaultDataMaster(new BaseProducer(new Random()))
 		dateProducer = Mock(DateProducer)
 		dataMaster.readResources("jfairy.yml")
 	}

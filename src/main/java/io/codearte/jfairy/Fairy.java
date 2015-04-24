@@ -4,6 +4,7 @@
 package io.codearte.jfairy;
 
 
+import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.company.Company;
@@ -47,6 +48,10 @@ public final class Fairy {
 
 	public static Fairy create(Locale locale) {
 		return Bootstrap.create(locale);
+	}
+
+	public static Fairy create(DataMaster dataMaster) {
+		return Bootstrap.create(dataMaster);
 	}
 
 
