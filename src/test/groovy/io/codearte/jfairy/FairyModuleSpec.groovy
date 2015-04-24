@@ -1,5 +1,6 @@
 package io.codearte.jfairy
 
+import com.google.common.base.Optional
 import spock.lang.Specification
 
 /**
@@ -10,7 +11,7 @@ class FairyModuleSpec extends Specification {
 
 	def "should generate appropriate FairyModule for locale"() {
 		when:
-			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(Optional.empty(), Locale.forLanguageTag(locale), new Random())
+			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(Optional.absent(), Locale.forLanguageTag(locale), new Random())
 
 		then:
 			fairyModule.getClass() == module
@@ -24,7 +25,7 @@ class FairyModuleSpec extends Specification {
 
 	def "should generate appropriate FairyModule when no locale passed"() {
 		when:
-			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(Optional.empty(), Locale.forLanguageTag(locale), new Random())
+			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(Optional.absent(), Locale.forLanguageTag(locale), new Random())
 
 		then:
 			fairyModule.getClass() == module

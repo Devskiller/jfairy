@@ -1,5 +1,6 @@
 package io.codearte.jfairy;
 
+import com.google.common.base.Optional;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.codearte.jfairy.data.DataMaster;
@@ -8,7 +9,6 @@ import io.codearte.jfairy.producer.util.LanguageCode;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -116,7 +116,7 @@ public class Bootstrap {
 		private Locale locale = Locale.ENGLISH;
 		private String filePrefix = DATA_FILE_PREFIX;
 		private Random random = new Random();
-		private Optional<DataMaster> dataMaster = Optional.empty();
+		private Optional<DataMaster> dataMaster = Optional.absent();
 
 		private Builder() {
 		}

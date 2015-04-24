@@ -1,5 +1,6 @@
 package io.codearte.jfairy;
 
+import com.google.common.base.Optional;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import io.codearte.jfairy.data.DataMaster;
@@ -9,7 +10,6 @@ import io.codearte.jfairy.producer.payment.IBANFactory;
 import io.codearte.jfairy.producer.person.PersonFactory;
 import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
 
-import java.util.Optional;
 import java.util.Random;
 
 /**
