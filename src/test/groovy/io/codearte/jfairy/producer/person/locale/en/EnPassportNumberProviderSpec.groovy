@@ -4,7 +4,7 @@ import io.codearte.jfairy.Fairy
 import spock.lang.Specification
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  @since 15.03.15
  */
 class EnPassportNumberProviderSpec extends Specification {

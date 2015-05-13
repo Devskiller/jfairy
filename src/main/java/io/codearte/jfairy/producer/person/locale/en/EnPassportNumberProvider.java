@@ -4,7 +4,7 @@ import io.codearte.jfairy.producer.person.PassportNumberProvider;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 15.03.15
  */
 public class EnPassportNumberProvider implements PassportNumberProvider {

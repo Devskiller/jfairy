@@ -15,7 +15,7 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 21.02.15
  */
 public class PlPassportNumberProvider implements PassportNumberProvider {

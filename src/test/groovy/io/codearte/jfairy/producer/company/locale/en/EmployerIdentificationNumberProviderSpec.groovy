@@ -4,7 +4,7 @@ import io.codearte.jfairy.Fairy
 import spock.lang.Specification
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  @since 21.03.15
  */
 class EmployerIdentificationNumberProviderSpec extends Specification {
