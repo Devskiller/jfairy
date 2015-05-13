@@ -19,13 +19,13 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Singleton
-public class DefaultDataMaster implements DataMaster {
+public class MapBasedDataMaster implements DataMaster {
 
 	private final BaseProducer baseProducer;
 	private Map<String, Object> dataSource = new CaseInsensitiveMap();
 
 	@Inject
-	DefaultDataMaster(BaseProducer baseProducer) {
+	MapBasedDataMaster(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 

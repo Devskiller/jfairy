@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.data.DefaultDataMaster;
+import io.codearte.jfairy.data.MapBasedDataMaster;
 import io.codearte.jfairy.producer.util.LanguageCode;
 
 import java.io.IOException;
@@ -30,31 +30,46 @@ import java.util.Random;
  * a
  *
  * @author Jakub Kubrynski
+ * @author Olga Maciaszek-Sharma
  */
 public class Bootstrap {
 
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
+	public static Fairy createFairy(Optional<DataMaster> customDataMaster, Locale locale, String filePrefix, Random random) {
 
-	public static Fairy createFairy(Optional<DataMaster> dataMaster, Locale locale, String filePrefix, Random random) {
-
-		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, random);
+		FairyModule fairyModule = getFairyModuleForLocale(resolveDataMaster(customDataMaster), locale, random);
 
 		Injector injector = Guice.createInjector(fairyModule);
 
 		FairyFactory instance = injector.getInstance(FairyFactory.class);
 
-		DataMaster createdDataMaster = injector.getInstance(DataMaster.class);
-
-		if (createdDataMaster instanceof DefaultDataMaster) {
-
-			fillDefaultDataMaster((DefaultDataMaster) createdDataMaster, locale, filePrefix);
-		}
+		fillDefaultDataMaster(locale, filePrefix, injector);
 
 		return instance.createFairy();
 	}
 
-	private static void fillDefaultDataMaster(DefaultDataMaster dataMaster, Locale locale, String filePrefix) {
+	private static void fillDefaultDataMaster(Locale locale, String filePrefix, Injector injector) {
+		DataMaster dataMasterBean = injector.getInstance(DataMaster.class);
+
+		if (dataMasterBean instanceof MapBasedDataMaster) {
+
+			fillDefaultDataMaster((MapBasedDataMaster) dataMasterBean, locale, filePrefix);
+		}
+	}
+
+	private static Class resolveDataMaster(Optional<DataMaster> customDataMaster) {
+		Class dataMaster;
+
+		if (customDataMaster.isPresent()) {
+			dataMaster = customDataMaster.get().getClass();
+		} else {
+			dataMaster = MapBasedDataMaster.class;
+		}
+		return dataMaster;
+	}
+
+	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
 		try {
 			dataMaster.readResources(filePrefix + ".yml");
 			dataMaster.readResources(filePrefix + "_" + locale.getLanguage() + ".yml");
@@ -109,6 +124,10 @@ public class Bootstrap {
 
 	public static Fairy create(DataMaster dataMaster) {
 		return builder().withDataMaster(dataMaster).build();
+	}
+
+	public static Fairy create(DataMaster dataMaster, Locale locale) {
+		return builder().withDataMaster(dataMaster).withLocale(locale).build();
 	}
 
 	public static class Builder {
@@ -188,15 +207,15 @@ public class Bootstrap {
 	}
 
 
-	private static FairyModule getFairyModuleForLocale(Optional<DataMaster> dataMaster, Locale locale, Random random) {
+	private static FairyModule getFairyModuleForLocale(Class<DataMaster> dataMasterClass, Locale locale, Random random) {
 		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
 		switch (code) {
 			case PL:
-				return new PlFairyModule(dataMaster, random);
+				return new PlFairyModule(dataMasterClass, random);
 			case EN:
-				return new EnFairyModule(dataMaster, random);
+				return new EnFairyModule(dataMasterClass, random);
 			default:
-				return new EnFairyModule(dataMaster, random);
+				return new EnFairyModule(dataMasterClass, random);
 		}
 	}
 }

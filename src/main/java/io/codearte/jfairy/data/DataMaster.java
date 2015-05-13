@@ -3,7 +3,7 @@ package io.codearte.jfairy.data;
 import java.util.List;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 23.04.15
  */
 public interface DataMaster {

@@ -11,7 +11,7 @@ import spock.lang.Specification
 class DefaultDataMasterSpec extends Specification {
 
 	def baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
-	def data = Spy(DefaultDataMaster, constructorArgs: [baseProducer])
+	def data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
 
 	def setup() {
 		baseProducer.randomBetween() >> 0
@@ -19,7 +19,7 @@ class DefaultDataMasterSpec extends Specification {
 
 	def "should read first names"() {
 		when:
-			DataMaster dataMaster = new DefaultDataMaster();
+			DataMaster dataMaster = new MapBasedDataMaster();
 			dataMaster.readResources("jfairy_en.yml")
 
 			def firstNames = dataMaster.getStringMap(PersonProvider.FIRST_NAME)

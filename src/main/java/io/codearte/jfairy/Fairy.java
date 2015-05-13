@@ -54,6 +54,10 @@ public final class Fairy {
 		return Bootstrap.create(dataMaster);
 	}
 
+	public static Fairy create(DataMaster dataMaster, Locale locale) {
+		return Bootstrap.create(dataMaster, locale);
+	}
+
 
 	public static Bootstrap.Builder builder() {
 		return Bootstrap.builder();

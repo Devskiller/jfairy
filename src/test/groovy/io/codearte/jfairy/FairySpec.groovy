@@ -1,12 +1,11 @@
 package io.codearte.jfairy
 
-import io.codearte.jfairy.data.DataMaster
 import io.codearte.jfairy.producer.person.Person
+import io.codearte.jfairy.testUtils.CustomDataMaster
+import io.codearte.jfairy.testUtils.TestFixture
 import spock.lang.Specification
 
 class FairySpec extends Specification {
-
-	private static final String CUSTOM_STRING = 'Custom Data Master'
 
 	def "Second person should be different without fairy instance"() {
 
@@ -67,7 +66,7 @@ class FairySpec extends Specification {
 			Person samplePerson = fairy.person()
 
 		then:
-			samplePerson.firstName() && samplePerson.firstName() != CUSTOM_STRING
+			samplePerson.firstName() && samplePerson.firstName() != TestFixture.CUSTOM_STRING
 
 	}
 
@@ -78,31 +77,7 @@ class FairySpec extends Specification {
 			Person samplePerson = fairy.person()
 
 		then:
-			samplePerson.firstName() == CUSTOM_STRING
+			samplePerson.firstName() == TestFixture.CUSTOM_STRING
 
 	}
-
-	private class CustomDataMaster implements DataMaster {
-
-		@Override
-		String getString(String key) {
-			return CUSTOM_STRING
-		}
-
-		@Override
-		List<String> getStringList(String key) {
-			return Arrays.asList(CUSTOM_STRING)
-		}
-
-		@Override
-		String getValuesOfType(String dataKey, String type) {
-			return CUSTOM_STRING
-		}
-
-		@Override
-		String getRandomValue(String key) {
-			return CUSTOM_STRING
-		}
-	}
-
 }

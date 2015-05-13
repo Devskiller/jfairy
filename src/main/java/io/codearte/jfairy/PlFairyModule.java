@@ -1,6 +1,5 @@
 package io.codearte.jfairy;
 
-import com.google.common.base.Optional;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.company.locale.pl.NIPProvider;
@@ -12,13 +11,13 @@ import io.codearte.jfairy.producer.person.locale.pl.PlPassportNumberProvider;
 import java.util.Random;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 21.02.15
  */
 public class PlFairyModule extends FairyModule {
 
-	public PlFairyModule(Optional<DataMaster> dataMaster, Random random) {
-		super(dataMaster, random);
+	public PlFairyModule(Class<DataMaster> dataMasterClass, Random random) {
+		super(dataMasterClass, random);
 	}
 
 	@Override
