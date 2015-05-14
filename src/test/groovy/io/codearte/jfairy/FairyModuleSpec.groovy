@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 /**
  * @author omaciaszek
- @since 15.03.15
+ * @since 15.03.15
  */
 class FairyModuleSpec extends Specification {
 
@@ -19,7 +19,7 @@ class FairyModuleSpec extends Specification {
 			locale | module
 			"en"   | EnFairyModule.class
 			"pl"   | PlFairyModule.class
-            "es"   | EsFairyModule.class
+			"es"   | EsFairyModule.class
 	}
 
 	def "should generate appropriate FairyModule when no locale passed"() {
@@ -33,7 +33,7 @@ class FairyModuleSpec extends Specification {
 			locale | module
 			"en"   | EnFairyModule.class
 			"pl"   | PlFairyModule.class
-            "es"   | EsFairyModule.class
+			"es"   | EsFairyModule.class
 	}
 
 }

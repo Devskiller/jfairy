@@ -1,7 +1,5 @@
 package io.codearte.jfairy.producer.company.locale.es
 
-import io.codearte.jfairy.producer.BaseProducer
-import io.codearte.jfairy.producer.company.locale.pl.NIPProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -11,27 +9,27 @@ import spock.lang.Unroll
  */
 class CIFProviderSpec extends Specification {
 
-    def generator = new CIFProvider()
+	def generator = new CIFProvider()
 
-    @Unroll
-    def "Should validate #nip as #valid"() {
+	@Unroll
+	def "Should validate #nip as #valid"() {
 
-        expect:
-            generator.isValid(nip) == valid
+		expect:
+			generator.isValid(nip) == valid
 
-        where:
-            nip         | valid
-            "L17761800" | true
-            "31231231X" | false
-            "G2301257H" | true
-            "AB023023C" | false
-    }
+		where:
+			nip         | valid
+			"L17761800" | true
+			"31231231X" | false
+			"G2301257H" | true
+			"AB023023C" | false
+	}
 
-    def "Should always generate proper nip"() {
-        expect:
-            generator.isValid(generator.get())
-        where:
-            i << (1..100)
-    }
+	def "Should always generate proper nip"() {
+		expect:
+			generator.isValid(generator.get())
+		where:
+			i << (1..100)
+	}
 
 }

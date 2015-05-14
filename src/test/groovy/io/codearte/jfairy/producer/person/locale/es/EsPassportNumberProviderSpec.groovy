@@ -9,23 +9,23 @@ import spock.lang.Specification
  */
 class EsPassportNumberProviderSpec extends Specification {
 
-    def Fairy fairy;
-    def String passportNumber
+	def Fairy fairy;
+	def String passportNumber
 
-    def setup() {
-        fairy = Fairy.create(Locale.forLanguageTag("es"))
-        passportNumber = fairy.person().passportNumber()
-    }
+	def setup() {
+		fairy = Fairy.create(Locale.forLanguageTag("es"))
+		passportNumber = fairy.person().passportNumber()
+	}
 
-    def "should generate number with nine characters"() {
-        expect:
-        passportNumber.length() == 9
-    }
+	def "should generate number with nine characters"() {
+		expect:
+			passportNumber.length() == 9
+	}
 
-    def "should contain only digits and letters"() {
-        for (Character character : passportNumber) {
-            expect:
-            character.isDigit() || character.isLetter()
-        }
-    }
+	def "should contain only digits and letters"() {
+		for (Character character : passportNumber) {
+			expect:
+				character.isDigit() || character.isLetter()
+		}
+	}
 }
