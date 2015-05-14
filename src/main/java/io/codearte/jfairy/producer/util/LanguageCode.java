@@ -7,5 +7,5 @@ package io.codearte.jfairy.producer.util;
 public enum LanguageCode {
 	PL,
 	EN,
-    ES
+	ES
 }

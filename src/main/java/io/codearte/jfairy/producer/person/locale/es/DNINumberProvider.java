@@ -12,19 +12,19 @@ import java.util.regex.Pattern;
  */
 public class DNINumberProvider implements NationalIdentityCardNumberProvider {
 
-    private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
-    private Pattern regexDni;
+	private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
+	private Pattern regexDni;
 
-    public DNINumberProvider() {
-        this.regexDni = Pattern.compile(REGEX_DNI);
-    }
+	public DNINumberProvider() {
+		this.regexDni = Pattern.compile(REGEX_DNI);
+	}
 
-    @Override
-    public String get() {
-        return String.format("%s-%s", RandomStringUtils.randomNumeric(8), RandomStringUtils.randomAlphabetic(1).toUpperCase());
-    }
+	@Override
+	public String get() {
+		return String.format("%s-%s", RandomStringUtils.randomNumeric(8), RandomStringUtils.randomAlphabetic(1).toUpperCase());
+	}
 
-    public boolean isValid(String dni) {
-        return this.regexDni.matcher(dni).matches();
-    }
+	public boolean isValid(String dni) {
+		return this.regexDni.matcher(dni).matches();
+	}
 }

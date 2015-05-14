@@ -15,15 +15,15 @@ import java.util.Random;
  */
 public class EsFairyModule extends FairyModule {
 
-    public EsFairyModule(Random random) {
-        super(random);
-    }
+	public EsFairyModule(Random random) {
+		super(random);
+	}
 
-    @Override
-    protected void configure() {
-        super.configure();
-        bind(NationalIdentityCardNumberProvider.class).to(DNINumberProvider.class);
-        bind(VATIdentificationNumberProvider.class).to(CIFProvider.class);
-        bind(PassportNumberProvider.class).to(EsPassportNumberProvider.class);
-    }
+	@Override
+	protected void configure() {
+		super.configure();
+		bind(NationalIdentityCardNumberProvider.class).to(DNINumberProvider.class);
+		bind(VATIdentificationNumberProvider.class).to(CIFProvider.class);
+		bind(PassportNumberProvider.class).to(EsPassportNumberProvider.class);
+	}
 }
