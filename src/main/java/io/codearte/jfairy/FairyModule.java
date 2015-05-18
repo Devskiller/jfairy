@@ -1,8 +1,10 @@
 package io.codearte.jfairy;
 
+import com.google.common.base.Optional;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.data.MapBasedDataMaster;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import io.codearte.jfairy.producer.payment.IBANFactory;
 import io.codearte.jfairy.producer.person.PersonFactory;
@@ -19,16 +21,20 @@ public abstract class FairyModule extends AbstractModule {
 
 	private final Random random;
 
-	private final Class<DataMaster> dataMasterClass;
+	private final Optional<DataMaster> dataMaster;
 
-	public FairyModule(Class<DataMaster> dataMasterClass, Random random) {
+	public FairyModule(Optional<DataMaster> dataMaster, Random random) {
 		this.random = random;
-		this.dataMasterClass = dataMasterClass;
+		this.dataMaster = dataMaster;
 	}
 
 	@Override
 	protected void configure() {
-		bind(DataMaster.class).to(dataMasterClass);
+		if (dataMaster.isPresent()) {
+			bind(DataMaster.class).toInstance(dataMaster.get());
+		} else {
+			bind(DataMaster.class).to(MapBasedDataMaster.class);
+		}
 		bind(Random.class).toInstance(random);
 
 		install(new FactoryModuleBuilder().build(PersonFactory.class));

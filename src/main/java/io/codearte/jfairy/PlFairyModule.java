@@ -1,5 +1,6 @@
 package io.codearte.jfairy;
 
+import com.google.common.base.Optional;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.company.locale.pl.NIPProvider;
@@ -16,8 +17,8 @@ import java.util.Random;
  */
 public class PlFairyModule extends FairyModule {
 
-	public PlFairyModule(Class<DataMaster> dataMasterClass, Random random) {
-		super(dataMasterClass, random);
+	public PlFairyModule(Optional<DataMaster> dataMaster, Random random) {
+		super(dataMaster, random);
 	}
 
 	@Override
