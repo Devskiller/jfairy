@@ -1,14 +1,12 @@
 package io.codearte.jfairy;
 
-import com.google.common.base.Optional;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.data.MapBasedDataMaster;
-import io.codearte.jfairy.producer.company.CompanyFactory;
-import io.codearte.jfairy.producer.payment.IBANFactory;
-import io.codearte.jfairy.producer.person.PersonFactory;
-import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
+import io.codearte.jfairy.dataProvider.company.CompanyFactory;
+import io.codearte.jfairy.dataProvider.payment.IBANFactory;
+import io.codearte.jfairy.dataProvider.person.PersonFactory;
+import io.codearte.jfairy.dataProvider.person.locale.pl.PeselFactory;
 
 import java.util.Random;
 
@@ -21,20 +19,16 @@ public abstract class FairyModule extends AbstractModule {
 
 	private final Random random;
 
-	private final Optional<DataMaster> dataMaster;
+	private final DataMaster dataMaster;
 
-	public FairyModule(Optional<DataMaster> dataMaster, Random random) {
+	public FairyModule(DataMaster dataMaster, Random random) {
 		this.random = random;
 		this.dataMaster = dataMaster;
 	}
 
 	@Override
 	protected void configure() {
-		if (dataMaster.isPresent()) {
-			bind(DataMaster.class).toInstance(dataMaster.get());
-		} else {
-			bind(DataMaster.class).to(MapBasedDataMaster.class);
-		}
+		bind(DataMaster.class).toInstance(dataMaster);
 		bind(Random.class).toInstance(random);
 
 		install(new FactoryModuleBuilder().build(PersonFactory.class));

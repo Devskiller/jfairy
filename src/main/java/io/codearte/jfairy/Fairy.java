@@ -4,20 +4,20 @@
 package io.codearte.jfairy;
 
 
+import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.producer.BaseProducer;
-import io.codearte.jfairy.producer.DateProducer;
-import io.codearte.jfairy.producer.company.Company;
-import io.codearte.jfairy.producer.company.CompanyFactory;
-import io.codearte.jfairy.producer.net.NetworkProducer;
-import io.codearte.jfairy.producer.payment.CreditCard;
-import io.codearte.jfairy.producer.person.Person;
-import io.codearte.jfairy.producer.person.PersonFactory;
-import io.codearte.jfairy.producer.person.PersonProperties;
-import io.codearte.jfairy.producer.text.TextProducer;
+import io.codearte.jfairy.dataProvider.BaseProducer;
+import io.codearte.jfairy.dataProvider.DateProducer;
+import io.codearte.jfairy.dataProvider.company.Company;
+import io.codearte.jfairy.dataProvider.company.CompanyFactory;
+import io.codearte.jfairy.dataProvider.net.NetworkProducer;
+import io.codearte.jfairy.dataProvider.payment.CreditCard;
+import io.codearte.jfairy.dataProvider.person.Person;
+import io.codearte.jfairy.dataProvider.person.PersonFactory;
+import io.codearte.jfairy.dataProvider.person.PersonProperties;
+import io.codearte.jfairy.dataProvider.text.TextProducer;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import java.util.Locale;
 
 public final class Fairy {
@@ -50,12 +50,12 @@ public final class Fairy {
 		return Bootstrap.create(locale);
 	}
 
-	public static Fairy create(DataMaster dataMaster) {
-		return Bootstrap.create(dataMaster);
+	public static Fairy create(Provider<DataMaster> dataMasterProvider) {
+		return Bootstrap.create(dataMasterProvider);
 	}
 
-	public static Fairy create(DataMaster dataMaster, Locale locale) {
-		return Bootstrap.create(dataMaster, locale);
+	public static Fairy create(Provider<DataMaster> dataMasterProvider, Locale locale) {
+		return Bootstrap.create(dataMasterProvider, locale);
 	}
 
 
@@ -66,7 +66,7 @@ public final class Fairy {
 	/**
 	 * Use this method for generating texts
 	 *
-	 * @return A {@link io.codearte.jfairy.producer.text.TextProducer} instance
+	 * @return A {@link io.codearte.jfairy.dataProvider.text.TextProducer} instance
 	 */
 	public TextProducer textProducer() {
 		return textProducer;
@@ -76,7 +76,7 @@ public final class Fairy {
 	 * Use this method for fake persons
 	 *
 	 * @param personProperties desired person features
-	 * @return A {@link io.codearte.jfairy.producer.person.Person} instance
+	 * @return A {@link io.codearte.jfairy.dataProvider.person.Person} instance
 	 */
 	public Person person(PersonProperties.PersonProperty... personProperties) {
 		return personFactory.producePersonProvider(personProperties).get();
@@ -85,7 +85,7 @@ public final class Fairy {
 	/**
 	 * Use this method to generate fake company
 	 *
-	 * @return A {@link io.codearte.jfairy.producer.company.CompanyProvider} instance
+	 * @return A {@link io.codearte.jfairy.dataProvider.company.CompanyProvider} instance
 	 */
 	public Company company() {
 		return companyFactory.produceCompany().get();
@@ -94,7 +94,7 @@ public final class Fairy {
 	/**
 	 * Use this method for get standard tools
 	 *
-	 * @return A {@link io.codearte.jfairy.producer.BaseProducer} instance
+	 * @return A {@link io.codearte.jfairy.dataProvider.BaseProducer} instance
 	 */
 	public BaseProducer baseProducer() {
 		return baseProducer;

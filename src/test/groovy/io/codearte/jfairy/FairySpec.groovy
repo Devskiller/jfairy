@@ -1,7 +1,8 @@
 package io.codearte.jfairy
 
-import io.codearte.jfairy.producer.person.Person
+import io.codearte.jfairy.dataProvider.person.Person
 import io.codearte.jfairy.testUtils.CustomDataMaster
+import io.codearte.jfairy.testUtils.CustomDataMasterProvider
 import io.codearte.jfairy.testUtils.TestFixture
 import spock.lang.Specification
 
@@ -72,7 +73,7 @@ class FairySpec extends Specification {
 
 	def "should use custom DataMaster when provided"() {
 		given:
-			Fairy fairy = Fairy.create(new CustomDataMaster());
+			Fairy fairy = Fairy.create(new CustomDataMasterProvider());
 		when:
 			Person samplePerson = fairy.person()
 

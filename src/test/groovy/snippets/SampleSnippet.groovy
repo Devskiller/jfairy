@@ -1,7 +1,7 @@
 package snippets
 
 import io.codearte.jfairy.Fairy
-import io.codearte.jfairy.producer.person.PersonProperties
+import io.codearte.jfairy.dataProvider.person.PersonProperties
 
 println "\n * With context"
 def fairy = Fairy.create(Locale.forLanguageTag("en"))

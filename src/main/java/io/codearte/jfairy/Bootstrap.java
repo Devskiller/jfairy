@@ -1,11 +1,13 @@
 package io.codearte.jfairy;
 
-import com.google.common.base.Optional;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.data.DataMasterModule;
 import io.codearte.jfairy.data.MapBasedDataMaster;
-import io.codearte.jfairy.producer.util.LanguageCode;
+import io.codearte.jfairy.data.MapBasedDataMasterFactory;
+import io.codearte.jfairy.dataProvider.util.LanguageCode;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -36,27 +38,17 @@ public class Bootstrap {
 
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
-	public static Fairy createFairy(Optional<DataMaster> customDataMaster, Locale locale, String filePrefix, Random random) {
+	public static Fairy createFairy(DataMaster dataMaster, Locale locale, String filePrefix, Random random) {
 
-		FairyModule fairyModule = getFairyModuleForLocale(customDataMaster, locale, random);
+		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, random);
 
 		Injector injector = Guice.createInjector(fairyModule);
 
 		FairyFactory instance = injector.getInstance(FairyFactory.class);
 
-		fillDefaultDataMaster(locale, filePrefix, injector);
-
 		return instance.createFairy();
 	}
 
-	private static void fillDefaultDataMaster(Locale locale, String filePrefix, Injector injector) {
-		DataMaster dataMasterBean = injector.getInstance(DataMaster.class);
-
-		if (dataMasterBean instanceof MapBasedDataMaster) {
-
-			fillDefaultDataMaster((MapBasedDataMaster) dataMasterBean, locale, filePrefix);
-		}
-	}
 
 	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
 		try {
@@ -111,12 +103,24 @@ public class Bootstrap {
 				.build();
 	}
 
-	public static Fairy create(DataMaster dataMaster) {
-		return builder().withDataMaster(dataMaster).build();
+	public static Fairy create(Provider<DataMaster> dataMaster) {
+		return builder().withDataMasterProvider(dataMaster).build();
 	}
 
-	public static Fairy create(DataMaster dataMaster, Locale locale) {
-		return builder().withDataMaster(dataMaster).withLocale(locale).build();
+	public static Fairy create(Provider<DataMaster> dataMaster, Locale locale) {
+		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
+	}
+
+	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
+		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
+		switch (code) {
+			case PL:
+				return new PlFairyModule(dataMaster, random);
+			case EN:
+				return new EnFairyModule(dataMaster, random);
+			default:
+				return new EnFairyModule(dataMaster, random);
+		}
 	}
 
 	public static class Builder {
@@ -124,9 +128,17 @@ public class Bootstrap {
 		private Locale locale = Locale.ENGLISH;
 		private String filePrefix = DATA_FILE_PREFIX;
 		private Random random = new Random();
-		private Optional<DataMaster> dataMaster = Optional.absent();
+		private DataMaster dataMaster = getDefaultDataMasterFactory().createMapBasedDataMaster();
+
+
+		private MapBasedDataMasterFactory getDefaultDataMasterFactory() {
+			DataMasterModule dataMasterModule = new DataMasterModule();
+			Injector injector = Guice.createInjector(dataMasterModule);
+			return injector.getInstance(MapBasedDataMasterFactory.class);
+		}
 
 		private Builder() {
+			fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
 		}
 
 		/**
@@ -178,11 +190,11 @@ public class Bootstrap {
 		/**
 		 * Sets a custom DataMaster implementation.
 		 *
-		 * @param dataMaster The random seed to use.
+		 * @param dataMasterProvider The random seed to use.
 		 * @return the same Builder (for chaining).
 		 */
-		public Builder withDataMaster(DataMaster dataMaster) {
-			this.dataMaster = Optional.of(dataMaster);
+		public Builder withDataMasterProvider(Provider<DataMaster> dataMasterProvider) {
+			this.dataMaster = dataMasterProvider.get();
 			return this;
 		}
 
@@ -196,15 +208,4 @@ public class Bootstrap {
 	}
 
 
-	private static FairyModule getFairyModuleForLocale(Optional<DataMaster> dataMaster, Locale locale, Random random) {
-		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
-		switch (code) {
-			case PL:
-				return new PlFairyModule(dataMaster, random);
-			case EN:
-				return new EnFairyModule(dataMaster, random);
-			default:
-				return new EnFairyModule(dataMaster, random);
-		}
-	}
 }

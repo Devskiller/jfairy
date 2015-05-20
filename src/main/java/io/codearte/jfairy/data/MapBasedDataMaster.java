@@ -4,7 +4,7 @@
 
 package io.codearte.jfairy.data;
 
-import io.codearte.jfairy.producer.BaseProducer;
+import io.codearte.jfairy.dataProvider.BaseProducer;
 import org.yaml.snakeyaml.Yaml;
 
 import javax.inject.Inject;

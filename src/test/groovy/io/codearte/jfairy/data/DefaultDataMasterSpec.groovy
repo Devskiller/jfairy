@@ -4,8 +4,8 @@
 
 package io.codearte.jfairy.data
 
-import io.codearte.jfairy.producer.BaseProducer
-import io.codearte.jfairy.producer.person.PersonProvider
+import io.codearte.jfairy.dataProvider.BaseProducer
+import io.codearte.jfairy.dataProvider.person.PersonProvider
 import spock.lang.Specification
 
 class DefaultDataMasterSpec extends Specification {

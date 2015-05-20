@@ -1,11 +1,20 @@
 package io.codearte.jfairy.testUtils
 
+import com.google.inject.Provider
 import io.codearte.jfairy.data.DataMaster
 
 /**
  * @author Olga Maciaszek-Sharma
  @since 13.05.15
  */
+class CustomDataMasterProvider implements Provider<DataMaster> {
+
+	@Override
+	DataMaster get() {
+		return new CustomDataMaster();
+	}
+}
+
 class CustomDataMaster implements DataMaster {
 
 	@Override

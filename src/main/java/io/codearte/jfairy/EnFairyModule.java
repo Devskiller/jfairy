@@ -1,13 +1,12 @@
 package io.codearte.jfairy;
 
-import com.google.common.base.Optional;
 import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
-import io.codearte.jfairy.producer.company.locale.en.EmployerIdentificationNumberProvider;
-import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
-import io.codearte.jfairy.producer.person.PassportNumberProvider;
-import io.codearte.jfairy.producer.person.locale.en.EnPassportNumberProvider;
-import io.codearte.jfairy.producer.person.locale.en.SocialSecurityCardNumberProvider;
+import io.codearte.jfairy.dataProvider.VATIdentificationNumberProvider;
+import io.codearte.jfairy.dataProvider.company.locale.en.EmployerIdentificationNumberProvider;
+import io.codearte.jfairy.dataProvider.person.NationalIdentityCardNumberProvider;
+import io.codearte.jfairy.dataProvider.person.PassportNumberProvider;
+import io.codearte.jfairy.dataProvider.person.locale.en.EnPassportNumberProvider;
+import io.codearte.jfairy.dataProvider.person.locale.en.SocialSecurityCardNumberProvider;
 
 import java.util.Random;
 
@@ -17,7 +16,7 @@ import java.util.Random;
  */
 public class EnFairyModule extends FairyModule {
 
-	public EnFairyModule(Optional<DataMaster> dataMaster, Random random) {
+	public EnFairyModule(DataMaster dataMaster, Random random) {
 		super(dataMaster, random);
 	}
 
