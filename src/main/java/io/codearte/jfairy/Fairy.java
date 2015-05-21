@@ -50,12 +50,12 @@ public final class Fairy {
 		return Bootstrap.create(locale);
 	}
 
-	public static Fairy create(Provider<DataMaster> dataMasterProvider) {
-		return Bootstrap.create(dataMasterProvider);
+	public static Fairy create(DataMaster dataMaster) {
+		return Bootstrap.create(dataMaster);
 	}
 
-	public static Fairy create(Provider<DataMaster> dataMasterProvider, Locale locale) {
-		return Bootstrap.create(dataMasterProvider, locale);
+	public static Fairy create(DataMaster dataMaster, Locale locale) {
+		return Bootstrap.create(dataMaster, locale);
 	}
 
 

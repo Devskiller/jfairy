@@ -2,7 +2,6 @@ package io.codearte.jfairy;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.data.DataMasterModule;
 import io.codearte.jfairy.data.MapBasedDataMaster;
@@ -103,12 +102,12 @@ public class Bootstrap {
 				.build();
 	}
 
-	public static Fairy create(Provider<DataMaster> dataMaster) {
-		return builder().withDataMasterProvider(dataMaster).build();
+	public static Fairy create(DataMaster dataMaster) {
+		return builder().withDataMaster(dataMaster).build();
 	}
 
-	public static Fairy create(Provider<DataMaster> dataMaster, Locale locale) {
-		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
+	public static Fairy create(DataMaster dataMaster, Locale locale) {
+		return builder().withDataMaster(dataMaster).withLocale(locale).build();
 	}
 
 	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
@@ -190,11 +189,11 @@ public class Bootstrap {
 		/**
 		 * Sets a custom DataMaster implementation.
 		 *
-		 * @param dataMasterProvider The random seed to use.
+		 * @param dataMaster The random seed to use.
 		 * @return the same Builder (for chaining).
 		 */
-		public Builder withDataMasterProvider(Provider<DataMaster> dataMasterProvider) {
-			this.dataMaster = dataMasterProvider.get();
+		public Builder withDataMaster(DataMaster dataMaster) {
+			this.dataMaster = dataMaster;
 			return this;
 		}
 
