@@ -3,8 +3,6 @@ package io.codearte.jfairy.producer.person;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.company.Company;
 
-import javax.inject.Inject;
-
 /**
  * @author jkubrynski@gmail.com
  * @since 2013-11-16
@@ -16,20 +14,14 @@ public final class PersonProperties {
 
 	public abstract static class PersonProperty {
 
-		@Inject
-		private BaseProducer baseProducer;
+		public abstract void apply(PersonProvider person, BaseProducer baseProducer);
 
-		public abstract void apply(PersonProvider person);
-
-		protected BaseProducer getBaseProducer() {
-			return baseProducer;
-		}
 	}
 
 	public static PersonProperty male() {
 		return new PersonProperty() {
 			@Override
-			public void apply(PersonProvider person) {
+			public void apply(PersonProvider person, BaseProducer baseProducer) {
 				person.setSex(Person.Sex.MALE);
 			}
 		};
@@ -38,7 +30,7 @@ public final class PersonProperties {
 	public static PersonProperty female() {
 		return new PersonProperty() {
 			@Override
-			public void apply(PersonProvider person) {
+			public void apply(PersonProvider person, BaseProducer baseProducer) {
 				person.setSex(Person.Sex.FEMALE);
 			}
 		};
@@ -47,8 +39,8 @@ public final class PersonProperties {
 	public static PersonProperty minAge(final int minAge) {
 		return new PersonProperty() {
 			@Override
-			public void apply(PersonProvider person) {
-				person.setAge(getBaseProducer().randomBetween(minAge, PersonProvider.MAX_AGE));
+			public void apply(PersonProvider person, BaseProducer baseProducer) {
+				person.setAge(baseProducer.randomBetween(minAge, PersonProvider.MAX_AGE));
 			}
 		};
 	}
@@ -56,7 +48,7 @@ public final class PersonProperties {
 	public static PersonProperty telephoneFormat(final String telephoneFormat) {
 		return new PersonProperty() {
 			@Override
-			public void apply(PersonProvider person) {
+			public void apply(PersonProvider person, BaseProducer baseProducer) {
 				person.telephoneNumberFormat(telephoneFormat);
 			}
 		};
@@ -65,7 +57,7 @@ public final class PersonProperties {
 	public static PersonProperty withCompany(final Company company) {
 		return new PersonProperty() {
 			@Override
-			public void apply(PersonProvider personProvider) {
+			public void apply(PersonProvider personProvider, BaseProducer baseProducer) {
 				personProvider.setCompany(company);
 			}
 		};

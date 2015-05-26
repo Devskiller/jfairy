@@ -9,6 +9,7 @@ import spock.lang.Specification
 
 import static io.codearte.jfairy.producer.person.PersonProperties.female
 import static io.codearte.jfairy.producer.person.PersonProperties.male
+import static io.codearte.jfairy.producer.person.PersonProperties.minAge
 import static io.codearte.jfairy.producer.person.PersonProperties.telephoneFormat
 
 class PersonSpec extends Specification {
@@ -70,6 +71,13 @@ class PersonSpec extends Specification {
 			def person = fairy.person(male())
 		then:
 			person.isMale()
+	}
+
+	def "should create person older than 98 years"() {
+		when:
+			def person = fairy.person(minAge(99))
+		then:
+			person.age() > 98
 	}
 
 	def "should create telephone number"() {

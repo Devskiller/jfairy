@@ -67,7 +67,7 @@ public class PersonProvider implements Provider<Person> {
 		this.companyProvider = companyProvider;
 
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
-			personProperty.apply(this);
+			personProperty.apply(this, baseProducer);
 		}
 	}
 
