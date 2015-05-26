@@ -36,13 +36,21 @@ public final class PersonProperties {
 		};
 	}
 
-	public static PersonProperty minAge(final int minAge) {
+	public static PersonProperty ageBetween(final int minAge, final int maxAge) {
 		return new PersonProperty() {
 			@Override
 			public void apply(PersonProvider person, BaseProducer baseProducer) {
-				person.setAge(baseProducer.randomBetween(minAge, PersonProvider.MAX_AGE));
+				person.setAge(baseProducer.randomBetween(minAge, maxAge));
 			}
 		};
+	}
+
+	public static PersonProperty minAge(final int minAge) {
+		return ageBetween(minAge, PersonProvider.MAX_AGE);
+	}
+
+	public static PersonProperty maxAge(final int maxAge) {
+		return ageBetween(PersonProvider.MIN_AGE, maxAge);
 	}
 
 	public static PersonProperty telephoneFormat(final String telephoneFormat) {
