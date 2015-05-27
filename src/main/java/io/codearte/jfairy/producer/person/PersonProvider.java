@@ -11,6 +11,7 @@ import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyProvider;
 import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
 import io.codearte.jfairy.producer.person.locale.pl.PeselProperties;
+import io.codearte.jfairy.producer.util.CharConverter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 
@@ -45,6 +46,7 @@ public class PersonProvider implements Provider<Person> {
 	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
+	private final CharConverter charConverter;
 	private final TimeProvider timeProvider;
 	private final PassportNumberProvider passportNumberProvider;
 
@@ -57,6 +59,7 @@ public class PersonProvider implements Provider<Person> {
 	                      AddressProvider addressProvider,
 	                      CompanyProvider companyProvider,
 	                      PassportNumberProvider passportNumberProvider,
+	                      CharConverter charConverter,
 	                      TimeProvider timeProvider,
 	                      @Assisted PersonProperties.PersonProperty... personProperties) {
 
@@ -68,6 +71,7 @@ public class PersonProvider implements Provider<Person> {
 		this.addressProvider = addressProvider;
 		this.passportNumberProvider = passportNumberProvider;
 		this.companyProvider = companyProvider;
+		this.charConverter = charConverter;
 		this.timeProvider = timeProvider;
 
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
@@ -132,7 +136,7 @@ public class PersonProvider implements Provider<Person> {
 				temp += ".";
 			}
 		}
-		return stripAccents(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
+		return charConverter.romanize(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
 	}
 
 	public void setSex(Person.Sex sex) {
