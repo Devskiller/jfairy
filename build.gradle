@@ -12,6 +12,7 @@ apply plugin: 'io.codearte.nexus-staging'
 
 scmVersion {
 	createReleaseCommit true
+	releaseCommitMessage { version, position -> "Release version: ${version}\n\n[ci skip]" }
 }
 project.version = scmVersion.version
 
