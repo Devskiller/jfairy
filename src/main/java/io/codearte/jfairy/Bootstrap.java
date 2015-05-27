@@ -150,6 +150,7 @@ public class Bootstrap {
 
 		/**
 		 * Returns the completed Fairy.
+		 * @return Fairy instance
 		 */
 		public Fairy build() {
 			return createFairy(locale, filePrefix, random);

@@ -32,6 +32,7 @@ public class BaseProducer {
 	/**
 	 * Returns random element from passed List
 	 *
+	 * @param <T> element generic type
 	 * @param elements list to process
 	 * @return random list element
 	 */
@@ -42,6 +43,7 @@ public class BaseProducer {
 	/**
 	 * Returns random element from passed vararg
 	 *
+	 * @param <T> element generic type
 	 * @param elements objects to process
 	 * @return random element
 	 */
@@ -52,6 +54,7 @@ public class BaseProducer {
 	/**
 	 * Returns random enum value
 	 *
+	 * @param <T> element generic type
 	 * @param enumType enum class
 	 * @return random enum value
 	 */
@@ -62,6 +65,7 @@ public class BaseProducer {
 	/**
 	 * Creates new list being random subset of the passed list
 	 *
+	 * @param <T> element generic type
 	 * @param elements list to process
 	 * @param count    returned list size
 	 * @return sublist of the elements list
@@ -74,6 +78,7 @@ public class BaseProducer {
 	/**
 	 * Creates new list being random subset of the passed vararg
 	 *
+	 * @param <T> element generic type
 	 * @param elements objects to process
 	 * @param count    returned list size
 	 * @return sublist of the passed elements
@@ -99,7 +104,7 @@ public class BaseProducer {
 	 * Returns random int value
 	 *
 	 * @param max value of the random number to be returned.  Must be positive.
-	 * @return random {@code int} value between {@code 0} (inclusive) and {@code max} (inclusive)
+	 * @return random {@code int} value between 0 (inclusive) and {@code max} (inclusive)
 	 */
 	public int randomInt(int max) {
 		return randomBetween(0, max);
@@ -128,9 +133,9 @@ public class BaseProducer {
 	/**
 	 * Returns random double value
 	 *
-	 * @param max value of the random number to be returned.  Must be
-	 *            positive.
-	 * @return random {@code double} value between {@code 0} (inclusive) and {@code max} (inclusive)
+	 * @param min value of the random number to be returned.  Must be positive.
+	 * @param max value of the random number to be returned.  Must be positive.
+	 * @return random {@code double} value between {@code min} (inclusive) and {@code max} (inclusive)
 	 */
 	public double randomBetween(double min, double max) {
 		double range = max - min;
