@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import javax.inject.Singleton;
 
 @Singleton
-class TimeProvider {
+public class TimeProvider {
 
 	public int getCurrentYear() {
 		return getCurrentDate().getYear();

@@ -4,9 +4,11 @@ import io.codearte.jfairy.Bootstrap
 import io.codearte.jfairy.Fairy
 import org.apache.commons.validator.routines.EmailValidator
 import org.joda.time.DateTime
+import org.joda.time.Period
 import spock.lang.Ignore
 import spock.lang.Specification
 
+import static io.codearte.jfairy.producer.person.PersonProperties.ageBetween
 import static io.codearte.jfairy.producer.person.PersonProperties.female
 import static io.codearte.jfairy.producer.person.PersonProperties.male
 import static io.codearte.jfairy.producer.person.PersonProperties.maxAge
@@ -86,6 +88,15 @@ class PersonSpec extends Specification {
 			def person = fairy.person(minAge(99))
 		then:
 			person.age() > 98
+	}
+
+	def "birth date and age should be related"() {
+		when:
+			def person = fairy.person(ageBetween(32, 32))
+		then:
+			person.age() == 32
+			def period = new Period(person.dateOfBirth().millis, DateTime.now().millis)
+			period.years == 32
 	}
 
 	def "should create telephone number"() {

@@ -41,7 +41,7 @@ public class DateProducer {
 		return randomDateInThePast(actualYear - fromYear);
 	}
 
-	private DateTime randomDateBetweenTwoDates(DateTime from, DateTime to) {
+	public DateTime randomDateBetweenTwoDates(DateTime from, DateTime to) {
 		return new DateTime(baseProducer.randomBetween(from.getMillis(), to.getMillis()));
 	}
 

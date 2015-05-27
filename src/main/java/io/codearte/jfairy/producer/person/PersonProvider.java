@@ -6,6 +6,7 @@ import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
+import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyProvider;
 import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
@@ -44,6 +45,7 @@ public class PersonProvider implements Provider<Person> {
 	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
+	private final TimeProvider timeProvider;
 	private final PassportNumberProvider passportNumberProvider;
 
 	@Inject
@@ -55,6 +57,7 @@ public class PersonProvider implements Provider<Person> {
 	                      AddressProvider addressProvider,
 	                      CompanyProvider companyProvider,
 	                      PassportNumberProvider passportNumberProvider,
+	                      TimeProvider timeProvider,
 	                      @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
@@ -65,6 +68,7 @@ public class PersonProvider implements Provider<Person> {
 		this.addressProvider = addressProvider;
 		this.passportNumberProvider = passportNumberProvider;
 		this.companyProvider = companyProvider;
+		this.timeProvider = timeProvider;
 
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
 			personProperty.apply(this, baseProducer);
@@ -96,7 +100,9 @@ public class PersonProvider implements Provider<Person> {
 			age = baseProducer.randomBetween(MIN_AGE, MAX_AGE);
 		}
 		if (dateOfBirth == null) {
-			dateOfBirth = dateProducer.randomDateInThePast(age);
+			DateTime maxDate = timeProvider.getCurrentDate().minusYears(age);
+			DateTime minDate = maxDate.minusYears(1).plusDays(1);
+			dateOfBirth = dateProducer.randomDateBetweenTwoDates(minDate, maxDate);
 		}
 		String companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
 		// FIXME: Replace this with baseProducer
