@@ -104,9 +104,7 @@ public class PersonProvider implements Provider<Person> {
 			age = baseProducer.randomBetween(MIN_AGE, MAX_AGE);
 		}
 		if (dateOfBirth == null) {
-			DateTime maxDate = timeProvider.getCurrentDate().minusYears(age);
-			DateTime minDate = maxDate.minusYears(1).plusDays(1);
-			dateOfBirth = dateProducer.randomDateBetweenTwoDates(minDate, maxDate);
+			dateOfBirth = generateDateOfBirth();
 		}
 		String companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
 		// FIXME: Replace this with baseProducer
@@ -116,6 +114,12 @@ public class PersonProvider implements Provider<Person> {
 				username, password, sex, telephoneNumber, dateOfBirth, age,
 				nationalIdentityCardNumberProvider.get(), nationalIdentificationNumber(), passportNumberProvider.get(),
 				company, companyEmail);
+	}
+
+	private DateTime generateDateOfBirth() {
+		DateTime maxDate = timeProvider.getCurrentDate().minusYears(age);
+		DateTime minDate = maxDate.minusYears(1).plusDays(1);
+		return dateProducer.randomDateBetweenTwoDates(minDate, maxDate);
 	}
 
 	private boolean randomBoolean() {
