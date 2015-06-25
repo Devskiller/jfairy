@@ -1,5 +1,7 @@
 # jFairy by Codearte
 
+[![Join the chat at https://gitter.im/Codearte/jfairy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Codearte/jfairy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/Codearte/jfairy.svg?branch=master)](https://travis-ci.org/Codearte/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Codearte/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
 
 Java fake data generator. Based on Wikipedia:
