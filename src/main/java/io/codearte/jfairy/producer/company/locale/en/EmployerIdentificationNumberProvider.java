@@ -12,7 +12,7 @@ import static java.lang.System.arraycopy;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 21.03.15
  */
 public class EmployerIdentificationNumberProvider implements VATIdentificationNumberProvider {

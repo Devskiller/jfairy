@@ -12,7 +12,7 @@ import io.codearte.jfairy.producer.util.locale.NonOpCharConverter;
 import java.util.Random;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 08.03.15
  */
 public class EnFairyModule extends FairyModule {
