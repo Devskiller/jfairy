@@ -12,7 +12,7 @@ import io.codearte.jfairy.producer.util.locale.PlCharConverter;
 import java.util.Random;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 21.02.15
  */
 public class PlFairyModule extends FairyModule {

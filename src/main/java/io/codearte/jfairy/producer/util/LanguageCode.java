@@ -1,11 +1,12 @@
 package io.codearte.jfairy.producer.util;
 
 /**
- * @author omaciaszek
+ * @author Olga Maciaszek-Sharma
  * @since 21.03.15
  */
 public enum LanguageCode {
 	PL,
 	EN,
-	ES
+	ES,
+	IT
 }
