@@ -1,5 +1,8 @@
 package io.codearte.jfairy
 
+import io.codearte.jfairy.producer.person.Person
+import io.codearte.jfairy.testUtils.CustomDataMasterProvider
+import io.codearte.jfairy.testUtils.TestFixture
 import spock.lang.Specification
 
 class FairySpec extends Specification {
@@ -56,4 +59,25 @@ class FairySpec extends Specification {
 			!firstPerson.fullName().equals(secondPerson.fullName())
 	}
 
+	def "should use default DataMaster when custom not provided"() {
+		given:
+			Fairy fairy = Fairy.create();
+		when:
+			Person samplePerson = fairy.person()
+
+		then:
+			samplePerson.firstName() && samplePerson.firstName() != TestFixture.CUSTOM_STRING
+
+	}
+
+	def "should use custom DataMaster when provided"() {
+		given:
+			Fairy fairy = Fairy.create(new CustomDataMasterProvider(), Locale.forLanguageTag("EN"));
+		when:
+			Person samplePerson = fairy.person()
+
+		then:
+			samplePerson.firstName() == TestFixture.CUSTOM_STRING
+
+	}
 }
