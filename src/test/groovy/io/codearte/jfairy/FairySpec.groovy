@@ -1,11 +1,25 @@
 package io.codearte.jfairy
 
+import com.google.inject.Provider
+import io.codearte.jfairy.data.DataMaster
 import io.codearte.jfairy.producer.person.Person
-import io.codearte.jfairy.testUtils.CustomDataMasterProvider
-import io.codearte.jfairy.testUtils.TestFixture
 import spock.lang.Specification
 
 class FairySpec extends Specification {
+
+	private static final String CUSTOM_STRING = 'Custom Data Master'
+
+	DataMaster customDataMaster = Stub(DataMaster) {
+		getString(_ as String) >> CUSTOM_STRING
+		getStringList(_ as String) >> Arrays.asList(CUSTOM_STRING)
+		getValuesOfType(_ as String, _ as String) >> CUSTOM_STRING
+		getRandomValue(_ as String) >> CUSTOM_STRING
+	}
+
+	Provider<DataMaster> customDataMasterProvider = Stub(Provider) {
+		get() >> customDataMaster
+	}
+
 
 	def "Second person should be different without fairy instance"() {
 
@@ -66,18 +80,19 @@ class FairySpec extends Specification {
 			Person samplePerson = fairy.person()
 
 		then:
-			samplePerson.firstName() && samplePerson.firstName() != TestFixture.CUSTOM_STRING
+			samplePerson.firstName() && samplePerson.firstName() != CUSTOM_STRING
 
 	}
 
 	def "should use custom DataMaster when provided"() {
 		given:
-			Fairy fairy = Fairy.create(new CustomDataMasterProvider(), Locale.forLanguageTag("EN"));
+			Fairy fairy = Fairy.create(customDataMasterProvider, Locale.forLanguageTag("EN"));
+
 		when:
 			Person samplePerson = fairy.person()
 
 		then:
-			samplePerson.firstName() == TestFixture.CUSTOM_STRING
+			samplePerson.firstName() == CUSTOM_STRING
 
 	}
 }

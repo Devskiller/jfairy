@@ -8,6 +8,8 @@ import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.data.DataMasterModule;
 import io.codearte.jfairy.data.MapBasedDataMaster;
 import io.codearte.jfairy.producer.util.LanguageCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
@@ -36,6 +38,8 @@ import java.util.Random;
  */
 public class Bootstrap {
 
+	private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
+
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
 	public static Fairy createFairy(DataMaster dataMaster, Locale locale, Random random) {
@@ -46,9 +50,9 @@ public class Bootstrap {
 
 		Injector injector = Guice.createInjector(fairyModule);
 
-		FairyFactory instance = injector.getInstance(FairyFactory.class);
+		FairyFactory fairyFactory = injector.getInstance(FairyFactory.class);
 
-		return instance.createFairy();
+		return fairyFactory.createFairy();
 	}
 
 
@@ -120,6 +124,7 @@ public class Bootstrap {
 			case ES:
 				return new EsFairyModule(dataMaster, random);
 			default:
+				LOG.info("No data for your language - using EN");
 				return new EnFairyModule(dataMaster, random);
 		}
 	}
