@@ -1,9 +1,16 @@
 package io.codearte.jfairy;
 
+import com.google.common.base.Optional;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.data.DataMasterModule;
+import io.codearte.jfairy.data.MapBasedDataMaster;
 import io.codearte.jfairy.producer.util.LanguageCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.io.IOException;
 import java.util.Locale;
@@ -27,27 +34,35 @@ import java.util.Random;
  * actually take effect.
  *
  * @author Jakub Kubrynski
+ * @author Olga Maciaszek-Sharma
  */
 public class Bootstrap {
 
+	private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
+
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
-	public static Fairy createFairy(Locale locale, String filePrefix, Random random) {
+	public static Fairy createFairy(DataMaster dataMaster, Locale locale, Random random) {
 
-		FairyModule fairyModule = getFairyModuleForLocale(locale, random);
+
+
+		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, random);
 
 		Injector injector = Guice.createInjector(fairyModule);
 
-		DataMaster dataMaster = injector.getInstance(DataMaster.class);
+		FairyFactory fairyFactory = injector.getInstance(FairyFactory.class);
+
+		return fairyFactory.createFairy();
+	}
+
+
+	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
 		try {
 			dataMaster.readResources(filePrefix + ".yml");
 			dataMaster.readResources(filePrefix + "_" + locale.getLanguage() + ".yml");
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
-
-		FairyFactory instance = injector.getInstance(FairyFactory.class);
-		return instance.createFairy(locale, filePrefix);
 	}
 
 	/**
@@ -94,13 +109,41 @@ public class Bootstrap {
 				.build();
 	}
 
+
+	public static Fairy create(Provider<DataMaster> dataMaster, Locale locale) {
+		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
+	}
+
+	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
+		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
+		switch (code) {
+			case PL:
+				return new PlFairyModule(dataMaster, random);
+			case EN:
+				return new EnFairyModule(dataMaster, random);
+			case ES:
+				return new EsFairyModule(dataMaster, random);
+			default:
+				LOG.info("No data for your language - using EN");
+				return new EnFairyModule(dataMaster, random);
+		}
+	}
+
 	public static class Builder {
 
 		private Locale locale = Locale.ENGLISH;
 		private String filePrefix = DATA_FILE_PREFIX;
 		private Random random = new Random();
+		private DataMaster dataMaster;
+
+
+		private MapBasedDataMaster getDefaultDataMaster() {
+			Injector injector = Guice.createInjector(new DataMasterModule(random));
+			return injector.getInstance(MapBasedDataMaster.class);
+		}
 
 		private Builder() {
+
 		}
 
 		/**
@@ -149,26 +192,30 @@ public class Bootstrap {
 		}
 
 		/**
+		 * Sets a custom DataMaster implementation.
+		 *
+		 * @param dataMasterProvider The random seed to use.
+		 * @return the same Builder (for chaining).
+		 */
+		public Builder withDataMasterProvider(Provider<DataMaster> dataMasterProvider) {
+			this.dataMaster = dataMasterProvider.get();
+			return this;
+		}
+
+
+		/**
 		 * Returns the completed Fairy.
+		 *
 		 * @return Fairy instance
 		 */
 		public Fairy build() {
-			return createFairy(locale, filePrefix, random);
+			if (dataMaster == null) {
+				dataMaster = getDefaultDataMaster();
+				fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
+			}
+			return createFairy(dataMaster, locale, random);
 		}
 	}
 
 
-	private static FairyModule getFairyModuleForLocale(Locale locale, Random random) {
-		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
-		switch (code) {
-			case PL:
-				return new PlFairyModule(random);
-			case EN:
-				return new EnFairyModule(random);
-			case ES:
-				return new EsFairyModule(random);
-			default:
-				return new EnFairyModule(random);
-		}
-	}
 }

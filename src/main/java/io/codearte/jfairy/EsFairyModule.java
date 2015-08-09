@@ -1,5 +1,6 @@
 package io.codearte.jfairy;
 
+import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.company.locale.es.CIFProvider;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
@@ -17,8 +18,8 @@ import java.util.Random;
  */
 public class EsFairyModule extends FairyModule {
 
-	public EsFairyModule(Random random) {
-		super(random);
+	public EsFairyModule(DataMaster dataMaster, Random random) {
+		super(dataMaster, random);
 	}
 
 	@Override
