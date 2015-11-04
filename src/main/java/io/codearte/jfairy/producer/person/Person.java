@@ -117,8 +117,16 @@ public class Person {
 	public Address getAddress() {
 		return address;
 	}
+	
+	public Address address() {
+		return address;
+	}
 
 	public Company getCompany() {
+		return company;
+	}
+
+	public Company company() {
 		return company;
 	}
 
