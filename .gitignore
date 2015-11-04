@@ -10,5 +10,11 @@ classes/
 .idea/
 out/
 
+### Eclipse ###
+/.classpath
+/.project
+/.settings
+/bin/
+
 ### Other ###
 
