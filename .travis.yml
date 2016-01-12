@@ -9,5 +9,5 @@ env:
 - TERM=dumb
 
 install: ./gradlew assemble --stacktrace --info
-script: ./gradlew check jacocoTestReport --stacktrace --info --continue
+script: ./gradlew check jacocoTestReport --stacktrace --debug --continue
 after_success: ./gradlew coveralls --stacktrace --info
