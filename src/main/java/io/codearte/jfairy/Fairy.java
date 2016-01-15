@@ -12,6 +12,9 @@ import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import io.codearte.jfairy.producer.net.NetworkProducer;
 import io.codearte.jfairy.producer.payment.CreditCard;
+import io.codearte.jfairy.producer.payment.IBAN;
+import io.codearte.jfairy.producer.payment.IBANFactory;
+import io.codearte.jfairy.producer.payment.IBANProperties;
 import io.codearte.jfairy.producer.person.Person;
 import io.codearte.jfairy.producer.person.PersonFactory;
 import io.codearte.jfairy.producer.person.PersonProperties;
@@ -29,10 +32,11 @@ public final class Fairy {
 	private final DateProducer dateProducer;
 	private final Provider<CreditCard> creditCardProvider;
 	private final CompanyFactory companyFactory;
+	private final IBANFactory ibanFactory;
 
 	@Inject
 	Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
-	      BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider, CompanyFactory companyFactory) {
+	      BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider, CompanyFactory companyFactory, IBANFactory ibanFactory) {
 		this.textProducer = textProducer;
 		this.personFactory = personFactory;
 		this.networkProducer = networkProducer;
@@ -40,6 +44,7 @@ public final class Fairy {
 		this.dateProducer = dateProducer;
 		this.creditCardProvider = creditCardProvider;
 		this.companyFactory = companyFactory;
+		this.ibanFactory = ibanFactory;
 	}
 
 	public static Fairy create() {
@@ -53,7 +58,6 @@ public final class Fairy {
 	public static Fairy create(Provider<DataMaster> dataMasterProvider, Locale locale) {
 		return Bootstrap.create(dataMasterProvider, locale);
 	}
-
 
 	public static Bootstrap.Builder builder() {
 		return Bootstrap.builder();
@@ -76,6 +80,16 @@ public final class Fairy {
 	 */
 	public Person person(PersonProperties.PersonProperty... personProperties) {
 		return personFactory.producePersonProvider(personProperties).get();
+	}
+
+	/**
+	 * Use this method for random account numbers
+	 *
+	 * @param ibanProperties desired iban features
+	 * @return A {@link io.codearte.jfairy.producer.payment.IBAN} instance
+	 */
+	public IBAN iban(IBANProperties.Property... ibanProperties) {
+		return ibanFactory.produceIBANProvider(ibanProperties).get();
 	}
 
 	/**
