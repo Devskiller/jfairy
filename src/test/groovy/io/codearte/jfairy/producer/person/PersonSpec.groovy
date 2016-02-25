@@ -90,6 +90,13 @@ class PersonSpec extends Specification {
 			person.age() > 98
 	}
 
+	def "should create person older than 10 years and younger than 10 years"() {
+		when:
+			Person person = fairy.person(minAge(10), maxAge(10))
+		then:
+			person.age() == 10
+	}
+
 	def "birth date and age should be related"() {
 		when:
 			def person = fairy.person(ageBetween(32, 32))

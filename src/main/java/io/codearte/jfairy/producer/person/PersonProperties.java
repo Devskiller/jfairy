@@ -3,11 +3,16 @@ package io.codearte.jfairy.producer.person;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.company.Company;
 
+import java.util.Optional;
+
 /**
  * @author jkubrynski@gmail.com
  * @since 2013-11-16
  */
 public final class PersonProperties {
+
+	private static Optional<Integer> minimumAge = Optional.empty();
+	private static Optional<Integer> maximumAge = Optional.empty();
 
 	private PersonProperties() {
 	}
@@ -41,16 +46,20 @@ public final class PersonProperties {
 			@Override
 			public void apply(PersonProvider person, BaseProducer baseProducer) {
 				person.setAge(baseProducer.randomBetween(minAge, maxAge));
+				minimumAge = Optional.of(minAge);
+				maximumAge = Optional.of(maxAge);
 			}
 		};
 	}
 
 	public static PersonProperty minAge(final int minAge) {
-		return ageBetween(minAge, PersonProvider.MAX_AGE);
+		minimumAge = Optional.of(minAge);
+		return ageBetween(minAge, maximumAge.orElse(PersonProvider.MAX_AGE));
 	}
 
 	public static PersonProperty maxAge(final int maxAge) {
-		return ageBetween(PersonProvider.MIN_AGE, maxAge);
+		maximumAge = Optional.of(maxAge);
+		return ageBetween(minimumAge.orElse(PersonProvider.MIN_AGE), maxAge);
 	}
 
 	public static PersonProperty telephoneFormat(final String telephoneFormat) {
