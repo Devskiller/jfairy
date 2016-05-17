@@ -219,10 +219,6 @@ jacocoTestReport {
 	}
 }
 
-wrapper {
-	gradleVersion '2.2'
-}
-
 boolean determineIfJacocoShouldBeEnabled() {
 	//MZA: A little bit fragile, Better ideas are welcome.
 	def shouldBeEnabled = gradle.startParameter.taskNames.contains("sonarRunner") || gradle.startParameter.taskNames.contains("jacocoTestReport")
