@@ -126,7 +126,7 @@ public class Bootstrap {
 			case FR:
 				return new EsFairyModule(dataMaster, random);
 			case SV:
-				return new EsFairyModule(dataMaster, random);
+				return new SvFairyModule(dataMaster, random);
 			default:
 				LOG.info("No data for your language - using EN");
 				return new EnFairyModule(dataMaster, random);
