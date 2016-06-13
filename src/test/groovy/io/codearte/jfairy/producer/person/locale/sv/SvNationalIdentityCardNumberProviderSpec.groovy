@@ -3,18 +3,18 @@ package io.codearte.jfairy.producer.person.locale.sv
 import io.codearte.jfairy.Fairy
 import spock.lang.Specification
 
-class SvPassportNumberProviderSpec extends Specification {
+class SvNationalIdentityCardNumberProviderSpec extends Specification {
 
 	def Fairy fairy;
-	def String passportNumber
+	def String nationalIdentityCardNumber
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("sv"))
-		passportNumber = fairy.person().passportNumber()
+		nationalIdentityCardNumber = fairy.person().nationalIdentityCardNumber()
 	}
 
 	def "should generate empty string since it is not yet implemented"() {
 		expect:
-			passportNumber.length() == 0
+			nationalIdentityCardNumber.length() == 0
 	}
 }

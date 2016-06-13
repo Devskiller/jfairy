@@ -52,16 +52,16 @@ public class PersonProvider implements Provider<Person> {
 
 	@Inject
 	public PersonProvider(DataMaster dataMaster,
-	                      DateProducer dateProducer,
-	                      BaseProducer baseProducer,
-	                      PeselFactory peselFactory,
-	                      NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
-	                      AddressProvider addressProvider,
-	                      CompanyProvider companyProvider,
-	                      PassportNumberProvider passportNumberProvider,
-	                      CharConverter charConverter,
-	                      TimeProvider timeProvider,
-	                      @Assisted PersonProperties.PersonProperty... personProperties) {
+						  DateProducer dateProducer,
+						  BaseProducer baseProducer,
+						  PeselFactory peselFactory,
+						  NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
+						  AddressProvider addressProvider,
+						  CompanyProvider companyProvider,
+						  PassportNumberProvider passportNumberProvider,
+						  CharConverter charConverter,
+						  TimeProvider timeProvider,
+						  @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
