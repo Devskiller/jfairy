@@ -1,10 +1,11 @@
 package io.codearte.jfairy.producer.person.locale.pl;
 
-import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumber;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.Person;
 import org.joda.time.DateTime;
 
@@ -18,7 +19,7 @@ import static java.lang.String.format;
  * Universal Electronic System for Registration of the Population)
  * More info: http://en.wikipedia.org/wiki/PESEL
  */
-public class PeselProvider implements Provider<NationalIdentificationNumber> {
+public class PeselProvider implements NationalIdentificationNumberProvider {
 
 	private static final int PESEL_LENGTH = 11;
 	private static final int VALIDITY_IN_YEARS = 10;
@@ -41,7 +42,7 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 	@Inject
 	public PeselProvider(DateProducer dateProducer, BaseProducer baseProducer,
 	                     @Assisted
-	                     PeselProperties.Property... properties) {
+	                     NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -49,8 +50,8 @@ public class PeselProvider implements Provider<NationalIdentificationNumber> {
 
 	}
 
-	public void with(PeselProperties.Property[] properties) {
-		for (PeselProperties.Property property : properties) {
+	public void with(NationalIdentificationNumberProperties.Property[] properties) {
+		for (NationalIdentificationNumberProperties.Property property : properties) {
 			property.apply(this);
 		}
 	}

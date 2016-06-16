@@ -8,8 +8,6 @@ import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static io.codearte.jfairy.producer.person.locale.pl.PeselProperties.dateOfBirth
-import static io.codearte.jfairy.producer.person.locale.pl.PeselProperties.sex
 import static io.codearte.jfairy.producer.person.locale.pl.PeselProvider.isValid
 
 class PeselSpec extends Specification {

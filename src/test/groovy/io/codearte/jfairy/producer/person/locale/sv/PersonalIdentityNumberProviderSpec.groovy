@@ -7,8 +7,6 @@ import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static io.codearte.jfairy.producer.person.locale.sv.PersonalIdentityNumberProperties.dateOfBirth
-import static io.codearte.jfairy.producer.person.locale.sv.PersonalIdentityNumberProperties.sex
 import static io.codearte.jfairy.producer.person.locale.sv.PersonalIdentityNumberProvider.isValid
 
 class PersonalIdentityNumberProviderSpec extends Specification {

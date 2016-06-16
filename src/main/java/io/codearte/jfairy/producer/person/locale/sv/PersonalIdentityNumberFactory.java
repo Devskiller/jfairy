@@ -1,7 +1,25 @@
 package io.codearte.jfairy.producer.person.locale.sv;
 
-public interface PersonalIdentityNumberFactory {
+import io.codearte.jfairy.producer.BaseProducer;
+import io.codearte.jfairy.producer.DateProducer;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties;
 
-	PersonalIdentityNumberProvider producePersonalIdentityNumberProvider(PersonalIdentityNumberProperties.Property... properties);
+import javax.inject.Inject;
 
+public class PersonalIdentityNumberFactory implements NationalIdentificationNumberFactory {
+
+	private final BaseProducer baseProducer;
+	private final DateProducer dateProducer;
+
+	@Inject
+	public PersonalIdentityNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
+		this.baseProducer = baseProducer;
+		this.dateProducer = dateProducer;
+	}
+
+	@Override
+	public PersonalIdentityNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
+		return new PersonalIdentityNumberProvider(dateProducer, baseProducer, properties);
+	}
 }

@@ -34,7 +34,6 @@ public abstract class FairyModule extends AbstractModule {
 		install(new FactoryModuleBuilder().build(PersonFactory.class));
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
 		install(new FactoryModuleBuilder().build(CompanyFactory.class));
-		install(new FactoryModuleBuilder().build(PeselFactory.class));
 		install(new FactoryModuleBuilder().build(IBANFactory.class));
 	}
 }

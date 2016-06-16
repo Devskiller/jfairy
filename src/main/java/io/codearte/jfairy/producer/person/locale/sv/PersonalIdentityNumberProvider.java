@@ -1,11 +1,12 @@
 package io.codearte.jfairy.producer.person.locale.sv;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumber;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.Person;
 import org.joda.time.DateTime;
 
@@ -21,7 +22,7 @@ import static java.lang.String.format;
  * The left part of the hyphen consists of the date of birth and the right part consist of
  * three random numbers + one check digit.
  */
-public class PersonalIdentityNumberProvider implements Provider<NationalIdentificationNumber> {
+public class PersonalIdentityNumberProvider implements NationalIdentificationNumberProvider {
 
 	private static final int PERSONAL_IDENTITY_NUMBER_LENGTH = 11;
 	private static final int VALIDITY_IN_YEARS = 120;
@@ -40,15 +41,15 @@ public class PersonalIdentityNumberProvider implements Provider<NationalIdentifi
 
 	@Inject
 	public PersonalIdentityNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-										  @Assisted PersonalIdentityNumberProperties.Property... properties) {
+										  @Assisted NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
 		with(properties);
 	}
 
-	public void with(PersonalIdentityNumberProperties.Property[] properties) {
-		for (PersonalIdentityNumberProperties.Property property : properties) {
+	public void with(NationalIdentificationNumberProperties.Property[] properties) {
+		for (NationalIdentificationNumberProperties.Property property : properties) {
 			property.apply(this);
 		}
 	}
