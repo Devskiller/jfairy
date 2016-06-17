@@ -3,11 +3,12 @@ package io.codearte.jfairy.producer.person.locale.sv;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.inject.Inject;
 
 /**
- * Swedish Identity Card Number is not yet supported
+ * Swedish Identity Card Number (random number implementation)
  */
 public class SvNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
@@ -22,6 +23,6 @@ public class SvNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	@Override
 	public String get() {
-		return "";
+		return RandomStringUtils.randomNumeric(8);
 	}
 }

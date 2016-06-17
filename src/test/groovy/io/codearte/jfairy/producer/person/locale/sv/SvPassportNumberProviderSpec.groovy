@@ -13,8 +13,8 @@ class SvPassportNumberProviderSpec extends Specification {
 		passportNumber = fairy.person().passportNumber()
 	}
 
-	def "should generate empty string since it is not yet implemented"() {
+	def "should generate number with 8 characters"() {
 		expect:
-			passportNumber.length() == 0
+			passportNumber.length() == 8
 	}
 }

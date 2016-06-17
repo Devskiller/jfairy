@@ -4,12 +4,12 @@ import io.codearte.jfairy.producer.person.PassportNumberProvider;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
- * Swedish Passport Number is not yet supported
+ * Swedish Passport Number (random number implementation)
  */
 public class SvPassportNumberProvider implements PassportNumberProvider {
 
 	@Override
 	public String get() {
-		return "";
+		return RandomStringUtils.randomNumeric(8);
 	}
 }

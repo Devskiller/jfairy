@@ -13,8 +13,8 @@ class SvNationalIdentityCardNumberProviderSpec extends Specification {
 		nationalIdentityCardNumber = fairy.person().nationalIdentityCardNumber()
 	}
 
-	def "should generate empty string since it is not yet implemented"() {
+	def "should generate number with 8 characters"() {
 		expect:
-			nationalIdentityCardNumber.length() == 0
+			nationalIdentityCardNumber.length() == 8
 	}
 }
