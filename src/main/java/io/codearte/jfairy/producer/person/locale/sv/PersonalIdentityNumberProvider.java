@@ -108,7 +108,7 @@ public class PersonalIdentityNumberProvider implements NationalIdentificationNum
 		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length - 1)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
-	private static int calculateChecksum(String personalIdentityNumber) {
+	public static int calculateChecksum(String personalIdentityNumber) {
 		String personalIdentityNumberWithoutHyphen = personalIdentityNumber.replace("-", "");
 		int sum = 0;
 		int i = 0;
