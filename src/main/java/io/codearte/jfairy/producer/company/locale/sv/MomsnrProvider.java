@@ -81,15 +81,19 @@ public class MomsnrProvider implements VATIdentificationNumberProvider {
 
 	}
 
+	/**
+	 * Group number used to determine the first numer in a swedish organization number
+	 * Enum is translated from swedish wiki https://sv.wikipedia.org/wiki/Organisationsnummer
+ 	 */
 	private enum GroupNumber {
-		DODSBON(1),
-		STAT_LANDSTING_KOMMUNER_FORSAMLINGAR(2),
-		UTLANDSKA_FORETAG(3),
-		AKTIEBOLAG(5),
-		ENKELT_BOLAG(6),
-		EKONOMISKA_FORENINGAR(7),
-		IDEELLA_FORENINGAR_OCH_STIFTELSER(8),
-		HANDELSBOLAG_KOMMANDITBOLAG_OCH_ENKLA_BOLAG(9);
+		ESTATE(1),												// Dödsbon
+		STATE_OR_COUNTY_OR_MUNICIPALITY_OR_PARISH(2),			// Stat, landsting, kommuner, församlingar
+		FOREIGN_COMPANY(3),										// Utländska företag som bedriver näringsverksamhet eller äger fastigheter i Sverige
+		LIMITED_COMPANY(5),										// Aktiebolag
+		PARTNERSHIP(6),											// Enkelt bolag
+		ECONOMIC_ASSOCIATION(7),								// Ekonomiska föreningar
+		NON_PROFIT_ASSOCIATION_OR_FOUNDATION(8),				// Ideella föreningar och stiftelser
+		TRADING_COMPANY_OR_LIMITED_COMPANY_OR_PARTNERSHIP(9);	// Handelsbolag, kommanditbolag och enkla bolag
 
 		private final int value;
 
