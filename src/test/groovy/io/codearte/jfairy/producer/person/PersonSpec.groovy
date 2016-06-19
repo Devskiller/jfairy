@@ -2,6 +2,8 @@ package io.codearte.jfairy.producer.person
 
 import io.codearte.jfairy.Bootstrap
 import io.codearte.jfairy.Fairy
+import io.codearte.jfairy.producer.company.Company
+import io.codearte.jfairy.producer.person.locale.en.EnAddress
 import org.apache.commons.validator.routines.EmailValidator
 import org.joda.time.DateTime
 import org.joda.time.Period
@@ -14,6 +16,21 @@ import static io.codearte.jfairy.producer.person.PersonProperties.male
 import static io.codearte.jfairy.producer.person.PersonProperties.maxAge
 import static io.codearte.jfairy.producer.person.PersonProperties.minAge
 import static io.codearte.jfairy.producer.person.PersonProperties.telephoneFormat
+import static io.codearte.jfairy.producer.person.PersonProperties.withAddress
+import static io.codearte.jfairy.producer.person.PersonProperties.withAge
+import static io.codearte.jfairy.producer.person.PersonProperties.withCompany
+import static io.codearte.jfairy.producer.person.PersonProperties.withCompanyEmail
+import static io.codearte.jfairy.producer.person.PersonProperties.withDateOfBirth
+import static io.codearte.jfairy.producer.person.PersonProperties.withEmail
+import static io.codearte.jfairy.producer.person.PersonProperties.withFirstName
+import static io.codearte.jfairy.producer.person.PersonProperties.withLastName
+import static io.codearte.jfairy.producer.person.PersonProperties.withMiddleName
+import static io.codearte.jfairy.producer.person.PersonProperties.withNationalIdentificationNumber
+import static io.codearte.jfairy.producer.person.PersonProperties.withNationalIdentityCardNumber
+import static io.codearte.jfairy.producer.person.PersonProperties.withPassportNumber
+import static io.codearte.jfairy.producer.person.PersonProperties.withPassword
+import static io.codearte.jfairy.producer.person.PersonProperties.withTelephoneNumber
+import static io.codearte.jfairy.producer.person.PersonProperties.withUsername
 
 class PersonSpec extends Specification {
 
@@ -214,5 +231,118 @@ class PersonSpec extends Specification {
 			person.passportNumber()
 	}
 
+	def "withFirstName should create person with specific first name"() {
+		when:
+			def person = fairy.person(withFirstName("Specificfirstname"))
+		then:
+			person.firstName() == "Specificfirstname"
+	}
+
+	def "withMiddleName should create person with specific middle name"() {
+		when:
+			def person = fairy.person(withMiddleName("Specificmiddlename"))
+		then:
+			person.middleName() == "Specificmiddlename"
+	}
+
+	def "withLastName should create person with specific last name"() {
+		when:
+			def person = fairy.person(withLastName("Specificlastname"))
+		then:
+			person.lastName() == "Specificlastname"
+	}
+
+	def "withEmail should create person with specific email"() {
+		when:
+			def person = fairy.person(withEmail("specificemail@gmail.com"))
+		then:
+			person.email() == "specificemail@gmail.com"
+	}
+
+	def "withUsername should create person with specific username"() {
+		when:
+			def person = fairy.person(withUsername("specificusername"))
+		then:
+			person.username() == "specificusername"
+	}
+
+	def "withTelephoneNumber should create person with specific telephoneNumber"() {
+		when:
+			def person = fairy.person(withTelephoneNumber("01234556789"))
+		then:
+			person.telephoneNumber() == "01234556789"
+	}
+
+	def "withTelephoneNumberFormat and telephoneFormat used together should create person with specific telephoneNumber"() {
+		when:
+		def person = fairy.person(telephoneFormat("###--###"), withTelephoneNumber("01234556789"))
+		then:
+		person.telephoneNumber() == "01234556789"
+	}
+
+	def "withDateOfBirth should create person with specific date of birth"() {
+		when:
+			def person = fairy.person(withDateOfBirth(DateTime.parse("2000-01-01")))
+		then:
+			person.dateOfBirth() == DateTime.parse("2000-01-01")
+	}
+
+	def "withAge should create person with specific age"() {
+		when:
+			def person = fairy.person(withAge(0))
+		then:
+			person.age() == 0
+	}
+
+	def "withPassword should create person with specific password"() {
+		when:
+			def person = fairy.person(withPassword("specificpassword"))
+		then:
+			person.password() == "specificpassword"
+	}
+
+	def "withCompanyEmail should create person with specific company email"() {
+		when:
+			def person = fairy.person(withCompanyEmail("specificcompanyemail@company.com"))
+		then:
+			person.companyEmail() == "specificcompanyemail@company.com"
+	}
+
+	def "withNationalIdentityCardNumber should create person with specific national identity card number"() {
+		when:
+			def person = fairy.person(withNationalIdentityCardNumber("SpecificNationalIdentityCardNumber"))
+		then:
+			person.nationalIdentityCardNumber() == "SpecificNationalIdentityCardNumber"
+	}
+
+	def "withNationalIdentificationNumber should create person with specific national identification number"() {
+		when:
+			def person = fairy.person(withNationalIdentificationNumber("SpecificNationalIdentificationNumber"))
+		then:
+			person.nationalIdentificationNumber() == "SpecificNationalIdentificationNumber"
+	}
+
+	def "withPassportNumber should create person with specific passport number"() {
+		when:
+			def person = fairy.person(withPassportNumber("SpecificPassportNumber"))
+		then:
+			person.passportNumber() == "SpecificPassportNumber"
+	}
+
+	def "withCompany should create person with specific company"() {
+		when:
+			def specificCompany = new Company("Company name", "domain.com", "company@emial.com", "VATNO");
+			def person = fairy.person(withCompany(specificCompany))
+		then:
+			person.getCompany() == specificCompany
+	}
+
+	def "withAddress should create person with specific address"() {
+		when:
+			def specificAddress = new EnAddress("POSTALCODE", "City", "Streetname", "123", "10B");
+			def person = fairy.person(withAddress(specificAddress))
+		then:
+			person.getAddress() == specificAddress
+	}
 
 }
