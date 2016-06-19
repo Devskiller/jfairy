@@ -2,7 +2,7 @@ package io.codearte.jfairy;
 
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
-import io.codearte.jfairy.producer.company.locale.pl.NIPProvider;
+import io.codearte.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.PassportNumberProvider;
@@ -29,7 +29,7 @@ public class PlFairyModule extends FairyModule {
 		super.configure();
 		bind(NationalIdentificationNumberFactory.class).to(PeselFactory.class);
 		bind(NationalIdentityCardNumberProvider.class).to(PlIdentityCardNumberProvider.class);
-		bind(VATIdentificationNumberProvider.class).to(NIPProvider.class);
+		bind(VATIdentificationNumberProvider.class).to(PlVATIdentificationNumberProvider.class);
 		bind(PassportNumberProvider.class).to(PlPassportNumberProvider.class);
 		bind(CharConverter.class).to(PlCharConverter.class);
 	}

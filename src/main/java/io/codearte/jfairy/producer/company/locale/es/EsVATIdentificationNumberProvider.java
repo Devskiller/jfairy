@@ -9,17 +9,17 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
 /**
- * @author graux
- * @since 26/04/2015
- * Código de Identificación Fiscal (CIF) Español
+ * Spanish VAT Identification Number (known as Número de Identificación Fiscal (for freelancers) or Código de Identificación Fiscal (for companies)	 in Spain)
+ * <p>
+ * https://en.wikipedia.org/wiki/VAT_identification_number
  */
-public class CIFProvider implements VATIdentificationNumberProvider {
+public class EsVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
 	private static final String REGEX_CIF = "^[A-Z][0-9]{2}[0-9]{5}([KPQSABEH]|[0-9]|[A-Z])$";
 
 	private Pattern regexCif;
 
-	public CIFProvider() {
+	public EsVATIdentificationNumberProvider() {
 		this.regexCif = Pattern.compile(REGEX_CIF);
 	}
 
