@@ -1,12 +1,8 @@
 package io.codearte.jfairy;
 
 import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
-import io.codearte.jfairy.producer.company.locale.es.CIFProvider;
-import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
-import io.codearte.jfairy.producer.person.PassportNumberProvider;
-import io.codearte.jfairy.producer.person.locale.es.DNINumberProvider;
-import io.codearte.jfairy.producer.person.locale.es.EsPassportNumberProvider;
+import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
+import io.codearte.jfairy.producer.person.locale.NoNationalIdentificationNumberFactory;
 import io.codearte.jfairy.producer.util.CharConverter;
 import io.codearte.jfairy.producer.util.locale.NonOpCharConverter;
 
@@ -25,6 +21,7 @@ public class FrFairyModule extends FairyModule {
 	@Override
 	protected void configure() {
 		super.configure();
+		bind(NationalIdentificationNumberFactory.class).to(NoNationalIdentificationNumberFactory.class);
 		bind(CharConverter.class).to(NonOpCharConverter.class);
 	}
 }

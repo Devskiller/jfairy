@@ -9,8 +9,6 @@ import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyProvider;
-import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
-import io.codearte.jfairy.producer.person.locale.pl.PeselProperties;
 import io.codearte.jfairy.producer.util.CharConverter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
@@ -42,7 +40,7 @@ public class PersonProvider implements Provider<Person> {
 
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
-	private final PeselFactory peselFactory;
+	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
@@ -52,21 +50,21 @@ public class PersonProvider implements Provider<Person> {
 
 	@Inject
 	public PersonProvider(DataMaster dataMaster,
-	                      DateProducer dateProducer,
-	                      BaseProducer baseProducer,
-	                      PeselFactory peselFactory,
-	                      NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
-	                      AddressProvider addressProvider,
-	                      CompanyProvider companyProvider,
-	                      PassportNumberProvider passportNumberProvider,
-	                      CharConverter charConverter,
-	                      TimeProvider timeProvider,
-	                      @Assisted PersonProperties.PersonProperty... personProperties) {
+						  DateProducer dateProducer,
+						  BaseProducer baseProducer,
+						  NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
+						  NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
+						  AddressProvider addressProvider,
+						  CompanyProvider companyProvider,
+						  PassportNumberProvider passportNumberProvider,
+						  CharConverter charConverter,
+						  TimeProvider timeProvider,
+						  @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
-		this.peselFactory = peselFactory;
+		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
 		this.nationalIdentityCardNumberProvider = nationalIdentityCardNumberProvider;
 		this.addressProvider = addressProvider;
 		this.passportNumberProvider = passportNumberProvider;
@@ -127,9 +125,9 @@ public class PersonProvider implements Provider<Person> {
 	}
 
 	private String nationalIdentificationNumber() {
-		return peselFactory.producePeselProvider(
-				PeselProperties.dateOfBirth(dateOfBirth),
-				PeselProperties.sex(sex)).get().getValue();
+		return nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
+				NationalIdentificationNumberProperties.dateOfBirth(dateOfBirth),
+				NationalIdentificationNumberProperties.sex(sex)).get().getValue();
 	}
 
 	private String generateEmail(String firstName, String lastName) {

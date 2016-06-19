@@ -10,5 +10,6 @@ public enum LanguageCode {
 	ES,
 	FR,
 	IT,
-	DE
+	DE,
+	SV
 }

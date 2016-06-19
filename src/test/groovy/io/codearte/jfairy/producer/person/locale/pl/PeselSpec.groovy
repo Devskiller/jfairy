@@ -1,15 +1,14 @@
-package io.codearte.jfairy.producer.person.locale
+package io.codearte.jfairy.producer.person.locale.pl
 
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
 import io.codearte.jfairy.producer.person.Person
-import io.codearte.jfairy.producer.person.locale.pl.PeselProvider
 import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static io.codearte.jfairy.producer.person.locale.pl.PeselProperties.dateOfBirth
-import static io.codearte.jfairy.producer.person.locale.pl.PeselProperties.sex
+import static io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
+import static io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties.sex
 import static io.codearte.jfairy.producer.person.locale.pl.PeselProvider.isValid
 
 class PeselSpec extends Specification {
