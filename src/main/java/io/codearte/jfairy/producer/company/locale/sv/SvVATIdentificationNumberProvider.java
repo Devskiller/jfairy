@@ -16,15 +16,15 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
- * Swedish VAT Identification number (known as Momsnr or Momsnummer in Sweden)
+ * Swedish VAT Identification Number (known as Momsnummer in Sweden)
  * <p>
  * https://en.wikipedia.org/wiki/VAT_identification_number
  */
-public class MomsnrProvider implements VATIdentificationNumberProvider {
+public class SvVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-	private static final int MOMSNRNR_LENGTH = 14;
-	private static final int ENSKILD_FIRMA_UPPER_AGE_LIMIT = 16;
-	private static final int ENSKILD_FIRMA_LOWER_AGE_LIMIT = 100;
+	private static final int VAT_IDENTIFICATION_NUMBER_LENGTH = 14;
+	private static final int SOLE_TRADER_UPPER_AGE_LIMIT = 16;
+	private static final int SOLE_TRADER_LOWER_AGE_LIMIT = 100;
 	private static final String SE = "SE";
 
 	private final BaseProducer baseProducer;
@@ -32,8 +32,8 @@ public class MomsnrProvider implements VATIdentificationNumberProvider {
 	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 
 	@Inject
-	public MomsnrProvider(BaseProducer baseProducer, DateProducer dateProducer,
-						  NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
+	public SvVATIdentificationNumberProvider(BaseProducer baseProducer, DateProducer dateProducer,
+											 NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
@@ -41,9 +41,9 @@ public class MomsnrProvider implements VATIdentificationNumberProvider {
 
 	@Override
 	public String get() {
-		boolean isEnskildFirma = baseProducer.trueOrFalse(); // Approximately 50% probablilty of a company to be of type enskild firma
-		if (isEnskildFirma) {
-			return generateMomsnrForEnskildFirma();
+		boolean isSoleTrader = baseProducer.trueOrFalse(); // Approximately 50% probablilty of a company to be of type sole trader (enskild firma)
+		if (isSoleTrader) {
+			return generateVatNumberForSoleTrader();
 		}
 
 		int randomGroupNumber = baseProducer.randomElement(GroupNumber.class).getValue();
@@ -54,9 +54,9 @@ public class MomsnrProvider implements VATIdentificationNumberProvider {
 		return SE + organizationNumber + "01";
 	}
 
-	private String generateMomsnrForEnskildFirma() {
-		DateTime lowerAgeLimit = DateTime.now().minusYears(ENSKILD_FIRMA_LOWER_AGE_LIMIT);
-		DateTime upperAgeLimit = DateTime.now().minusYears(ENSKILD_FIRMA_UPPER_AGE_LIMIT);
+	private String generateVatNumberForSoleTrader() {
+		DateTime lowerAgeLimit = DateTime.now().minusYears(SOLE_TRADER_LOWER_AGE_LIMIT);
+		DateTime upperAgeLimit = DateTime.now().minusYears(SOLE_TRADER_UPPER_AGE_LIMIT);
 		DateTime dateOfBirth = dateProducer.randomDateBetweenTwoDates(lowerAgeLimit, upperAgeLimit);
 		NationalIdentificationNumberProvider nationalIdentificationNumberProvider = nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
 				dateOfBirth(dateOfBirth));
@@ -65,17 +65,17 @@ public class MomsnrProvider implements VATIdentificationNumberProvider {
 	}
 
 	/**
-	 * @param momsnr Moms nummer
-	 * @return momsnr validity
+	 * @param vatIdentificationNumber Swedish VAT Identification Number
+	 * @return vatIdentificationNumber validity
 	 */
-	public static boolean isValid(String momsnr) {
-		int size = momsnr.length();
-		if (size != MOMSNRNR_LENGTH) {
+	public static boolean isValid(String vatIdentificationNumber) {
+		int length = vatIdentificationNumber.length();
+		if (length != VAT_IDENTIFICATION_NUMBER_LENGTH) {
 			return false;
 		}
 
-		int checksum = Integer.valueOf(Character.toString(momsnr.charAt(size - 3)));
-		int checkDigit = calculateChecksum(momsnr.substring(2, momsnr.length() - 2));
+		int checksum = Integer.valueOf(Character.toString(vatIdentificationNumber.charAt(length - 3)));
+		int checkDigit = calculateChecksum(vatIdentificationNumber.substring(2, vatIdentificationNumber.length() - 2));
 
 		return checkDigit == checksum;
 
