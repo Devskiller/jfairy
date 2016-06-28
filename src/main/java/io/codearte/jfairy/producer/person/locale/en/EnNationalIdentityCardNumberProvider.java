@@ -13,10 +13,12 @@ import static java.lang.System.arraycopy;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
+ * English National Identity Card Number (known as Social Security Number)
+ *
  * @author Olga Maciaszek-Sharma
  * @since 15.03.15
  */
-public class SocialSecurityCardNumberProvider implements NationalIdentityCardNumberProvider, VATIdentificationNumberProvider {
+public class EnNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider, VATIdentificationNumberProvider {
 
 	private static final int SSN_LENGTH = 11;
 	private static final int AREA_NUMBER_LENGTH = 3;
@@ -29,7 +31,7 @@ public class SocialSecurityCardNumberProvider implements NationalIdentityCardNum
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public SocialSecurityCardNumberProvider(BaseProducer baseProducer) {
+	public EnNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 
