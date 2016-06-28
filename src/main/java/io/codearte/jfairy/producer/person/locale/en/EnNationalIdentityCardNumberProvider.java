@@ -18,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  * @author Olga Maciaszek-Sharma
  * @since 15.03.15
  */
-public class EnNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider, VATIdentificationNumberProvider {
+public class EnNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	private static final int SSN_LENGTH = 11;
 	private static final int AREA_NUMBER_LENGTH = 3;
