@@ -42,17 +42,17 @@ class EsAddressSpec extends Specification {
 			address.getCity() == "Cáceres"
 	}
 
-	def "should return addressLine1 in sv locale format"() {
+	def "should return addressLine1 in es locale format"() {
 		expect:
 			address.getAddressLine1() == "Vieja, 39 327"
 	}
 
-	def "should return addressLine2 in sv locale format"() {
+	def "should return addressLine2 in es locale format"() {
 		expect:
 			address.getAddressLine2() == "33.915 Cáceres"
 	}
 
-	def "should return address in sv locale format"() {
+	def "should return address in es locale format"() {
 		expect:
 			address.toString() == "Vieja, 39 327" + LINE_SEPARATOR + "33.915 Cáceres"
 	}

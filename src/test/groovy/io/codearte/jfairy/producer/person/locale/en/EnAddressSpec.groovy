@@ -42,17 +42,17 @@ class EnAddressSpec extends Specification {
 		    address.getCity() == "San Francisco"
 	}
 
-	def "should return addressLine1 in sv locale format"() {
+	def "should return addressLine1 in en locale format"() {
 		expect:
 			address.getAddressLine1() == "11 Ford Street APT 313"
 	}
 
-	def "should return addressLine2 in sv locale format"() {
+	def "should return addressLine2 in en locale format"() {
 		expect:
 			address.getAddressLine2() == "San Francisco 28664"
 	}
 
-	def "should return address in sv locale format"() {
+	def "should return address in en locale format"() {
 		expect:
 			address.toString() == "11 Ford Street APT 313" + LINE_SEPARATOR + "San Francisco 28664"
 	}

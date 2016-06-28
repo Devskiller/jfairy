@@ -42,17 +42,17 @@ class PlAddressSpec extends Specification {
 		    address.getCity() == "Cedzyna"
 	}
 
-	def "should return addressLine1 in sv locale format"() {
+	def "should return addressLine1 in pl locale format"() {
 		expect:
 			address.getAddressLine1() == "Szulborska 11"
 	}
 
-	def "should return addressLine2 in sv locale format"() {
+	def "should return addressLine2 in pl locale format"() {
 		expect:
 			address.getAddressLine2() == "91-528 Cedzyna"
 	}
 
-	def "should return address in sv locale format"() {
+	def "should return address in pl locale format"() {
 		expect:
 			address.toString() == "Szulborska 11" + LINE_SEPARATOR + "91-528 Cedzyna"
 	}
