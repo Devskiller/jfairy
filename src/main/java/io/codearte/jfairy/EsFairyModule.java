@@ -8,8 +8,8 @@ import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.PassportNumberProvider;
 import io.codearte.jfairy.producer.person.locale.NoNationalIdentificationNumberFactory;
-import io.codearte.jfairy.producer.person.locale.es.DNINumberProvider;
 import io.codearte.jfairy.producer.person.locale.es.EsAddressProvider;
+import io.codearte.jfairy.producer.person.locale.es.EsNationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.locale.es.EsPassportNumberProvider;
 import io.codearte.jfairy.producer.util.CharConverter;
 import io.codearte.jfairy.producer.util.locale.NonOpCharConverter;
@@ -30,7 +30,7 @@ public class EsFairyModule extends FairyModule {
 	protected void configure() {
 		super.configure();
 		bind(NationalIdentificationNumberFactory.class).to(NoNationalIdentificationNumberFactory.class);
-		bind(NationalIdentityCardNumberProvider.class).to(DNINumberProvider.class);
+		bind(NationalIdentityCardNumberProvider.class).to(EsNationalIdentityCardNumberProvider.class);
 		bind(VATIdentificationNumberProvider.class).to(EsVATIdentificationNumberProvider.class);
 		bind(AddressProvider.class).to(EsAddressProvider.class);
 		bind(PassportNumberProvider.class).to(EsPassportNumberProvider.class);
