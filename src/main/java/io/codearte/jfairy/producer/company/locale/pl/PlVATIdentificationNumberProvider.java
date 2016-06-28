@@ -12,9 +12,14 @@ import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
-public class NIPProvider implements VATIdentificationNumberProvider {
+/**
+ * Polish VAT Identification Number (known as NIP Numer Identyfikacji Podatkowej in Poland)
+ * <p>
+ * https://en.wikipedia.org/wiki/VAT_identification_number
+ */
+public class PlVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-	private static final Logger LOG = LoggerFactory.getLogger(NIPProvider.class);
+	private static final Logger LOG = LoggerFactory.getLogger(PlVATIdentificationNumberProvider.class);
 
 	// ex 1234563218
 	private static final int NIP_LENGTH = 10;
@@ -75,7 +80,7 @@ public class NIPProvider implements VATIdentificationNumberProvider {
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public NIPProvider(BaseProducer baseProducer) {
+	public PlVATIdentificationNumberProvider(BaseProducer baseProducer) {
 
 		this.baseProducer = baseProducer;
 	}

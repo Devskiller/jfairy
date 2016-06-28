@@ -12,10 +12,14 @@ import static java.lang.System.arraycopy;
 import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
+ * American VAT Identification Number (known as Employer Identification Number or EIN in the United States)
+ * <p>
+ * https://en.wikipedia.org/wiki/Employer_Identification_Number
+ *
  * @author Olga Maciaszek-Sharma
  * @since 21.03.15
  */
-public class EmployerIdentificationNumberProvider implements VATIdentificationNumberProvider {
+public class EnVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
 	private static final int EIN_LENGTH = 10;
 	private static final int HYPHEN_INDEX = 2;
@@ -27,7 +31,7 @@ public class EmployerIdentificationNumberProvider implements VATIdentificationNu
 	private static Set<Integer> excludedNumbers = Sets.newHashSet(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
 	@Inject
-	public EmployerIdentificationNumberProvider(BaseProducer baseProducer) {
+	public EnVATIdentificationNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 
