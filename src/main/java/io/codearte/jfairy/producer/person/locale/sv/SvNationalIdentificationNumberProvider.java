@@ -13,7 +13,8 @@ import org.joda.time.DateTime;
 import static java.lang.String.format;
 
 /**
- * Personal Identity Number (known as Personnummer in sweden) is the Swedish national identity number
+ * Swedish National Identification Number (known as Personal Identity Number or Personnummer in sweden)
+ *
  * https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
  * <p>
  * E.g.
@@ -22,9 +23,9 @@ import static java.lang.String.format;
  * The left part of the hyphen consists of the date of birth and the right part consist of
  * three random numbers + one check digit.
  */
-public class PersonalIdentityNumberProvider implements NationalIdentificationNumberProvider {
+public class SvNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
-	private static final int PERSONAL_IDENTITY_NUMBER_LENGTH = 11;
+	private static final int NATIONAL_IDENTIFICATION_NUMBER_LENGTH = 11;
 	private static final int VALIDITY_IN_YEARS = 120;
 
 
@@ -40,8 +41,8 @@ public class PersonalIdentityNumberProvider implements NationalIdentificationNum
 	private Person.Sex sex;
 
 	@Inject
-	public PersonalIdentityNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-										  @Assisted NationalIdentificationNumberProperties.Property... properties) {
+	public SvNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
+												  @Assisted NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -74,9 +75,9 @@ public class PersonalIdentityNumberProvider implements NationalIdentificationNum
 		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
-        String personalIdentityNumber = format("%02d%02d%02d-%02d%d", year, month, day, serialNumber, sexCode);
+        String nationalIdentificationNumber = format("%02d%02d%02d-%02d%d", year, month, day, serialNumber, sexCode);
 
-		return personalIdentityNumber + calculateChecksum(personalIdentityNumber);
+		return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
 	}
 
 	public void setIssueDate(DateTime issueDate) {
@@ -88,17 +89,17 @@ public class PersonalIdentityNumberProvider implements NationalIdentificationNum
 	}
 
 	/**
-	 * @param personalIdentityNumber Personal Identity Number
-	 * @return personalIdentityNumber validity
+	 * @param nationalIdentificationNumber Personal Identity Number
+	 * @return nationalIdentificationNumber validity
 	 */
-	public static boolean isValid(String personalIdentityNumber) {
-		int size = personalIdentityNumber.length();
-		if (size != PERSONAL_IDENTITY_NUMBER_LENGTH) {
+	public static boolean isValid(String nationalIdentificationNumber) {
+		int size = nationalIdentificationNumber.length();
+		if (size != NATIONAL_IDENTIFICATION_NUMBER_LENGTH) {
 			return false;
 		}
 
-		int checksum = Integer.valueOf(personalIdentityNumber.substring(size - 1));
-		int checkDigit = calculateChecksum(personalIdentityNumber);
+		int checksum = Integer.valueOf(nationalIdentificationNumber.substring(size - 1));
+		int checkDigit = calculateChecksum(nationalIdentificationNumber);
 
 		return checkDigit == checksum;
 
@@ -108,12 +109,12 @@ public class PersonalIdentityNumberProvider implements NationalIdentificationNum
 		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length - 1)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
-	public static int calculateChecksum(String personalIdentityNumber) {
-		String personalIdentityNumberWithoutHyphen = personalIdentityNumber.replace("-", "");
+	public static int calculateChecksum(String nationalIdentificationNumber) {
+		String nationalIdentificationNumberWithoutHyphen = nationalIdentificationNumber.replace("-", "");
 		int sum = 0;
 		int i = 0;
 		for (int weight : WEIGHTS) {
-			int digit = Character.digit(personalIdentityNumberWithoutHyphen.charAt(i++), 10);
+			int digit = Character.digit(nationalIdentificationNumberWithoutHyphen.charAt(i++), 10);
 			int product = digit * weight;
 			sum += (product / 10) + (product % 10);
 		}
