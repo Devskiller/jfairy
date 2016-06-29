@@ -15,13 +15,14 @@ import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 
 /**
- * PESEL - Polish Powszechny Elektroniczny System Ewidencji Ludności,
+ * Spanish National Identification Number (known as PESEL or Polish Powszechny Elektroniczny System Ewidencji Ludności)
+ *
  * Universal Electronic System for Registration of the Population)
  * More info: http://en.wikipedia.org/wiki/PESEL
  */
-public class PeselProvider implements NationalIdentificationNumberProvider {
+public class PlNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
-	private static final int PESEL_LENGTH = 11;
+	private static final int NATIONAL_IDENTIFICATION_NUMBER_LENGTH = 11;
 	private static final int VALIDITY_IN_YEARS = 10;
 
 	private static final int[] PERIOD_WEIGHTS = {80, 0, 20, 40, 60};
@@ -40,8 +41,8 @@ public class PeselProvider implements NationalIdentificationNumberProvider {
 	private Person.Sex sex;
 
 	@Inject
-	public PeselProvider(DateProducer dateProducer, BaseProducer baseProducer,
-	                     @Assisted
+	public PlNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
+												  @Assisted
 	                     NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
@@ -76,9 +77,9 @@ public class PeselProvider implements NationalIdentificationNumberProvider {
 		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
-		String pesel = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
+		String nationalIdentificationNumber = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
 
-		return pesel + calculateChecksum(pesel);
+		return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
 	}
 
 	public void setIssueDate(DateTime issueDate) {
@@ -90,17 +91,17 @@ public class PeselProvider implements NationalIdentificationNumberProvider {
 	}
 
 	/**
-	 * @param pesel PESEL
-	 * @return pesel validity
+	 * @param nationalIdentificationNumber National Identification Number (PESEL)
+	 * @return nationalIdentificationNumber validity
 	 */
-	public static boolean isValid(String pesel) {
-		int size = pesel.length();
-		if (size != PESEL_LENGTH) {
+	public static boolean isValid(String nationalIdentificationNumber) {
+		int size = nationalIdentificationNumber.length();
+		if (size != NATIONAL_IDENTIFICATION_NUMBER_LENGTH) {
 			return false;
 		}
 
-		int checksum = valueOf(pesel.substring(size - 1));
-		int checkDigit = calculateChecksum(pesel);
+		int checksum = valueOf(nationalIdentificationNumber.substring(size - 1));
+		int checkDigit = calculateChecksum(nationalIdentificationNumber);
 
 		return checkDigit == checksum;
 
@@ -115,11 +116,11 @@ public class PeselProvider implements NationalIdentificationNumberProvider {
 		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length - 1)] + (sex == Person.Sex.MALE ? 1 : 0);
 	}
 
-	private static int calculateChecksum(String pesel) {
+	private static int calculateChecksum(String nationalIdentificationNumber) {
 		int sum = 0;
 		int i = 0;
 		for (int weight : WEIGHTS) {
-			int digit = Character.digit(pesel.charAt(i++), 10);
+			int digit = Character.digit(nationalIdentificationNumber.charAt(i++), 10);
 			sum += digit * weight;
 		}
 
