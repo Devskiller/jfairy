@@ -1,47 +1,19 @@
 package io.codearte.jfairy.producer.person;
 
-public class Address {
+public interface Address {
 
-	private final String postalCode;
+	String street();
 
-	private final String city;
+	String streetNumber();
 
-	private final String street;
+	String apartmentNumber();
 
-	private final String streetNumber;
+	String getPostalCode();
 
-	private final String apartmentNumber;
+	String getCity();
 
-	public Address(String postalCode, String city, String street, String streetNumber, String apartmentNumber) {
-		this.postalCode = postalCode;
-		this.city = city;
-		this.street = street;
-		this.streetNumber = streetNumber;
-		this.apartmentNumber = apartmentNumber;
-	}
+	String getAddressLine1();
 
-	public String getPostalCode() {
-		return postalCode;
-	}
+	String getAddressLine2();
 
-	public String getCity() {
-		return city;
-	}
-
-	public String street() {
-		return street;
-	}
-
-	public String streetNumber() {
-		return streetNumber;
-	}
-
-	public String apartmentNumber() {
-		return apartmentNumber;
-	}
-
-	@Override
-	public String toString() {
-		return postalCode + " " + city;
-	}
 }

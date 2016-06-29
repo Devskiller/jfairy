@@ -30,8 +30,8 @@ public class Person {
 	private final String passportNumber;
 
 	public Person(String firstName, String middleName, String lastName, Address address, String email, String username,
-	              String password, Sex sex, String telephoneNumber, DateTime dateOfBirth, Integer age,
-	              String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail) {
+				  String password, Sex sex, String telephoneNumber, DateTime dateOfBirth, Integer age,
+				  String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail) {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.address = address;
 		this.firstName = firstName;
