@@ -17,8 +17,10 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
  * Polish Identity Card Number
+ *
+ * http://en.wikipedia.org/wiki/Polish_identity_card
  */
-public class PlIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
+public class PlNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	@VisibleForTesting
 	static final int ISSUING_BEGIN = 2000;
@@ -43,7 +45,7 @@ public class PlIdentityCardNumberProvider implements NationalIdentityCardNumberP
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public PlIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
+	public PlNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 	}
