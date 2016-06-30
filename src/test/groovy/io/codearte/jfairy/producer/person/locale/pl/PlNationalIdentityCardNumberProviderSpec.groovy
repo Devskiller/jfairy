@@ -9,15 +9,15 @@ import io.codearte.jfairy.producer.DateProducer
 import org.joda.time.DateTime
 import spock.lang.Specification
 
-import static PlIdentityCardNumberProvider.ISSUING_BEGIN
-import static PlIdentityCardNumberProvider.LETTER_WEIGHT
-import static PlIdentityCardNumberProvider.MAX_DIGITS_PART_VALUE
+import static PlNationalIdentityCardNumberProvider.ISSUING_BEGIN
+import static PlNationalIdentityCardNumberProvider.LETTER_WEIGHT
+import static PlNationalIdentityCardNumberProvider.MAX_DIGITS_PART_VALUE
 
 /**
  * @author mariuszs
  * @since 30.10.13.
  */
-class PlIdentityCardNumberProviderSpec extends Specification {
+class PlNationalIdentityCardNumberProviderSpec extends Specification {
 
 	def baseProducer = Mock(BaseProducer)
 	def dateGenerator = Mock(DateProducer)
@@ -31,7 +31,7 @@ class PlIdentityCardNumberProviderSpec extends Specification {
 			baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
 			baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
 		when:
-			PlIdentityCardNumberProvider generator = new PlIdentityCardNumberProvider(dateGenerator, baseProducer)
+			PlNationalIdentityCardNumberProvider generator = new PlNationalIdentityCardNumberProvider(dateGenerator, baseProducer)
 			def id = generator.get(DateTime.parse("2013-12-12"))
 		then:
 			id == "ABA300000"

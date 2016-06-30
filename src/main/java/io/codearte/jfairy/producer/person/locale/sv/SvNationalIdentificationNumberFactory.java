@@ -7,19 +7,19 @@ import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties
 
 import javax.inject.Inject;
 
-public class PersonalIdentityNumberFactory implements NationalIdentificationNumberFactory {
+public class SvNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 
 	@Inject
-	public PersonalIdentityNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
+	public SvNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 	}
 
 	@Override
-	public PersonalIdentityNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
-		return new PersonalIdentityNumberProvider(dateProducer, baseProducer, properties);
+	public SvNationalIdentificationNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
+		return new SvNationalIdentificationNumberProvider(dateProducer, baseProducer, properties);
 	}
 }

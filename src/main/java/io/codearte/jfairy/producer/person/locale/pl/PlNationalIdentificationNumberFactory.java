@@ -7,20 +7,20 @@ import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties
 
 import javax.inject.Inject;
 
-public class PeselFactory implements NationalIdentificationNumberFactory {
+public class PlNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 
 	@Inject
-	public PeselFactory(BaseProducer baseProducer, DateProducer dateProducer) {
+	public PlNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 	}
 
 	@Override
-	public PeselProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
-		return new PeselProvider(dateProducer, baseProducer, properties);
+	public PlNationalIdentificationNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
+		return new PlNationalIdentificationNumberProvider(dateProducer, baseProducer, properties);
 	}
 
 }

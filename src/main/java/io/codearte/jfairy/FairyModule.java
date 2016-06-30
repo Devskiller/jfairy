@@ -6,7 +6,6 @@ import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import io.codearte.jfairy.producer.payment.IBANFactory;
 import io.codearte.jfairy.producer.person.PersonFactory;
-import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
 
 import java.util.Random;
 

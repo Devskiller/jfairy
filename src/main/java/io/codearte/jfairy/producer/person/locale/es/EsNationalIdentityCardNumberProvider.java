@@ -6,16 +6,18 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.util.regex.Pattern;
 
 /**
+ * Spanish National Identity Card Number (known as Documento Nacional de Identidad or DNI)
+ *
  * @author graux
  * @since 26/04/2015
  * Documento Nacional de Identidad (DNI) Español
  */
-public class DNINumberProvider implements NationalIdentityCardNumberProvider {
+public class EsNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
 	private Pattern regexDni;
 
-	public DNINumberProvider() {
+	public EsNationalIdentityCardNumberProvider() {
 		this.regexDni = Pattern.compile(REGEX_DNI);
 	}
 

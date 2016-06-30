@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 import javax.inject.Inject;
 
 import static io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
-import static io.codearte.jfairy.producer.person.locale.sv.PersonalIdentityNumberProvider.calculateChecksum;
+import static io.codearte.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider.calculateChecksum;
 import static java.lang.String.valueOf;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.apache.commons.lang3.StringUtils.leftPad;

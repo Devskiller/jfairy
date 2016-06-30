@@ -7,9 +7,9 @@ import io.codearte.jfairy.producer.person.AddressProvider;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.PassportNumberProvider;
-import io.codearte.jfairy.producer.person.locale.pl.PeselFactory;
 import io.codearte.jfairy.producer.person.locale.pl.PlAddressProvider;
-import io.codearte.jfairy.producer.person.locale.pl.PlIdentityCardNumberProvider;
+import io.codearte.jfairy.producer.person.locale.pl.PlNationalIdentificationNumberFactory;
+import io.codearte.jfairy.producer.person.locale.pl.PlNationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.locale.pl.PlPassportNumberProvider;
 import io.codearte.jfairy.producer.util.CharConverter;
 import io.codearte.jfairy.producer.util.locale.PlCharConverter;
@@ -29,8 +29,8 @@ public class PlFairyModule extends FairyModule {
 	@Override
 	protected void configure() {
 		super.configure();
-		bind(NationalIdentificationNumberFactory.class).to(PeselFactory.class);
-		bind(NationalIdentityCardNumberProvider.class).to(PlIdentityCardNumberProvider.class);
+		bind(NationalIdentificationNumberFactory.class).to(PlNationalIdentificationNumberFactory.class);
+		bind(NationalIdentityCardNumberProvider.class).to(PlNationalIdentityCardNumberProvider.class);
 		bind(VATIdentificationNumberProvider.class).to(PlVATIdentificationNumberProvider.class);
 		bind(AddressProvider.class).to(PlAddressProvider.class);
 		bind(PassportNumberProvider.class).to(PlPassportNumberProvider.class);
