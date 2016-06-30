@@ -104,7 +104,7 @@ public class PersonProvider implements Provider<Person> {
 		if (dateOfBirth == null) {
 			dateOfBirth = generateDateOfBirth();
 		}
-		String companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
+		String companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.getDomain()));
 		// FIXME: Replace this with baseProducer
 		String password = RandomStringUtils.randomAlphanumeric(8);
 
