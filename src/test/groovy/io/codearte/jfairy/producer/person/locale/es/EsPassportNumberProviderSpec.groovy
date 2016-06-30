@@ -14,7 +14,7 @@ class EsPassportNumberProviderSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("es"))
-		passportNumber = fairy.person().passportNumber()
+		passportNumber = fairy.person().getPassportNumber()
 	}
 
 	def "should generate number with nine characters"() {

@@ -16,7 +16,7 @@ class SvPersonSpec extends Specification {
 		when:
 			def person = fairy.person()
 		then:
-			person.nationalIdentificationNumber()
+			person.getNationalIdentificationNumber()
 	}
 
 }

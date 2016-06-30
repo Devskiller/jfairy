@@ -10,7 +10,7 @@ class SvNationalIdentityCardNumberProviderSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("sv"))
-		nationalIdentityCardNumber = fairy.person().nationalIdentityCardNumber()
+		nationalIdentityCardNumber = fairy.person().getNationalIdentityCardNumber()
 	}
 
 	def "should generate number with 8 characters"() {

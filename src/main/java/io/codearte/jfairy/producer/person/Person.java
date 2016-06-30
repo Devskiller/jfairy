@@ -50,35 +50,35 @@ public class Person {
 		this.passportNumber = passportNumber;
 	}
 
-	public String nationalIdentificationNumber() {
+	public String getNationalIdentificationNumber() {
 		return nationalIdentificationNumber;
 	}
 
-	public String firstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public String middleName() {
+	public String getMiddleName() {
 		return middleName;
 	}
 
-	public String lastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public String email() {
+	public String getEmail() {
 		return email;
 	}
 
-	public String username() {
+	public String getUsername() {
 		return username;
 	}
 
-	public String password() {
+	public String getPassword() {
 		return password;
 	}
 
-	public String fullName() {
+	public String getFullName() {
 		return firstName + " " + lastName;
 	}
 
@@ -90,27 +90,27 @@ public class Person {
 		return sex == FEMALE;
 	}
 
-	public Sex sex() {
+	public Sex getSex() {
 		return sex;
 	}
 
-	public String telephoneNumber() {
+	public String getTelephoneNumber() {
 		return telephoneNumber;
 	}
 
-	public DateTime dateOfBirth() {
+	public DateTime getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public int age() {
+	public int getAge() {
 		return age;
 	}
 
-	public String nationalIdentityCardNumber() {
+	public String getNationalIdentityCardNumber() {
 		return nationalIdentityCardNumber;
 	}
 
-	public String companyEmail() {
+	public String getCompanyEmail() {
 		return companyEmail;
 	}
 
@@ -122,7 +122,7 @@ public class Person {
 		return company;
 	}
 
-	public String passportNumber() {
+	public String getPassportNumber() {
 		return passportNumber;
 	}
 }
