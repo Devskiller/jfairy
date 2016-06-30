@@ -26,15 +26,15 @@ public class SvAddress implements Address {
 		this.city = city;
 	}
 
-	public String street() {
+	public String getStreet() {
 		return street;
 	}
 
-	public String streetNumber() {
+	public String getStreetNumber() {
 		return streetNumber;
 	}
 
-	public String apartmentNumber() {
+	public String getApartmentNumber() {
 		return apartmentNumber;
 	}
 

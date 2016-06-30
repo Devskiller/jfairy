@@ -19,17 +19,17 @@ class EnAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Ford Street"
+			address.getStreet() == "Ford Street"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "11"
+			address.getStreetNumber() == "11"
 	}
 
     def "should generate random apartmentNumber"() {
         expect:
-            address.apartmentNumber() == "313"
+            address.getApartmentNumber() == "313"
     }
 
 	def "should generate random postalCode"() {
