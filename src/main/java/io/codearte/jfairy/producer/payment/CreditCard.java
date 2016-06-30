@@ -1,11 +1,6 @@
 package io.codearte.jfairy.producer.payment;
 
-import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.producer.DateProducer;
 import org.joda.time.DateTime;
-import org.joda.time.Period;
-
-import javax.inject.Inject;
 
 /**
  * @author jkubrynski@gmail.com
@@ -13,24 +8,12 @@ import javax.inject.Inject;
  */
 public class CreditCard {
 
-	private static final Period DEFAULT_VALIDITY = Period.months(36);
-	private static final String DATA_KEY = "cardVendors";
+	private final String cardVendor;
+	private final DateTime expiryDate;
 
-	private final DataMaster dataMaster;
-	private final DateProducer dateProducer;
-	private String cardVendor;
-	private DateTime expiryDate;
-
-	@Inject
-	public CreditCard(DataMaster dataMaster, DateProducer dateProducer) {
-		this.dataMaster = dataMaster;
-		this.dateProducer = dateProducer;
-		generate();
-	}
-
-	public final void generate() {
-		cardVendor = dataMaster.getRandomValue(DATA_KEY);
-		expiryDate = dateProducer.randomDateBetweenNowAndFuturePeriod(DEFAULT_VALIDITY);
+	public CreditCard(String cardVendor, DateTime expiryDate) {
+		this.cardVendor = cardVendor;
+		this.expiryDate = expiryDate;
 	}
 
 	public String vendor() {
