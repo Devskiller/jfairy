@@ -178,9 +178,9 @@ class PersonSpec extends Specification {
 		when:
 			def address = person.address
 		then:
-			address.getStreet()
-			address.getStreetNumber().isNumber()
-			(address.getApartmentNumber().isNumber() || address.getApartmentNumber() == "")
+			address.street
+			address.streetNumber.isNumber()
+			(address.apartmentNumber.isNumber() || address.apartmentNumber == "")
 	}
 
 	def "should generate middle name only sometimes"() {
@@ -200,8 +200,8 @@ class PersonSpec extends Specification {
 			def persons = []
 			(1..50).each { persons.add(fairy.person()) }
 		when:
-			def allWithoutApartmentNumber = persons.findAll { p -> p.address.getApartmentNumber().isEmpty() }
-			def allWithApartmentNumber = persons.findAll { p -> !p.address.getApartmentNumber().isEmpty() }
+			def allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber.isEmpty() }
+			def allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber.isEmpty() }
 		then:
 			allWithoutApartmentNumber.size() > 0
 			allWithApartmentNumber.size() > 0

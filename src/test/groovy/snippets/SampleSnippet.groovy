@@ -36,8 +36,8 @@ println "National Id Card No: " + person.nationalIdentityCardNumber
 println "        Passport No: " + person.passportNumber
 println "        Postal Code: " + person.address.postalCode
 println "               City: " + person.address.city
-println "             Street: " + person.address.getStreet()
-println "      Street number: " + person.address.getStreetNumber()
+println "             Street: " + person.address.street
+println "      Street number: " + person.address.streetNumber
 println "       Full address: " + person.address.toString()
 
 println ""

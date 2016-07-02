@@ -19,37 +19,37 @@ class EnAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.getStreet() == "Ford Street"
+			address.street == "Ford Street"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.getStreetNumber() == "11"
+			address.streetNumber == "11"
 	}
 
     def "should generate random apartmentNumber"() {
         expect:
-            address.getApartmentNumber() == "313"
+            address.apartmentNumber == "313"
     }
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "28664"
+			address.postalCode == "28664"
 	}
 
 	def "should generate random city"() {
 		expect:
-		    address.getCity() == "San Francisco"
+		    address.city == "San Francisco"
 	}
 
 	def "should return addressLine1 in en locale format"() {
 		expect:
-			address.getAddressLine1() == "11 Ford Street APT 313"
+			address.addressLine1 == "11 Ford Street APT 313"
 	}
 
 	def "should return addressLine2 in en locale format"() {
 		expect:
-			address.getAddressLine2() == "San Francisco 28664"
+			address.addressLine2 == "San Francisco 28664"
 	}
 
 	def "should return address in en locale format"() {

@@ -19,37 +19,37 @@ class EsAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.getStreet() == "Vieja"
+			address.street == "Vieja"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.getStreetNumber() == "39"
+			address.streetNumber == "39"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.getApartmentNumber() == "327"
+			address.apartmentNumber == "327"
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "33.915"
+			address.postalCode == "33.915"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.getCity() == "Cáceres"
+			address.city == "Cáceres"
 	}
 
 	def "should return addressLine1 in es locale format"() {
 		expect:
-			address.getAddressLine1() == "Vieja, 39 327"
+			address.addressLine1 == "Vieja, 39 327"
 	}
 
 	def "should return addressLine2 in es locale format"() {
 		expect:
-			address.getAddressLine2() == "33.915 Cáceres"
+			address.addressLine2 == "33.915 Cáceres"
 	}
 
 	def "should return address in es locale format"() {

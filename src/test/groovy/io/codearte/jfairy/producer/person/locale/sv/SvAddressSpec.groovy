@@ -19,37 +19,37 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.getStreet() == "Götgatan"
+			address.street == "Götgatan"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.getStreetNumber() == "73"
+			address.streetNumber == "73"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.getApartmentNumber() == ""
+			address.apartmentNumber == ""
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "528 66"
+			address.postalCode == "528 66"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.getCity() == "Kristianstad"
+			address.city == "Kristianstad"
 	}
 
 	def "should return addressLine1 in sv locale format"() {
 		expect:
-			address.getAddressLine1() == "Götgatan 73"
+			address.addressLine1 == "Götgatan 73"
 	}
 
 	def "should return addressLine2 in sv locale format"() {
 		expect:
-			address.getAddressLine2() == "528 66 Kristianstad"
+			address.addressLine2 == "528 66 Kristianstad"
 	}
 
 	def "should return address in sv locale format"() {
