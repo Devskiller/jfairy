@@ -14,7 +14,7 @@ class PlPassportNumberProviderSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("pl"))
-		passportNumber = fairy.person().getPassportNumber()
+		passportNumber = fairy.person().passportNumber
 	}
 
 	def "should generate number with correct length"() {

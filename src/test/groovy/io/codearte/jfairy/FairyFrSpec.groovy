@@ -12,7 +12,7 @@ class FairyFrSpec extends Specification {
         when:
             Person person = fairy.person();
         then:
-            person.getFullName() == 'Normand Besnard'
+            person.fullName == 'Normand Besnard'
     }
 
     def "Should create French city"() {

@@ -28,7 +28,7 @@ class FairySpec extends Specification {
 		when:
 			person = Fairy.create().person();
 		then:
-			person.getFullName() != old(person.getFullName())
+			person.fullName != old(person.fullName)
 	}
 
 	def "Second person should be different with one fairy"() {
@@ -39,7 +39,7 @@ class FairySpec extends Specification {
 		when:
 			person = fairy.person();
 		then:
-			person.getFullName() != old(person.getFullName())
+			person.fullName != old(person.fullName)
 	}
 
 	def "Second person should be the same with the same random seed"() {
@@ -54,10 +54,10 @@ class FairySpec extends Specification {
 			def fourthPerson = secondFairy.person()
 
 		expect:
-			firstPerson.getFullName().equals(secondPerson.getFullName())
-			thirdPerson.getFullName().equals(fourthPerson.getFullName())
+			firstPerson.fullName.equals(secondPerson.fullName)
+			thirdPerson.fullName.equals(fourthPerson.fullName)
 
-			!firstPerson.getFullName().equals(thirdPerson.getFullName())
+			!firstPerson.fullName.equals(thirdPerson.fullName)
 	}
 
 	def "Second person should be different with different random seeds"() {
@@ -70,7 +70,7 @@ class FairySpec extends Specification {
 			def secondPerson = secondFairy.person();
 
 		expect:
-			!firstPerson.getFullName().equals(secondPerson.getFullName())
+			!firstPerson.fullName.equals(secondPerson.fullName)
 	}
 
 	def "should use default DataMaster when custom not provided"() {
@@ -80,7 +80,7 @@ class FairySpec extends Specification {
 			Person samplePerson = fairy.person()
 
 		then:
-			samplePerson.getFirstName() && samplePerson.getFirstName() != CUSTOM_STRING
+			samplePerson.firstName && samplePerson.firstName != CUSTOM_STRING
 
 	}
 
@@ -92,7 +92,7 @@ class FairySpec extends Specification {
 			Person samplePerson = fairy.person()
 
 		then:
-			samplePerson.getFirstName() == CUSTOM_STRING
+			samplePerson.firstName == CUSTOM_STRING
 
 	}
 }

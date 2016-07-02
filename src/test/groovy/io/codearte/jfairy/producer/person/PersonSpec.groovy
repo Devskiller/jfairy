@@ -35,7 +35,7 @@ class PersonSpec extends Specification {
 		when:
 			def person = fairy.person()
 		then:
-			"${person.getFirstName()} ${person.getLastName()}" == person.getFullName()
+			"${person.firstName} ${person.lastName}" == person.fullName
 	}
 
 	@Ignore
@@ -43,65 +43,65 @@ class PersonSpec extends Specification {
 		setup:
 			def fairy = fairy
 		expect:
-			fairy.person().getFirstName() != fairy.person().getFirstName()
+			fairy.person().firstName != fairy.person().firstName
 	}
 
 	def "should be sure that data exists"() {
 		when:
 			def person = fairy.person()
 		then:
-			person.getFirstName()
-			person.getLastName()
-			person.getFullName()
-			person.getEmail()
-			person.isMale() || person.isFemale()
-			person.getNationalIdentityCardNumber()
+			person.firstName
+			person.lastName
+			person.fullName
+			person.email
+			person.male || person.female
+			person.nationalIdentityCardNumber
 			person.address
 
-			emailValidator.isValid(person.getEmail())
+			emailValidator.isValid(person.email)
 	}
 
 	def "should create female"() {
 		when:
 			def person = fairy.person(female())
 		then:
-			person.isFemale()
+			person.female
 	}
 
 	def "should create male"() {
 		when:
 			def person = fairy.person(male())
 		then:
-			person.isMale()
+			person.male
 	}
 
 	def "should create person younger than 3 years"() {
 		when:
 			def person = fairy.person(maxAge(3))
 		then:
-			person.getAge() <= 3
+			person.age <= 3
 	}
 
 	def "should create person older than 98 years"() {
 		when:
 			def person = fairy.person(minAge(99))
 		then:
-			person.getAge() > 98
+			person.age > 98
 	}
 
 	def "should create person older than 10 years and younger than 10 years"() {
 		when:
 			Person person = fairy.person(minAge(10), maxAge(10))
 		then:
-			person.getAge() == 10
+			person.age == 10
 	}
 
 	def "birth date and age should be related"() {
 		when:
 			def person = fairy.person(ageBetween(32, 32))
 		then:
-			person.getAge() == 32
-			def period = new Period(person.getDateOfBirth().millis, DateTime.now().millis)
+			person.age == 32
+			def period = new Period(person.dateOfBirth.millis, DateTime.now().millis)
 			period.years == 32
 	}
 
@@ -109,28 +109,28 @@ class PersonSpec extends Specification {
 		when:
 			def person = fairy.person()
 		then:
-			person.getTelephoneNumber()
+			person.telephoneNumber
 	}
 
 	def "should create telephone number in defined format"() {
 		when:
 			def person = fairy.person(telephoneFormat("###--###"))
 		then:
-			person.getTelephoneNumber() ==~ /\d\d\d--\d\d\d/
+			person.telephoneNumber ==~ /\d\d\d--\d\d\d/
 	}
 
 	def "should create birth date"() {
 		when:
 			def person = fairy.person()
 		then:
-			person.getDateOfBirth().isBefore(DateTime.now())
+			person.dateOfBirth.isBefore(DateTime.now())
 	}
 
 	def "should create age"() {
 		when:
 			def person = fairy.person()
 		then:
-			person.getAge()
+			person.age
 	}
 
 	def "should create company email"() {
@@ -141,8 +141,8 @@ class PersonSpec extends Specification {
 			def person = fairy.person()
 
 		then:
-			person.getCompanyEmail()
-			emailValidator.isValid(person.getCompanyEmail())
+			person.companyEmail
+			emailValidator.isValid(person.companyEmail)
 	}
 
 	def "should create address"() {
@@ -176,7 +176,7 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def address = person.getAddress()
+			def address = person.address
 		then:
 			address.street()
 			address.streetNumber().isNumber()
@@ -188,8 +188,8 @@ class PersonSpec extends Specification {
 			def persons = []
 			(1..100).each { persons.add(fairy.person()) }
 		when:
-			def allWithoutMiddleName = persons.findAll { p -> p.getMiddleName().isEmpty() }
-			def allWithMiddleName = persons.findAll { p -> !p.getMiddleName().isEmpty() }
+			def allWithoutMiddleName = persons.findAll { p -> p.middleName.isEmpty() }
+			def allWithMiddleName = persons.findAll { p -> !p.middleName.isEmpty() }
 		then:
 			allWithoutMiddleName.size() > 0
 			allWithMiddleName.size() > 0
@@ -211,7 +211,7 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		expect:
-			person.getPassportNumber()
+			person.passportNumber
 	}
 
 
