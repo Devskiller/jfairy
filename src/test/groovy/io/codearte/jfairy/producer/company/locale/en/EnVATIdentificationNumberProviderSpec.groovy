@@ -18,7 +18,7 @@ class EnVATIdentificationNumberProviderSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("en"))
-		vatIdentificationNumber = fairy.company().getVatIdentificationNumber()
+		vatIdentificationNumber = fairy.company().vatIdentificationNumber
 	}
 
 	def "should generate number with 10 characters"() {

@@ -27,11 +27,11 @@ class CompanySpec extends Specification {
 		when:
 			def company = Bootstrap.create().company()
 		then:
-			company.getName()
-			domainValidator.isValid(company.getDomain())
-			emailValidator.isValid(company.getEmail())
-			urlValidator.isValid(company.getUrl())
-			company.getVatIdentificationNumber()
+			company.name
+			domainValidator.isValid(company.domain)
+			emailValidator.isValid(company.email)
+			urlValidator.isValid(company.url)
+			company.vatIdentificationNumber
 	}
 
 }

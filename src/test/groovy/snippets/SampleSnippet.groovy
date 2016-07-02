@@ -54,10 +54,10 @@ println fairy.person().nationalIdentityCardNumber
 println fairy.person().nationalIdentificationNumber
 
 def company = fairy.company()
-println "Company: " + company.getName()
-println "URL: " + company.getUrl()
-println "VAT: " + company.getVatIdentificationNumber()
+println "Company: " + company.name
+println "URL: " + company.url
+println "VAT: " + company.vatIdentificationNumber
 company = fairy.company()
-println "Company: " + company.getName()
-println "URL: " + company.getUrl()
-println "VAT: " + company.getVatIdentificationNumber()
+println "Company: " + company.name
+println "URL: " + company.url
+println "VAT: " + company.vatIdentificationNumber
