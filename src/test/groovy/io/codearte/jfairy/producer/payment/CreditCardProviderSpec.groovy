@@ -30,7 +30,7 @@ class CreditCardProviderSpec extends Specification {
 		when:
 			CreditCard creditCard = creditCardProvider.get()
 		then:
-			creditCard.vendor()
+			creditCard.getVendor()
 	}
 
 	def "should return card expiry date"() {
@@ -39,7 +39,7 @@ class CreditCardProviderSpec extends Specification {
 		when:
 			CreditCard creditCard = creditCardProvider.get()
 		then:
-			creditCard.expiryDate() == EXPIRY_DATE
+			creditCard.getExpiryDate() == EXPIRY_DATE
 	}
 
 	def "should return card expiry date string"() {
@@ -48,7 +48,7 @@ class CreditCardProviderSpec extends Specification {
 		when:
 			CreditCard creditCard = creditCardProvider.get()
 		then:
-			creditCard.expiryDateAsString() == "02/09"
+			creditCard.getExpiryDateAsString() == "02/09"
 	}
 
 
