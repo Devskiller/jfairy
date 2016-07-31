@@ -14,47 +14,47 @@ class EnAddressSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("EN")).build()
-		address = fairy.person().getAddress()
+		address = fairy.person().address
 	}
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Ford Street"
+			address.street() == "Aster Court"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "11"
+			address.streetNumber() == "79"
 	}
 
-    def "should generate random apartmentNumber"() {
-        expect:
-            address.apartmentNumber() == "313"
-    }
+	def "should generate random apartmentNumber"() {
+		expect:
+			address.apartmentNumber() == ""
+	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "28664"
+			address.postalCode == "66450"
 	}
 
 	def "should generate random city"() {
 		expect:
-		    address.getCity() == "San Francisco"
+			address.city == "San Francisco"
 	}
 
 	def "should return addressLine1 in en locale format"() {
 		expect:
-			address.getAddressLine1() == "11 Ford Street APT 313"
+			address.addressLine1 == "79 Aster Court"
 	}
 
 	def "should return addressLine2 in en locale format"() {
 		expect:
-			address.getAddressLine2() == "San Francisco 28664"
+			address.addressLine2 == "San Francisco 66450"
 	}
 
 	def "should return address in en locale format"() {
 		expect:
-			address.toString() == "11 Ford Street APT 313" + LINE_SEPARATOR + "San Francisco 28664"
+			address.toString() == "79 Aster Court" + LINE_SEPARATOR + "San Francisco 66450"
 	}
 
 }
