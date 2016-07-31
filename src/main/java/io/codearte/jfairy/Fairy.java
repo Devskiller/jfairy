@@ -12,6 +12,7 @@ import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import io.codearte.jfairy.producer.net.NetworkProducer;
 import io.codearte.jfairy.producer.payment.CreditCard;
+import io.codearte.jfairy.producer.payment.CreditCardProvider;
 import io.codearte.jfairy.producer.person.Person;
 import io.codearte.jfairy.producer.person.PersonFactory;
 import io.codearte.jfairy.producer.person.PersonProperties;
@@ -27,12 +28,12 @@ public final class Fairy {
 	private final NetworkProducer networkProducer;
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
-	private final Provider<CreditCard> creditCardProvider;
+	private final CreditCardProvider creditCardProvider;
 	private final CompanyFactory companyFactory;
 
 	@Inject
 	Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
-	      BaseProducer baseProducer, DateProducer dateProducer, Provider<CreditCard> creditCardProvider, CompanyFactory companyFactory) {
+	      BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider, CompanyFactory companyFactory) {
 		this.textProducer = textProducer;
 		this.personFactory = personFactory;
 		this.networkProducer = networkProducer;
