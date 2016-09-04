@@ -11,8 +11,6 @@ import io.codearte.jfairy.producer.person.locale.NoNationalIdentificationNumberF
 import io.codearte.jfairy.producer.person.locale.es.EsAddressProvider;
 import io.codearte.jfairy.producer.person.locale.es.EsNationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.locale.es.EsPassportNumberProvider;
-import io.codearte.jfairy.producer.util.CharConverter;
-import io.codearte.jfairy.producer.util.locale.NonOpCharConverter;
 
 import java.util.Random;
 
@@ -34,6 +32,5 @@ public class EsFairyModule extends FairyModule {
 		bind(VATIdentificationNumberProvider.class).to(EsVATIdentificationNumberProvider.class);
 		bind(AddressProvider.class).to(EsAddressProvider.class);
 		bind(PassportNumberProvider.class).to(EsPassportNumberProvider.class);
-		bind(CharConverter.class).to(NonOpCharConverter.class);
 	}
 }
