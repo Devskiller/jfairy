@@ -14,7 +14,7 @@ class CompanyProviderSpec extends Specification {
     DataMaster dataMaster = Mock(DataMaster)
     VATIdentificationNumberProvider vatIdentificationNumberProvider = Mock(VATIdentificationNumberProvider)
 
-    def "should generate should remove slashes in company email"() {
+    def "should remove slashes in company email"() {
         given:
             baseProducer.trueOrFalse() >> false
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
@@ -30,7 +30,7 @@ class CompanyProviderSpec extends Specification {
     }
 
 
-    def "should generate should lowercase letters in company email"() {
+    def "should lowercase letters in company email"() {
         given:
             baseProducer.trueOrFalse() >> false
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
@@ -46,7 +46,7 @@ class CompanyProviderSpec extends Specification {
     }
 
 
-    def "should generate should strip dots and remove spaces in company email"() {
+    def "should strip dots and remove spaces in company email"() {
         given:
             baseProducer.trueOrFalse() >> false
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
@@ -61,7 +61,7 @@ class CompanyProviderSpec extends Specification {
             email == "info@companyinc.com"
     }
 
-    def "should strip accents from company email"() {
+    def "should strip accents in company email"() {
         given:
             baseProducer.trueOrFalse() >> false
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
