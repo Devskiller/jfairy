@@ -8,8 +8,8 @@ import static io.codearte.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL
 
 class EmailProviderSpec extends Specification {
 
-    def dataMaster = Mock(DataMaster)
-    def baseProducer = Mock(BaseProducer)
+    DataMaster dataMaster = Mock(DataMaster)
+    BaseProducer baseProducer = Mock(BaseProducer)
 
     def setup() {
         dataMaster.getRandomValue(PERSONAL_EMAIL) >> "mail.com"
@@ -18,10 +18,10 @@ class EmailProviderSpec extends Specification {
     def "should remove spaces from firstName and lastName in email"() {
         given:
             baseProducer.randomBetween(1, 3) >> 1
-            def emailProvider = new EmailProvider(dataMaster, baseProducer, "Emilie Agneta", "Vojnov Allerstrand");
+            EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "Emilie Agneta", "Vojnov Allerstrand");
 
         when:
-            def email = emailProvider.get();
+            String email = emailProvider.get();
 
         then:
             email == "emilieagnetavojnovallerstrand@mail.com"
@@ -30,10 +30,10 @@ class EmailProviderSpec extends Specification {
     def "should replace spaces with dots from firstName and lastName in email"() {
         given:
             baseProducer.randomBetween(1, 3) >> 2
-            def emailProvider = new EmailProvider(dataMaster, baseProducer, "Emilie Agneta", "Vojnov Allerstrand");
+            EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "Emilie Agneta", "Vojnov Allerstrand");
 
         when:
-            def email = emailProvider.get();
+            String email = emailProvider.get();
 
         then:
             email == "emilie.agneta.vojnov.allerstrand@mail.com"
@@ -42,10 +42,10 @@ class EmailProviderSpec extends Specification {
     def "should replace spaces with dots from lastName in email"() {
         given:
             baseProducer.randomBetween(1, 3) >> 3
-            def emailProvider = new EmailProvider(dataMaster, baseProducer, "Emilie Agneta", "Vojnov Allerstrand");
+            EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "Emilie Agneta", "Vojnov Allerstrand");
 
         when:
-            def email = emailProvider.get();
+            String email = emailProvider.get();
 
         then:
             email == "vojnovallerstrand@mail.com"
@@ -54,10 +54,10 @@ class EmailProviderSpec extends Specification {
     def "should strip accents from email"() {
         given:
             baseProducer.randomBetween(1, 3) >> 2
-            def emailProvider = new EmailProvider(dataMaster, baseProducer, "åäöéáąćęłńśóźż", "åäöéáąćęłńśóźż");
+            EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "åäöéáąćęłńśóźż", "åäöéáąćęłńśóźż");
 
         when:
-            def email = emailProvider.get();
+            String email = emailProvider.get();
 
         then:
             email == "aaoeaacelnsozz.aaoeaacelnsozz@mail.com"

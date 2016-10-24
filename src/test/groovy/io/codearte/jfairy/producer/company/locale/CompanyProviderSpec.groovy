@@ -10,9 +10,9 @@ import static io.codearte.jfairy.producer.company.CompanyProvider.*
 
 class CompanyProviderSpec extends Specification {
 
-    def baseProducer = Mock(BaseProducer)
-    def dataMaster = Mock(DataMaster)
-    def vatIdentificationNumberProvider = Mock(VATIdentificationNumberProvider)
+    BaseProducer baseProducer = Mock(BaseProducer)
+    DataMaster dataMaster = Mock(DataMaster)
+    VATIdentificationNumberProvider vatIdentificationNumberProvider = Mock(VATIdentificationNumberProvider)
 
     def "should generate should remove slashes in company email"() {
         given:
@@ -20,11 +20,10 @@ class CompanyProviderSpec extends Specification {
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
             dataMaster.getRandomValue(COMPANY_NAME) >> "mercedes/bosch"
             dataMaster.getRandomValue(DOMAIN) >> "com"
-
-        def companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+            CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
         when:
-            def email = companyProvider.get().email();
+            String email = companyProvider.get().email();
 
         then:
             email == "info@mercedesbosch.com"
@@ -37,11 +36,10 @@ class CompanyProviderSpec extends Specification {
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
             dataMaster.getRandomValue(COMPANY_NAME) >> "GOOGLE"
             dataMaster.getRandomValue(DOMAIN) >> "com"
-
-        def companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+            CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
         when:
-            def email = companyProvider.get().email();
+            String email = companyProvider.get().email();
 
         then:
             email == "info@google.com"
@@ -54,11 +52,10 @@ class CompanyProviderSpec extends Specification {
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
             dataMaster.getRandomValue(COMPANY_NAME) >> "company inc."
             dataMaster.getRandomValue(DOMAIN) >> "com"
-
-        def companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+            CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
         when:
-            def email = companyProvider.get().email();
+            String email = companyProvider.get().email();
 
         then:
             email == "info@companyinc.com"
@@ -70,11 +67,10 @@ class CompanyProviderSpec extends Specification {
             dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
             dataMaster.getRandomValue(COMPANY_NAME) >> "åäöéáąćęłńśóźż"
             dataMaster.getRandomValue(DOMAIN) >> "com"
-
-        def companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+            CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
         when:
-            def email = companyProvider.get().email();
+            String email = companyProvider.get().email();
 
         then:
             email == "info@aaoeaacelnsozz.com"

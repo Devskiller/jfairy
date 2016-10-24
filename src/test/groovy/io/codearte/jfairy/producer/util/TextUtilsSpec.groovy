@@ -8,7 +8,7 @@ class TextUtilsSpec extends Specification {
 		given:
 			ArrayList<String> input = Arrays.asList("abc", "def", "ghi")
 		when:
-			def output = TextUtils.joinWithSpace(input)
+			String output = TextUtils.joinWithSpace(input)
 		then:
 			output == "abc def ghi"
 	}
@@ -17,7 +17,7 @@ class TextUtilsSpec extends Specification {
 		given:
 			String input = "Zażółć gęślą jaźń"
 		when:
-			def output = TextUtils.stripAccents(input)
+			String output = TextUtils.stripAccents(input)
 		then:
 			output == "Zazolc gesla jazn"
 	}
