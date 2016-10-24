@@ -8,18 +8,18 @@ import static org.apache.commons.lang3.StringUtils.lowerCase;
 
 public class CompanyEmailProvider implements Provider<String> {
 
-    private final String firstName;
-    private final String lastName;
-    private final Company company;
+	private final String firstName;
+	private final String lastName;
+	private final Company company;
 
-    public CompanyEmailProvider(String firstName, String lastName, Company company) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.company = company;
-    }
+	public CompanyEmailProvider(String firstName, String lastName, Company company) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.company = company;
+	}
 
-    @Override
-    public String get() {
-        return TextUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain())).replaceAll(" ", ".");
-    }
+	@Override
+	public String get() {
+		return TextUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain())).replaceAll(" ", ".");
+	}
 }

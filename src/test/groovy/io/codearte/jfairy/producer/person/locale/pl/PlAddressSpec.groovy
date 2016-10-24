@@ -27,10 +27,10 @@ class PlAddressSpec extends Specification {
 			address.streetNumber() == "11"
 	}
 
-    def "should generate random apartmentNumber"() {
-        expect:
-            address.apartmentNumber() == ""
-    }
+	def "should generate random apartmentNumber"() {
+		expect:
+			address.apartmentNumber() == ""
+	}
 
 	def "should generate random postalCode"() {
 		expect:
@@ -39,7 +39,7 @@ class PlAddressSpec extends Specification {
 
 	def "should generate random city"() {
 		expect:
-		    address.getCity() == "Cedzyna"
+			address.getCity() == "Cedzyna"
 	}
 
 	def "should return addressLine1 in pl locale format"() {

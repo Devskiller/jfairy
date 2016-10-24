@@ -27,10 +27,10 @@ class EnAddressSpec extends Specification {
 			address.streetNumber() == "11"
 	}
 
-    def "should generate random apartmentNumber"() {
-        expect:
-            address.apartmentNumber() == "313"
-    }
+	def "should generate random apartmentNumber"() {
+		expect:
+			address.apartmentNumber() == "313"
+	}
 
 	def "should generate random postalCode"() {
 		expect:
@@ -39,7 +39,7 @@ class EnAddressSpec extends Specification {
 
 	def "should generate random city"() {
 		expect:
-		    address.getCity() == "San Francisco"
+			address.getCity() == "San Francisco"
 	}
 
 	def "should return addressLine1 in en locale format"() {
