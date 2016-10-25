@@ -9,8 +9,8 @@ import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR
 class SvAddressSpec extends Specification {
 
 	private final int SEED = 7
-	def Fairy fairy;
-	def Address address
+	Fairy fairy;
+	Address address
 
 	def setup() {
 		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("SV")).build()
@@ -19,12 +19,12 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Götgatan"
+			address.street() == "Trångsund"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "73"
+			address.streetNumber() == "123"
 	}
 
 	def "should generate random apartmentNumber"() {
@@ -34,27 +34,27 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "528 66"
+			address.getPostalCode() == "152 86"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.getCity() == "Kristianstad"
+			address.getCity() == "Mölndal"
 	}
 
 	def "should return addressLine1 in sv locale format"() {
 		expect:
-			address.getAddressLine1() == "Götgatan 73"
+			address.getAddressLine1() == "Trångsund 123"
 	}
 
 	def "should return addressLine2 in sv locale format"() {
 		expect:
-			address.getAddressLine2() == "528 66 Kristianstad"
+			address.getAddressLine2() == "152 86 Mölndal"
 	}
 
 	def "should return address in sv locale format"() {
 		expect:
-			address.toString() == "Götgatan 73" + LINE_SEPARATOR + "528 66 Kristianstad"
+			address.toString() == "Trångsund 123" + LINE_SEPARATOR + "152 86 Mölndal"
 	}
 
 }

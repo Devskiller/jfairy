@@ -4,6 +4,7 @@ import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
+import io.codearte.jfairy.producer.util.TextUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -35,7 +36,7 @@ public class CompanyProvider implements Provider<Company> {
 		if (baseProducer.trueOrFalse()) {
 			name += " " + dataMaster.getRandomValue(COMPANY_SUFFIX);
 		}
-		String domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
+		String domain = TextUtils.stripAccents(StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".").replace("/", ""))
 				+ "." + dataMaster.getRandomValue(DOMAIN);
 		String email = dataMaster.getRandomValue(COMPANY_EMAIL);
 

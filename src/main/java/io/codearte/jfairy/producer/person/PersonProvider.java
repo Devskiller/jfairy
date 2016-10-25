@@ -9,7 +9,6 @@ import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyProvider;
-import io.codearte.jfairy.producer.util.CharConverter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 
@@ -44,7 +43,6 @@ public class PersonProvider implements Provider<Person> {
 	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final AddressProvider addressProvider;
 	private final CompanyProvider companyProvider;
-	private final CharConverter charConverter;
 	private final TimeProvider timeProvider;
 	private final PassportNumberProvider passportNumberProvider;
 
@@ -57,7 +55,6 @@ public class PersonProvider implements Provider<Person> {
 						  AddressProvider addressProvider,
 						  CompanyProvider companyProvider,
 						  PassportNumberProvider passportNumberProvider,
-						  CharConverter charConverter,
 						  TimeProvider timeProvider,
 						  @Assisted PersonProperties.PersonProperty... personProperties) {
 
@@ -69,7 +66,6 @@ public class PersonProvider implements Provider<Person> {
 		this.addressProvider = addressProvider;
 		this.passportNumberProvider = passportNumberProvider;
 		this.companyProvider = companyProvider;
-		this.charConverter = charConverter;
 		this.timeProvider = timeProvider;
 
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
@@ -104,7 +100,7 @@ public class PersonProvider implements Provider<Person> {
 		if (dateOfBirth == null) {
 			dateOfBirth = generateDateOfBirth();
 		}
-		String companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
+		String companyEmail = generateCompanyEmail(firstName, lastName, company);
 		// FIXME: Replace this with baseProducer
 		String password = RandomStringUtils.randomAlphanumeric(8);
 
@@ -112,6 +108,10 @@ public class PersonProvider implements Provider<Person> {
 				username, password, sex, telephoneNumber, dateOfBirth, age,
 				nationalIdentityCardNumberProvider.get(), nationalIdentificationNumber(), passportNumberProvider.get(),
 				company, companyEmail);
+	}
+
+	private String generateCompanyEmail(String firstName, String lastName, Company company) {
+		return new CompanyEmailProvider(firstName, lastName, company).get();
 	}
 
 	private DateTime generateDateOfBirth() {
@@ -131,14 +131,8 @@ public class PersonProvider implements Provider<Person> {
 	}
 
 	private String generateEmail(String firstName, String lastName) {
-		String temp = "";
-		if (randomBoolean()) {
-			temp = firstName;
-			if (randomBoolean()) {
-				temp += ".";
-			}
-		}
-		return charConverter.romanize(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
+		EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, firstName, lastName);
+		return emailProvider.get();
 	}
 
 	public void setSex(Person.Sex sex) {
