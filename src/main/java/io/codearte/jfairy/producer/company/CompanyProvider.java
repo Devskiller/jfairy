@@ -5,6 +5,7 @@ import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
+import io.codearte.jfairy.producer.util.TextUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
@@ -51,8 +52,8 @@ public class CompanyProvider implements Provider<Company> {
 			}
 		}
 		if (domain == null) {
-			domain = StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".")
-					+ "." + dataMaster.getRandomValue(DOMAIN);
+            domain = TextUtils.stripAccents(StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".").replace("/", ""))
+                    + "." + dataMaster.getRandomValue(DOMAIN);
 		}
 
 		if (email == null) {

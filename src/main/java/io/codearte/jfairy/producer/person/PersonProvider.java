@@ -10,7 +10,6 @@ import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import io.codearte.jfairy.producer.company.CompanyProvider;
-import io.codearte.jfairy.producer.util.CharConverter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
@@ -58,7 +57,6 @@ public class PersonProvider implements Provider<Person> {
 	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final AddressProvider addressProvider;
 	private final CompanyFactory companyFactory;
-	private final CharConverter charConverter;
 	private final TimeProvider timeProvider;
 	private final PassportNumberProvider passportNumberProvider;
 
@@ -71,7 +69,6 @@ public class PersonProvider implements Provider<Person> {
 						  AddressProvider addressProvider,
 						  CompanyFactory companyFactory,
 						  PassportNumberProvider passportNumberProvider,
-						  CharConverter charConverter,
 						  TimeProvider timeProvider,
 						  @Assisted PersonProperties.PersonProperty... personProperties) {
 
@@ -83,7 +80,6 @@ public class PersonProvider implements Provider<Person> {
 		this.addressProvider = addressProvider;
 		this.passportNumberProvider = passportNumberProvider;
 		this.companyFactory = companyFactory;
-		this.charConverter = charConverter;
 		this.timeProvider = timeProvider;
 
 		for (PersonProperties.PersonProperty personProperty : personProperties) {
@@ -137,7 +133,7 @@ public class PersonProvider implements Provider<Person> {
 		}
 
 		if (companyEmail == null) {
-			companyEmail = stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain()));
+			companyEmail = generateCompanyEmail(firstName, lastName, company);
 		}
 		if (password == null) {
 			// FIXME: Replace this with baseProducer
@@ -163,6 +159,10 @@ public class PersonProvider implements Provider<Person> {
 				company, companyEmail);
 	}
 
+	private String generateCompanyEmail(String firstName, String lastName, Company company) {
+		return new CompanyEmailProvider(firstName, lastName, company).get();
+	}
+
 	private DateTime generateDateOfBirth() {
 		DateTime maxDate = timeProvider.getCurrentDate().minusYears(age);
 		DateTime minDate = maxDate.minusYears(1).plusDays(1);
@@ -180,14 +180,8 @@ public class PersonProvider implements Provider<Person> {
 	}
 
 	private String generateEmail(String firstName, String lastName) {
-		String temp = "";
-		if (randomBoolean()) {
-			temp = firstName;
-			if (randomBoolean()) {
-				temp += ".";
-			}
-		}
-		return charConverter.romanize(lowerCase(temp + lastName + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
+		EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, firstName, lastName);
+		return emailProvider.get();
 	}
 
 	public void telephoneNumberFormat(String telephoneFormat) {
