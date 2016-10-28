@@ -9,7 +9,6 @@ import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyFactory;
-import io.codearte.jfairy.producer.company.CompanyProvider;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Years;
@@ -90,110 +89,161 @@ public class PersonProvider implements Provider<Person> {
 	@Override
 	public Person get() {
 
-		if (sex == null) {
-			sex = randomBoolean() ? Person.Sex.MALE : Person.Sex.FEMALE;
-		}
+		generateSex();
+		generateCompany();
+		generateFirstName();
+		generateMiddleName();
+		generateLastName();
+		generateEmail();
+		generateUsername();
+		generateTelephoneNumber();
+		generateAge();
+		generateDateOfBirth();
+		generateCompanyEmail();
+		generatePassword();
+		generateNationalIdentityCardNumber();
+		generateNationalIdentificationNumber();
+		generatePassportNumber();
+		generateAddress();
 
-		//fixme - should be created only if needed
-		if (company == null) {
-			company = companyFactory.produceCompany().get();
-		}
-
-		if (firstName == null) {
-			firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
-		}
-		if (middleName == null) {
-			middleName = randomBoolean() ? dataMaster.getValuesOfType(FIRST_NAME, sex.name()) : "";
-		}
-		if (lastName == null) {
-			lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name());
-		}
-		if (email == null) {
-			email = generateEmail(firstName, lastName);
-		}
-		if (username == null) {
-			username = generateUsername(firstName, lastName);
-		}
-
-		if (telephoneNumber == null) {
-			if (telephoneNumberFormat == null) {
-				telephoneNumberFormat = dataMaster.getRandomValue(TELEPHONE_NUMBER_FORMATS);
-			}
-			telephoneNumber = baseProducer.numerify(telephoneNumberFormat);
-		}
-
-		if (dateOfBirth != null) {
-			age = Years.yearsBetween(dateOfBirth, DateTime.now()).getYears();
-		}
-		if (age == null) {
-			age = baseProducer.randomBetween(MIN_AGE, MAX_AGE);
-		}
-		if (dateOfBirth == null) {
-			dateOfBirth = generateDateOfBirth();
-		}
-
-		if (companyEmail == null) {
-			companyEmail = generateCompanyEmail(firstName, lastName, company);
-		}
-		if (password == null) {
-			// FIXME: Replace this with baseProducer
-			password = RandomStringUtils.randomAlphanumeric(8);
-		}
-
-		if (nationalIdentityCardNumber == null) {
-			nationalIdentityCardNumber = nationalIdentityCardNumberProvider.get();
-		}
-
-		if (nationalIdentificationNumber == null) {
-			nationalIdentificationNumber = nationalIdentificationNumber();
-		}
-		if (address == null) {
-			address = addressProvider.get();
-		}
-		if (passportNumber == null) {
-			passportNumber = passportNumberProvider.get();
-		}
 		return new Person(firstName, middleName, lastName, address, email,
 				username, password, sex, telephoneNumber, dateOfBirth, age,
 				nationalIdentityCardNumber, nationalIdentificationNumber, passportNumber,
 				company, companyEmail);
 	}
 
-	private String generateCompanyEmail(String firstName, String lastName, Company company) {
-		return new CompanyEmailProvider(firstName, lastName, company).get();
+	private void generateSex() {
+		if (sex != null) {
+			return;
+		}
+		sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
 	}
 
-	private DateTime generateDateOfBirth() {
+	private void generateCompany() {
+		if (company != null) {
+			return;
+		}
+		company = companyFactory.produceCompany().get();
+	}
+
+	private void generateFirstName() {
+		if (firstName != null) {
+			return;
+		}
+		firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
+	}
+
+	private void generateMiddleName() {
+		if (middleName != null) {
+			return;
+		}
+		middleName = baseProducer.trueOrFalse() ? dataMaster.getValuesOfType(FIRST_NAME, sex.name()) : "";
+	}
+
+	private void generateLastName() {
+		if (lastName != null) {
+			return;
+		}
+		lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name());
+	}
+
+	private void generateEmail() {
+		if (email != null) {
+			return;
+		}
+		EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, firstName, lastName);
+		email = emailProvider.get();
+	}
+
+	private void generateUsername() {
+		if (username != null) {
+			return;
+		}
+		if (baseProducer.trueOrFalse()) {
+			username = lowerCase(stripAccents(firstName.substring(0, 1) + lastName));
+		} else {
+			username = lowerCase(stripAccents(firstName + lastName.substring(0, 1)));
+		}
+	}
+
+	private void generateTelephoneNumber() {
+		if (telephoneNumber != null) {
+			return;
+		}
+		if (telephoneNumberFormat == null) {
+			telephoneNumberFormat = dataMaster.getRandomValue(TELEPHONE_NUMBER_FORMATS);
+		}
+		telephoneNumber = baseProducer.numerify(telephoneNumberFormat);
+	}
+
+	private void generateAge() {
+		if (dateOfBirth != null) {
+			age = Years.yearsBetween(dateOfBirth, DateTime.now()).getYears();
+		} else {
+			if (age != null) {
+				return;
+			}
+			age = baseProducer.randomBetween(MIN_AGE, MAX_AGE);
+		}
+	}
+
+	private void generateDateOfBirth() {
+		if (dateOfBirth != null) {
+			return;
+		}
 		DateTime maxDate = timeProvider.getCurrentDate().minusYears(age);
 		DateTime minDate = maxDate.minusYears(1).plusDays(1);
-		return dateProducer.randomDateBetweenTwoDates(minDate, maxDate);
+		dateOfBirth = dateProducer.randomDateBetweenTwoDates(minDate, maxDate);
 	}
 
-	private boolean randomBoolean() {
-		return baseProducer.trueOrFalse();
+	private void generateCompanyEmail() {
+		if (companyEmail != null) {
+			return;
+		}
+		CompanyEmailProvider companyEmailProvider = new CompanyEmailProvider(firstName, lastName, company);
+		companyEmail = companyEmailProvider.get();
 	}
 
-	private String nationalIdentificationNumber() {
-		return nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
+	private void generatePassword() {
+		if (password != null) {
+			return;
+		}
+		// FIXME: Replace this with baseProducer
+		password = RandomStringUtils.randomAlphanumeric(8);
+	}
+
+	private void generateNationalIdentityCardNumber() {
+		if (nationalIdentityCardNumber != null) {
+			return;
+		}
+		nationalIdentityCardNumber = nationalIdentityCardNumberProvider.get();
+	}
+
+	private void generateNationalIdentificationNumber() {
+		if (nationalIdentificationNumber != null) {
+			return;
+		}
+		nationalIdentificationNumber = nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
 				NationalIdentificationNumberProperties.dateOfBirth(dateOfBirth),
 				NationalIdentificationNumberProperties.sex(sex)).get().getValue();
 	}
 
-	private String generateEmail(String firstName, String lastName) {
-		EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, firstName, lastName);
-		return emailProvider.get();
-	}
-
-	public void telephoneNumberFormat(String telephoneFormat) {
-		telephoneNumberFormat = telephoneFormat;
-	}
-
-	private String generateUsername(String firstName, String lastName) {
-		if (randomBoolean()) {
-			return lowerCase(stripAccents(firstName.substring(0, 1) + lastName));
-		} else {
-			return lowerCase(stripAccents(firstName + lastName.substring(0, 1)));
+	private void generateAddress() {
+		if (address != null) {
+			return;
 		}
+		address = addressProvider.get();
+	}
+
+	private void generatePassportNumber() {
+		if (passportNumber != null) {
+			return;
+		}
+		passportNumber = passportNumberProvider.get();
+	}
+
+	public void setTelephoneNumberFormat(String telephoneFormat) {
+		telephoneNumberFormat = telephoneFormat;
 	}
 
 	public void setSex(Person.Sex sex) {
