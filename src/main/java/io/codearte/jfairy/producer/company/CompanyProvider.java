@@ -45,27 +45,46 @@ public class CompanyProvider implements Provider<Company> {
 	@Override
 	public Company get() {
 
-		if (name == null) {
-			name = dataMaster.getRandomValue(COMPANY_NAME);
-			if (baseProducer.trueOrFalse()) {
-				name += " " + dataMaster.getRandomValue(COMPANY_SUFFIX);
-			}
-		}
-		if (domain == null) {
-            domain = TextUtils.stripAccents(StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".").replace("/", ""))
-                    + "." + dataMaster.getRandomValue(DOMAIN);
-		}
-
-		if (email == null) {
-			email = dataMaster.getRandomValue(COMPANY_EMAIL);
-		}
-
-		if (vatIdentificationNumber == null) {
-			vatIdentificationNumber = vatIdentificationNumberProvider.get();
-		}
+		generateName();
+		generateDomain();
+		generateEmail();
+		generateVatIdentificationNumber();
 
 		return new Company(name, domain, email, vatIdentificationNumber);
 	}
+
+	private void generateName() {
+		if (name != null) {
+			return;
+		}
+		name = dataMaster.getRandomValue(COMPANY_NAME);
+		if (baseProducer.trueOrFalse()) {
+			name += " " + dataMaster.getRandomValue(COMPANY_SUFFIX);
+		}
+	}
+
+	private void generateDomain() {
+		if (domain != null) {
+			return;
+		}
+		domain = TextUtils.stripAccents(StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".").replace("/", ""))
+				+ "." + dataMaster.getRandomValue(DOMAIN);
+	}
+
+	private void generateEmail() {
+		if (email != null) {
+			return;
+		}
+		email = dataMaster.getRandomValue(COMPANY_EMAIL);
+	}
+
+	private void generateVatIdentificationNumber() {
+		if (vatIdentificationNumber != null) {
+			return;
+		}
+		vatIdentificationNumber = vatIdentificationNumberProvider.get();
+	}
+
 
 	public void setName(String name) {
 		this.name = name;
