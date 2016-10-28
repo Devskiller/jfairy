@@ -14,17 +14,17 @@ class SvAddressSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("SV")).build()
-		address = fairy.person().getAddress()
+		address = fairy.person().address
 	}
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Trångsund"
+			address.street() == "Björngårdsgatan"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "123"
+			address.streetNumber() == "79"
 	}
 
 	def "should generate random apartmentNumber"() {
@@ -34,27 +34,27 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "152 86"
+			address.postalCode == "286 64"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.getCity() == "Mölndal"
+			address.city == "Södertälje"
 	}
 
 	def "should return addressLine1 in sv locale format"() {
 		expect:
-			address.getAddressLine1() == "Trångsund 123"
+			address.addressLine1 == "Björngårdsgatan 79"
 	}
 
 	def "should return addressLine2 in sv locale format"() {
 		expect:
-			address.getAddressLine2() == "152 86 Mölndal"
+			address.addressLine2 == "286 64 Södertälje"
 	}
 
 	def "should return address in sv locale format"() {
 		expect:
-			address.toString() == "Trångsund 123" + LINE_SEPARATOR + "152 86 Mölndal"
+			address.toString() == "Björngårdsgatan 79" + LINE_SEPARATOR + "286 64 Södertälje"
 	}
 
 }

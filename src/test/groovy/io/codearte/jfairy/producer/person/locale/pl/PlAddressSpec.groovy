@@ -14,17 +14,17 @@ class PlAddressSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("PL")).build()
-		address = fairy.person().getAddress()
+		address = fairy.person().address
 	}
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Szulborska"
+			address.street() == "Kwarciana"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "11"
+			address.streetNumber() == "92"
 	}
 
 	def "should generate random apartmentNumber"() {
@@ -34,27 +34,27 @@ class PlAddressSpec extends Specification {
 
 	def "should generate random postalCode"() {
 		expect:
-			address.getPostalCode() == "91-528"
+			address.postalCode == "64-503"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.getCity() == "Cedzyna"
+		    address.city == "Milicz"
 	}
 
 	def "should return addressLine1 in pl locale format"() {
 		expect:
-			address.getAddressLine1() == "Szulborska 11"
+			address.addressLine1 == "Kwarciana 92"
 	}
 
 	def "should return addressLine2 in pl locale format"() {
 		expect:
-			address.getAddressLine2() == "91-528 Cedzyna"
+			address.addressLine2 == "64-503 Milicz"
 	}
 
 	def "should return address in pl locale format"() {
 		expect:
-			address.toString() == "Szulborska 11" + LINE_SEPARATOR + "91-528 Cedzyna"
+			address.toString() == "Kwarciana 92" + LINE_SEPARATOR + "64-503 Milicz"
 	}
 
 }
