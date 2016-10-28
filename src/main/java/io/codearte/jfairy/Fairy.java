@@ -10,6 +10,7 @@ import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyFactory;
+import io.codearte.jfairy.producer.company.CompanyProperties;
 import io.codearte.jfairy.producer.net.NetworkProducer;
 import io.codearte.jfairy.producer.payment.CreditCard;
 import io.codearte.jfairy.producer.payment.CreditCardProvider;
@@ -33,7 +34,7 @@ public final class Fairy {
 
 	@Inject
 	Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
-	      BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider, CompanyFactory companyFactory) {
+		  BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider, CompanyFactory companyFactory) {
 		this.textProducer = textProducer;
 		this.personFactory = personFactory;
 		this.networkProducer = networkProducer;
@@ -84,8 +85,8 @@ public final class Fairy {
 	 *
 	 * @return A {@link io.codearte.jfairy.producer.company.CompanyProvider} instance
 	 */
-	public Company company() {
-		return companyFactory.produceCompany().get();
+	public Company company(CompanyProperties.CompanyProperty... companyProperties) {
+		return companyFactory.produceCompany(companyProperties).get();
 	}
 
 	/**

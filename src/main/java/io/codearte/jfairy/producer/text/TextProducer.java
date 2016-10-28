@@ -4,6 +4,7 @@
 package io.codearte.jfairy.producer.text;
 
 import io.codearte.jfairy.producer.BaseProducer;
+import io.codearte.jfairy.producer.util.TextUtils;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

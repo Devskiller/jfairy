@@ -7,6 +7,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
+import io.codearte.jfairy.producer.util.TextUtils;
 
 import javax.inject.Inject;
 import java.util.List;
