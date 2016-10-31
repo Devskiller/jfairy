@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 class SvPersonSpec extends Specification {
 
-	Fairy fairy = Bootstrap.create(Locale.forLanguageTag("SV"))
+    private Fairy fairy = Bootstrap.create(Locale.forLanguageTag("SV"))
 
 	def setup() {
 		Bootstrap.create()

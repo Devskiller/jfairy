@@ -19,8 +19,8 @@ import static PlNationalIdentityCardNumberProvider.MAX_DIGITS_PART_VALUE
  */
 class PlNationalIdentityCardNumberProviderSpec extends Specification {
 
-	BaseProducer baseProducer = Mock(BaseProducer)
-	DateProducer dateGenerator = Mock(DateProducer)
+    private BaseProducer baseProducer = Mock(BaseProducer)
+    private DateProducer dateGenerator = Mock(DateProducer)
 
 	/**
 	 * http://en.wikipedia.org/wiki/Polish_identity_card

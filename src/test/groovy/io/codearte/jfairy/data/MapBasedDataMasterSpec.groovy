@@ -10,8 +10,8 @@ import spock.lang.Specification
 
 class MapBasedDataMasterSpec extends Specification {
 
-	BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
-	MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
+    private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
+    private MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
 
 	def setup() {
 		baseProducer.randomBetween() >> 0

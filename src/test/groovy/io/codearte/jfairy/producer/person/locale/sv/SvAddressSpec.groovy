@@ -9,8 +9,8 @@ import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR
 class SvAddressSpec extends Specification {
 
 	private final int SEED = 7
-	Fairy fairy;
-	Address address
+    private Fairy fairy;
+    private Address address
 
 	def setup() {
 		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("SV")).build()

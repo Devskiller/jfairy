@@ -14,8 +14,8 @@ import static SvNationalIdentificationNumberProvider.isValid
 
 class SvNationalIdentificationNumberProviderSpec extends Specification {
 
-	BaseProducer randomGenerator = Mock(BaseProducer)
-	DateProducer dateGenerator = Mock(DateProducer)
+	private BaseProducer randomGenerator = Mock(BaseProducer)
+	private DateProducer dateGenerator = Mock(DateProducer)
 
 	@Unroll
 	def "should validate #nationalIdentificationNumber as #valid"() {

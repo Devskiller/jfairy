@@ -6,10 +6,10 @@ import spock.lang.Specification
 
 class NetworkSpec extends Specification {
 
-	InetAddressValidator ipValidator = InetAddressValidator.getInstance();
+    private InetAddressValidator ipValidator = InetAddressValidator.getInstance();
 
-	IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new Random()));
-	NetworkProducer network = new NetworkProducer(ipNumber)
+    private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new Random()));
+    private NetworkProducer network = new NetworkProducer(ipNumber)
 
 	def "Should generate proper ip number"() {
 		String ip = network.ipAddress()

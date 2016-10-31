@@ -9,7 +9,7 @@ import spock.lang.Specification
  */
 class FairyModuleSpec extends Specification {
 
-	MapBasedDataMaster mapBasedDataMaster = Stub(MapBasedDataMaster)
+    private MapBasedDataMaster mapBasedDataMaster = Stub(MapBasedDataMaster)
 
 	def "should generate appropriate FairyModule for locale"() {
 		when:

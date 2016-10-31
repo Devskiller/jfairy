@@ -9,8 +9,8 @@ import spock.lang.Specification
  */
 class EnNationalIdentityCardNumberProviderSpec extends Specification {
 
-	Fairy fairy;
-	String nationalIdentityCardNumber
+    private Fairy fairy;
+    private String nationalIdentityCardNumber
 	private final int nationalIdentityCardNumberLength = 11
 	private final int[] partsDividedAtChars = [3, 6]
 	private int areaPartBeginningIndex = 0

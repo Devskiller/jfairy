@@ -34,8 +34,8 @@ import static io.codearte.jfairy.producer.person.PersonProperties.withUsername
 
 class PersonSpec extends Specification {
 
-	EmailValidator emailValidator = EmailValidator.getInstance()
-	Fairy fairy = Bootstrap.create()
+	private EmailValidator emailValidator = EmailValidator.getInstance()
+	private Fairy fairy = Bootstrap.create()
 
 	def setup() {
 		Bootstrap.create()

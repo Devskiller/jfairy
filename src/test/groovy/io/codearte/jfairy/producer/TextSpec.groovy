@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class TextSpec extends Specification {
 
-	TextProducer text;
+    private TextProducer text;
 
 	def setup() {
 		text = Fairy.create().textProducer()
