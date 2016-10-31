@@ -67,7 +67,7 @@ public final class PersonProperties {
 		return new PersonProperty() {
 			@Override
 			public void apply(PersonProvider person, BaseProducer baseProducer) {
-				person.telephoneNumberFormat(telephoneFormat);
+				person.setTelephoneNumberFormat(telephoneFormat);
 			}
 		};
 	}
