@@ -15,7 +15,7 @@ import static PlNationalIdentificationNumberProvider.isValid
 class PlNationalIdentificationNumberSpec extends Specification {
 
 	private BaseProducer randomGenerator = Mock(BaseProducer)
-	private DateProducer dateGenerator = Mock(DateProducer)
+	private DateProducer dateGenerator = Mock()
 
 	@Unroll
 	def "should validate #nationalIdentificationNumber as #valid"() {

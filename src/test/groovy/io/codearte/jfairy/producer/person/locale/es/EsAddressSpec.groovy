@@ -9,8 +9,8 @@ import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR
 class EsAddressSpec extends Specification {
 
 	private final int SEED = 7
-    private Fairy fairy;
-    private Address address
+	private Fairy fairy;
+	private Address address
 
 	def setup() {
 		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("ES")).build()

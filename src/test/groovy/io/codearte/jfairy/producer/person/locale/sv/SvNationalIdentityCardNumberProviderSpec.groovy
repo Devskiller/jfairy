@@ -5,8 +5,8 @@ import spock.lang.Specification
 
 class SvNationalIdentityCardNumberProviderSpec extends Specification {
 
-    private Fairy fairy;
-    private String nationalIdentityCardNumber
+	private Fairy fairy;
+	private String nationalIdentityCardNumber
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("sv"))

@@ -17,10 +17,10 @@ import static io.codearte.jfairy.producer.company.CompanyProperties.CompanyPrope
  */
 class CompanySpec extends Specification {
 
-    private EmailValidator emailValidator = EmailValidator.getInstance();
-    private UrlValidator urlValidator = UrlValidator.getInstance();
-    private DomainValidator domainValidator = DomainValidator.getInstance();
-    private Fairy fairy = Bootstrap.create();
+	private EmailValidator emailValidator = EmailValidator.getInstance();
+	private UrlValidator urlValidator = UrlValidator.getInstance();
+	private DomainValidator domainValidator = DomainValidator.getInstance();
+	private Fairy fairy = Bootstrap.create();
 
 	def "should instantiate Company producer"() {
 		when:

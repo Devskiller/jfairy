@@ -13,8 +13,8 @@ import spock.lang.Specification
  */
 class EsNationalIdentityCardNumberProviderSpec extends Specification {
 
-    private Fairy fairy;
-    private String esNationalIdentityCardNumber
+	private Fairy fairy;
+	private String esNationalIdentityCardNumber
 	private final int dniLength = 10
 	private final int hyphenPos = 8
 
