@@ -55,10 +55,7 @@ class PersonSpec extends Specification {
 			"${person.firstName} ${person.lastName}" == person.fullName
 	}
 
-	@Ignore
 	def "second generated name should be different"() {
-		setup:
-			Fairy fairy = fairy
 		expect:
 			fairy.person().firstName != fairy.person().firstName
 	}
