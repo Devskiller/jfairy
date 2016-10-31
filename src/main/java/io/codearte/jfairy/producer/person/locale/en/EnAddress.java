@@ -25,15 +25,15 @@ public class EnAddress implements Address {
 		this.postalCode = postalCode;
 	}
 
-	public String streetNumber() {
+	public String getStreetNumber() {
 		return streetNumber;
 	}
 
-	public String street() {
+	public String getStreet() {
 		return street;
 	}
 
-	public String apartmentNumber() {
+	public String getApartmentNumber() {
 		return apartmentNumber;
 	}
 

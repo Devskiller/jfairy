@@ -19,17 +19,17 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Björngårdsgatan"
+			address.street == "Björngårdsgatan"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "79"
+			address.streetNumber == "79"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber() == ""
+			address.apartmentNumber == ""
 	}
 
 	def "should generate random postalCode"() {

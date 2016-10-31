@@ -19,17 +19,17 @@ class EsAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Vieja"
+			address.street == "Vieja"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "39"
+			address.streetNumber == "39"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber() == "327"
+			address.apartmentNumber == "327"
 	}
 
 	def "should generate random postalCode"() {

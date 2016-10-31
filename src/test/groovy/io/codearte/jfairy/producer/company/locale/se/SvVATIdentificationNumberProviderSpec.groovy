@@ -14,7 +14,7 @@ class SvVATIdentificationNumberProviderSpec extends Specification {
 
 	def setup() {
 		fairy = Fairy.create(Locale.forLanguageTag("sv"))
-		vatIdentificationNumber = fairy.company().vatIdentificationNumber()
+		vatIdentificationNumber = fairy.company().vatIdentificationNumber
 	}
 
 

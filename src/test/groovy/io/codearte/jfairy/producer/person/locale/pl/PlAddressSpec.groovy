@@ -19,18 +19,18 @@ class PlAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street() == "Kwarciana"
+			address.street == "Kwarciana"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber() == "92"
+			address.streetNumber == "92"
 	}
 
-	def "should generate random apartmentNumber"() {
-		expect:
-			address.apartmentNumber() == ""
-	}
+    def "should generate random apartmentNumber"() {
+        expect:
+            address.apartmentNumber == ""
+    }
 
 	def "should generate random postalCode"() {
 		expect:

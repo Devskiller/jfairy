@@ -2,11 +2,11 @@ package io.codearte.jfairy.producer.person;
 
 public interface Address {
 
-	String street();
+	String getStreet();
 
-	String streetNumber();
+	String getStreetNumber();
 
-	String apartmentNumber();
+	String getApartmentNumber();
 
 	String getPostalCode();
 

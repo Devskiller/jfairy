@@ -23,7 +23,7 @@ class CompanyProviderSpec extends Specification {
 			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
-			String email = companyProvider.get().email();
+			String email = companyProvider.get().email;
 
 		then:
 			email == "info@mercedesbosch.com"
@@ -39,7 +39,7 @@ class CompanyProviderSpec extends Specification {
 			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
-			String email = companyProvider.get().email();
+			String email = companyProvider.get().email;
 
 		then:
 			email == "info@google.com"
@@ -55,7 +55,7 @@ class CompanyProviderSpec extends Specification {
 			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
-			String email = companyProvider.get().email();
+			String email = companyProvider.get().email;
 
 		then:
 			email == "info@companyinc.com"
@@ -70,7 +70,7 @@ class CompanyProviderSpec extends Specification {
 			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
-			String email = companyProvider.get().email();
+			String email = companyProvider.get().email;
 
 		then:
 			email == "info@aaoeaacelnsozz.com"

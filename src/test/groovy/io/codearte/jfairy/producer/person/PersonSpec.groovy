@@ -52,7 +52,7 @@ class PersonSpec extends Specification {
 		when:
 			def person = fairy.person()
 		then:
-			"${person.firstName()} ${person.lastName()}" == person.fullName()
+			"${person.firstName} ${person.lastName}" == person.fullName
 	}
 
 	@Ignore
@@ -60,65 +60,65 @@ class PersonSpec extends Specification {
 		setup:
 			def fairy = fairy
 		expect:
-			fairy.person().firstName() != fairy.person().firstName()
+			fairy.person().firstName != fairy.person().firstName
 	}
 
 	def "should be sure that data exists"() {
 		when:
 			def person = fairy.person()
 		then:
-			person.firstName()
-			person.lastName()
-			person.fullName()
-			person.email()
-			person.isMale() || person.isFemale()
-			person.nationalIdentityCardNumber()
+			person.firstName
+			person.lastName
+			person.fullName
+			person.email
+			person.male || person.female
+			person.nationalIdentityCardNumber
 			person.address
 
-			emailValidator.isValid(person.email())
+			emailValidator.isValid(person.email)
 	}
 
 	def "should create female"() {
 		when:
 			def person = fairy.person(female())
 		then:
-			person.isFemale()
+			person.female
 	}
 
 	def "should create male"() {
 		when:
 			def person = fairy.person(male())
 		then:
-			person.isMale()
+			person.male
 	}
 
 	def "should create person younger than 3 years"() {
 		when:
 			def person = fairy.person(maxAge(3))
 		then:
-			person.age() <= 3
+			person.age <= 3
 	}
 
 	def "should create person older than 98 years"() {
 		when:
 			def person = fairy.person(minAge(99))
 		then:
-			person.age() > 98
+			person.age > 98
 	}
 
 	def "should create person older than 10 years and younger than 10 years"() {
 		when:
 			Person person = fairy.person(minAge(10), maxAge(10))
 		then:
-			person.age() == 10
+			person.age == 10
 	}
 
 	def "birth date and age should be related"() {
 		when:
 			def person = fairy.person(ageBetween(32, 32))
 		then:
-			person.age() == 32
-			def period = new Period(person.dateOfBirth().millis, DateTime.now().millis)
+			person.age == 32
+			def period = new Period(person.dateOfBirth.millis, DateTime.now().millis)
 			period.years == 32
 	}
 
@@ -126,28 +126,28 @@ class PersonSpec extends Specification {
 		when:
 			def person = fairy.person()
 		then:
-			person.telephoneNumber()
+			person.telephoneNumber
 	}
 
 	def "should create telephone number in defined format"() {
 		when:
 			def person = fairy.person(telephoneFormat("###--###"))
 		then:
-			person.telephoneNumber() ==~ /\d\d\d--\d\d\d/
+			person.telephoneNumber ==~ /\d\d\d--\d\d\d/
 	}
 
 	def "should create birth date"() {
 		when:
 			def person = fairy.person()
 		then:
-			person.dateOfBirth().isBefore(DateTime.now())
+			person.dateOfBirth.isBefore(DateTime.now())
 	}
 
 	def "should create age"() {
 		when:
 			def person = fairy.person()
 		then:
-			person.age()
+			person.age
 	}
 
 	def "should create company email"() {
@@ -158,8 +158,8 @@ class PersonSpec extends Specification {
 			def person = fairy.person()
 
 		then:
-			person.companyEmail()
-			emailValidator.isValid(person.companyEmail())
+			person.companyEmail
+			emailValidator.isValid(person.companyEmail)
 	}
 
 	def "should create address"() {
@@ -193,11 +193,11 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		when:
-			def address = person.getAddress()
+			def address = person.address
 		then:
-			address.street()
-			address.streetNumber().isNumber()
-			(address.apartmentNumber().isNumber() || address.apartmentNumber() == "")
+			address.street
+			address.streetNumber.isNumber()
+			(address.apartmentNumber.isNumber() || address.apartmentNumber == "")
 	}
 
 	def "should generate middle name only sometimes"() {
@@ -205,8 +205,8 @@ class PersonSpec extends Specification {
 			def persons = []
 			(1..100).each { persons.add(fairy.person()) }
 		when:
-			def allWithoutMiddleName = persons.findAll { p -> p.middleName().isEmpty() }
-			def allWithMiddleName = persons.findAll { p -> !p.middleName().isEmpty() }
+			def allWithoutMiddleName = persons.findAll { p -> p.middleName.isEmpty() }
+			def allWithMiddleName = persons.findAll { p -> !p.middleName.isEmpty() }
 		then:
 			allWithoutMiddleName.size() > 0
 			allWithMiddleName.size() > 0
@@ -217,8 +217,8 @@ class PersonSpec extends Specification {
 			def persons = []
 			(1..50).each { persons.add(fairy.person()) }
 		when:
-			def allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber().isEmpty() }
-			def allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber().isEmpty() }
+			def allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber.isEmpty() }
+			def allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber.isEmpty() }
 		then:
 			allWithoutApartmentNumber.size() > 0
 			allWithApartmentNumber.size() > 0
@@ -228,105 +228,105 @@ class PersonSpec extends Specification {
 		given:
 			def person = fairy.person()
 		expect:
-			person.passportNumber()
+			person.passportNumber
 	}
 
 	def "withFirstName should create person with specific first name"() {
 		when:
 			def person = fairy.person(withFirstName("Specificfirstname"))
 		then:
-			person.firstName() == "Specificfirstname"
+			person.firstName == "Specificfirstname"
 	}
 
 	def "withMiddleName should create person with specific middle name"() {
 		when:
 			def person = fairy.person(withMiddleName("Specificmiddlename"))
 		then:
-			person.middleName() == "Specificmiddlename"
+			person.middleName == "Specificmiddlename"
 	}
 
 	def "withLastName should create person with specific last name"() {
 		when:
 			def person = fairy.person(withLastName("Specificlastname"))
 		then:
-			person.lastName() == "Specificlastname"
+			person.lastName == "Specificlastname"
 	}
 
 	def "withEmail should create person with specific email"() {
 		when:
 			def person = fairy.person(withEmail("specificemail@gmail.com"))
 		then:
-			person.email() == "specificemail@gmail.com"
+			person.email == "specificemail@gmail.com"
 	}
 
 	def "withUsername should create person with specific username"() {
 		when:
 			def person = fairy.person(withUsername("specificusername"))
 		then:
-			person.username() == "specificusername"
+			person.username == "specificusername"
 	}
 
 	def "withTelephoneNumber should create person with specific telephoneNumber"() {
 		when:
 			def person = fairy.person(withTelephoneNumber("01234556789"))
 		then:
-			person.telephoneNumber() == "01234556789"
+			person.telephoneNumber == "01234556789"
 	}
 
 	def "withTelephoneNumberFormat and telephoneFormat used together should create person with specific telephoneNumber"() {
 		when:
-		def person = fairy.person(telephoneFormat("###--###"), withTelephoneNumber("01234556789"))
+			def person = fairy.person(telephoneFormat("###--###"), withTelephoneNumber("01234556789"))
 		then:
-		person.telephoneNumber() == "01234556789"
+			person.telephoneNumber == "01234556789"
 	}
 
 	def "withDateOfBirth should create person with specific date of birth"() {
 		when:
 			def person = fairy.person(withDateOfBirth(DateTime.parse("2000-01-01")))
 		then:
-			person.dateOfBirth() == DateTime.parse("2000-01-01")
+			person.dateOfBirth == DateTime.parse("2000-01-01")
 	}
 
 	def "withAge should create person with specific age"() {
 		when:
 			def person = fairy.person(withAge(0))
 		then:
-			person.age() == 0
+			person.age == 0
 	}
 
 	def "withPassword should create person with specific password"() {
 		when:
 			def person = fairy.person(withPassword("specificpassword"))
 		then:
-			person.password() == "specificpassword"
+			person.password == "specificpassword"
 	}
 
 	def "withCompanyEmail should create person with specific company email"() {
 		when:
 			def person = fairy.person(withCompanyEmail("specificcompanyemail@company.com"))
 		then:
-			person.companyEmail() == "specificcompanyemail@company.com"
+			person.companyEmail == "specificcompanyemail@company.com"
 	}
 
 	def "withNationalIdentityCardNumber should create person with specific national identity card number"() {
 		when:
 			def person = fairy.person(withNationalIdentityCardNumber("SpecificNationalIdentityCardNumber"))
 		then:
-			person.nationalIdentityCardNumber() == "SpecificNationalIdentityCardNumber"
+			person.nationalIdentityCardNumber == "SpecificNationalIdentityCardNumber"
 	}
 
 	def "withNationalIdentificationNumber should create person with specific national identification number"() {
 		when:
 			def person = fairy.person(withNationalIdentificationNumber("SpecificNationalIdentificationNumber"))
 		then:
-			person.nationalIdentificationNumber() == "SpecificNationalIdentificationNumber"
+			person.nationalIdentificationNumber == "SpecificNationalIdentificationNumber"
 	}
 
 	def "withPassportNumber should create person with specific passport number"() {
 		when:
 			def person = fairy.person(withPassportNumber("SpecificPassportNumber"))
 		then:
-			person.passportNumber() == "SpecificPassportNumber"
+			person.passportNumber == "SpecificPassportNumber"
 	}
 
 	def "withCompany should create person with specific company"() {

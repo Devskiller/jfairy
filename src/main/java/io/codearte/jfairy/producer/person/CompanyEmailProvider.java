@@ -20,6 +20,6 @@ public class CompanyEmailProvider implements Provider<String> {
 
 	@Override
 	public String get() {
-		return TextUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.domain())).replaceAll(" ", ".");
+		return TextUtils.stripAccents(lowerCase(firstName + '.' + lastName + '@' + company.getDomain())).replaceAll(" ", ".");
 	}
 }

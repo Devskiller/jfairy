@@ -32,38 +32,38 @@ class CompanySpec extends Specification {
 		when:
 			def company = fairy.company()
 		then:
-			company.name()
-			domainValidator.isValid(company.domain())
-			emailValidator.isValid(company.email())
-			urlValidator.isValid(company.url())
-			company.vatIdentificationNumber()
+			company.name
+			domainValidator.isValid(company.domain)
+			emailValidator.isValid(company.email)
+			urlValidator.isValid(company.url)
+			company.vatIdentificationNumber
 	}
 
 	def "withName should create company with specific name"() {
 		when:
 			def company = fairy.company(withName("Specific Name"))
 		then:
-			company.name() == "Specific Name"
+			company.name == "Specific Name"
 	}
 
 	def "withDomain should create company with specific domain"() {
 		when:
 			def company = fairy.company(withDomain("specificdomain.com"))
 		then:
-			company.domain() == "specificdomain.com"
+			company.domain == "specificdomain.com"
 	}
 
 	def "withEmail should create company with specific email"() {
 		when:
 			def company = fairy.company(withEmail("specificemail"))
 		then:
-			company.email().startsWith("specificemail@")
+			company.email.startsWith("specificemail@")
 	}
 
 	def "withVatIdentificationNumber should create company with specific vat identification number"() {
 		when:
 			def company = fairy.company(withVatIdentificationNumber("specificvatidentificationnumber"))
 		then:
-			company.vatIdentificationNumber() == "specificvatidentificationnumber"
+			company.vatIdentificationNumber == "specificvatidentificationnumber"
 	}
 }

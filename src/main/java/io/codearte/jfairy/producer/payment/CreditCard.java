@@ -16,15 +16,15 @@ public class CreditCard {
 		this.expiryDate = expiryDate;
 	}
 
-	public String vendor() {
+	public String getVendor() {
 		return cardVendor;
 	}
 
-	public DateTime expiryDate() {
+	public DateTime getExpiryDate() {
 		return expiryDate;
 	}
 
-	public String expiryDateAsString() {
+	public String getExpiryDateAsString() {
 		return String.format("%02d/%02d", expiryDate.getMonthOfYear(), expiryDate.getYearOfCentury());
 	}
 }

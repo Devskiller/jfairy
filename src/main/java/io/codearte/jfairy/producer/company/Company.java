@@ -14,23 +14,23 @@ public class Company {
 		this.vatIdentificationNumber = vatIdentificationNumber;
 	}
 
-	public String name() {
+	public String getName() {
 		return name;
 	}
 
-	public String url() {
+	public String getUrl() {
 		return "http://www." + domain;
 	}
 
-	public String email() {
+	public String getEmail() {
 		return email + "@" + domain;
 	}
 
-	public String domain() {
+	public String getDomain() {
 		return domain;
 	}
 
-	public String vatIdentificationNumber() {
+	public String getVatIdentificationNumber() {
 		return vatIdentificationNumber;
 	}
 
