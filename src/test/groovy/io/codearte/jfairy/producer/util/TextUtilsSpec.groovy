@@ -6,7 +6,7 @@ class TextUtilsSpec extends Specification {
 
 	def "joinWithSpace should join list of strings with spaces"() {
 		given:
-			ArrayList<String> input = Arrays.asList("abc", "def", "ghi")
+			List<String> input = Arrays.asList("abc", "def", "ghi")
 		when:
 			String output = TextUtils.joinWithSpace(input)
 		then:

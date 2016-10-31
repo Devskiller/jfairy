@@ -202,11 +202,11 @@ class PersonSpec extends Specification {
 
 	def "should generate middle name only sometimes"() {
 		given:
-			ArrayList<Person> persons = []
+			List<Person> persons = []
 			(1..100).each { persons.add(fairy.person()) }
 		when:
-			ArrayList<Person> allWithoutMiddleName = persons.findAll { p -> p.middleName.isEmpty() }
-			ArrayList<Person> allWithMiddleName = persons.findAll { p -> !p.middleName.isEmpty() }
+			List<Person> allWithoutMiddleName = persons.findAll { p -> p.middleName.isEmpty() }
+			List<Person> allWithMiddleName = persons.findAll { p -> !p.middleName.isEmpty() }
 		then:
 			allWithoutMiddleName.size() > 0
 			allWithMiddleName.size() > 0
@@ -214,11 +214,11 @@ class PersonSpec extends Specification {
 
 	def "should generate apartment number only sometimes"() {
 		given:
-			ArrayList<Person> persons = []
+			List<Person> persons = []
 			(1..50).each { persons.add(fairy.person()) }
 		when:
-			ArrayList<Person> allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber.isEmpty() }
-			ArrayList<Person> allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber.isEmpty() }
+			List<Person> allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber.isEmpty() }
+			List<Person> allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber.isEmpty() }
 		then:
 			allWithoutApartmentNumber.size() > 0
 			allWithApartmentNumber.size() > 0
