@@ -9,8 +9,8 @@ import spock.lang.Specification
  */
 class EnNationalIdentityCardNumberProviderSpec extends Specification {
 
-	def Fairy fairy;
-	def String nationalIdentityCardNumber
+	Fairy fairy;
+	String nationalIdentityCardNumber
 	private final int nationalIdentityCardNumberLength = 11
 	private final int[] partsDividedAtChars = [3, 6]
 	private int areaPartBeginningIndex = 0
@@ -38,9 +38,9 @@ class EnNationalIdentityCardNumberProviderSpec extends Specification {
 		given:
 			String areaPart = nationalIdentityCardNumber.substring(areaPartBeginningIndex, partsDividedAtChars[0]);
 			Integer areaNumber = Integer.parseInt(areaPart);
-			def minAreaPartNumber = 1
-			def maxAreaPartNumber = 899
-			def incorrectAreaNumber = 666
+			int minAreaPartNumber = 1
+			int maxAreaPartNumber = 899
+			int incorrectAreaNumber = 666
 
 		expect:
 			for (char digit : areaPart.toCharArray()) {
@@ -54,8 +54,8 @@ class EnNationalIdentityCardNumberProviderSpec extends Specification {
 		given:
 			String groupPart = nationalIdentityCardNumber.substring(groupPartBeginningIndex, partsDividedAtChars[1]);
 			Integer groupNumber = Integer.parseInt(groupPart);
-			def minGroupNumber = 1
-			def maxGroupNumber = 99
+			int minGroupNumber = 1
+			int maxGroupNumber = 99
 
 		expect:
 			for (char digit : groupPart.toCharArray()) {
@@ -68,8 +68,8 @@ class EnNationalIdentityCardNumberProviderSpec extends Specification {
 		given:
 			String serialPart = nationalIdentityCardNumber.substring(serialNumberBeginningIndex, nationalIdentityCardNumberLength);
 			Integer serialNumber = Integer.parseInt(serialPart);
-			def minSerialNumber = 1
-			def maxSerialNumber = 9999
+			int minSerialNumber = 1
+			int maxSerialNumber = 9999
 
 		expect:
 			for (char digit : serialPart.toCharArray()) {

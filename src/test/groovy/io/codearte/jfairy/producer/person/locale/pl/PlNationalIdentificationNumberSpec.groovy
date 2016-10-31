@@ -2,6 +2,7 @@ package io.codearte.jfairy.producer.person.locale.pl
 
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
+import io.codearte.jfairy.producer.person.NationalIdentificationNumber
 import io.codearte.jfairy.producer.person.Person
 import org.joda.time.DateTime
 import spock.lang.Specification
@@ -13,8 +14,8 @@ import static PlNationalIdentificationNumberProvider.isValid
 
 class PlNationalIdentificationNumberSpec extends Specification {
 
-	def randomGenerator = Mock(BaseProducer)
-	def dateGenerator = Mock(DateProducer)
+	BaseProducer randomGenerator = Mock(BaseProducer)
+	DateProducer dateGenerator = Mock(DateProducer)
 
 	@Unroll
 	def "should validate #nationalIdentificationNumber as #valid"() {
@@ -37,11 +38,10 @@ class PlNationalIdentificationNumberSpec extends Specification {
 	def "should generate good nationalIdentificationNumber"() {
 
 		expect:
-			def PlNationalIdentificationNumberProvider generator = new PlNationalIdentificationNumberProvider(dateGenerator, randomGenerator,
-					dateOfBirth(DateTime.parse(date)),
-					sex(Person.Sex.MALE))
+			PlNationalIdentificationNumberProvider generator = new PlNationalIdentificationNumberProvider(dateGenerator,
+                    randomGenerator, dateOfBirth(DateTime.parse(date)), sex(Person.Sex.MALE))
 
-			def nationalIdentificationNumber = generator.get()
+			NationalIdentificationNumber nationalIdentificationNumber = generator.get()
 
 			nationalIdentificationNumber.getValue().startsWith(prefix)
 			isValid(nationalIdentificationNumber.getValue())

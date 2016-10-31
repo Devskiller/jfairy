@@ -10,8 +10,8 @@ import spock.lang.Specification
 
 class MapBasedDataMasterSpec extends Specification {
 
-	def baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
-	def data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
+	BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
+	MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
 
 	def setup() {
 		baseProducer.randomBetween() >> 0
@@ -22,7 +22,7 @@ class MapBasedDataMasterSpec extends Specification {
 			DataMaster dataMaster = new MapBasedDataMaster();
 			dataMaster.readResources("jfairy_en.yml")
 
-			def firstNames = dataMaster.getStringMap(PersonProvider.FIRST_NAME)
+			Map<String, List<String>> firstNames = dataMaster.getStringMap(PersonProvider.FIRST_NAME)
 		then:
 			firstNames.size() > 0
 			firstNames.keySet().size() > 0
@@ -33,7 +33,7 @@ class MapBasedDataMasterSpec extends Specification {
 			data.getStringMap(PersonProvider.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-			def male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male");
+			String male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male");
 
 		then:
 			male == "Mark"
@@ -44,7 +44,7 @@ class MapBasedDataMasterSpec extends Specification {
 			data.getStringMap(PersonProvider.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-			def female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female");
+			String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female");
 
 		then:
 			female == "Ana" || "Ivon"

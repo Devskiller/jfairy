@@ -9,7 +9,7 @@ import spock.lang.Unroll
  */
 class EsVATIdentificationNumberProviderSpec extends Specification {
 
-	def generator = new EsVATIdentificationNumberProvider()
+	EsVATIdentificationNumberProvider generator = new EsVATIdentificationNumberProvider()
 
 	@Unroll
 	def "Should validate #vatIdentificationNumber as #valid"() {

@@ -37,7 +37,7 @@ class DateProducerSpec extends Specification {
 			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 					SOME_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-			def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
+			DateTime dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
 		then:
 			dateInThePast < CURRENT_DATE
 			dateInThePast > FIVE_YEARS_EARLIER_DATE
@@ -59,7 +59,7 @@ class DateProducerSpec extends Specification {
 			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 					FIVE_YEARS_EARLIER_DATE_IN_MILLIS
 		when:
-			def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
+			DateTime dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
 		then:
 			dateInThePast == FIVE_YEARS_EARLIER_DATE
 	}
@@ -69,7 +69,7 @@ class DateProducerSpec extends Specification {
 			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 					LATEST_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-			def dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
+			DateTime dateInThePast = sut.randomDateInThePast(MAX_YEARS_IN_THE_PAST)
 		then:
 			dateInThePast == LATEST_DATE_IN_THE_PAST
 	}
@@ -92,7 +92,7 @@ class DateProducerSpec extends Specification {
 			baseProducer.randomBetween(FIVE_YEARS_EARLIER_DATE_IN_MILLIS, LATEST_DATE_IN_THE_PAST_IN_MILLIS) >>
 					SOME_DATE_IN_THE_PAST_IN_MILLIS
 		when:
-			def dateInThePast = sut.randomDateBetweenYearAndNow(2008)
+			DateTime dateInThePast = sut.randomDateBetweenYearAndNow(2008)
 		then:
 			dateInThePast < CURRENT_DATE
 			dateInThePast > FIVE_YEARS_EARLIER_DATE
@@ -101,7 +101,7 @@ class DateProducerSpec extends Specification {
 
 	def "should generate date between now and specified period"() {
 		when:
-			def dateInFuturePeriod = sut.randomDateBetweenNowAndFuturePeriod(Period.months(12))
+			DateTime dateInFuturePeriod = sut.randomDateBetweenNowAndFuturePeriod(Period.months(12))
 		then:
 			dateInFuturePeriod >= CURRENT_DATE
 			dateInFuturePeriod <= ONE_YEAR_LATER
@@ -109,7 +109,7 @@ class DateProducerSpec extends Specification {
 
 	def "should generate date between now and future offset"() {
 		when:
-			def dateInFuturePeriod = sut.randomDateInTheFuture(1)
+			DateTime dateInFuturePeriod = sut.randomDateInTheFuture(1)
 		then:
 			dateInFuturePeriod >= CURRENT_DATE
 			dateInFuturePeriod <= ONE_YEAR_LATER
@@ -117,7 +117,7 @@ class DateProducerSpec extends Specification {
 
 	def "should generate date in future"() {
 		when:
-			def dateInFuturePeriod = sut.randomDateInTheFuture()
+			DateTime dateInFuturePeriod = sut.randomDateInTheFuture()
 		then:
 			dateInFuturePeriod >= CURRENT_DATE
 	}

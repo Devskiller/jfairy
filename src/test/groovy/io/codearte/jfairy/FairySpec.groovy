@@ -24,7 +24,7 @@ class FairySpec extends Specification {
 	def "Second person should be different without fairy instance"() {
 
 		given:
-			def person = Fairy.create().person();
+			Person person = Fairy.create().person();
 		when:
 			person = Fairy.create().person();
 		then:
@@ -34,8 +34,8 @@ class FairySpec extends Specification {
 	def "Second person should be different with one fairy"() {
 
 		given:
-			def fairy = Fairy.create()
-			def person = fairy.person();
+			Fairy fairy = Fairy.create()
+			Person person = fairy.person();
 		when:
 			person = fairy.person();
 		then:
@@ -45,13 +45,13 @@ class FairySpec extends Specification {
 	def "Second person should be the same with the same random seed"() {
 
 		given:
-			def firstFairy = Fairy.builder().withRandomSeed(10).build()
-			def secondFairy = Fairy.builder().withRandomSeed(10).build()
+			Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
+			Fairy secondFairy = Fairy.builder().withRandomSeed(10).build()
 
-			def firstPerson = firstFairy.person()
-			def secondPerson = secondFairy.person()
-			def thirdPerson = firstFairy.person()
-			def fourthPerson = secondFairy.person()
+			Person firstPerson = firstFairy.person()
+			Person secondPerson = secondFairy.person()
+			Person thirdPerson = firstFairy.person()
+			Person fourthPerson = secondFairy.person()
 
 		expect:
 			firstPerson.fullName.equals(secondPerson.fullName)
@@ -63,11 +63,11 @@ class FairySpec extends Specification {
 	def "Second person should be different with different random seeds"() {
 
 		given:
-			def firstFairy = Fairy.builder().withRandomSeed(10).build()
-			def secondFairy = Fairy.builder().withRandomSeed(20).build()
+			Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
+			Fairy secondFairy = Fairy.builder().withRandomSeed(20).build()
 
-			def firstPerson = firstFairy.person()
-			def secondPerson = secondFairy.person();
+			Person firstPerson = firstFairy.person()
+			Person secondPerson = secondFairy.person();
 
 		expect:
 			!firstPerson.fullName.equals(secondPerson.fullName)

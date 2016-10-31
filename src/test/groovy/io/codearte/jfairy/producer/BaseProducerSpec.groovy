@@ -9,7 +9,7 @@ import spock.lang.Unroll
 
 class BaseProducerSpec extends Specification {
 
-	def baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
+	BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
 
 	def setup() {
 		baseProducer.randomBetween('0', '9') >> '7'
@@ -33,7 +33,7 @@ class BaseProducerSpec extends Specification {
 
 	def "should replace ? with letter from desired range"() {
 		when:
-			def result = baseProducer.letterify("Test??", 'A' as char, 'A' as char)
+			String result = baseProducer.letterify("Test??", 'A' as char, 'A' as char)
 		then:
 			result == "TestAA"
 	}
@@ -41,10 +41,10 @@ class BaseProducerSpec extends Specification {
 	@Unroll
 	def "should generate random number from given range #from - #to"() {
 		setup:
-			def randomGenerator = new BaseProducer(new Random());
+			BaseProducer randomGenerator = new BaseProducer(new Random());
 
 		expect:
-			def between = randomGenerator.randomBetween(from, to)
+			double between = randomGenerator.randomBetween(from, to)
 
 			between >= from
 			between <= to
