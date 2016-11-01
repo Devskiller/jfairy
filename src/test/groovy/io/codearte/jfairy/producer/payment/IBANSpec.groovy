@@ -5,8 +5,8 @@ import org.iban4j.IbanUtil
 import spock.lang.Specification
 
 class IBANSpec extends Specification {
-	private baseProducer
 
+	private baseProducer
 
 	def setup() {
 		baseProducer = new BaseProducer(new Random())

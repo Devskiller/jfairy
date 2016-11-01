@@ -80,7 +80,7 @@ class TextSpec extends Specification {
 
 	def "should create random string"() {
 		when:
-			def randomString = text.randomString(10)
+			String randomString = text.randomString(10)
 		then:
 			randomString.length() == 10
 	}

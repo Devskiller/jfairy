@@ -1,6 +1,7 @@
 package snippets
 
 import io.codearte.jfairy.Fairy
+import io.codearte.jfairy.producer.person.Person
 
 /**
  * @author Mariusz Smykuła
@@ -8,7 +9,7 @@ import io.codearte.jfairy.Fairy
 class Foo {
 
 	public static void main(String[] args) {
-		def person = Fairy.create(Locale.default).person();
+		Person person = Fairy.create(Locale.default).person();
 
 		println person.address
 		println person.address.postalCode

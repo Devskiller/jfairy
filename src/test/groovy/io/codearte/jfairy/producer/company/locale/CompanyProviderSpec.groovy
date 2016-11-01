@@ -10,9 +10,9 @@ import static io.codearte.jfairy.producer.company.CompanyProvider.*
 
 class CompanyProviderSpec extends Specification {
 
-	BaseProducer baseProducer = Mock(BaseProducer)
-	DataMaster dataMaster = Mock(DataMaster)
-	VATIdentificationNumberProvider vatIdentificationNumberProvider = Mock(VATIdentificationNumberProvider)
+	private BaseProducer baseProducer = Mock(BaseProducer)
+	private DataMaster dataMaster = Mock(DataMaster)
+	private VATIdentificationNumberProvider vatIdentificationNumberProvider = Mock(VATIdentificationNumberProvider)
 
 	def "should remove slashes in company email"() {
 		given:

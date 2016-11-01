@@ -6,8 +6,8 @@ import spock.lang.Unroll
 
 class PlVATIdentificationNumberProviderSpec extends Specification {
 
-	def baseProducer = new BaseProducer(new Random())
-	def generator = new PlVATIdentificationNumberProvider(baseProducer)
+	private BaseProducer baseProducer = new BaseProducer(new Random())
+	private PlVATIdentificationNumberProvider generator = new PlVATIdentificationNumberProvider(baseProducer)
 
 	@Unroll
 	def "Should validate #vatIdentificationNumber as #valid"() {

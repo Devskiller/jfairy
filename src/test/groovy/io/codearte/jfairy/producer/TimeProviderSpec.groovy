@@ -4,6 +4,7 @@
 
 package io.codearte.jfairy.producer
 
+import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -14,7 +15,7 @@ class TimeProviderSpec extends Specification {
 		setup:
 			TimeProvider dateProvider = new TimeProvider();
 		expect:
-			def readDate = dateProvider.getDateForString(date)
+			DateTime readDate = dateProvider.getDateForString(date)
 			readDate.getYear() == year
 			readDate.getMonthOfYear() == month
 			readDate.getDayOfMonth() == day

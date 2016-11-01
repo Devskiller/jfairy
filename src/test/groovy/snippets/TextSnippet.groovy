@@ -1,8 +1,9 @@
 package snippets
 
 import io.codearte.jfairy.Fairy
+import io.codearte.jfairy.producer.text.TextProducer
 
-def text = Fairy.create().textProducer()
+TextProducer text = Fairy.create().textProducer()
 
 println "* Lorem ipsum *"
 println text.loremIpsum()

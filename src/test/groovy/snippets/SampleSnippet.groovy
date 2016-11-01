@@ -1,12 +1,14 @@
 package snippets
 
 import io.codearte.jfairy.Fairy
+import io.codearte.jfairy.producer.company.Company
+import io.codearte.jfairy.producer.person.Person
 import io.codearte.jfairy.producer.person.PersonProperties
 
 println "\n * With context"
-def fairy = Fairy.create(Locale.forLanguageTag("en"))
+Fairy fairy = Fairy.create(Locale.forLanguageTag("en"))
 3.times {
-	def person = fairy.person()
+	Person person = fairy.person()
 
 	println "${person.fullName} <${person.email}>"
 
@@ -19,7 +21,7 @@ println fairy.textProducer().sentence(5)
 println fairy.person().firstName
 println fairy.person().firstName
 
-def person = fairy.person()
+Person person = fairy.person()
 println ""
 println "         First name: " + person.firstName
 println "        Middle name: " + person.middleName
@@ -53,7 +55,7 @@ println ""
 println fairy.person().nationalIdentityCardNumber
 println fairy.person().nationalIdentificationNumber
 
-def company = fairy.company()
+Company company = fairy.company()
 println "Company: " + company.name
 println "URL: " + company.url
 println "VAT: " + company.vatIdentificationNumber

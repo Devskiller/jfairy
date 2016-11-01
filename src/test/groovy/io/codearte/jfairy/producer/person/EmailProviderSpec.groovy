@@ -8,8 +8,8 @@ import static io.codearte.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL
 
 class EmailProviderSpec extends Specification {
 
-	DataMaster dataMaster = Mock(DataMaster)
-	BaseProducer baseProducer = Mock(BaseProducer)
+	private DataMaster dataMaster = Mock(DataMaster)
+	private BaseProducer baseProducer = Mock(BaseProducer)
 
 	def setup() {
 		dataMaster.getRandomValue(PERSONAL_EMAIL) >> "mail.com"
