@@ -18,4 +18,17 @@ public class NetworkProducer {
 		return ipNumberProducer.generate();
 	}
 
+	/**
+	 * Add a simple url generator
+	 * @return
+	 */
+	public String url() {
+		String h = ipAddress().replaceAll("\\.", "");
+		char[] chars = h.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			char c = chars[i];
+			chars[i] = (char)(c + 97);
+		}
+		return "http://" + String.valueOf(chars) + ".com";
+	}
 }

@@ -19,4 +19,12 @@ class NetworkSpec extends Specification {
 			ipValidator.isValid(ip)
 
 	}
+
+	def "Should generate proper url"() {
+		String url = network.url()
+
+		expect:
+			url.startsWith("http://") && url.endsWith(".com")
+
+	}
 }
