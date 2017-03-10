@@ -114,11 +114,15 @@ public class Bootstrap {
 		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
 	}
 
+	/**
+	 * Support customized language config
+	 * @param dataMaster master of the config
+	 * @param locale The Locale to set.
+	 * @param random specific random
+	 * @return FariyModule instance in accordance with locale
+	 */
 	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
-		/**
-		 * Modified by Lhfcws
-		 * Support customized language with yaml config only
-		 */
+
 		LanguageCode code = null;
 		try {
 			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());

@@ -20,15 +20,22 @@ public class NetworkProducer {
 
 	/**
 	 * Add a simple url generator
+	 * Example: networkProducer.url(baseProducer.trueOrFalse())
+	 *
 	 * @return
 	 */
-	public String url() {
-		String h = ipAddress().replaceAll("\\.", "");
-		char[] chars = h.toCharArray();
-		for (int i = 0; i < chars.length; i++) {
-			char c = chars[i];
-			chars[i] = (char)(c + 97);
+	public String url(boolean isHttps) {
+		String mergedIP = ipAddress().replaceAll("\\.", "");
+		char[] domainChars = mergedIP.toCharArray();
+		for (int i = 0; i < domainChars.length; i++) {
+			char c = domainChars[i];
+			domainChars[i] = (char) (c + 97);
 		}
-		return "http://" + String.valueOf(chars) + ".com";
+
+		String domain = String.valueOf(domainChars);
+		if (isHttps)
+			return "https://" + domain + ".com";
+		else
+			return "http://" + domain + ".com";
 	}
 }
