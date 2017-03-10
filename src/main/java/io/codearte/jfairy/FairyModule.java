@@ -4,8 +4,14 @@ import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.company.CompanyFactory;
+import io.codearte.jfairy.producer.company.CompanyProvider;
+import io.codearte.jfairy.producer.company.DefaultCompanyProvider;
+import io.codearte.jfairy.producer.payment.DefaultIBANProvider;
 import io.codearte.jfairy.producer.payment.IBANFactory;
+import io.codearte.jfairy.producer.payment.IBANProvider;
+import io.codearte.jfairy.producer.person.DefaultPersonProvider;
 import io.codearte.jfairy.producer.person.PersonFactory;
+import io.codearte.jfairy.producer.person.PersonProvider;
 
 import java.util.Random;
 
@@ -16,9 +22,9 @@ import java.util.Random;
  */
 public abstract class FairyModule extends AbstractModule {
 
-	private final Random random;
+	protected final Random random;
 
-	private final DataMaster dataMaster;
+	protected final DataMaster dataMaster;
 
 	public FairyModule(DataMaster dataMaster, Random random) {
 		this.random = random;
@@ -30,9 +36,9 @@ public abstract class FairyModule extends AbstractModule {
 		bind(DataMaster.class).toInstance(dataMaster);
 		bind(Random.class).toInstance(random);
 
-		install(new FactoryModuleBuilder().build(PersonFactory.class));
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
-		install(new FactoryModuleBuilder().build(CompanyFactory.class));
-		install(new FactoryModuleBuilder().build(IBANFactory.class));
+		install(new FactoryModuleBuilder().implement(PersonProvider.class, DefaultPersonProvider.class).build(PersonFactory.class));
+		install(new FactoryModuleBuilder().implement(CompanyProvider.class, DefaultCompanyProvider.class).build(CompanyFactory.class));
+		install(new FactoryModuleBuilder().implement(IBANProvider.class, DefaultIBANProvider.class).build(IBANFactory.class));
 	}
 }

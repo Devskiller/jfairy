@@ -1,151 +1,37 @@
 package io.codearte.jfairy.producer.payment;
 
 import com.google.inject.Provider;
-import com.google.inject.assistedinject.Assisted;
-import io.codearte.jfairy.producer.BaseProducer;
-import org.apache.commons.lang3.StringUtils;
-import org.iban4j.CountryCode;
-import org.iban4j.Iban;
-import org.iban4j.bban.BbanStructure;
 import org.iban4j.bban.BbanStructureEntry;
 
-import javax.inject.Inject;
-import java.math.BigInteger;
-import java.util.IllegalFormatCodePointException;
 
 /**
  * ALPHA: Under development
  */
-public class IBANProvider implements Provider<IBAN> {
+public interface IBANProvider extends Provider<IBAN> {
 
-	private final BaseProducer baseProducer;
-	private CountryCode countryCode;
-	private String accountNumber;
-	private String bankCode;
-	private String branchCode;
-	private String nationalCheckDigit;
+	IBAN get();
 
-	@Inject
-	public IBANProvider(BaseProducer baseProducer,
+	String nationalCheckDigit(String value);
 
-	                    @Assisted
-	                    IBANProperties.Property... properties) {
+	void fillNationalCheckDigit();
 
-		this.baseProducer = baseProducer;
+	void fillBranchCode();
 
-		for (IBANProperties.Property property : properties) {
-			property.apply(this);
-		}
-	}
+	void fillBankCode();
 
-	@Override
-	public IBAN get() {
-		try {
+	void fillAccountNumber();
 
-			fillCountryCode();
-			fillAccountNumber();
-			fillBankCode();
-			fillBranchCode();
-			nationalCheckDigit = nationalCheckDigit(nationalCheckDigit);
+	void fillCountryCode();
 
-			Iban iban = new Iban.Builder()
-					.countryCode(countryCode)
-					.bankCode(bankCode)
-					.branchCode(branchCode)
-					.nationalCheckDigit(nationalCheckDigit)
-					.accountNumber(accountNumber)
-					.build();
+	String generateRequiredData(BbanStructureEntry.EntryType type);
 
-			String identificationNumber = iban.getIdentificationNumber();
-			String checkDigit = iban.getCheckDigit();
-			String accountType = iban.getAccountType();
-			String bban = iban.getBban();
-			String ownerAccountType = iban.getOwnerAccountType();
-			String ibanNumber = iban.toString();
+	void setNationalCheckDigit(String nationalCheckDigit);
 
-			return new IBAN(accountNumber, identificationNumber, branchCode, checkDigit,
-					accountType, bankCode, bban, countryCode.getName(), nationalCheckDigit,
-					ownerAccountType, ibanNumber);
-		} catch (IllegalFormatCodePointException e) {
-			throw new IllegalArgumentException("Invalid iban " + e.getMessage(), e);
-		}
-	}
+	void setBranchCode(String branchCode);
 
-	private String nationalCheckDigit(String value) {
-		if (StringUtils.isBlank(value)) {
-			return generateRequiredData(BbanStructureEntry.EntryType.x);
-		}
-		return value;
-	}
+	void setCountry(String country);
 
-	private void fillNationalCheckDigit() {
-		if (StringUtils.isBlank(nationalCheckDigit)) {
-			nationalCheckDigit = generateRequiredData(BbanStructureEntry.EntryType.x);
-		}
-	}
+	void setAccountNumber(String accountNumber);
 
-	private void fillBranchCode() {
-		if (StringUtils.isBlank(branchCode)) {
-			branchCode = generateRequiredData(BbanStructureEntry.EntryType.s);
-		}
-	}
-
-	private void fillBankCode() {
-		if (StringUtils.isBlank(bankCode)) {
-			bankCode = generateRequiredData(BbanStructureEntry.EntryType.b);
-		}
-	}
-
-	private void fillAccountNumber() {
-		if (StringUtils.isBlank(accountNumber)) {
-			accountNumber = generateRequiredData(BbanStructureEntry.EntryType.c);
-		}
-	}
-
-	private void fillCountryCode() {
-		if (countryCode == null) {
-			countryCode = CountryCode.PL;
-		}
-	}
-
-	private static BbanStructureEntry extractBbanEntry(final CountryCode countryCode, final BbanStructureEntry.EntryType entryType) {
-
-		for (BbanStructureEntry entry : BbanStructure.forCountry(countryCode).getEntries()) {
-			if (entry.getEntryType() == entryType) {
-				return entry;
-			}
-		}
-		return null;
-	}
-
-	private String generateRequiredData(BbanStructureEntry.EntryType type) {
-		String value = "";
-		BbanStructureEntry entry = extractBbanEntry(countryCode, type);
-		if (entry != null) {
-			int length = entry.getLength();
-			value = "" + baseProducer.randomBetween(0L, BigInteger.TEN.pow(length).longValue() - 1);
-			value = StringUtils.leftPad(value, length, "0");
-		}
-		return value;
-	}
-
-	public void setNationalCheckDigit(String nationalCheckDigit) {
-		this.nationalCheckDigit = nationalCheckDigit;
-	}
-
-	public void setBranchCode(String branchCode) {
-		this.branchCode = branchCode;
-	}
-
-	public void setCountry(String country) {
-		this.countryCode = CountryCode.valueOf(country);
-	}
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public void setBankCode(String bankCode) {
-		this.bankCode = bankCode;
-	}
+	void setBankCode(String bankCode);
 }

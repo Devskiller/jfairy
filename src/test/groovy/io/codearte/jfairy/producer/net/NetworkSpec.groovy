@@ -21,10 +21,10 @@ class NetworkSpec extends Specification {
 	}
 
 	def "Should generate proper url"() {
-		String url = network.url()
+		String url = network.url(true)
 
 		expect:
-			url.startsWith("http://") && url.endsWith(".com")
+			url.startsWith("https://") && url.endsWith(".com")
 
 	}
 }
