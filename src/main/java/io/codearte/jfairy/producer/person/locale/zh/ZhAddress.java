@@ -13,6 +13,11 @@ import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
  */
 public class ZhAddress implements Address {
 
+	private static final String CITY = "市";
+	private static final String NUMBER = "号";
+	private static final String ROOM = "房";
+	private static final String POSTCODE = "邮编";
+
 	private final String streetNumber;
 
 	private final String street;
@@ -52,15 +57,15 @@ public class ZhAddress implements Address {
 	}
 
 	public String getAddressLine1() {
-		String line = city + "市" +  street + streetNumber + "号";
+		String line = city + CITY + street + streetNumber + NUMBER;
 		if (apartmentNumber.length() > 0)
-			return line + " " + apartmentNumber + "房";
+			return line + " " + apartmentNumber + ROOM;
 		else
 			return line;
 	}
 
 	public String getAddressLine2() {
-		return "邮编 " + postalCode;
+		return POSTCODE + " " + postalCode;
 	}
 
 	@Override
