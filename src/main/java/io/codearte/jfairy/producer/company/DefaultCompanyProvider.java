@@ -60,7 +60,7 @@ public class DefaultCompanyProvider implements CompanyProvider {
 
 	/**
 	 * In case of the illegal hostname characters in company name
-	 * and truncate it if it is too long (length > 10) after escape
+	 * and truncate it if it is too long (length &gt; 10) after escape
 	 *
 	 * It is compatible with other non-latin language and will not change the original result for latin language.
 	 *

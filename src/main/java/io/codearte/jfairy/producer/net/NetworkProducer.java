@@ -22,7 +22,8 @@ public class NetworkProducer {
 	 * Add a simple url generator
 	 * Example: networkProducer.url(baseProducer.trueOrFalse())
 	 *
-	 * @return
+	 * @param isHttps is https or not
+	 * @return A faked url.
 	 */
 	public String url(boolean isHttps) {
 		String mergedIP = ipAddress().replaceAll("\\.", "");

@@ -65,9 +65,10 @@ public class ZhFairyUtil {
 
 	/**
 	 * Get random number from 1 to max in 0 leading string format.
+	 * @param baseProducer BaseProducer
 	 * @param max         upper bound of number
 	 * @param paddingSize padding size
-	 * @return
+	 * @return A number smaller than #max with #paddingSize digits in string format
 	 */
 	public static String getRandomNumStr(BaseProducer baseProducer, int max, int paddingSize) {
 		int rndNum = baseProducer.randomBetween(1, max);
