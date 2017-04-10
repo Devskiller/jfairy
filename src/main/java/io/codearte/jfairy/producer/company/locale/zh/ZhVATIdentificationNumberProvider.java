@@ -31,10 +31,11 @@ public class ZhVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	private char getChar() {
 		int rndNum = baseProducer.randomBetween(0, 35);
-		if (rndNum < 10)
-			return (char)(49 + rndNum);
-		else
-			return (char)(65 + rndNum - 10);
+		if (rndNum < 10) {
+			return (char) (49 + rndNum);
+		} else {
+			return (char) (65 + rndNum - 10);
+		}
 	}
 
 	private String getChars(int paddingSize) {

@@ -12,6 +12,8 @@ import java.util.Random;
  */
 public class ZhFairyUtil {
 
+	private ZhFairyUtil() {}
+
 	/**
 	 * Codes of China provinces
 	 */
@@ -41,7 +43,7 @@ public class ZhFairyUtil {
 		"52",    // Guizhou
 		"53",    // Yunnan
 		"54",    // Xizang
-		"61",    // Shanxi
+		"61",    // Shaanxi
 		"62",    // Gansu
 		"63",    // Qinghai
 		"64",    // Ningxia
@@ -70,8 +72,9 @@ public class ZhFairyUtil {
 	public static String getRandomNumStr(BaseProducer baseProducer, int max, int paddingSize) {
 		int rndNum = baseProducer.randomBetween(1, max);
 		String numStr = "" + rndNum;
-		while (numStr.length() < paddingSize)
+		while (numStr.length() < paddingSize) {
 			numStr = "0" + numStr;
+		}
 		return numStr;
 	}
 }

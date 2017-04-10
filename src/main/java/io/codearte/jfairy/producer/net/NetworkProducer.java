@@ -33,9 +33,10 @@ public class NetworkProducer {
 		}
 
 		String domain = String.valueOf(domainChars);
-		if (isHttps)
+		if (isHttps) {
 			return "https://" + domain + ".com";
-		else
+		} else {
 			return "http://" + domain + ".com";
+		}
 	}
 }
