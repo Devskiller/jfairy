@@ -22,9 +22,9 @@ import java.util.Random;
  */
 public abstract class FairyModule extends AbstractModule {
 
-	protected final Random random;
+	private final Random random;
 
-	protected final DataMaster dataMaster;
+	private final DataMaster dataMaster;
 
 	public FairyModule(DataMaster dataMaster, Random random) {
 		this.random = random;
