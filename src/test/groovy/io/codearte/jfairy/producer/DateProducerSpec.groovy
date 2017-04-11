@@ -83,7 +83,7 @@ class DateProducerSpec extends Specification {
 		where:
 			fromYear | toYear || expectedDate
 			2009     | 2010   || new DateTime("2009-12-31T23:59:59.999")
-			2010     | 2010   || new DateTime("2010-07-02T12:59:59.999")
+			2010     | 2010   || new DateTime("2010-07-02T11:59:59.999")
 			2015     | 2020   || new DateTime("2017-12-31T23:59:59.999")
 	}
 

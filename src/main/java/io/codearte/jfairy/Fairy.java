@@ -83,6 +83,7 @@ public final class Fairy {
 	/**
 	 * Use this method to generate fake company
 	 *
+	 * @param companyProperties desired company features
 	 * @return A {@link io.codearte.jfairy.producer.company.CompanyProvider} instance
 	 */
 	public Company company(CompanyProperties.CompanyProperty... companyProperties) {

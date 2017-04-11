@@ -1,6 +1,5 @@
 package io.codearte.jfairy.producer.company;
 
-import io.codearte.jfairy.producer.BaseProducer;
 
 public final class CompanyProperties {
 

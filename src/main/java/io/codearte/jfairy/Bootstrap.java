@@ -114,8 +114,23 @@ public class Bootstrap {
 		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
 	}
 
+	/**
+	 * Support customized language config
+	 * @param dataMaster master of the config
+	 * @param locale The Locale to set.
+	 * @param random specific random
+	 * @return FariyModule instance in accordance with locale
+	 */
 	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
-		LanguageCode code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
+
+		LanguageCode code = null;
+		try {
+			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
+		} catch (IllegalArgumentException e) {
+			LOG.warn("Uknown locale " + locale);
+			code = LanguageCode.EN;
+		}
+
 		switch (code) {
 			case PL:
 				return new PlFairyModule(dataMaster, random);
@@ -127,6 +142,8 @@ public class Bootstrap {
 				return new EsFairyModule(dataMaster, random);
 			case SV:
 				return new SvFairyModule(dataMaster, random);
+			case ZH:
+				return new ZhFairyModule(dataMaster, random);
 			default:
 				LOG.info("No data for your language - using EN");
 				return new EnFairyModule(dataMaster, random);

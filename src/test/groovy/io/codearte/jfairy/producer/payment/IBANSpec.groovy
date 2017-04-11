@@ -21,7 +21,7 @@ class IBANSpec extends Specification {
 	 */
 	def "should return valid iban"() {
 		when:
-			IBANProvider iban = new IBANProvider(baseProducer,
+			IBANProvider iban = new DefaultIBANProvider(baseProducer,
 					IBANProperties.accountNumber("00234573201"),
 					IBANProperties.country("AT")
 			);
@@ -42,7 +42,7 @@ class IBANSpec extends Specification {
 
 	def "should return valid polish iban"() {
 		when:
-			IBANProvider iban = new IBANProvider(baseProducer)
+			IBANProvider iban = new DefaultIBANProvider(baseProducer)
 		then:
 			IbanUtil.validate(iban.get().ibanNumber);
 	}

@@ -4,6 +4,7 @@ import io.codearte.jfairy.data.DataMaster
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider
 import io.codearte.jfairy.producer.company.CompanyProvider
+import io.codearte.jfairy.producer.company.DefaultCompanyProvider
 import spock.lang.Specification
 
 import static io.codearte.jfairy.producer.company.CompanyProvider.*
@@ -20,7 +21,7 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "mercedes/bosch"
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
 			String email = companyProvider.get().email;
@@ -36,7 +37,7 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "GOOGLE"
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
 			String email = companyProvider.get().email;
@@ -52,7 +53,7 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "company inc."
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
 			String email = companyProvider.get().email;
@@ -67,7 +68,7 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "åäöéáąćęłńśóźż"
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new CompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
 
 		when:
 			String email = companyProvider.get().email;
