@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.payment;
 
 import com.google.inject.Provider;
+import org.iban4j.bban.BbanEntryType;
 import org.iban4j.bban.BbanStructureEntry;
 
 
@@ -23,7 +24,7 @@ public interface IBANProvider extends Provider<IBAN> {
 
 	void fillCountryCode();
 
-	String generateRequiredData(BbanStructureEntry.EntryType type);
+	String generateRequiredData(BbanEntryType type);
 
 	void setNationalCheckDigit(String nationalCheckDigit);
 

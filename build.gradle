@@ -56,7 +56,7 @@ dependencies {
 	compile 'joda-time:joda-time:2.3'
 	compile 'com.google.inject:guice:4.0'
 	compile 'com.google.inject.extensions:guice-assistedinject:4.0'
-	compile 'org.iban4j:iban4j:2.1.1'
+	compile 'org.iban4j:iban4j:3.2.1'
 	compile 'org.reflections:reflections:0.9.9'
 	testCompile 'commons-validator:commons-validator:1.4.0'
 	testCompile 'ch.qos.logback:logback-classic:1.1.2'
