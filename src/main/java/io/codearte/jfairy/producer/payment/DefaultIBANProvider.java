@@ -5,6 +5,7 @@ import io.codearte.jfairy.producer.BaseProducer;
 import org.apache.commons.lang3.StringUtils;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
+import org.iban4j.bban.BbanEntryType;
 import org.iban4j.bban.BbanStructure;
 import org.iban4j.bban.BbanStructureEntry;
 
@@ -73,7 +74,7 @@ public class DefaultIBANProvider implements IBANProvider {
 	@Override
 	public String nationalCheckDigit(String value) {
 		if (StringUtils.isBlank(value)) {
-			return generateRequiredData(BbanStructureEntry.EntryType.x);
+			return generateRequiredData(BbanEntryType.national_check_digit);
 		}
 		return value;
 	}
@@ -81,28 +82,28 @@ public class DefaultIBANProvider implements IBANProvider {
 	@Override
 	public void fillNationalCheckDigit() {
 		if (StringUtils.isBlank(nationalCheckDigit)) {
-			nationalCheckDigit = generateRequiredData(BbanStructureEntry.EntryType.x);
+			nationalCheckDigit = generateRequiredData(BbanEntryType.national_check_digit);
 		}
 	}
 
 	@Override
 	public void fillBranchCode() {
 		if (StringUtils.isBlank(branchCode)) {
-			branchCode = generateRequiredData(BbanStructureEntry.EntryType.s);
+			branchCode = generateRequiredData(BbanEntryType.branch_code);
 		}
 	}
 
 	@Override
 	public void fillBankCode() {
 		if (StringUtils.isBlank(bankCode)) {
-			bankCode = generateRequiredData(BbanStructureEntry.EntryType.b);
+			bankCode = generateRequiredData(BbanEntryType.bank_code);
 		}
 	}
 
 	@Override
 	public void fillAccountNumber() {
 		if (StringUtils.isBlank(accountNumber)) {
-			accountNumber = generateRequiredData(BbanStructureEntry.EntryType.c);
+			accountNumber = generateRequiredData(BbanEntryType.account_number);
 		}
 	}
 
@@ -114,7 +115,7 @@ public class DefaultIBANProvider implements IBANProvider {
 	}
 
 	@Override
-	public String generateRequiredData(BbanStructureEntry.EntryType type) {
+	public String generateRequiredData(BbanEntryType type) {
 		String value = "";
 		BbanStructureEntry entry = extractBbanEntry(countryCode, type);
 		if (entry != null) {
@@ -150,7 +151,7 @@ public class DefaultIBANProvider implements IBANProvider {
 		this.bankCode = bankCode;
 	}
 
-	protected static BbanStructureEntry extractBbanEntry(final CountryCode countryCode, final BbanStructureEntry.EntryType entryType) {
+	protected static BbanStructureEntry extractBbanEntry(final CountryCode countryCode, final BbanEntryType entryType) {
 
 		for (BbanStructureEntry entry : BbanStructure.forCountry(countryCode).getEntries()) {
 			if (entry.getEntryType() == entryType) {
