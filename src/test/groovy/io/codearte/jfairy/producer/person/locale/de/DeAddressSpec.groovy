@@ -19,7 +19,7 @@ class DeAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Messelweg"
+			address.street == 'Messelweg'
 	}
 
 	def "should generate random streetNumber"() {
