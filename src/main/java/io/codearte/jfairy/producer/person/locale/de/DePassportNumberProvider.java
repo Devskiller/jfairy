@@ -16,6 +16,10 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
  */
 public class DePassportNumberProvider implements PassportNumberProvider {
 
+	private static final String[] PASSPORT_TYPE_LETTERS = {"C", "F", "G", "H", "J", "K"};
+
+	private static final String VALID_NUMBER_PATTERN = "^[CFGHJK][0-9]{8}$";
+
 	private final BaseProducer baseProducer;
 
 	@Inject
@@ -25,11 +29,11 @@ public class DePassportNumberProvider implements PassportNumberProvider {
 
 	@Override
 	public String get() {
-		return baseProducer.randomElement("C", "F", "G", "H", "J", "K") + randomNumeric(8);
+		return baseProducer.randomElement(PASSPORT_TYPE_LETTERS) + randomNumeric(8);
 	}
 
 	public boolean isValid(String passportNumber) {
-		return passportNumber.matches("^[CFGHJK][0-9]{8}$");
+		return passportNumber.matches(VALID_NUMBER_PATTERN);
 	}
 
 }

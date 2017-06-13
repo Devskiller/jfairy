@@ -14,16 +14,14 @@ class DeNationalIdentityCardNumberProviderSpec extends Specification {
 
 	@Unroll
 	def "Should validate #nationalIdentityCardNumber as #valid"() {
-
 		expect:
 			generator.isValid(nationalIdentityCardNumber) == valid
-
 		where:
 			nationalIdentityCardNumber | valid
-			"T22000129"                | true
-			"123456789"                | false
-			"L00000000"                | true
-			"A12345678"                | false
+			'T22000129'                | true
+			'123456789'                | false
+			'L00000000'                | true
+			'A12345678'                | false
 	}
 
 	def "Should always generate proper nationalIdentityCardNumber"() {

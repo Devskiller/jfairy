@@ -12,16 +12,14 @@ class DeVATIdentificationNumberProviderSpec extends Specification {
 
 	@Unroll
 	def "Should validate #vatIdentificationNumber as #valid"() {
-
 		expect:
 			generator.isValid(vatIdentificationNumber) == valid
-
 		where:
 			vatIdentificationNumber | valid
-			"999999999"             | true
-			"1234567890"            | false
-			"000000000"             | true
-			"18947440810"           | false
+			'999999999'             | true
+			'1234567890'            | false
+			'000000000'             | true
+			'18947440810'           | false
 	}
 
 	def "Should always generate proper vatIdentificationNumber"() {

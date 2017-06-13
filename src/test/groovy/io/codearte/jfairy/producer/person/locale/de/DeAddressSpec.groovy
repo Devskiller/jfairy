@@ -24,37 +24,37 @@ class DeAddressSpec extends Specification {
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "176"
+			address.streetNumber == '176'
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == ""
+			address.apartmentNumber == ''
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "15286"
+			address.postalCode == '15286'
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == "Schlitz"
+			address.city == 'Schlitz'
 	}
 
 	def "should return addressLine1 in de locale format"() {
 		expect:
-			address.addressLine1 == "Messelweg 176"
+			address.addressLine1 == 'Messelweg 176'
 	}
 
 	def "should return addressLine2 in de locale format"() {
 		expect:
-			address.addressLine2 == "15286 Schlitz"
+			address.addressLine2 == '15286 Schlitz'
 	}
 
 	def "should return address in de locale format"() {
 		expect:
-			address.toString() == "Messelweg 176" + LINE_SEPARATOR + "15286 Schlitz"
+			address.toString() == "Messelweg 176${LINE_SEPARATOR}15286 Schlitz"
 	}
 
 }

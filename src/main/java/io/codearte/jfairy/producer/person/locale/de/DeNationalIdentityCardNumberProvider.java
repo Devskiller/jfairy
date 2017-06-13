@@ -16,6 +16,10 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
  */
 public class DeNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
+	private static final String[] ID_CARD_TYPE_LETTERS = {"L", "M", "N", "P", "R", "T", "V", "W", "X", "Y"};
+
+	private static final String VALID_NUMBER_PATTERN = "^[LMNPRTVWXY][0-9]{8}$";
+
 	private final BaseProducer baseProducer;
 
 	@Inject
@@ -25,11 +29,11 @@ public class DeNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	@Override
 	public String get() {
-		return baseProducer.randomElement("L", "M", "N", "P", "R", "T", "V", "W", "X", "Y") + randomNumeric(8);
+		return baseProducer.randomElement(ID_CARD_TYPE_LETTERS) + randomNumeric(8);
 	}
 
 	public boolean isValid(String nationalIdentityCardNumber) {
-		return nationalIdentityCardNumber.matches("^[LMNPRTVWXY][0-9]{8}$");
+		return nationalIdentityCardNumber.matches(VALID_NUMBER_PATTERN);
 	}
 
 }

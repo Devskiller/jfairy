@@ -14,16 +14,14 @@ class DePassportNumberProviderSpec extends Specification {
 
 	@Unroll
 	def "Should validate #passportNumber as #valid"() {
-
 		expect:
 			generator.isValid(passportNumber) == valid
-
 		where:
 			passportNumber | valid
-			"C22000129"    | true
-			"123456789"    | false
-			"H00000000"    | true
-			"A12345678"    | false
+			'C22000129'    | true
+			'123456789'    | false
+			'H00000000'    | true
+			'A12345678'    | false
 	}
 
 	def "Should always generate proper passportNumber"() {
