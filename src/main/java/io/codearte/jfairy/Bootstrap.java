@@ -144,6 +144,8 @@ public class Bootstrap {
 				return new SvFairyModule(dataMaster, random);
 			case ZH:
 				return new ZhFairyModule(dataMaster, random);
+			case DE:
+				return new DeFairyModule(dataMaster, random);
 			default:
 				LOG.info("No data for your language - using EN");
 				return new EnFairyModule(dataMaster, random);
