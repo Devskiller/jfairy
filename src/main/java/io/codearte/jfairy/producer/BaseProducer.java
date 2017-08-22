@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +33,7 @@ public class BaseProducer {
 	/**
 	 * Returns random element from passed List
 	 *
-	 * @param <T> element generic type
+	 * @param <T>      element generic type
 	 * @param elements list to process
 	 * @return random list element
 	 */
@@ -43,7 +44,7 @@ public class BaseProducer {
 	/**
 	 * Returns random element from passed vararg
 	 *
-	 * @param <T> element generic type
+	 * @param <T>      element generic type
 	 * @param elements objects to process
 	 * @return random element
 	 */
@@ -54,7 +55,7 @@ public class BaseProducer {
 	/**
 	 * Returns random enum value
 	 *
-	 * @param <T> element generic type
+	 * @param <T>      element generic type
 	 * @param enumType enum class
 	 * @return random enum value
 	 */
@@ -65,20 +66,33 @@ public class BaseProducer {
 	/**
 	 * Creates new list being random subset of the passed list
 	 *
-	 * @param <T> element generic type
+	 * @param <T>      element generic type
 	 * @param elements list to process
 	 * @param count    returned list size
 	 * @return sublist of the elements list
 	 */
 	public <T> List<T> randomElements(List<T> elements, int count) {
+		if (elements.size() >= count) {
+			return extractRandomList(elements, count);
+		} else {
+			List<T> randomElements = new ArrayList<T>();
+			randomElements.addAll(extractRandomList(elements, count % elements.size()));
+			do {
+				randomElements.addAll(extractRandomList(elements, elements.size()));
+			} while (randomElements.size() < count);
+			return randomElements;
+		}
+	}
+
+	private <T> List<T> extractRandomList(List<T> elements, int count) {
 		shuffle(elements, random);
-		return elements.subList(0, count % elements.size());
+		return elements.subList(0, count);
 	}
 
 	/**
 	 * Creates new list being random subset of the passed vararg
 	 *
-	 * @param <T> element generic type
+	 * @param <T>      element generic type
 	 * @param elements objects to process
 	 * @param count    returned list size
 	 * @return sublist of the passed elements
