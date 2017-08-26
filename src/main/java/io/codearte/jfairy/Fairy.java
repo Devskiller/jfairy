@@ -4,6 +4,9 @@
 package io.codearte.jfairy;
 
 
+import javax.inject.Inject;
+import java.util.Locale;
+
 import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
@@ -18,9 +21,6 @@ import io.codearte.jfairy.producer.person.Person;
 import io.codearte.jfairy.producer.person.PersonFactory;
 import io.codearte.jfairy.producer.person.PersonProperties;
 import io.codearte.jfairy.producer.text.TextProducer;
-
-import javax.inject.Inject;
-import java.util.Locale;
 
 public final class Fairy {
 
@@ -55,7 +55,6 @@ public final class Fairy {
 	public static Fairy create(Provider<DataMaster> dataMasterProvider, Locale locale) {
 		return Bootstrap.create(dataMasterProvider, locale);
 	}
-
 
 	public static Bootstrap.Builder builder() {
 		return Bootstrap.builder();

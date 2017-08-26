@@ -3,31 +3,24 @@
  */
 package io.codearte.jfairy.producer.text;
 
-import io.codearte.jfairy.producer.BaseProducer;
-import io.codearte.jfairy.producer.util.TextUtils;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.codearte.jfairy.producer.BaseProducer;
+import io.codearte.jfairy.producer.util.TextUtils;
 
 import static org.apache.commons.lang3.StringUtils.left;
 
 public class TextProducer {
 
 	private static final int DEFAULT_WORD_COUNT = 3;
-
 	private static final int DEFAULT_WORD_COUNT_IN_SENTENCE = 3;
-
 	private static final int DEFAULT_SENTENCE_COUNT = 3;
-
 	private static final int SENTENCE_COUNT_PRECISION_MIN = 1;
-
 	private static final int SENTENCE_COUNT_PRECISION_MAX = 3;
-
 	private final TextProducerInternal textProducerInternal;
-
 	private final BaseProducer baseProducer;
-
 	private int limit = 0;
 
 	@Inject
@@ -39,14 +32,6 @@ public class TextProducer {
 	public TextProducer limitedTo(int limit) {
 		this.limit = limit;
 		return this;
-	}
-
-	public String result(String result) {
-		if (limit > 0) {
-			return left(result, limit);
-		} else {
-			return result;
-		}
 	}
 
 	public String loremIpsum() {
@@ -87,15 +72,6 @@ public class TextProducer {
 
 	public String sentence(int wordCount) {
 		return result(textProducerInternal.sentence(wordCount));
-
-	}
-
-	private List<String> sentences(int sentenceCount) {
-		List<String> sentences = new ArrayList<String>(sentenceCount);
-		for (int i = 0; i < sentenceCount; i++) {
-			sentences.add(sentence());
-		}
-		return sentences;
 	}
 
 	public String paragraph() {
@@ -115,5 +91,21 @@ public class TextProducer {
 	 */
 	public String randomString(int charsCount) {
 		return textProducerInternal.randomString(charsCount);
+	}
+
+	private List<String> sentences(int sentenceCount) {
+		List<String> sentences = new ArrayList<String>(sentenceCount);
+		for (int i = 0; i < sentenceCount; i++) {
+			sentences.add(sentence());
+		}
+		return sentences;
+	}
+
+	private String result(String result) {
+		if (limit > 0) {
+			return left(result, limit);
+		} else {
+			return result;
+		}
 	}
 }

@@ -1,6 +1,9 @@
 package io.codearte.jfairy;
 
-import com.google.common.base.Optional;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.Random;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -10,11 +13,6 @@ import io.codearte.jfairy.data.MapBasedDataMaster;
 import io.codearte.jfairy.producer.util.LanguageCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
-import java.io.IOException;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * <p>Using a {@link #builder()}, you can configure the following fields:</p>
@@ -39,22 +37,14 @@ import java.util.Random;
 public class Bootstrap {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
-
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
-	public static Fairy createFairy(DataMaster dataMaster, Locale locale, Random random) {
-
-
-
+	static Fairy createFairy(DataMaster dataMaster, Locale locale, Random random) {
 		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, random);
-
 		Injector injector = Guice.createInjector(fairyModule);
-
 		FairyFactory fairyFactory = injector.getInstance(FairyFactory.class);
-
 		return fairyFactory.createFairy();
 	}
-
 
 	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
 		try {
@@ -73,7 +63,6 @@ public class Bootstrap {
 	public static Builder builder() {
 		return new Builder();
 	}
-
 
 	/**
 	 * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
@@ -109,7 +98,6 @@ public class Bootstrap {
 				.build();
 	}
 
-
 	public static Fairy create(Provider<DataMaster> dataMaster, Locale locale) {
 		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
 	}
@@ -122,7 +110,6 @@ public class Bootstrap {
 	 * @return FariyModule instance in accordance with locale
 	 */
 	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
-
 		LanguageCode code = null;
 		try {
 			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
@@ -153,12 +140,10 @@ public class Bootstrap {
 	}
 
 	public static class Builder {
-
 		private Locale locale = Locale.ENGLISH;
 		private String filePrefix = DATA_FILE_PREFIX;
 		private Random random = new Random();
 		private DataMaster dataMaster;
-
 
 		private MapBasedDataMaster getDefaultDataMaster() {
 			Injector injector = Guice.createInjector(new DataMasterModule(random));
@@ -225,7 +210,6 @@ public class Bootstrap {
 			return this;
 		}
 
-
 		/**
 		 * Returns the completed Fairy.
 		 *
@@ -239,6 +223,4 @@ public class Bootstrap {
 			return createFairy(dataMaster, locale, random);
 		}
 	}
-
-
 }
