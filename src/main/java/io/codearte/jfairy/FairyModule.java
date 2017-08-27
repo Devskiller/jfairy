@@ -3,6 +3,7 @@ package io.codearte.jfairy;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import io.codearte.jfairy.producer.company.CompanyProvider;
 import io.codearte.jfairy.producer.company.DefaultCompanyProvider;
@@ -22,19 +23,18 @@ import java.util.Random;
  */
 public abstract class FairyModule extends AbstractModule {
 
-	private final Random random;
-
+	private final RandomGenerator randomGenerator;
 	private final DataMaster dataMaster;
 
-	public FairyModule(DataMaster dataMaster, Random random) {
-		this.random = random;
+	public FairyModule(DataMaster dataMaster, RandomGenerator randomGenerator) {
 		this.dataMaster = dataMaster;
+		this.randomGenerator = randomGenerator;
 	}
 
 	@Override
 	protected void configure() {
 		bind(DataMaster.class).toInstance(dataMaster);
-		bind(Random.class).toInstance(random);
+		bind(RandomGenerator.class).toInstance(randomGenerator);
 
 		install(new FactoryModuleBuilder().build(FairyFactory.class));
 		install(new FactoryModuleBuilder().implement(PersonProvider.class, DefaultPersonProvider.class).build(PersonFactory.class));

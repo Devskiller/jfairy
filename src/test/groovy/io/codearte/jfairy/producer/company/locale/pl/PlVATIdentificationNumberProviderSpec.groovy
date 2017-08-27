@@ -1,12 +1,14 @@
 package io.codearte.jfairy.producer.company.locale.pl
 
 import io.codearte.jfairy.producer.BaseProducer
+import io.codearte.jfairy.producer.RandomGenerator
+import org.apache.commons.math3.random.RandomDataGenerator
 import spock.lang.Specification
 import spock.lang.Unroll
 
 class PlVATIdentificationNumberProviderSpec extends Specification {
 
-	private BaseProducer baseProducer = new BaseProducer(new Random())
+	private BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
 	private PlVATIdentificationNumberProvider generator = new PlVATIdentificationNumberProvider(baseProducer)
 
 	@Unroll

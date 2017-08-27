@@ -2,9 +2,7 @@ package io.codearte.jfairy.data;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
-
-import java.util.Random;
+import io.codearte.jfairy.producer.RandomGenerator;
 
 /**
  * @author Olga Maciaszek-Sharma
@@ -12,15 +10,15 @@ import java.util.Random;
  */
 public class DataMasterModule extends AbstractModule {
 
-	private Random random;
+	private RandomGenerator randomGenerator;
 
 	@Inject
-	public DataMasterModule(Random random) {
-		this.random = random;
+	public DataMasterModule(RandomGenerator randomGenerator) {
+		this.randomGenerator = randomGenerator;
 	}
 
 	@Override
 	protected void configure() {
-		bind(Random.class).toInstance(random);
+		bind(RandomGenerator.class).toInstance(randomGenerator);
 	}
 }

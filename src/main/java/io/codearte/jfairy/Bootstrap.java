@@ -7,7 +7,10 @@ import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.data.DataMasterModule;
 import io.codearte.jfairy.data.MapBasedDataMaster;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.util.LanguageCode;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.RandomDataGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,11 +45,9 @@ public class Bootstrap {
 
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
-	public static Fairy createFairy(DataMaster dataMaster, Locale locale, Random random) {
+	public static Fairy createFairy(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
 
-
-
-		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, random);
+		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, randomGenerator);
 
 		Injector injector = Guice.createInjector(fairyModule);
 
@@ -118,12 +119,12 @@ public class Bootstrap {
 	 * Support customized language config
 	 * @param dataMaster master of the config
 	 * @param locale The Locale to set.
-	 * @param random specific random
+	 * @param randomGenerator specific random generator
 	 * @return FariyModule instance in accordance with locale
 	 */
-	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, Random random) {
+	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
 
-		LanguageCode code = null;
+		LanguageCode code;
 		try {
 			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
 		} catch (IllegalArgumentException e) {
@@ -133,22 +134,22 @@ public class Bootstrap {
 
 		switch (code) {
 			case PL:
-				return new PlFairyModule(dataMaster, random);
+				return new PlFairyModule(dataMaster, randomGenerator);
 			case EN:
-				return new EnFairyModule(dataMaster, random);
+				return new EnFairyModule(dataMaster, randomGenerator);
 			case ES:
-				return new EsFairyModule(dataMaster, random);
+				return new EsFairyModule(dataMaster, randomGenerator);
 			case FR:
-				return new EsFairyModule(dataMaster, random);
+				return new EsFairyModule(dataMaster, randomGenerator);
 			case SV:
-				return new SvFairyModule(dataMaster, random);
+				return new SvFairyModule(dataMaster, randomGenerator);
 			case ZH:
-				return new ZhFairyModule(dataMaster, random);
+				return new ZhFairyModule(dataMaster, randomGenerator);
 			case DE:
-				return new DeFairyModule(dataMaster, random);
+				return new DeFairyModule(dataMaster, randomGenerator);
 			default:
 				LOG.info("No data for your language - using EN");
-				return new EnFairyModule(dataMaster, random);
+				return new EnFairyModule(dataMaster, randomGenerator);
 		}
 	}
 
@@ -156,12 +157,12 @@ public class Bootstrap {
 
 		private Locale locale = Locale.ENGLISH;
 		private String filePrefix = DATA_FILE_PREFIX;
-		private Random random = new Random();
+		private RandomGenerator randomGenerator = new RandomGenerator();
 		private DataMaster dataMaster;
 
 
 		private MapBasedDataMaster getDefaultDataMaster() {
-			Injector injector = Guice.createInjector(new DataMasterModule(random));
+			Injector injector = Guice.createInjector(new DataMasterModule(randomGenerator));
 			return injector.getInstance(MapBasedDataMaster.class);
 		}
 
@@ -192,25 +193,14 @@ public class Bootstrap {
 		}
 
 		/**
-		 * Sets the Random object to use to pick things randomly.
-		 *
-		 * @param random The Random to use.
-		 * @return the same Builder (for chaining).
-		 */
-		public Builder withRandom(Random random) {
-			this.random = random;
-			return this;
-		}
-
-		/**
 		 * Sets the random seed to use to pick things randomly. (If you set this, you will always
 		 * get the same result when you generate things.)
 		 *
 		 * @param randomSeed The random seed to use.
 		 * @return the same Builder (for chaining).
 		 */
-		public Builder withRandomSeed(long randomSeed) {
-			this.random = new Random(randomSeed);
+		public Builder withRandomSeed(int randomSeed) {
+			this.randomGenerator = new RandomGenerator(randomSeed);
 			return this;
 		}
 
@@ -236,7 +226,7 @@ public class Bootstrap {
 				dataMaster = getDefaultDataMaster();
 				fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
 			}
-			return createFairy(dataMaster, locale, random);
+			return createFairy(dataMaster, locale, randomGenerator);
 		}
 	}
 

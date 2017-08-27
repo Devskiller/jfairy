@@ -4,6 +4,7 @@ import io.codearte.jfairy.data.DataMaster
 import io.codearte.jfairy.data.MapBasedDataMaster
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
+import io.codearte.jfairy.producer.RandomGenerator
 import org.joda.time.DateTime
 import spock.lang.Specification
 
@@ -20,7 +21,7 @@ class CreditCardProviderSpec extends Specification {
 	private CreditCardProvider creditCardProvider;
 
 	def setup() {
-		dataMaster = new MapBasedDataMaster(new BaseProducer(new Random()))
+		dataMaster = new MapBasedDataMaster(new BaseProducer(new RandomGenerator()))
 		dateProducer = Mock(DateProducer)
 		dataMaster.readResources("jfairy.yml")
 		creditCardProvider = new CreditCardProvider(dataMaster, dateProducer)

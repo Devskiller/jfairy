@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.payment
 
 import io.codearte.jfairy.producer.BaseProducer
+import io.codearte.jfairy.producer.RandomGenerator
 import org.iban4j.IbanUtil
 import spock.lang.Specification
 
@@ -9,7 +10,7 @@ class IBANSpec extends Specification {
 	private baseProducer
 
 	def setup() {
-		baseProducer = new BaseProducer(new Random())
+		baseProducer = new BaseProducer(new RandomGenerator())
 	}
 
 	/**

@@ -13,48 +13,48 @@ class PlAddressSpec extends Specification {
 	private Address address
 
 	def setup() {
-		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("PL")).build()
+		fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.forLanguageTag("PL")).build()
 		address = fairy.person().address
 	}
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Kwarciana"
+			address.street == "Zespołowa"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "92"
+			address.streetNumber == "76"
 	}
 
     def "should generate random apartmentNumber"() {
         expect:
-            address.apartmentNumber == ""
+            address.apartmentNumber == "19"
     }
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "64-503"
+			address.postalCode == "66-450"
 	}
 
 	def "should generate random city"() {
 		expect:
-		    address.city == "Milicz"
+		    address.city == "Skaryszew"
 	}
 
 	def "should return addressLine1 in pl locale format"() {
 		expect:
-			address.addressLine1 == "Kwarciana 92"
+			address.addressLine1 == "Zespołowa 76, 19"
 	}
 
 	def "should return addressLine2 in pl locale format"() {
 		expect:
-			address.addressLine2 == "64-503 Milicz"
+			address.addressLine2 == "66-450 Skaryszew"
 	}
 
 	def "should return address in pl locale format"() {
 		expect:
-			address.toString() == "Kwarciana 92" + LINE_SEPARATOR + "64-503 Milicz"
+			address.toString() == "Zespołowa 76, 19" + System.lineSeparator() + "66-450 Skaryszew"
 	}
 
 }

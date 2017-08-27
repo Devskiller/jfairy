@@ -13,7 +13,7 @@ class EsAddressSpec extends Specification {
 	private Address address
 
 	def setup() {
-		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.forLanguageTag("ES")).build()
+		fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.forLanguageTag("ES")).build()
 		address = fairy.person().address
 	}
 
@@ -24,37 +24,37 @@ class EsAddressSpec extends Specification {
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "39"
+			address.streetNumber == "86"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == "327"
+			address.apartmentNumber == "127"
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "33.915"
+			address.postalCode == "13.391"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == "Cáceres"
+			address.city == "Palencia"
 	}
 
 	def "should return addressLine1 in es locale format"() {
 		expect:
-			address.addressLine1 == "Vieja, 39 327"
+			address.addressLine1 == "Vieja, 86 127"
 	}
 
 	def "should return addressLine2 in es locale format"() {
 		expect:
-			address.addressLine2 == "33.915 Cáceres"
+			address.addressLine2 == "13.391 Palencia"
 	}
 
 	def "should return address in es locale format"() {
 		expect:
-			address.toString() == "Vieja, 39 327" + LINE_SEPARATOR + "33.915 Cáceres"
+			address.toString() == "Vieja, 86 127" + System.lineSeparator() + "13.391 Palencia"
 	}
 
 }

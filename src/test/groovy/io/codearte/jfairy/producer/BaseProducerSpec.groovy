@@ -9,7 +9,7 @@ import spock.lang.Unroll
 
 class BaseProducerSpec extends Specification {
 
-	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
+	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()]);
 
 	def setup() {
 		baseProducer.randomBetween('0', '9') >> '7'
@@ -41,7 +41,7 @@ class BaseProducerSpec extends Specification {
 	@Unroll
 	def "should generate random number from given range #from - #to"() {
 		setup:
-		  BaseProducer randomGenerator = new BaseProducer(new Random());
+		  BaseProducer randomGenerator = new BaseProducer(new RandomGenerator())
 
 		expect:
 		  double between = randomGenerator.randomBetween(from, to)
@@ -56,7 +56,7 @@ class BaseProducerSpec extends Specification {
 		  1    | 3
 		  0    | 4
 		  48   | 57
-		  2L   | 2L
+		  2L   | 3L
 		  -5L  | -2L
 		  -3L  | 2L
 		  2.0  | 3.0
@@ -97,6 +97,7 @@ class BaseProducerSpec extends Specification {
 	}
 
 	static enum TestEnum {
+
 		A, B, C
 	}
 }

@@ -1,6 +1,7 @@
 package io.codearte.jfairy;
 
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.company.locale.es.EsVATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.AddressProvider;
@@ -12,16 +13,14 @@ import io.codearte.jfairy.producer.person.locale.es.EsAddressProvider;
 import io.codearte.jfairy.producer.person.locale.es.EsNationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.person.locale.es.EsPassportNumberProvider;
 
-import java.util.Random;
-
 /**
  * @author graux
  * @since 26.04.15
  */
 public class EsFairyModule extends FairyModule {
 
-	public EsFairyModule(DataMaster dataMaster, Random random) {
-		super(dataMaster, random);
+	public EsFairyModule(DataMaster dataMaster, RandomGenerator randomGenerator) {
+		super(dataMaster, randomGenerator);
 	}
 
 	@Override

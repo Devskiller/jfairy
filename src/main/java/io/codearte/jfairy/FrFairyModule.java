@@ -1,10 +1,9 @@
 package io.codearte.jfairy;
 
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
 import io.codearte.jfairy.producer.person.locale.NoNationalIdentificationNumberFactory;
-
-import java.util.Random;
 
 /**
  * @author graux
@@ -12,8 +11,8 @@ import java.util.Random;
  */
 public class FrFairyModule extends FairyModule {
 
-	public FrFairyModule(DataMaster dataMaster, Random random) {
-		super(dataMaster, random);
+	public FrFairyModule(DataMaster dataMaster, RandomGenerator randomGenerator) {
+		super(dataMaster, randomGenerator);
 	}
 
 	@Override

@@ -49,8 +49,9 @@ repositories {
 }
 
 dependencies {
-	compile 'org.yaml:snakeyaml:[1.9,2.0)'
+	compile 'org.yaml:snakeyaml:1.9'
 	compile 'org.apache.commons:commons-lang3:3.6'
+	compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 	compile 'com.google.guava:guava:20.0'
 	compile 'org.slf4j:slf4j-api:1.7.25'
 	compile 'joda-time:joda-time:2.9.9'

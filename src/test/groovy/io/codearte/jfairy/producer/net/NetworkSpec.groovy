@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.net
 
 import io.codearte.jfairy.producer.BaseProducer
+import io.codearte.jfairy.producer.RandomGenerator
 import org.apache.commons.validator.routines.InetAddressValidator
 import spock.lang.Specification
 
@@ -8,7 +9,7 @@ class NetworkSpec extends Specification {
 
 	private InetAddressValidator ipValidator = InetAddressValidator.getInstance();
 
-	private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new Random()));
+	private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new RandomGenerator()));
 	private NetworkProducer network = new NetworkProducer(ipNumber)
 
 	def "Should generate proper ip number"() {

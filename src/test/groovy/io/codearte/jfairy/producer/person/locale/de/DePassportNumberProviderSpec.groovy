@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.person.locale.de
 
 import io.codearte.jfairy.producer.BaseProducer
+import io.codearte.jfairy.producer.RandomGenerator
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -9,7 +10,7 @@ import spock.lang.Unroll
  */
 class DePassportNumberProviderSpec extends Specification {
 
-	private BaseProducer baseProducer = new BaseProducer(new Random())
+	private BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
 	private DePassportNumberProvider generator = new DePassportNumberProvider(baseProducer)
 
 	@Unroll

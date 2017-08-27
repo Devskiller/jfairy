@@ -34,11 +34,11 @@ public abstract class AbstractAddressProvider implements AddressProvider {
 	}
 
 	public String getStreetNumber() {
-		return String.valueOf(baseProducer.randomInt(199));
+		return String.valueOf(baseProducer.randomBetween(1, 199));
 	}
 
 	public String getApartmentNumber() {
-		return baseProducer.trueOrFalse() ? String.valueOf(baseProducer.randomInt(350)) : "";
+		return baseProducer.trueOrFalse() ? String.valueOf(baseProducer.randomBetween(1, 350)) : "";
 	}
 
 }

@@ -6,20 +6,20 @@ import spock.lang.Specification
 class FairyFrSpec extends Specification {
 
 	private final int SEED = 7
-	private Fairy fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.FRENCH).build()
+	private Fairy fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.FRENCH).build()
 
 	def "Should create French name"() {
 		when:
 			Person person = fairy.person();
 		then:
-			person.fullName == 'Normand Besnard'
+			person.fullName == 'Tancrède Besnard'
 	}
 
 	def "Should create French city"() {
 		when:
 			Person person = fairy.person();
 		then:
-			person.address.city == 'Six-Fours-les-Plages'
+			person.address.city == 'Conflans-Sainte-Honorine'
 	}
 
 }

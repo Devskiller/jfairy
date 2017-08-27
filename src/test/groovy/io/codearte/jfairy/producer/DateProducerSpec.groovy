@@ -3,6 +3,7 @@
  */
 package io.codearte.jfairy.producer
 
+import org.apache.commons.math3.random.RandomDataGenerator
 import org.joda.time.DateTime
 import org.joda.time.Period
 import spock.lang.Specification
@@ -23,7 +24,7 @@ class DateProducerSpec extends Specification {
 	private static final SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.getMillis()
 	private static final FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.getMillis()
 
-	private baseProducer = Spy(BaseProducer, constructorArgs: [new Random()])
+	private baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()])
 	private timeProviderMock = Mock(TimeProvider)
 	private DateProducer sut = new DateProducer(baseProducer, timeProviderMock)
 
@@ -83,7 +84,7 @@ class DateProducerSpec extends Specification {
 		where:
 			fromYear | toYear || expectedDate
 			2009     | 2010   || new DateTime("2009-12-31T23:59:59.999")
-			2010     | 2010   || new DateTime("2010-07-02T11:59:59.999")
+			2010     | 2010   || new DateTime("2010-07-02T12:59:59.999")
 			2015     | 2020   || new DateTime("2017-12-31T23:59:59.999")
 	}
 

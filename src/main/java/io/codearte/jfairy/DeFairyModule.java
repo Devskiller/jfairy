@@ -1,6 +1,7 @@
 package io.codearte.jfairy;
 
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.company.locale.de.DeVATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.AddressProvider;
@@ -19,8 +20,8 @@ import java.util.Random;
  */
 public class DeFairyModule extends FairyModule {
 
-	public DeFairyModule(DataMaster dataMaster, Random random) {
-		super(dataMaster, random);
+	public DeFairyModule(DataMaster dataMaster, RandomGenerator randomGenerator) {
+		super(dataMaster, randomGenerator);
 	}
 
 	@Override

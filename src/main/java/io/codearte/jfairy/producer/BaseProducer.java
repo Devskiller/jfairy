@@ -1,23 +1,20 @@
 package io.codearte.jfairy.producer;
 
-import com.google.common.base.Preconditions;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-import static java.util.Collections.shuffle;
+import com.google.common.base.Preconditions;
 
 @Singleton
 public class BaseProducer {
 
-	private final Random random;
+	private final RandomGenerator random;
 
 	@Inject
-	public BaseProducer(Random random) {
+	public BaseProducer(RandomGenerator random) {
 		this.random = random;
 	}
 
@@ -85,7 +82,7 @@ public class BaseProducer {
 	}
 
 	private <T> List<T> extractRandomList(List<T> elements, int count) {
-		shuffle(elements, random);
+		random.shuffle(elements);
 		return elements.subList(0, count);
 	}
 
@@ -109,9 +106,7 @@ public class BaseProducer {
 	 * @return random {@code int} value between {@code min} (inclusive) and {@code max} (inclusive)
 	 */
 	public int randomBetween(int min, int max) {
-		int range = max - min + 1;
-		int randomInt = range > 0 ? this.random.nextInt(range) : 0;
-		return min + randomInt;
+		return random.nextInt(min, max);
 	}
 
 	/**
@@ -138,10 +133,7 @@ public class BaseProducer {
 	 * @return pseudorandom {@code long} value between {@code mon} (inclusive) and {@code max} (inclusive)
 	 */
 	public long randomBetween(long min, long max) {
-		Preconditions.checkArgument(min <= max, "%s has to be <= %s", min, max);
-		//Can it be done easier for long numbers?
-		long range = (max - min) + 1;
-		return min + (long) (random.nextDouble() * range);
+		return random.nextDouble(min, max);
 	}
 
 	/**
@@ -152,9 +144,7 @@ public class BaseProducer {
 	 * @return random {@code double} value between {@code min} (inclusive) and {@code max} (inclusive)
 	 */
 	public double randomBetween(double min, double max) {
-		double range = max - min;
-		double randomDouble = range > 0 ? this.random.nextDouble() * range : 0;
-		return min + randomDouble;
+		return random.nextDouble(min, max);
 	}
 
 	/**

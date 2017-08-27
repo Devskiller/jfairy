@@ -12,7 +12,7 @@ import spock.lang.Specification
  */
 class FairyZhSpec extends Specification {
 	private final int SEED = 0
-	private Fairy fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.CHINA).build()
+	private Fairy fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.CHINA).build()
 
 	/********************
 	 * Person
@@ -42,7 +42,7 @@ class FairyZhSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.addressLine1 == '南京市外环西路145号'
+		person.address.addressLine1 == '南京市外环西路85号'
 	}
 
 	def "Should create Chinese city"() {

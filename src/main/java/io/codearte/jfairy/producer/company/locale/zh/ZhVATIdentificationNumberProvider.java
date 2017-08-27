@@ -1,7 +1,9 @@
 package io.codearte.jfairy.producer.company.locale.zh;
 
 import io.codearte.jfairy.producer.BaseProducer;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
+import org.apache.commons.math3.random.RandomDataGenerator;
 
 import java.util.Random;
 
@@ -17,7 +19,7 @@ import static io.codearte.jfairy.producer.util.ZhFairyUtil.*;
  */
 public class ZhVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-	private static BaseProducer baseProducer = new BaseProducer(new Random());
+	private static BaseProducer baseProducer = new BaseProducer(new RandomGenerator());
 
 	@Override
 	public String get() {

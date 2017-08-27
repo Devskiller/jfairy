@@ -2,8 +2,6 @@ package io.codearte.jfairy.producer.util;
 
 import io.codearte.jfairy.producer.BaseProducer;
 
-import java.util.Random;
-
 /**
  * io.codearte.jfairy.producer.util.ZhFairyUtil
  *

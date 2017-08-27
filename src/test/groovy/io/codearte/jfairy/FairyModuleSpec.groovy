@@ -1,6 +1,7 @@
 package io.codearte.jfairy
 
 import io.codearte.jfairy.data.MapBasedDataMaster
+import io.codearte.jfairy.producer.RandomGenerator
 import spock.lang.Specification
 
 /**
@@ -13,7 +14,7 @@ class FairyModuleSpec extends Specification {
 
 	def "should generate appropriate FairyModule for locale"() {
 		when:
-			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(mapBasedDataMaster, Locale.forLanguageTag(locale), new Random())
+			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(mapBasedDataMaster, Locale.forLanguageTag(locale), new RandomGenerator())
 
 		then:
 			fairyModule.getClass() == module
@@ -27,7 +28,7 @@ class FairyModuleSpec extends Specification {
 
 	def "should generate appropriate FairyModule when no locale passed"() {
 		when:
-			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(mapBasedDataMaster, Locale.forLanguageTag(locale), new Random())
+			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(mapBasedDataMaster, Locale.forLanguageTag(locale), new RandomGenerator())
 
 		then:
 			fairyModule.getClass() == module

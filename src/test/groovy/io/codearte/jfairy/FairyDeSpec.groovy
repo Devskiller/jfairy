@@ -9,7 +9,7 @@ import spock.lang.Specification
 class FairyDeSpec extends Specification {
 
 	private final int SEED = 186
-	private Fairy fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.GERMAN).build()
+	private Fairy fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.GERMAN).build()
 
 	def "Should create German name"() {
 		when:
@@ -22,7 +22,7 @@ class FairyDeSpec extends Specification {
 		when:
 			Person person = fairy.person();
 		then:
-			person.address.city == 'Oberursel Taunus'
+			person.address.city == 'Schlitz'
 	}
 
 }

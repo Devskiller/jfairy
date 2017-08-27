@@ -1,6 +1,7 @@
 package io.codearte.jfairy;
 
 import io.codearte.jfairy.data.DataMaster;
+import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.company.locale.zh.ZhVATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.*;
@@ -18,8 +19,8 @@ import java.util.Random;
  * @since 2017/03/01
  */
 public class ZhFairyModule extends FairyModule {
-	public ZhFairyModule(DataMaster dataMaster, Random random) {
-		super(dataMaster, random);
+	public ZhFairyModule(DataMaster dataMaster, RandomGenerator randomGenerator) {
+		super(dataMaster, randomGenerator);
 	}
 
 	@Override

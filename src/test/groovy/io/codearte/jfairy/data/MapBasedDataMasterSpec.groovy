@@ -5,12 +5,14 @@
 package io.codearte.jfairy.data
 
 import io.codearte.jfairy.producer.BaseProducer
+import io.codearte.jfairy.producer.RandomGenerator
 import io.codearte.jfairy.producer.person.PersonProvider
+import org.apache.commons.math3.random.RandomDataGenerator
 import spock.lang.Specification
 
 class MapBasedDataMasterSpec extends Specification {
 
-	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new Random()]);
+	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()]);
 	private MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
 
 	def setup() {

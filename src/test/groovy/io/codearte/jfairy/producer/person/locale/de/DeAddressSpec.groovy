@@ -13,28 +13,28 @@ class DeAddressSpec extends Specification {
 	private Address address
 
 	def setup() {
-		fairy = Fairy.builder().withRandom(new Random(SEED)).withLocale(Locale.GERMAN).build()
+		fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.GERMAN).build()
 		address = fairy.person().address
 	}
 
 	def "should generate random street"() {
 		expect:
-			address.street == 'Messelweg'
+			address.street == 'Riehler Straße'
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == '176'
+			address.streetNumber == '155'
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == ''
+			address.apartmentNumber == '224'
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == '15286'
+			address.postalCode == '91528'
 	}
 
 	def "should generate random city"() {
@@ -44,17 +44,17 @@ class DeAddressSpec extends Specification {
 
 	def "should return addressLine1 in de locale format"() {
 		expect:
-			address.addressLine1 == 'Messelweg 176'
+			address.addressLine1 == 'Riehler Straße 155, 224'
 	}
 
 	def "should return addressLine2 in de locale format"() {
 		expect:
-			address.addressLine2 == '15286 Schlitz'
+			address.addressLine2 == '91528 Schlitz'
 	}
 
 	def "should return address in de locale format"() {
 		expect:
-			address.toString() == "Messelweg 176${LINE_SEPARATOR}15286 Schlitz"
+			address.toString() == "Riehler Straße 155, 224${System.lineSeparator()}91528 Schlitz"
 	}
 
 }
