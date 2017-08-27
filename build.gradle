@@ -49,7 +49,7 @@ repositories {
 }
 
 dependencies {
-	compile 'org.yaml:snakeyaml:1.9'
+	compile 'org.yaml:snakeyaml:1.18'
 	compile 'org.apache.commons:commons-lang3:3.6'
 	compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 	compile 'com.google.guava:guava:20.0'
