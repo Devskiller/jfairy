@@ -1,61 +1,25 @@
 package io.codearte.jfairy.producer.person.locale.en;
 
 import io.codearte.jfairy.producer.person.Address;
+import io.codearte.jfairy.producer.person.locale.AbstractAddress;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 
-public class EnAddress implements Address {
-
-	private final String streetNumber;
-
-	private final String street;
-
-	private final String apartmentNumber;
-
-	private final String city;
-
-	private final String postalCode;
+public class EnAddress extends AbstractAddress {
 
 	public EnAddress(String streetNumber, String street, String apartmentNumber, String city, String postalCode) {
-		this.streetNumber = streetNumber;
-		this.street = street;
-		this.apartmentNumber = apartmentNumber;
-		this.city = city;
-		this.postalCode = postalCode;
+		super(street, streetNumber, apartmentNumber, postalCode, city);
 	}
 
-	public String getStreetNumber() {
-		return streetNumber;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public String getApartmentNumber() {
-		return apartmentNumber;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
+	@Override
 	public String getAddressLine1() {
 		return streetNumber + " " + street
 				+ (isNotBlank(apartmentNumber) ? " APT " + apartmentNumber : "");
 	}
 
+	@Override
 	public String getAddressLine2() {
 		return city + " " + postalCode;
-	}
-
-	@Override
-	public String toString() {
-		return getAddressLine1() + LINE_SEPARATOR + getAddressLine2();
 	}
 }
