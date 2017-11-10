@@ -5,11 +5,11 @@ import io.codearte.jfairy.producer.RandomGenerator
 import spock.lang.Specification
 
 class GeNationalIdentityCardNumberProviderSpec extends Specification {
-	private GeNationalIdentityCardNumberProvider generator
+	private GeNationalIdentityCardNumberProvider provider
 
 	def setup() {
 		BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
-		generator = new GeNationalIdentityCardNumberProvider(baseProducer)
+		provider = new GeNationalIdentityCardNumberProvider(baseProducer)
 	}
 
 	private boolean isOldIdCardNumber(String id) {
@@ -26,7 +26,7 @@ class GeNationalIdentityCardNumberProviderSpec extends Specification {
 
 	def "Should always generate proper nationalIdentityCardNumber"() {
 		expect:
-		isIdCardNumber(generator.get())
+		isIdCardNumber(provider.get())
 		where:
 		i << (1..100)
 	}
