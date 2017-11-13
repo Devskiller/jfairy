@@ -1,15 +1,15 @@
-package io.codearte.jfairy.producer.person.locale.ge
+package io.codearte.jfairy.producer.person.locale.ka
 
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.RandomGenerator
 import spock.lang.Specification
 
-class GeNationalIdentityCardNumberProviderSpec extends Specification {
-	private GeNationalIdentityCardNumberProvider provider
+class KaNationalIdentityCardNumberProviderSpec extends Specification {
+	private KaNationalIdentityCardNumberProvider provider
 
 	def setup() {
 		BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
-		provider = new GeNationalIdentityCardNumberProvider(baseProducer)
+		provider = new KaNationalIdentityCardNumberProvider(baseProducer)
 	}
 
 	private boolean isOldIdCardNumber(String id) {

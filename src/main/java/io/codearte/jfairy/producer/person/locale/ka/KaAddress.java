@@ -1,11 +1,11 @@
-package io.codearte.jfairy.producer.person.locale.ge;
+package io.codearte.jfairy.producer.person.locale.ka;
 
 import io.codearte.jfairy.producer.person.locale.AbstractAddress;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class GeAddress extends AbstractAddress {
-	public GeAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
+public class KaAddress extends AbstractAddress {
+	public KaAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
 		super(street, streetNumber, apartmentNumber, postalCode, city);
 	}
 

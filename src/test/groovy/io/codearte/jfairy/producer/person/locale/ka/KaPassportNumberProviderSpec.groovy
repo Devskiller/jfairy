@@ -1,15 +1,15 @@
-package io.codearte.jfairy.producer.person.locale.ge
+package io.codearte.jfairy.producer.person.locale.ka
 
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.RandomGenerator
 import spock.lang.Specification
 
-class GePassportNumberProviderSpec extends Specification {
-	private GePassportNumberProvider provider
+class KaPassportNumberProviderSpec extends Specification {
+	private KaPassportNumberProvider provider
 
 	def setup() {
 		BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
-		provider = new GePassportNumberProvider(baseProducer)
+		provider = new KaPassportNumberProvider(baseProducer)
 	}
 
 	def isValidPassportNumber(String id) {

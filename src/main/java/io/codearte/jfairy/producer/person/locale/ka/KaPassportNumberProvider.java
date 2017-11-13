@@ -1,16 +1,16 @@
-package io.codearte.jfairy.producer.person.locale.ge;
+package io.codearte.jfairy.producer.person.locale.ka;
 
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.person.PassportNumberProvider;
 
 import javax.inject.Inject;
 
-public class GePassportNumberProvider implements PassportNumberProvider {
+public class KaPassportNumberProvider implements PassportNumberProvider {
 
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public GePassportNumberProvider(BaseProducer baseProducer) {
+	public KaPassportNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 

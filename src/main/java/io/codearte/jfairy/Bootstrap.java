@@ -144,7 +144,7 @@ public class Bootstrap {
 			case DE:
 				return new DeFairyModule(dataMaster, randomGenerator);
 			case KA:
-				return new GeFairyModule(dataMaster, randomGenerator);
+				return new KaFairyModule(dataMaster, randomGenerator);
 			default:
 				LOG.info("No data for your language - using EN");
 				return new EnFairyModule(dataMaster, randomGenerator);

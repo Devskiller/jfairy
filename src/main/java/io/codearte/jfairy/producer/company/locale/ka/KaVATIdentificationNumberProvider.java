@@ -1,15 +1,15 @@
-package io.codearte.jfairy.producer.company.locale.ge;
+package io.codearte.jfairy.producer.company.locale.ka;
 
 import com.google.inject.Inject;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 
-public class GeVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
+public class KaVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
 	private final BaseProducer baseProducer;
 
 	@Inject
-	public GeVATIdentificationNumberProvider(BaseProducer baseProducer) {
+	public KaVATIdentificationNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 

@@ -1,4 +1,4 @@
-package io.codearte.jfairy.producer.person.locale.ge
+package io.codearte.jfairy.producer.person.locale.ka
 
 import io.codearte.jfairy.Fairy
 import io.codearte.jfairy.producer.person.Address
@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 import static java.lang.System.lineSeparator
 
-class GeAddressSpec extends Specification {
+class KaAddressSpec extends Specification {
 	private final int SEED = 8
 
 	private Fairy fairy

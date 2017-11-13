@@ -3,7 +3,7 @@ package io.codearte.jfairy
 import io.codearte.jfairy.producer.person.Person
 import spock.lang.Specification
 
-class FairyGeSpec extends Specification {
+class FairyKaSpec extends Specification {
 
 	private final int SEED = 2
 	private Locale geLocale = new Locale.Builder().setLanguage("ka").setRegion("ge").setScript("Geor").build();

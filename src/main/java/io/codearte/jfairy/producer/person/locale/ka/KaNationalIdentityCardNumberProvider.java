@@ -1,4 +1,4 @@
-package io.codearte.jfairy.producer.person.locale.ge;
+package io.codearte.jfairy.producer.person.locale.ka;
 
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
@@ -6,7 +6,7 @@ import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import javax.inject.Inject;
 import java.util.function.Supplier;
 
-public class GeNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
+public class KaNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	private static class OldCardNumberProvider implements NationalIdentityCardNumberProvider {
 		private static char[] GEORGIAN_CHAR = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ".toCharArray();
@@ -42,7 +42,7 @@ public class GeNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final Supplier<NationalIdentityCardNumberProvider> formatPicker;
 
 	@Inject
-	public GeNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+	public KaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		NationalIdentityCardNumberProvider oldCardNumberProvider = new OldCardNumberProvider(baseProducer);
 		NationalIdentityCardNumberProvider newCardNumberProvider = new NewCardNumberProvider(baseProducer);
 		formatPicker = () -> baseProducer.randomElement(oldCardNumberProvider, newCardNumberProvider);
