@@ -9,6 +9,7 @@ public enum LanguageCode {
 	EN,
 	ES,
 	FR,
+	KA,
 	IT,
 	DE,
 	SV,

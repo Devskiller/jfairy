@@ -1,6 +1,5 @@
 package io.codearte.jfairy;
 
-import com.google.common.base.Optional;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -9,15 +8,12 @@ import io.codearte.jfairy.data.DataMasterModule;
 import io.codearte.jfairy.data.MapBasedDataMaster;
 import io.codearte.jfairy.producer.RandomGenerator;
 import io.codearte.jfairy.producer.util.LanguageCode;
-import org.apache.commons.math3.random.JDKRandomGenerator;
-import org.apache.commons.math3.random.RandomDataGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.Random;
 
 /**
  * <p>Using a {@link #builder()}, you can configure the following fields:</p>
@@ -147,6 +143,8 @@ public class Bootstrap {
 				return new ZhFairyModule(dataMaster, randomGenerator);
 			case DE:
 				return new DeFairyModule(dataMaster, randomGenerator);
+			case KA:
+				return new KaFairyModule(dataMaster, randomGenerator);
 			default:
 				LOG.info("No data for your language - using EN");
 				return new EnFairyModule(dataMaster, randomGenerator);
