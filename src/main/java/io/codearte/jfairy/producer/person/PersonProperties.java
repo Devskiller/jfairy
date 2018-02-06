@@ -207,4 +207,11 @@ public final class PersonProperties {
 		};
 	}
 
+	public static PersonProperty withJobTitle(final String jobTitle) {
+		return new PersonProperty() {
+			@Override
+			public void apply(PersonProvider personProvider, BaseProducer baseProducer) {
+				personProvider.setJobTitle(jobTitle);
+			}
+		};	}
 }

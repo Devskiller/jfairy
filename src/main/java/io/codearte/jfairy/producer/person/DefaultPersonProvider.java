@@ -31,6 +31,7 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected String username;
 	protected String telephoneNumber;
 	protected String password;
+	protected String jobTitle;
 	protected String companyEmail;
 	protected String nationalIdentityCardNumber;
 	protected String nationalIdentificationNumber;
@@ -92,11 +93,12 @@ public class DefaultPersonProvider implements PersonProvider {
 		generateNationalIdentificationNumber();
 		generatePassportNumber();
 		generateAddress();
+		generateJobTitle();
 
 		return new Person(firstName, middleName, lastName, address, email,
 			username, password, sex, telephoneNumber, dateOfBirth, age,
 			nationalIdentityCardNumber, nationalIdentificationNumber, passportNumber,
-			company, companyEmail);
+			company, companyEmail, jobTitle);
 	}
 
 	@Override
@@ -246,6 +248,15 @@ public class DefaultPersonProvider implements PersonProvider {
 	}
 
 	@Override
+	public void generateJobTitle() {
+		if (jobTitle != null) {
+			return;
+		}
+		jobTitle = dataMaster.getRandomValue(JOB_TITLE);
+	}
+
+
+	@Override
 	public void setTelephoneNumberFormat(String telephoneFormat) {
 		telephoneNumberFormat = telephoneFormat;
 	}
@@ -329,6 +340,9 @@ public class DefaultPersonProvider implements PersonProvider {
 	public void setPassportNumber(String passportNumber) {
 		this.passportNumber = passportNumber;
 	}
+
+	@Override
+	public void setJobTitle(String JobTitle) { this.jobTitle=JobTitle; }
 }
 
 
