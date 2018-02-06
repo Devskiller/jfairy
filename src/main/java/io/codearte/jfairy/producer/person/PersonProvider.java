@@ -30,6 +30,8 @@ public interface PersonProvider extends Provider<Person> {
 	String PERSONAL_EMAIL = "personalEmails";
 	@VisibleForTesting
 	String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
+	@VisibleForTesting
+	String JOB_TITLE = "jobTitles";
 
 	@Override
 	Person get();
@@ -57,6 +59,8 @@ public interface PersonProvider extends Provider<Person> {
 	void generateCompanyEmail();
 
 	void generatePassword();
+
+	void generateJobTitle();
 
 	void generateNationalIdentityCardNumber();
 
@@ -99,6 +103,8 @@ public interface PersonProvider extends Provider<Person> {
 	void setNationalIdentificationNumber(String nationalIdentificationNumber);
 
 	void setPassportNumber(String passportNumber);
+
+	void setJobTitle(String jobTitle);
 }
 
 

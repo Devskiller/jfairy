@@ -23,6 +23,7 @@ import static io.codearte.jfairy.producer.person.PersonProperties.withCompanyEma
 import static io.codearte.jfairy.producer.person.PersonProperties.withDateOfBirth
 import static io.codearte.jfairy.producer.person.PersonProperties.withEmail
 import static io.codearte.jfairy.producer.person.PersonProperties.withFirstName
+import static io.codearte.jfairy.producer.person.PersonProperties.withJobTitle
 import static io.codearte.jfairy.producer.person.PersonProperties.withLastName
 import static io.codearte.jfairy.producer.person.PersonProperties.withMiddleName
 import static io.codearte.jfairy.producer.person.PersonProperties.withNationalIdentificationNumber
@@ -71,6 +72,7 @@ class PersonSpec extends Specification {
 			person.male || person.female
 			person.nationalIdentityCardNumber
 			person.address
+			person.jobTitle
 
 			emailValidator.isValid(person.email)
 	}
@@ -263,6 +265,13 @@ class PersonSpec extends Specification {
 			Person person = fairy.person(withUsername("specificusername"))
 		then:
 			person.username == "specificusername"
+	}
+
+	def "withJobTitle should create person with specific job title"() {
+		when:
+		Person person = fairy.person(withJobTitle("really great job title"))
+		then:
+		person.jobTitle == "really great job title"
 	}
 
 	def "withTelephoneNumber should create person with specific telephoneNumber"() {

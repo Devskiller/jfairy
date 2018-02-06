@@ -13,7 +13,7 @@ data:
   companyNames: [Alist, Beans, Klein, Felics, Adapt, MemorTech, Porta, SuperMemo, Nonos, Vitae, Woods, Quisuc, Quicker, Interdem, Morsem, Datastore, Linger, Buapel, Terson, Gualas, Yrsa, Warst, Erntogra, Robutenia, QuickLink, Furba, Hostes, FlyHigh]
   companySuffixes: [SpA, srl, snc, sas]
   companyEmails: [info, segreteria, personale, direzione, amministrazione, magazzino]
-
+  jobTitles: [project manager, sviluppatore, designer, tester, integratore, scrum master, consulente]
   text: Nel mezzo del cammin di nostra vita mi ritrovai per una selva oscura, ché la diritta via era smarrita. Ahi quanto a dir qual era è cosa dura esta selva selvaggia e aspra e forte che nel pensier rinova la paura! Tant’è amara che poco è più morte; ma per trattar del ben ch’i’ vi trovai, dirò de l’altre cose ch’i’ v’ ho scorte.
 
   telephone_number_formats: ['##-#######', '###-#######']
