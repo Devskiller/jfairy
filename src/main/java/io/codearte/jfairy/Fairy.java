@@ -3,7 +3,6 @@
  */
 package io.codearte.jfairy;
 
-
 import com.google.inject.Provider;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
@@ -14,6 +13,9 @@ import io.codearte.jfairy.producer.company.CompanyProperties;
 import io.codearte.jfairy.producer.net.NetworkProducer;
 import io.codearte.jfairy.producer.payment.CreditCard;
 import io.codearte.jfairy.producer.payment.CreditCardProvider;
+import io.codearte.jfairy.producer.payment.IBAN;
+import io.codearte.jfairy.producer.payment.IBANFactory;
+import io.codearte.jfairy.producer.payment.IBANProperties;
 import io.codearte.jfairy.producer.person.Person;
 import io.codearte.jfairy.producer.person.PersonFactory;
 import io.codearte.jfairy.producer.person.PersonProperties;
@@ -31,10 +33,12 @@ public final class Fairy {
 	private final DateProducer dateProducer;
 	private final CreditCardProvider creditCardProvider;
 	private final CompanyFactory companyFactory;
+	private final IBANFactory ibanFactory;
 
 	@Inject
 	Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
-		  BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider, CompanyFactory companyFactory) {
+	      BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider,
+	      CompanyFactory companyFactory, IBANFactory ibanFactory) {
 		this.textProducer = textProducer;
 		this.personFactory = personFactory;
 		this.networkProducer = networkProducer;
@@ -42,6 +46,7 @@ public final class Fairy {
 		this.dateProducer = dateProducer;
 		this.creditCardProvider = creditCardProvider;
 		this.companyFactory = companyFactory;
+		this.ibanFactory = ibanFactory;
 	}
 
 	public static Fairy create() {
@@ -101,6 +106,25 @@ public final class Fairy {
 
 	public DateProducer dateProducer() {
 		return dateProducer;
+	}
+
+	/**
+	 * Use this method for generating IBAN (International Bank Account Number)
+	 *
+	 * @return A {@link io.codearte.jfairy.producer.payment.IBAN} instance
+	 */
+	public IBAN iban() {
+		return ibanFactory.produceIBANProvider().get();
+	}
+
+	/**
+	 * Use this method for generating IBAN (International Bank Account Number)
+	 *
+	 * @param properties desired IBAN features
+	 * @return A {@link io.codearte.jfairy.producer.payment.IBAN} instance
+	 */
+	public IBAN iban(IBANProperties.Property... properties) {
+		return ibanFactory.produceIBANProvider(properties).get();
 	}
 
 	public CreditCard creditCard() {

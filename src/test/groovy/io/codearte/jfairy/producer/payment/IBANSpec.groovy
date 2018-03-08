@@ -1,5 +1,6 @@
 package io.codearte.jfairy.producer.payment
 
+import io.codearte.jfairy.Fairy
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.RandomGenerator
 import org.iban4j.IbanUtil
@@ -23,8 +24,8 @@ class IBANSpec extends Specification {
 	def "should return valid iban"() {
 		when:
 			IBANProvider iban = new DefaultIBANProvider(baseProducer,
-					IBANProperties.accountNumber("00234573201"),
-					IBANProperties.country("AT")
+				IBANProperties.accountNumber("00234573201"),
+				IBANProperties.country("AT")
 			);
 
 		then:
@@ -46,5 +47,12 @@ class IBANSpec extends Specification {
 			IBANProvider iban = new DefaultIBANProvider(baseProducer)
 		then:
 			IbanUtil.validate(iban.get().ibanNumber);
+	}
+
+	def "should be usable directly from Fairy"() {
+		when:
+			String number = Fairy.create().iban(IBANProperties.country("PL")).ibanNumber
+		then:
+			number.startsWith('PL')
 	}
 }
