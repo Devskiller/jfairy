@@ -27,3 +27,4 @@ data:
 
   country: ['España'] #, 'Argentina', 'Uruguay', 'Mexico', 'Chile', 'Colombia', 'Venezuela', 'Cuba', 'Ecuador', 'Honduras', 'Perú']
 
+  defaultCountryCode: 'ES'

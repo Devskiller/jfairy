@@ -1,30 +1,12 @@
 package io.codearte.jfairy.producer.payment;
 
 import com.google.inject.Provider;
-import org.iban4j.bban.BbanEntryType;
-import org.iban4j.bban.BbanStructureEntry;
 
-
-/**
- * ALPHA: Under development
- */
 public interface IBANProvider extends Provider<IBAN> {
 
 	IBAN get();
 
-	String nationalCheckDigit(String value);
-
-	void fillNationalCheckDigit();
-
-	void fillBranchCode();
-
-	void fillBankCode();
-
-	void fillAccountNumber();
-
 	void fillCountryCode();
-
-	String generateRequiredData(BbanEntryType type);
 
 	void setNationalCheckDigit(String nationalCheckDigit);
 
