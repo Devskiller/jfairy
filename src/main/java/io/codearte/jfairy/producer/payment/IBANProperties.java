@@ -1,6 +1,26 @@
 package io.codearte.jfairy.producer.payment;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import io.codearte.jfairy.producer.util.LanguageCode;
+import org.iban4j.CountryCode;
+
 public final class IBANProperties {
+
+	private final static HashMap<LanguageCode, CountryCode> COUNTRIES = new HashMap<>();
+
+	static {
+		COUNTRIES.put(LanguageCode.PL, CountryCode.PL);
+		COUNTRIES.put(LanguageCode.EN, CountryCode.GB);
+		COUNTRIES.put(LanguageCode.ES, CountryCode.ES);
+		COUNTRIES.put(LanguageCode.FR, CountryCode.FR);
+		COUNTRIES.put(LanguageCode.KA, CountryCode.GE);
+		COUNTRIES.put(LanguageCode.IT, CountryCode.IT);
+		COUNTRIES.put(LanguageCode.DE, CountryCode.DE);
+		COUNTRIES.put(LanguageCode.SV, CountryCode.SV);
+		COUNTRIES.put(LanguageCode.ZH, CountryCode.TW);
+	}
 
 	private IBANProperties() {
 	}
@@ -47,6 +67,24 @@ public final class IBANProperties {
 				provider.setCountry(country);
 			}
 		};
+	}
+
+	public static Property language(final String language) {
+		return new Property() {
+			@Override
+			public void apply(IBANProvider provider) {
+				provider.setCountry(countryFromLanguage(language));
+			}
+		};
+	}
+
+	private static String countryFromLanguage(String lang) {
+		return COUNTRIES.entrySet().stream()
+			.filter(locale -> locale.getKey().name().equals(lang))
+			.map(Map.Entry::getValue)
+			.map(CountryCode::getAlpha2)
+			.findFirst()
+			.orElse("PL");
 	}
 
 	public static Property bankCode(final String bankCode) {

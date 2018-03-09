@@ -25,3 +25,5 @@ data:
   street: [Via Roma, P.zza Italia, L.go Augusto, Via G. Matteotti, Piazza G. Cesare, Corso Italia, Corso Mediterraneo, P.zza Aspromonte, Via Caduti di Guerra, Via Miseno, Via Lambro, Via A. Diaz]
 
   country: ['Italia', 'Francia', 'Germania', 'Spagna']
+
+  defaultCountryCode: 'IT'

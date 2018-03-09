@@ -1,6 +1,8 @@
 package io.codearte.jfairy.producer.payment
 
 import io.codearte.jfairy.Fairy
+import io.codearte.jfairy.data.DataMaster
+import io.codearte.jfairy.data.MapBasedDataMaster
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.RandomGenerator
 import org.iban4j.IbanUtil
@@ -8,10 +10,12 @@ import spock.lang.Specification
 
 class IBANSpec extends Specification {
 
-	private baseProducer
+	private DataMaster dataMaster
 
 	def setup() {
-		baseProducer = new BaseProducer(new RandomGenerator())
+		BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
+		dataMaster = new MapBasedDataMaster(baseProducer);
+		dataMaster.readResources("jfairy_pl.yml")
 	}
 
 	/**
@@ -23,7 +27,7 @@ class IBANSpec extends Specification {
 	 */
 	def "should return valid iban"() {
 		when:
-			IBANProvider iban = new DefaultIBANProvider(baseProducer,
+			IBANProvider iban = new DefaultIBANProvider(dataMaster,
 				IBANProperties.accountNumber("00234573201"),
 				IBANProperties.country("AT")
 			);
@@ -44,7 +48,7 @@ class IBANSpec extends Specification {
 
 	def "should return valid polish iban"() {
 		when:
-			IBANProvider iban = new DefaultIBANProvider(baseProducer)
+			IBANProvider iban = new DefaultIBANProvider(dataMaster)
 		then:
 			IbanUtil.validate(iban.get().ibanNumber);
 	}
@@ -54,5 +58,26 @@ class IBANSpec extends Specification {
 			String number = Fairy.create().iban(IBANProperties.country("PL")).ibanNumber
 		then:
 			number.startsWith('PL')
+	}
+
+	def "should ignore countries not supporting iban"() {
+		when:
+			def iban = Fairy.create().iban(IBANProperties.country("US"))
+		then:
+			iban == null
+	}
+
+	def "should set proper country for specified language"() {
+		when:
+			String number = Fairy.create().iban(IBANProperties.language("DE")).ibanNumber
+		then:
+			number.startsWith('DE')
+	}
+
+	def "should set proper country for according to selected language"() {
+		when:
+			String number = Fairy.create(Locale.ENGLISH).iban().ibanNumber
+		then:
+			number.startsWith('GB')
 	}
 }

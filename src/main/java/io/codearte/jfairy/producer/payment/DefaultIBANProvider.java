@@ -1,24 +1,23 @@
 package io.codearte.jfairy.producer.payment;
 
+import javax.inject.Inject;
+import java.util.IllegalFormatCodePointException;
+
+import com.google.common.base.Strings;
 import com.google.inject.assistedinject.Assisted;
+import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
-import org.apache.commons.lang3.StringUtils;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
-import org.iban4j.bban.BbanEntryType;
-import org.iban4j.bban.BbanStructure;
-import org.iban4j.bban.BbanStructureEntry;
-
-import javax.inject.Inject;
-import java.math.BigInteger;
-import java.util.IllegalFormatCodePointException;
+import org.iban4j.UnsupportedCountryException;
 
 /**
  * ALPHA: Under development
  */
 public class DefaultIBANProvider implements IBANProvider {
 
-	protected BaseProducer baseProducer;
+	public static final String DEFAULT_COUNTRY_CODE = "defaultCountryCode";
+	protected DataMaster dataMaster;
 	protected CountryCode countryCode;
 	protected String accountNumber;
 	protected String bankCode;
@@ -26,12 +25,10 @@ public class DefaultIBANProvider implements IBANProvider {
 	protected String nationalCheckDigit;
 
 	@Inject
-	public DefaultIBANProvider(BaseProducer baseProducer,
+	public DefaultIBANProvider(DataMaster dataMaster,
+	                           @Assisted IBANProperties.Property... properties) {
 
-							   @Assisted
-	                    IBANProperties.Property... properties) {
-
-		this.baseProducer = baseProducer;
+		this.dataMaster = dataMaster;
 
 		for (IBANProperties.Property property : properties) {
 			property.apply(this);
@@ -43,87 +40,42 @@ public class DefaultIBANProvider implements IBANProvider {
 		try {
 
 			fillCountryCode();
-			fillAccountNumber();
-			fillBankCode();
-			fillBranchCode();
-			nationalCheckDigit = nationalCheckDigit(nationalCheckDigit);
 
-			Iban iban = new Iban.Builder()
+			try {
+
+				Iban.Builder builder = new Iban.Builder()
 					.countryCode(countryCode)
 					.bankCode(bankCode)
 					.branchCode(branchCode)
-					.nationalCheckDigit(nationalCheckDigit)
-					.accountNumber(accountNumber)
-					.build();
+					.nationalCheckDigit(nationalCheckDigit);
+				if (!Strings.isNullOrEmpty(accountNumber)) {
+					builder.accountNumber(accountNumber);
+				}
+				Iban iban = builder.buildRandom();
 
-			String identificationNumber = iban.getIdentificationNumber();
-			String checkDigit = iban.getCheckDigit();
-			String accountType = iban.getAccountType();
-			String bban = iban.getBban();
-			String ownerAccountType = iban.getOwnerAccountType();
-			String ibanNumber = iban.toString();
+				String identificationNumber = iban.getIdentificationNumber();
+				String checkDigit = iban.getCheckDigit();
+				String accountType = iban.getAccountType();
+				String bban = iban.getBban();
+				String ownerAccountType = iban.getOwnerAccountType();
+				String ibanNumber = iban.toString();
 
-			return new IBAN(accountNumber, identificationNumber, branchCode, checkDigit,
+				return new IBAN(accountNumber, identificationNumber, branchCode, checkDigit,
 					accountType, bankCode, bban, countryCode.getName(), nationalCheckDigit,
 					ownerAccountType, ibanNumber);
+			} catch (UnsupportedCountryException e) {
+				return null;
+			}
 		} catch (IllegalFormatCodePointException e) {
 			throw new IllegalArgumentException("Invalid iban " + e.getMessage(), e);
 		}
 	}
 
 	@Override
-	public String nationalCheckDigit(String value) {
-		if (StringUtils.isBlank(value)) {
-			return generateRequiredData(BbanEntryType.national_check_digit);
-		}
-		return value;
-	}
-
-	@Override
-	public void fillNationalCheckDigit() {
-		if (StringUtils.isBlank(nationalCheckDigit)) {
-			nationalCheckDigit = generateRequiredData(BbanEntryType.national_check_digit);
-		}
-	}
-
-	@Override
-	public void fillBranchCode() {
-		if (StringUtils.isBlank(branchCode)) {
-			branchCode = generateRequiredData(BbanEntryType.branch_code);
-		}
-	}
-
-	@Override
-	public void fillBankCode() {
-		if (StringUtils.isBlank(bankCode)) {
-			bankCode = generateRequiredData(BbanEntryType.bank_code);
-		}
-	}
-
-	@Override
-	public void fillAccountNumber() {
-		if (StringUtils.isBlank(accountNumber)) {
-			accountNumber = generateRequiredData(BbanEntryType.account_number);
-		}
-	}
-
-	@Override
 	public void fillCountryCode() {
 		if (countryCode == null) {
-			countryCode = CountryCode.PL;
+			countryCode = CountryCode.valueOf(dataMaster.getString(DEFAULT_COUNTRY_CODE));
 		}
-	}
-
-	@Override
-	public String generateRequiredData(BbanEntryType type) {
-		String value = "";
-		BbanStructureEntry entry = extractBbanEntry(countryCode, type);
-		if (entry != null) {
-			int length = entry.getLength();
-			value = "" + baseProducer.randomBetween(0L, BigInteger.TEN.pow(length).longValue() - 1);
-			value = StringUtils.leftPad(value, length, "0");
-		}
-		return value;
 	}
 
 	@Override
@@ -151,13 +103,4 @@ public class DefaultIBANProvider implements IBANProvider {
 		this.bankCode = bankCode;
 	}
 
-	protected static BbanStructureEntry extractBbanEntry(final CountryCode countryCode, final BbanEntryType entryType) {
-
-		for (BbanStructureEntry entry : BbanStructure.forCountry(countryCode).getEntries()) {
-			if (entry.getEntryType() == entryType) {
-				return entry;
-			}
-		}
-		return null;
-	}
 }
