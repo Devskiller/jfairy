@@ -1,15 +1,18 @@
 package io.codearte.jfairy.producer.person.locale.zh;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.google.inject.Inject;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
-import static io.codearte.jfairy.producer.util.ZhFairyUtil.*;
+import static io.codearte.jfairy.producer.util.ZhFairyUtil.CITY_MAX;
+import static io.codearte.jfairy.producer.util.ZhFairyUtil.DISTRICT_MAX;
+import static io.codearte.jfairy.producer.util.ZhFairyUtil.PROV_LIST;
+import static io.codearte.jfairy.producer.util.ZhFairyUtil.getRandomNumStr;
 
 /**
  * Chinese National Identity Card Number, total 18 digits
@@ -23,7 +26,7 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 	 * The last 4 digit is an order number from 0001 to 9999
 	 */
 	private static final int ORDER_MAX = 9999;
-	private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyyMMdd");
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
@@ -46,8 +49,8 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 	}
 
 	private String getBirthDate() {
-		DateTime birthDate = this.dateProducer.randomDateInThePast(50);
-		return formatter.print(birthDate);
+		LocalDateTime birthDate = this.dateProducer.randomDateInThePast(50);
+		return formatter.format(birthDate);
 	}
 }
 

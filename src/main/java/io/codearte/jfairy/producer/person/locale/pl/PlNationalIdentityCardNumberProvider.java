@@ -1,13 +1,14 @@
 package io.codearte.jfairy.producer.person.locale.pl;
 
+import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.google.common.annotations.VisibleForTesting;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import io.codearte.jfairy.producer.util.AlphaNumberSystem;
-import org.joda.time.DateTime;
-
-import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.String.copyValueOf;
@@ -17,7 +18,7 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
 
 /**
  * Polish Identity Card Number
- *
+ * <p>
  * http://en.wikipedia.org/wiki/Polish_identity_card
  */
 public class PlNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
@@ -53,12 +54,12 @@ public class PlNationalIdentityCardNumberProvider implements NationalIdentityCar
 	@Override
 	public String get() {
 
-		DateTime dateTime = dateProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN);
+		LocalDate dateTime = dateProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN).toLocalDate();
 
 		return get(dateTime);
 	}
 
-	public String get(DateTime date) {
+	public String get(LocalDate date) {
 
 		checkArgument(date.getYear() >= ISSUING_BEGIN, "Polish ID was introduced in 2000");
 

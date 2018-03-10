@@ -1,5 +1,10 @@
 package io.codearte.jfairy.producer.person;
 
+import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.data.DataMaster;
 import io.codearte.jfairy.producer.BaseProducer;
@@ -8,10 +13,6 @@ import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
 import io.codearte.jfairy.producer.company.CompanyFactory;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Years;
-
-import javax.inject.Inject;
 
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 import static org.apache.commons.lang3.StringUtils.stripAccents;
@@ -21,7 +22,7 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected Person.Sex sex;
 	protected String telephoneNumberFormat;
 	protected Integer age;
-	protected DateTime dateOfBirth;
+	protected LocalDate dateOfBirth;
 	protected Company company;
 	protected Address address;
 	protected String firstName;
@@ -48,15 +49,15 @@ public class DefaultPersonProvider implements PersonProvider {
 
 	@Inject
 	public DefaultPersonProvider(DataMaster dataMaster,
-								 DateProducer dateProducer,
-								 BaseProducer baseProducer,
-								 NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
-								 NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
-								 AddressProvider addressProvider,
-								 CompanyFactory companyFactory,
-								 PassportNumberProvider passportNumberProvider,
-								 TimeProvider timeProvider,
-								 @Assisted PersonProperties.PersonProperty... personProperties) {
+	                             DateProducer dateProducer,
+	                             BaseProducer baseProducer,
+	                             NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
+	                             NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
+	                             AddressProvider addressProvider,
+	                             CompanyFactory companyFactory,
+	                             PassportNumberProvider passportNumberProvider,
+	                             TimeProvider timeProvider,
+	                             @Assisted PersonProperties.PersonProperty... personProperties) {
 
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
@@ -174,7 +175,7 @@ public class DefaultPersonProvider implements PersonProvider {
 	@Override
 	public void generateAge() {
 		if (dateOfBirth != null) {
-			age = Years.yearsBetween(dateOfBirth, DateTime.now()).getYears();
+			age = (int) ChronoUnit.YEARS.between(dateOfBirth, LocalDateTime.now());
 		} else {
 			if (age != null) {
 				return;
@@ -188,8 +189,8 @@ public class DefaultPersonProvider implements PersonProvider {
 		if (dateOfBirth != null) {
 			return;
 		}
-		DateTime maxDate = timeProvider.getCurrentDate().minusYears(age);
-		DateTime minDate = maxDate.minusYears(1).plusDays(1);
+		LocalDate maxDate = timeProvider.getCurrentDate().minusYears(age);
+		LocalDate minDate = maxDate.minusYears(1).plusDays(1);
 		dateOfBirth = dateProducer.randomDateBetweenTwoDates(minDate, maxDate);
 	}
 
@@ -296,7 +297,7 @@ public class DefaultPersonProvider implements PersonProvider {
 	}
 
 	@Override
-	public void setDateOfBirth(DateTime dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

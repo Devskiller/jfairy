@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.person;
 
-import org.joda.time.DateTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public final class NationalIdentificationNumberProperties {
 
@@ -12,7 +13,7 @@ public final class NationalIdentificationNumberProperties {
 		public abstract void apply(NationalIdentificationNumberProvider nationalIdentificationNumberProvider);
 	}
 
-	public static Property dateOfBirth(final DateTime dateOfBirth) {
+	public static Property dateOfBirth(final LocalDate dateOfBirth) {
 		return new Property() {
 			@Override
 			public void apply(NationalIdentificationNumberProvider nationalIdentificationNumberProvider) {

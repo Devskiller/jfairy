@@ -1,13 +1,14 @@
 package io.codearte.jfairy.producer.company.locale.sv;
 
+import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.VATIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberFactory;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberProvider;
-import org.joda.time.DateTime;
-
-import javax.inject.Inject;
 
 import static io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
 import static io.codearte.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider.calculateChecksum;
@@ -33,7 +34,7 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	@Inject
 	public SvVATIdentificationNumberProvider(BaseProducer baseProducer, DateProducer dateProducer,
-											 NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
+	                                         NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
@@ -55,10 +56,11 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 	}
 
 	private String generateVatNumberForSoleTrader() {
-		DateTime lowerAgeLimit = DateTime.now().minusYears(SOLE_TRADER_LOWER_AGE_LIMIT);
-		DateTime upperAgeLimit = DateTime.now().minusYears(SOLE_TRADER_UPPER_AGE_LIMIT);
-		DateTime dateOfBirth = dateProducer.randomDateBetweenTwoDates(lowerAgeLimit, upperAgeLimit);
-		NationalIdentificationNumberProvider nationalIdentificationNumberProvider = nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
+		LocalDate lowerAgeLimit = LocalDate.now().minusYears(SOLE_TRADER_LOWER_AGE_LIMIT);
+		LocalDate upperAgeLimit = LocalDate.now().minusYears(SOLE_TRADER_UPPER_AGE_LIMIT);
+		LocalDate dateOfBirth = dateProducer.randomDateBetweenTwoDates(lowerAgeLimit, upperAgeLimit);
+		NationalIdentificationNumberProvider nationalIdentificationNumberProvider =
+			nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
 				dateOfBirth(dateOfBirth));
 		String personalIdentityNumber = nationalIdentificationNumberProvider.get().getValue();
 		return SE + personalIdentityNumber.replace("-", "") + "01";
@@ -84,16 +86,16 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 	/**
 	 * Group number used to determine the first numer in a swedish organization number
 	 * Enum is translated from swedish wiki https://sv.wikipedia.org/wiki/Organisationsnummer
- 	 */
+	 */
 	private enum GroupNumber {
-		ESTATE(1),												// Dödsbon
-		STATE_OR_COUNTY_OR_MUNICIPALITY_OR_PARISH(2),			// Stat, landsting, kommuner, församlingar
-		FOREIGN_COMPANY(3),										// Utländska företag som bedriver näringsverksamhet eller äger fastigheter i Sverige
-		LIMITED_COMPANY(5),										// Aktiebolag
-		PARTNERSHIP(6),											// Enkelt bolag
-		ECONOMIC_ASSOCIATION(7),								// Ekonomiska föreningar
-		NON_PROFIT_ASSOCIATION_OR_FOUNDATION(8),				// Ideella föreningar och stiftelser
-		TRADING_COMPANY_OR_LIMITED_COMPANY_OR_PARTNERSHIP(9);	// Handelsbolag, kommanditbolag och enkla bolag
+		ESTATE(1),                                                // Dödsbon
+		STATE_OR_COUNTY_OR_MUNICIPALITY_OR_PARISH(2),            // Stat, landsting, kommuner, församlingar
+		FOREIGN_COMPANY(3),                                        // Utländska företag som bedriver näringsverksamhet eller äger fastigheter i Sverige
+		LIMITED_COMPANY(5),                                        // Aktiebolag
+		PARTNERSHIP(6),                                            // Enkelt bolag
+		ECONOMIC_ASSOCIATION(7),                                // Ekonomiska föreningar
+		NON_PROFIT_ASSOCIATION_OR_FOUNDATION(8),                // Ideella föreningar och stiftelser
+		TRADING_COMPANY_OR_LIMITED_COMPANY_OR_PARTNERSHIP(9);    // Handelsbolag, kommanditbolag och enkla bolag
 
 		private final int value;
 

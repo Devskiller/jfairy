@@ -1,5 +1,12 @@
 package io.codearte.jfairy.producer.person.locale.sv;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.producer.BaseProducer;
@@ -8,13 +15,12 @@ import io.codearte.jfairy.producer.person.NationalIdentificationNumber;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.Person;
-import org.joda.time.DateTime;
 
 import static java.lang.String.format;
 
 /**
  * Swedish National Identification Number (known as Personal Identity Number or Personnummer in sweden)
- *
+ * <p>
  * https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
  * <p>
  * E.g.
@@ -37,12 +43,12 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
-	private DateTime issueDate;
+	private LocalDate issueDate;
 	private Person.Sex sex;
 
 	@Inject
 	public SvNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-												  @Assisted NationalIdentificationNumberProperties.Property... properties) {
+	                                              @Assisted NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -59,7 +65,7 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 	public NationalIdentificationNumber get() {
 
 		if (issueDate == null) {
-			issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS);
+			issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS).toLocalDate();
 		}
 		if (sex == null) {
 			sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
@@ -69,18 +75,18 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 	}
 
 	private String generate() {
-		int year = issueDate.getYearOfCentury();
-		int month = issueDate.getMonthOfYear();
-		int day = issueDate.getDayOfMonth();
 		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
-        String nationalIdentificationNumber = format("%02d%02d%02d-%02d%d", year, month, day, serialNumber, sexCode);
+		String nationalIdentificationNumber = format("%s%s%s-%02d%d",
+			DateTimeFormatter.ofPattern("uu").format(issueDate),
+			DateTimeFormatter.ofPattern("MM").format(issueDate),
+			DateTimeFormatter.ofPattern("dd").format(issueDate), serialNumber, sexCode);
 
 		return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
 	}
 
-	public void setIssueDate(DateTime issueDate) {
+	public void setIssueDate(LocalDate issueDate) {
 		this.issueDate = issueDate;
 	}
 

@@ -4,9 +4,10 @@ import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
 import io.codearte.jfairy.producer.person.*;
-import org.joda.time.DateTime;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class NoNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 
@@ -33,7 +34,7 @@ public class NoNationalIdentificationNumberFactory implements NationalIdentifica
 		}
 
 		@Override
-		public void setIssueDate(DateTime dateOfBirth) {
+		public void setIssueDate(LocalDate dateOfBirth) {
 		}
 
 		@Override

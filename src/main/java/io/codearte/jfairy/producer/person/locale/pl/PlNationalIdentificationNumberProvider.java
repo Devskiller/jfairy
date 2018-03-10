@@ -1,5 +1,10 @@
 package io.codearte.jfairy.producer.person.locale.pl;
 
+import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.google.inject.assistedinject.Assisted;
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.DateProducer;
@@ -7,16 +12,13 @@ import io.codearte.jfairy.producer.person.NationalIdentificationNumber;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberProperties;
 import io.codearte.jfairy.producer.person.NationalIdentificationNumberProvider;
 import io.codearte.jfairy.producer.person.Person;
-import org.joda.time.DateTime;
-
-import javax.inject.Inject;
 
 import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 
 /**
  * Spanish National Identification Number (known as PESEL or Polish Powszechny Elektroniczny System Ewidencji Ludności)
- *
+ * <p>
  * Universal Electronic System for Registration of the Population)
  * More info: http://en.wikipedia.org/wiki/PESEL
  */
@@ -37,13 +39,13 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
-	private DateTime issueDate;
+	private LocalDate issueDate;
 	private Person.Sex sex;
 
 	@Inject
 	public PlNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-												  @Assisted
-	                     NationalIdentificationNumberProperties.Property... properties) {
+	                                              @Assisted
+		                                              NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -61,7 +63,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 	public NationalIdentificationNumber get() {
 
 		if (issueDate == null) {
-			issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS);
+			issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS).toLocalDate();
 		}
 		if (sex == null) {
 			sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
@@ -71,18 +73,18 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 	}
 
 	private String generate() {
-		int year = issueDate.getYearOfCentury();
-		int month = calculateMonth(issueDate.getMonthOfYear(), issueDate.getYear());
+		int month = calculateMonth(issueDate.getMonthValue(), issueDate.getYear());
 		int day = issueDate.getDayOfMonth();
 		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
 		int sexCode = calculateSexCode(sex);
 
-		String nationalIdentificationNumber = format("%02d%02d%02d%03d%d", year, month, day, serialNumber, sexCode);
+		String nationalIdentificationNumber = format("%s%02d%02d%03d%d",
+			DateTimeFormatter.ofPattern("uu").format(issueDate), month, day, serialNumber, sexCode);
 
 		return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
 	}
 
-	public void setIssueDate(DateTime issueDate) {
+	public void setIssueDate(LocalDate issueDate) {
 		this.issueDate = issueDate;
 	}
 

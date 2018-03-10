@@ -1,12 +1,14 @@
 package io.codearte.jfairy.producer.person
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Period
+
 import io.codearte.jfairy.Bootstrap
 import io.codearte.jfairy.Fairy
 import io.codearte.jfairy.producer.company.Company
 import io.codearte.jfairy.producer.person.locale.en.EnAddress
 import org.apache.commons.validator.routines.EmailValidator
-import org.joda.time.DateTime
-import org.joda.time.Period
 import spock.lang.Ignore
 import spock.lang.Specification
 
@@ -117,7 +119,7 @@ class PersonSpec extends Specification {
 			Person person = fairy.person(ageBetween(32, 32))
 		then:
 			person.age == 32
-			Period period = new Period(person.dateOfBirth.millis, DateTime.now().millis)
+			Period period = Period.between(person.getDateOfBirth(), LocalDate.now())
 			period.years == 32
 	}
 
@@ -139,7 +141,7 @@ class PersonSpec extends Specification {
 		when:
 			Person person = fairy.person()
 		then:
-			person.dateOfBirth.isBefore(DateTime.now())
+			person.dateOfBirth.isBefore(LocalDate.now())
 	}
 
 	def "should create age"() {
@@ -281,9 +283,9 @@ class PersonSpec extends Specification {
 
 	def "withDateOfBirth should create person with specific date of birth"() {
 		when:
-			Person person = fairy.person(withDateOfBirth(DateTime.parse("2000-01-01")))
+			Person person = fairy.person(withDateOfBirth(LocalDate.parse("2000-01-01")))
 		then:
-			person.dateOfBirth == DateTime.parse("2000-01-01")
+			person.dateOfBirth == LocalDate.parse("2000-01-01")
 	}
 
 	def "withAge should create person with specific age"() {

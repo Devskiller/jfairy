@@ -1,6 +1,6 @@
 package io.codearte.jfairy.producer.payment;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author jkubrynski@gmail.com
@@ -9,9 +9,9 @@ import org.joda.time.DateTime;
 public class CreditCard {
 
 	private final String cardVendor;
-	private final DateTime expiryDate;
+	private final LocalDateTime expiryDate;
 
-	public CreditCard(String cardVendor, DateTime expiryDate) {
+	public CreditCard(String cardVendor, LocalDateTime expiryDate) {
 		this.cardVendor = cardVendor;
 		this.expiryDate = expiryDate;
 	}
@@ -20,11 +20,11 @@ public class CreditCard {
 		return cardVendor;
 	}
 
-	public DateTime getExpiryDate() {
+	public LocalDateTime getExpiryDate() {
 		return expiryDate;
 	}
 
 	public String getExpiryDateAsString() {
-		return String.format("%02d/%02d", expiryDate.getMonthOfYear(), expiryDate.getYearOfCentury());
+		return String.format("%02d/%02d", expiryDate.getMonthValue(), expiryDate.getYear());
 	}
 }

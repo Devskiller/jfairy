@@ -1,22 +1,11 @@
 package io.codearte.jfairy.producer.person;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Provider;
-import com.google.inject.assistedinject.Assisted;
-import io.codearte.jfairy.data.DataMaster;
-import io.codearte.jfairy.producer.BaseProducer;
-import io.codearte.jfairy.producer.DateProducer;
-import io.codearte.jfairy.producer.TimeProvider;
 import io.codearte.jfairy.producer.company.Company;
-import io.codearte.jfairy.producer.company.CompanyFactory;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Years;
-
-import javax.inject.Inject;
-
-import static org.apache.commons.lang3.StringUtils.lowerCase;
-import static org.apache.commons.lang3.StringUtils.stripAccents;
 
 public interface PersonProvider extends Provider<Person> {
 
@@ -86,7 +75,7 @@ public interface PersonProvider extends Provider<Person> {
 
 	void setTelephoneNumber(String telephoneNumber);
 
-	void setDateOfBirth(DateTime dateOfBirth);
+	void setDateOfBirth(LocalDate dateOfBirth);
 
 	void setPassword(String password);
 

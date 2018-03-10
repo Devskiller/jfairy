@@ -1,7 +1,9 @@
 package io.codearte.jfairy.producer.person;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import io.codearte.jfairy.producer.company.Company;
-import org.joda.time.DateTime;
 
 import static io.codearte.jfairy.producer.person.Person.Sex.FEMALE;
 import static io.codearte.jfairy.producer.person.Person.Sex.MALE;
@@ -21,7 +23,7 @@ public class Person {
 	private final String password;
 	private final Sex sex;
 	private final String telephoneNumber;
-	private final DateTime dateOfBirth;
+	private final LocalDate dateOfBirth;
 	private final Integer age;
 	private final Company company;
 	private final String companyEmail;
@@ -30,8 +32,8 @@ public class Person {
 	private final String passportNumber;
 
 	public Person(String firstName, String middleName, String lastName, Address address, String email, String username,
-				  String password, Sex sex, String telephoneNumber, DateTime dateOfBirth, Integer age,
-				  String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail) {
+	              String password, Sex sex, String telephoneNumber, LocalDate dateOfBirth, Integer age,
+	              String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail) {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.address = address;
 		this.firstName = firstName;
@@ -98,7 +100,7 @@ public class Person {
 		return telephoneNumber;
 	}
 
-	public DateTime getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 

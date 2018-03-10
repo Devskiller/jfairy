@@ -4,14 +4,21 @@
 
 package io.codearte.jfairy.producer;
 
-import com.google.common.annotations.VisibleForTesting;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+
+import com.google.common.annotations.VisibleForTesting;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Singleton
 public class DateProducer {
@@ -28,48 +35,53 @@ public class DateProducer {
 		this.timeProvider = timeProvider;
 	}
 
-	public DateTime randomDateInThePast(int maxYearsEarlier) {
+	public LocalDateTime randomDateInThePast(int maxYearsEarlier) {
 		checkArgument(maxYearsEarlier >= 0, "%s has to be >= 0", maxYearsEarlier);
-		DateTime currentDate = timeProvider.getCurrentDate();
-		DateTime latestDateInThePast = currentDate.minusSeconds(SECONDS_BEFORE_TO_BE_IN_THE_PAST);
-		DateTime maxYearsEarlierDate = currentDate.minusYears(maxYearsEarlier);
+		LocalDateTime currentDate = timeProvider.getCurrentTime();
+		LocalDateTime latestDateInThePast = currentDate.minusSeconds(SECONDS_BEFORE_TO_BE_IN_THE_PAST);
+		LocalDateTime maxYearsEarlierDate = currentDate.minusYears(maxYearsEarlier);
 		return randomDateBetweenTwoDates(maxYearsEarlierDate, latestDateInThePast);
 	}
 
-	public DateTime randomDateBetweenYearAndNow(int fromYear) {
+	public LocalDateTime randomDateBetweenYearAndNow(int fromYear) {
 		int actualYear = timeProvider.getCurrentYear();
 		return randomDateInThePast(actualYear - fromYear);
 	}
 
-	public DateTime randomDateBetweenTwoDates(DateTime from, DateTime to) {
-		return new DateTime(baseProducer.randomBetween(from.getMillis(), to.getMillis()));
+	public LocalDate randomDateBetweenTwoDates(LocalDate from, LocalDate to) {
+		return randomDateBetweenTwoDates(from.atStartOfDay(), to.atStartOfDay()).toLocalDate();
+	}
+	public LocalDateTime randomDateBetweenTwoDates(LocalDateTime from, LocalDateTime to) {
+		ZoneId zoneId = ZoneOffset.UTC;
+		long between = baseProducer.randomBetween(from.atZone(zoneId).toEpochSecond(), to.atZone(zoneId).toEpochSecond());
+		return LocalDateTime.ofInstant(Instant.ofEpochSecond(between), zoneId);
 	}
 
-	public DateTime randomDateBetweenYears(int fromYear, int toYear) {
+	public LocalDateTime randomDateBetweenYears(int fromYear, int toYear) {
 		checkArgument(fromYear <= toYear, "%s has to be <= %s", fromYear, toYear);
-		DateTime fromDate = getDateForFirstDayForGivenYear(fromYear);
-		DateTime toDate = getDateForLastDayForGivenYear(toYear);
+		LocalDateTime fromDate = getDateForFirstDayForGivenYear(fromYear);
+		LocalDateTime toDate = getDateForLastDayForGivenYear(toYear);
 		return randomDateBetweenTwoDates(fromDate, toDate);
 	}
 
-	private DateTime getDateForLastDayForGivenYear(int year) {
-		return new DateTime(getDateForFirstDayForGivenYear(year + 1).getMillis() - 1);
+	private LocalDateTime getDateForLastDayForGivenYear(int year) {
+		return LocalDateTime.of(year, Month.JANUARY, 1, 23, 59).with(lastDayOfYear());
 	}
 
-	private DateTime getDateForFirstDayForGivenYear(int year) {
-		return new DateTime(year, 1, 1, 0, 0);
+	private LocalDateTime getDateForFirstDayForGivenYear(int year) {
+		return LocalDateTime.of(year, Month.JANUARY, 1, 0, 0).with(firstDayOfYear());
 	}
 
-	public DateTime randomDateBetweenNowAndFuturePeriod(Period futurePeriod) {
-		DateTime now = timeProvider.getCurrentDate();
-		return new DateTime(baseProducer.randomBetween(now.getMillis(), now.plus(futurePeriod).getMillis()));
+	public LocalDateTime randomDateBetweenNowAndFuturePeriod(Period futurePeriod) {
+		LocalDateTime now = timeProvider.getCurrentTime();
+		return randomDateBetweenTwoDates(now, now.plus(futurePeriod));
 	}
 
-	public DateTime randomDateInTheFuture(int years) {
-		return randomDateBetweenNowAndFuturePeriod(Period.years(years));
+	public LocalDateTime randomDateInTheFuture(int years) {
+		return randomDateBetweenNowAndFuturePeriod(Period.ofYears(years));
 	}
 
-	public DateTime randomDateInTheFuture() {
+	public LocalDateTime randomDateInTheFuture() {
 		return randomDateInTheFuture(100);
 	}
 }

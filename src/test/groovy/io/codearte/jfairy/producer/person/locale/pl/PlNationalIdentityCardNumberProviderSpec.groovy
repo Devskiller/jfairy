@@ -4,9 +4,10 @@
 
 package io.codearte.jfairy.producer.person.locale.pl
 
+import java.time.LocalDate
+
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
-import org.joda.time.DateTime
 import spock.lang.Specification
 
 import static PlNationalIdentityCardNumberProvider.ISSUING_BEGIN
@@ -28,11 +29,11 @@ class PlNationalIdentityCardNumberProviderSpec extends Specification {
 	void "should generate proper id number"() {
 		int max = (2013 - ISSUING_BEGIN) * LETTER_WEIGHT
 		setup:
-			baseProducer.randomBetween(max, max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
+			baseProducer.randomBetween(max, (int) max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
 			baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
 		when:
 			PlNationalIdentityCardNumberProvider generator = new PlNationalIdentityCardNumberProvider(dateGenerator, baseProducer)
-			String id = generator.get(DateTime.parse("2013-12-12"))
+			String id = generator.get(LocalDate.parse("2013-12-12"))
 		then:
 			id == "ABA300000"
 			generator.isValid(id)

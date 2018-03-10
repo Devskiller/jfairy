@@ -1,10 +1,12 @@
 package io.codearte.jfairy.producer.person.locale.pl
 
+import java.time.LocalDate
+import java.time.LocalDateTime
+
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
 import io.codearte.jfairy.producer.person.NationalIdentificationNumber
 import io.codearte.jfairy.producer.person.Person
-import org.joda.time.DateTime
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -39,7 +41,7 @@ class PlNationalIdentificationNumberSpec extends Specification {
 
 		expect:
 			PlNationalIdentificationNumberProvider generator = new PlNationalIdentificationNumberProvider(dateGenerator,
-                    randomGenerator, dateOfBirth(DateTime.parse(date)), sex(Person.Sex.MALE))
+                    randomGenerator, dateOfBirth(LocalDate.parse(date)), sex(Person.Sex.MALE))
 
 			NationalIdentificationNumber nationalIdentificationNumber = generator.get()
 
