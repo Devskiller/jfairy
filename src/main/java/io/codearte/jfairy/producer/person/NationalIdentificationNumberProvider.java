@@ -1,14 +1,15 @@
 package io.codearte.jfairy.producer.person;
 
-import com.google.inject.Provider;
-import org.joda.time.DateTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import com.google.inject.Provider;
 
 public interface NationalIdentificationNumberProvider extends Provider<NationalIdentificationNumber> {
 
 	NationalIdentificationNumber get();
 
-	void setIssueDate(DateTime dateOfBirth);
+	void setIssueDate(LocalDate dateOfBirth);
 
 	void setSex(Person.Sex sex);
 }

@@ -1,10 +1,12 @@
 package io.codearte.jfairy.producer.person;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import io.codearte.jfairy.producer.BaseProducer;
 import io.codearte.jfairy.producer.company.Company;
 
 import com.google.common.base.Optional;
-import org.joda.time.DateTime;
 
 /**
  * @author jkubrynski@gmail.com
@@ -144,7 +146,7 @@ public final class PersonProperties {
 		};
 	}
 
-	public static PersonProperty withDateOfBirth(final DateTime dateOfBirth) {
+	public static PersonProperty withDateOfBirth(final LocalDate dateOfBirth) {
 		return new PersonProperty() {
 			@Override
 			public void apply(PersonProvider personProvider, BaseProducer baseProducer) {

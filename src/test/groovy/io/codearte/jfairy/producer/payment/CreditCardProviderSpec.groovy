@@ -1,11 +1,12 @@
 package io.codearte.jfairy.producer.payment
 
+import java.time.LocalDateTime
+
 import io.codearte.jfairy.data.DataMaster
 import io.codearte.jfairy.data.MapBasedDataMaster
 import io.codearte.jfairy.producer.BaseProducer
 import io.codearte.jfairy.producer.DateProducer
 import io.codearte.jfairy.producer.RandomGenerator
-import org.joda.time.DateTime
 import spock.lang.Specification
 
 /**
@@ -14,7 +15,7 @@ import spock.lang.Specification
  */
 class CreditCardProviderSpec extends Specification {
 
-	public static final DateTime EXPIRY_DATE = new DateTime("2009-02-11T23:59:59.999")
+	public static final LocalDateTime EXPIRY_DATE = LocalDateTime.parse("2009-02-11T23:59:59.999")
 
 	private DataMaster dataMaster
 	private DateProducer dateProducer
