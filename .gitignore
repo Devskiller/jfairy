@@ -1,7 +1,5 @@
-### Gradle ###
-.gradle/
-build/
-classes/
+### Maven ###
+target/
 
 ### IntelliJ ###
 *.iml
