@@ -6,6 +6,11 @@ jdk:
 env:
 - TERM=dumb
 
-install: ./gradlew assemble --stacktrace --info
-script: ./gradlew check jacocoTestReport --stacktrace --info --continue -Pcompatibility
-after_success: ./gradlew coveralls --stacktrace --info
+script: ./mvnw package
+
+cache:
+  directories:
+  - ~/.m2/repository
+  - ~/.m2/wrapper
+
+
