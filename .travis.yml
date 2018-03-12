@@ -8,6 +8,9 @@ env:
 
 script: ./mvnw package
 
+after_success:
+  - mvn clean test jacoco:report coveralls:report
+
 cache:
   directories:
   - ~/.m2/repository
