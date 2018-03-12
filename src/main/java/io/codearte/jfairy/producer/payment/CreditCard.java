@@ -1,6 +1,7 @@
 package io.codearte.jfairy.producer.payment;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author jkubrynski@gmail.com
@@ -25,6 +26,6 @@ public class CreditCard {
 	}
 
 	public String getExpiryDateAsString() {
-		return String.format("%02d/%02d", expiryDate.getMonthValue(), expiryDate.getYear());
+		return String.format("%02d/%s", expiryDate.getMonthValue(), DateTimeFormatter.ofPattern("uu").format(expiryDate));
 	}
 }

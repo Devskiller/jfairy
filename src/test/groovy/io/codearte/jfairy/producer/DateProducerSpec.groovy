@@ -12,18 +12,18 @@ import spock.lang.Unroll
 
 class DateProducerSpec extends Specification {
 
-	private static final MAX_YEARS_IN_THE_PAST = 5
+	private static final int MAX_YEARS_IN_THE_PAST = 5
 
-	private static final CURRENT_DATE = LocalDateTime.parse("2013-11-09T01:16:00")
+	private static final LocalDateTime CURRENT_DATE = LocalDateTime.parse("2013-11-09T01:16:00")
 	private static final int CURRENT_YEAR = 2013
-	private static final LATEST_DATE_IN_THE_PAST = OffsetDateTime.parse("2013-11-09T01:15:59+00:00")
-	private static final SOME_DATE_IN_THE_PAST = OffsetDateTime.parse("2011-01-20T12:32:12+00:00")
-	private static final ONE_YEAR_LATER = OffsetDateTime.parse("2014-11-09T01:16:00+00:00")
+	private static final OffsetDateTime LATEST_DATE_IN_THE_PAST = OffsetDateTime.parse("2013-11-09T01:15:59+00:00")
+	private static final OffsetDateTime SOME_DATE_IN_THE_PAST = OffsetDateTime.parse("2011-01-20T12:32:12+00:00")
+	private static final OffsetDateTime ONE_YEAR_LATER = OffsetDateTime.parse("2014-11-09T01:16:00+00:00")
 
-	private static final FIVE_YEARS_EARLIER_DATE = OffsetDateTime.parse("2008-11-09T01:16:00+00:00")
-	private static final LATEST_DATE_IN_THE_PAST_IN_MILLIS = LATEST_DATE_IN_THE_PAST.toInstant().getEpochSecond()
-	private static final SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.toInstant().getEpochSecond()
-	private static final FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.toInstant().getEpochSecond()
+	private static final OffsetDateTime FIVE_YEARS_EARLIER_DATE = OffsetDateTime.parse("2008-11-09T01:16:00+00:00")
+	private static final long LATEST_DATE_IN_THE_PAST_IN_MILLIS = LATEST_DATE_IN_THE_PAST.toInstant().toEpochMilli()
+	private static final long SOME_DATE_IN_THE_PAST_IN_MILLIS = SOME_DATE_IN_THE_PAST.toInstant().toEpochMilli()
+	private static final long FIVE_YEARS_EARLIER_DATE_IN_MILLIS = FIVE_YEARS_EARLIER_DATE.toInstant().toEpochMilli()
 
 	private baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()])
 	private timeProviderMock = Mock(TimeProvider)
