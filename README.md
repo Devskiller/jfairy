@@ -1,6 +1,6 @@
 # jFairy by Codearte
 
-[![Build Status](https://travis-ci.org/Devskiller/jfairy.svg?branch=master)](https://travis-ci.org/Devskiller/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy) [![Javadocs](http://www.javadoc.io/badge/io.codearte.jfairy/jfairy.svg)](http://www.javadoc.io/doc/io.codearte.jfairy/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Codearte/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
+[![Build Status](https://travis-ci.org/Devskiller/jfairy.svg?branch=master)](https://travis-ci.org/Devskiller/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.devskiller/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy) [![Javadocs](http://www.javadoc.io/badge/com.devskiller/jfairy.svg)](http://www.javadoc.io/doc/com.devskiller/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Devskiller/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
 [![Stack Overflow](https://img.shields.io/badge/stack%20overflow-jfairy-4183C4.svg)](https://stackoverflow.com/questions/tagged/jfairy)
 [![Join the chat at https://gitter.im/Codearte/jfairy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Codearte/jfairy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
