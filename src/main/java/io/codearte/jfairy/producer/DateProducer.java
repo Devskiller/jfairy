@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -51,10 +50,11 @@ public class DateProducer {
 	public LocalDate randomDateBetweenTwoDates(LocalDate from, LocalDate to) {
 		return randomDateBetweenTwoDates(from.atStartOfDay(), to.atStartOfDay()).toLocalDate();
 	}
+
 	public LocalDateTime randomDateBetweenTwoDates(LocalDateTime from, LocalDateTime to) {
-		ZoneId zoneId = ZoneOffset.UTC;
-		long between = baseProducer.randomBetween(from.atZone(zoneId).toEpochSecond(), to.atZone(zoneId).toEpochSecond());
-		return LocalDateTime.ofInstant(Instant.ofEpochSecond(between), zoneId);
+		long between = baseProducer.randomBetween(from.toInstant(ZoneOffset.UTC).toEpochMilli(),
+			to.toInstant(ZoneOffset.UTC).toEpochMilli());
+		return LocalDateTime.ofInstant(Instant.ofEpochMilli(between), ZoneOffset.UTC);
 	}
 
 	public LocalDateTime randomDateBetweenYears(int fromYear, int toYear) {
