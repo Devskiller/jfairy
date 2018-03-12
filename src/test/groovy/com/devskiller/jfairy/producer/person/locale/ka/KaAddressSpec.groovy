@@ -21,41 +21,41 @@ class KaAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-		address.street == "გორკის ქუჩა"  // Gorki Street
+		address.street == "აგლაძის ქუჩა"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-		address.streetNumber == "184"
+		address.streetNumber == "23"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-		address.apartmentNumber == "329"
+		address.apartmentNumber == "210"
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-		address.postalCode == "1260"
+		address.postalCode == "8126"
 	}
 
 	def "should generate random city"() {
 		expect:
-		address.city == "რუსთავი"  // Rustavi
+		address.city == "ქობულეთი"
  	}
 
 	def "should return addressLine1 in GE locale format"() {
 		expect:
-		address.addressLine1 == "1260, რუსთავი"  // ZIP, city
+		address.addressLine1 == "8126, ქობულეთი"  // ZIP, city
 	}
 
 	def "should return addressLine2 in GE locale format"() {
 		expect:
-		address.addressLine2 == "გორკის ქუჩა №184, ბინა 329"  // street & number & appartment
+		address.addressLine2 == "აგლაძის ქუჩა №23, ბინა 210"  // street & number & appartment
 	}
 
 	def "should return address in GE locale format"() {
 		expect:
-		address.toString() == "1260, რუსთავი${lineSeparator()}გორკის ქუჩა №184, ბინა 329"
+		address.toString() == "8126, ქობულეთი${lineSeparator()}აგლაძის ქუჩა №23, ბინა 210"
 	}
 }

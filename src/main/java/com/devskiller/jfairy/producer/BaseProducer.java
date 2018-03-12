@@ -39,11 +39,10 @@ public class BaseProducer {
 	/**
 	 * Returns random element from passed vararg
 	 *
-	 * @param <T>      element generic type
 	 * @param elements objects to process
 	 * @return random element
 	 */
-	public <T> T randomElement(T... elements) {
+	public String randomElement(String... elements) {
 		return randomElement(Arrays.asList(elements));
 	}
 
@@ -84,17 +83,7 @@ public class BaseProducer {
 		return elements.subList(0, count);
 	}
 
-	/**
-	 * Creates new list being random subset of the passed vararg
-	 *
-	 * @param <T>      element generic type
-	 * @param elements objects to process
-	 * @param count    returned list size
-	 * @return sublist of the passed elements
-	 */
-	public <T> List<T> randomElements(int count, T... elements) {
-		return randomElements(Arrays.asList(elements), count);
-	}
+
 
 	/**
 	 * Returns random int value

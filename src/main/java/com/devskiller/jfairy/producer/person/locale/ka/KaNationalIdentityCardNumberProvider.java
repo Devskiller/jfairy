@@ -45,7 +45,7 @@ public class KaNationalIdentityCardNumberProvider implements NationalIdentityCar
 	public KaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		NationalIdentityCardNumberProvider oldCardNumberProvider = new OldCardNumberProvider(baseProducer);
 		NationalIdentityCardNumberProvider newCardNumberProvider = new NewCardNumberProvider(baseProducer);
-		formatPicker = () -> baseProducer.randomElement(oldCardNumberProvider, newCardNumberProvider);
+		formatPicker = () -> baseProducer.trueOrFalse() ? oldCardNumberProvider : newCardNumberProvider;
 	}
 
 	@Override
