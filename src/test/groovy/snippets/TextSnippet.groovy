@@ -1,7 +1,7 @@
 package snippets
 
-import io.codearte.jfairy.Fairy
-import io.codearte.jfairy.producer.text.TextProducer
+import com.devskiller.jfairy.Fairy
+import com.devskiller.jfairy.producer.text.TextProducer
 
 TextProducer text = Fairy.create().textProducer()
 

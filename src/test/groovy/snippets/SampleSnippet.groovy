@@ -1,9 +1,9 @@
 package snippets
 
-import io.codearte.jfairy.Fairy
-import io.codearte.jfairy.producer.company.Company
-import io.codearte.jfairy.producer.person.Person
-import io.codearte.jfairy.producer.person.PersonProperties
+import com.devskiller.jfairy.Fairy
+import com.devskiller.jfairy.producer.company.Company
+import com.devskiller.jfairy.producer.person.Person
+import com.devskiller.jfairy.producer.person.PersonProperties
 
 println "\n * With context"
 Fairy fairy = Fairy.create(Locale.forLanguageTag("en"))
