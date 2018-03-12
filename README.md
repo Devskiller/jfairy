@@ -62,12 +62,7 @@ Look into [code samples](https://github.com/Codearte/fairyland/tree/master/src/t
 
 ## Building
 
-This project can be built using gradle command:
+This project can be built using maven command:
 
-    ./gradlew build
+    ./mvnw install
 
-## Installation
-
-Installation into maven local repository
-
-    ./gradlew publishToMavenLocal
