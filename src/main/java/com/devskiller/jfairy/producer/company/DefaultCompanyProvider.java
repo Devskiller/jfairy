@@ -3,8 +3,8 @@ package com.devskiller.jfairy.producer.company;
 import javax.inject.Inject;
 
 import com.google.inject.assistedinject.Assisted;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
