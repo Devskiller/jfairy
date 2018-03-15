@@ -10,15 +10,21 @@ import java.time.format.DateTimeFormatter;
 public class CreditCard {
 
 	private final String cardVendor;
+	private final String cardNumber;
 	private final LocalDateTime expiryDate;
 
-	public CreditCard(String cardVendor, LocalDateTime expiryDate) {
+	public CreditCard(String cardVendor, String cardNumber, LocalDateTime expiryDate) {
 		this.cardVendor = cardVendor;
+		this.cardNumber = cardNumber;
 		this.expiryDate = expiryDate;
 	}
 
 	public String getVendor() {
 		return cardVendor;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
 	public LocalDateTime getExpiryDate() {

@@ -20,20 +20,23 @@ class CreditCardProviderSpec extends Specification {
 
 	private DataMaster dataMaster
 	private DateProducer dateProducer
-	private CreditCardProvider creditCardProvider;
+	private CreditCardProvider creditCardProvider
+	private BaseProducer baseProducer
 
 	def setup() {
-		dataMaster = new MapBasedDataMaster(new BaseProducer(new RandomGenerator()))
+		baseProducer = new BaseProducer(new RandomGenerator())
+		dataMaster = new MapBasedDataMaster(baseProducer)
 		dateProducer = Mock(DateProducer)
 		dataMaster.readResources("jfairy.yml")
-		creditCardProvider = new CreditCardProvider(dataMaster, dateProducer)
+		creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer)
 	}
 
-	def "should return credit card provider"() {
+	def "should return credit card basic data"() {
 		when:
 			CreditCard creditCard = creditCardProvider.get()
 		then:
-			creditCard.vendor
+			creditCard.vendor == 'Visa'
+			creditCard.cardNumber.length() == 16
 	}
 
 	def "should return card expiry date"() {

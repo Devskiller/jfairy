@@ -24,7 +24,7 @@ class MapBasedDataMasterSpec extends Specification {
 			DataMaster dataMaster = new MapBasedDataMaster();
 			dataMaster.readResources("jfairy_en.yml")
 
-			Map<String, List<String>> firstNames = dataMaster.getStringMap(PersonProvider.FIRST_NAME)
+			Map<String, List<String>> firstNames = dataMaster.getData(PersonProvider.FIRST_NAME, Map.class)
 		then:
 			firstNames.size() > 0
 			firstNames.keySet().size() > 0
@@ -32,10 +32,10 @@ class MapBasedDataMasterSpec extends Specification {
 
 	def "should return men"() {
 		setup:
-			data.getStringMap(PersonProvider.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getData(PersonProvider.FIRST_NAME, Map.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-			String male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male");
+			String male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male", String.class)
 
 		then:
 			male == "Mark"
@@ -43,10 +43,10 @@ class MapBasedDataMasterSpec extends Specification {
 
 	def "should return one of women"() {
 		setup:
-			data.getStringMap(PersonProvider.FIRST_NAME) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getData(PersonProvider.FIRST_NAME, Map.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
-			String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female");
+			String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female", String.class)
 
 		then:
 			female == "Ana" || "Ivon"
