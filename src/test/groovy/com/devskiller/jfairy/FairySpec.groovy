@@ -13,7 +13,7 @@ class FairySpec extends Specification {
 	DataMaster customDataMaster = Stub(DataMaster) {
 		getString(_ as String) >> CUSTOM_STRING
 		getStringList(_ as String) >> Arrays.asList(CUSTOM_STRING)
-		getValuesOfType(_ as String, _ as String) >> CUSTOM_STRING
+		getValuesOfType(_ as String, _ as String, String.class) >> CUSTOM_STRING
 		getRandomValue(_ as String) >> CUSTOM_STRING
 	}
 

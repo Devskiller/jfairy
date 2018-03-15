@@ -12,7 +12,7 @@ public interface DataMaster {
 
 	List<String> getStringList(String key);
 
-	String getValuesOfType(String dataKey, final String type);
+	<T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass);
 
 	String getRandomValue(String key);
 

@@ -43,20 +43,10 @@ public class MapBasedDataMaster implements DataMaster {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<String, Integer> getIntegerValueMap(String key) {
-		return (Map<String, Integer>) getData(key, Map.class);
-	}
+	public <T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass) {
+		Map<String, List<T>> data = getData(dataKey, Map.class);
 
-	@SuppressWarnings("unchecked")
-	public Map<String, List<String>> getStringMap(String key) {
-		return (Map<String, List<String>>) getData(key, Map.class);
-	}
-
-	@Override
-	public String getValuesOfType(String dataKey, final String type) {
-		Map<String, List<String>> stringMap = getStringMap(dataKey);
-
-		List<String> entries = stringMap.get(type);
+		List<T> entries = data.get(type);
 
 		return baseProducer.randomElement(entries);
 	}
@@ -79,7 +69,7 @@ public class MapBasedDataMaster implements DataMaster {
 	}
 
 	@SuppressWarnings({"unchecked", "ConstantConditions"}) // checked by checkArgument
-	private <T> T getData(String key, Class<T> type) {
+	<T> T getData(String key, Class<T> type) {
 		checkArgument(key != null, "key cannot be null");
 		checkArgument(type != null, "type cannot be null");
 

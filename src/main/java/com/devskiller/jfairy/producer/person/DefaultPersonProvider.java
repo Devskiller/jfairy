@@ -122,7 +122,7 @@ public class DefaultPersonProvider implements PersonProvider {
 		if (firstName != null) {
 			return;
 		}
-		firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name());
+		firstName = dataMaster.getValuesOfType(FIRST_NAME, sex.name(), String.class);
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public class DefaultPersonProvider implements PersonProvider {
 		if (middleName != null) {
 			return;
 		}
-		middleName = baseProducer.trueOrFalse() ? dataMaster.getValuesOfType(FIRST_NAME, sex.name()) : "";
+		middleName = baseProducer.trueOrFalse() ? dataMaster.getValuesOfType(FIRST_NAME, sex.name(), String.class) : "";
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class DefaultPersonProvider implements PersonProvider {
 		if (lastName != null) {
 			return;
 		}
-		lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name());
+		lastName = dataMaster.getValuesOfType(LAST_NAME, sex.name(), String.class);
 	}
 
 	@Override
