@@ -5,7 +5,7 @@
 
 	<groupId>com.devskiller</groupId>
 	<artifactId>jfairy</artifactId>
-	<version>0.6.0-SNAPSHOT</version>
+	<version>0.6.1-SNAPSHOT</version>
 
 	<name>jFairy</name>
 	<description>Java fake data generator</description>
