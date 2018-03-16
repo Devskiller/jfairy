@@ -32,7 +32,7 @@ public class CreditCardProvider implements Provider<CreditCard> {
 		String randomNumber = generateNumber();
 
 		LocalDateTime expiryDate = dateProducer.randomDateBetweenNowAndFuturePeriod(DEFAULT_VALIDITY);
-		return new CreditCard(CARD_VENDOR, randomNumber, expiryDate);
+		return new CreditCard(CARD_VENDOR, randomNumber, baseProducer.numerify("###"), expiryDate);
 	}
 
 	private String generateNumber() {

@@ -11,11 +11,13 @@ public class CreditCard {
 
 	private final String cardVendor;
 	private final String cardNumber;
+	private final String cvv;
 	private final LocalDateTime expiryDate;
 
-	public CreditCard(String cardVendor, String cardNumber, LocalDateTime expiryDate) {
+	public CreditCard(String cardVendor, String cardNumber, String cvv, LocalDateTime expiryDate) {
 		this.cardVendor = cardVendor;
 		this.cardNumber = cardNumber;
+		this.cvv = cvv;
 		this.expiryDate = expiryDate;
 	}
 
@@ -25,6 +27,10 @@ public class CreditCard {
 
 	public String getCardNumber() {
 		return cardNumber;
+	}
+
+	public String getCvv() {
+		return cvv;
 	}
 
 	public LocalDateTime getExpiryDate() {
