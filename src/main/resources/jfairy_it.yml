@@ -26,4 +26,4 @@ data:
 
   country: ['Italia', 'Francia', 'Germania', 'Spagna']
 
-  defaultCountryCode: 'IT'
+  language: 'IT'

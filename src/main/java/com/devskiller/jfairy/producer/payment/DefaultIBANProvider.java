@@ -2,6 +2,7 @@ package com.devskiller.jfairy.producer.payment;
 
 import javax.inject.Inject;
 import java.util.IllegalFormatCodePointException;
+import java.util.List;
 
 import com.google.common.base.Strings;
 import com.google.inject.assistedinject.Assisted;
@@ -10,14 +11,16 @@ import org.iban4j.Iban;
 import org.iban4j.UnsupportedCountryException;
 
 import com.devskiller.jfairy.data.DataMaster;
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.person.Country;
 
 /**
  * ALPHA: Under development
  */
 public class DefaultIBANProvider implements IBANProvider {
 
-	public static final String DEFAULT_COUNTRY_CODE = "defaultCountryCode";
 	protected DataMaster dataMaster;
+	protected BaseProducer baseProducer;
 	protected CountryCode countryCode;
 	protected String accountNumber;
 	protected String bankCode;
@@ -25,11 +28,12 @@ public class DefaultIBANProvider implements IBANProvider {
 	protected String nationalCheckDigit;
 
 	@Inject
-	public DefaultIBANProvider(DataMaster dataMaster,
+	public DefaultIBANProvider(BaseProducer baseProducer,
+	                           DataMaster dataMaster,
 	                           @Assisted IBANProperties.Property... properties) {
 
 		this.dataMaster = dataMaster;
-
+		this.baseProducer = baseProducer;
 		for (IBANProperties.Property property : properties) {
 			property.apply(this);
 		}
@@ -74,7 +78,9 @@ public class DefaultIBANProvider implements IBANProvider {
 	@Override
 	public void fillCountryCode() {
 		if (countryCode == null) {
-			countryCode = CountryCode.valueOf(dataMaster.getString(DEFAULT_COUNTRY_CODE));
+			List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
+			Country country = baseProducer.randomElement(countries);
+			countryCode = CountryCode.valueOf(country.getCode());
 		}
 	}
 

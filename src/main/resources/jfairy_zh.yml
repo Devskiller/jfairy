@@ -26,4 +26,4 @@ data:
 
   country: [中国, 美国, 法国, 英国, 德国, 西班牙, 意大利, 加拿大, 俄罗斯, 日本, 韩国, 巴西]
 
-  defaultCountryCode: 'TW'
+  language: 'ZH'

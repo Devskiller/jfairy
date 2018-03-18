@@ -11,6 +11,7 @@ import com.devskiller.jfairy.Bootstrap
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.producer.company.Company
 import com.devskiller.jfairy.producer.person.locale.en.EnAddress
+import com.devskiller.jfairy.producer.util.LanguageCode
 
 import static com.devskiller.jfairy.producer.person.PersonProperties.ageBetween
 import static com.devskiller.jfairy.producer.person.PersonProperties.female
@@ -96,6 +97,13 @@ class PersonSpec extends Specification {
 			Person person = fairy.person(maxAge(3))
 		then:
 			person.age <= 3
+	}
+
+	def "should create nationality"() {
+		when:
+			Person person = fairy.person()
+		then:
+			Country.findCountryForLanguage(LanguageCode.EN)*.getCode().contains(person.nationality.code)
 	}
 
 	@Ignore("Properties are not cleaned")
@@ -204,10 +212,10 @@ class PersonSpec extends Specification {
 	def "should generate middle name only sometimes"() {
 		given:
 			List<Person> persons = []
-			(1..100).each { persons.add(fairy.person()) }
+			(1..100).each {persons.add(fairy.person())}
 		when:
-			List<Person> allWithoutMiddleName = persons.findAll { p -> p.middleName.isEmpty() }
-			List<Person> allWithMiddleName = persons.findAll { p -> !p.middleName.isEmpty() }
+			List<Person> allWithoutMiddleName = persons.findAll {p -> p.middleName.isEmpty()}
+			List<Person> allWithMiddleName = persons.findAll {p -> !p.middleName.isEmpty()}
 		then:
 			allWithoutMiddleName.size() > 0
 			allWithMiddleName.size() > 0
@@ -216,10 +224,10 @@ class PersonSpec extends Specification {
 	def "should generate apartment number only sometimes"() {
 		given:
 			List<Person> persons = []
-			(1..50).each { persons.add(fairy.person()) }
+			(1..50).each {persons.add(fairy.person())}
 		when:
-			List<Person> allWithoutApartmentNumber = persons.findAll { p -> p.address.apartmentNumber.isEmpty() }
-			List<Person> allWithApartmentNumber = persons.findAll { p -> !p.address.apartmentNumber.isEmpty() }
+			List<Person> allWithoutApartmentNumber = persons.findAll {p -> p.address.apartmentNumber.isEmpty()}
+			List<Person> allWithApartmentNumber = persons.findAll {p -> !p.address.apartmentNumber.isEmpty()}
 		then:
 			allWithoutApartmentNumber.size() > 0
 			allWithApartmentNumber.size() > 0

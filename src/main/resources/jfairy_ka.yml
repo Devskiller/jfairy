@@ -26,4 +26,4 @@ data:
 
   country: ['Georgia'] #'USA', 'Russia', 'Greece', 'Turkey'
 
-  defaultCountryCode: 'KA'
+  language: 'KA'

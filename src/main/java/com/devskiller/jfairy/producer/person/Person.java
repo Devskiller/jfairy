@@ -9,7 +9,7 @@ import static com.devskiller.jfairy.producer.person.Person.Sex.MALE;
 
 public class Person {
 
-	public static enum Sex {
+	public enum Sex {
 		MALE, FEMALE
 	}
 
@@ -29,10 +29,12 @@ public class Person {
 	private final String nationalIdentityCardNumber;
 	private final String nationalIdentificationNumber;
 	private final String passportNumber;
+	private final Country nationality;
 
 	public Person(String firstName, String middleName, String lastName, Address address, String email, String username,
 	              String password, Sex sex, String telephoneNumber, LocalDate dateOfBirth, Integer age,
-	              String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail) {
+	              String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber,
+	              Company company, String companyEmail, Country nationality) {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.address = address;
 		this.firstName = firstName;
@@ -49,6 +51,7 @@ public class Person {
 		this.company = company;
 		this.companyEmail = companyEmail;
 		this.passportNumber = passportNumber;
+		this.nationality = nationality;
 	}
 
 	public String getNationalIdentificationNumber() {
@@ -125,5 +128,9 @@ public class Person {
 
 	public String getPassportNumber() {
 		return passportNumber;
+	}
+
+	public Country getNationality() {
+		return nationality;
 	}
 }

@@ -26,4 +26,4 @@ data:
 
   country: ['Sverige']
 
-  defaultCountryCode: 'SV'
+  language: 'SV'

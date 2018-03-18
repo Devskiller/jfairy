@@ -26,4 +26,4 @@ data:
 
   country: ['Canada', 'USA', 'Poland']
 
-  defaultCountryCode: 'GB'
+  language: 'EN'

@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import com.google.inject.assistedinject.Assisted;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -37,8 +38,9 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected String nationalIdentityCardNumber;
 	protected String nationalIdentificationNumber;
 	protected String passportNumber;
-	protected final DataMaster dataMaster;
+	protected Country nationality;
 
+	protected final DataMaster dataMaster;
 	protected final DateProducer dateProducer;
 	protected final BaseProducer baseProducer;
 	protected final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
@@ -94,11 +96,12 @@ public class DefaultPersonProvider implements PersonProvider {
 		generateNationalIdentificationNumber();
 		generatePassportNumber();
 		generateAddress();
+		generateNationality();
 
 		return new Person(firstName, middleName, lastName, address, email,
 			username, password, sex, telephoneNumber, dateOfBirth, age,
 			nationalIdentityCardNumber, nationalIdentificationNumber, passportNumber,
-			company, companyEmail);
+			company, companyEmail, nationality);
 	}
 
 	@Override
@@ -245,6 +248,11 @@ public class DefaultPersonProvider implements PersonProvider {
 			return;
 		}
 		passportNumber = passportNumberProvider.get();
+	}
+
+	private void generateNationality() {
+		List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
+		nationality = !countries.isEmpty() ? baseProducer.randomElement(countries) : Country.UnitedKingdom;
 	}
 
 	@Override

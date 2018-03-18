@@ -14,6 +14,13 @@ class SvPersonSpec extends Specification {
 		Bootstrap.create()
 	}
 
+	def "should create nationality"() {
+		when:
+			Person person = fairy.person()
+		then:
+			person.nationality.code == 'SE'
+	}
+
 	def "should create nationalIdentificationNumber"() {
 		when:
 			Person person = fairy.person()
