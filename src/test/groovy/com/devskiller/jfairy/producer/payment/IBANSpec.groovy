@@ -12,9 +12,10 @@ import com.devskiller.jfairy.producer.RandomGenerator
 class IBANSpec extends Specification {
 
 	private DataMaster dataMaster
+	private BaseProducer baseProducer
 
 	def setup() {
-		BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
+		baseProducer = new BaseProducer(new RandomGenerator())
 		dataMaster = new MapBasedDataMaster(baseProducer);
 		dataMaster.readResources("jfairy_pl.yml")
 	}
@@ -28,7 +29,9 @@ class IBANSpec extends Specification {
 	 */
 	def "should return valid iban"() {
 		when:
-			IBANProvider iban = new DefaultIBANProvider(dataMaster,
+			IBANProvider iban = new DefaultIBANProvider(
+				baseProducer,
+				dataMaster,
 				IBANProperties.accountNumber("00234573201"),
 				IBANProperties.country("AT")
 			);
@@ -46,10 +49,9 @@ class IBANSpec extends Specification {
 	 PLkk bbbssssx cccccccccccccccc
 	 PL60 11401010 1111000234573201
 	 */
-
 	def "should return valid polish iban"() {
 		when:
-			IBANProvider iban = new DefaultIBANProvider(dataMaster)
+			IBANProvider iban = new DefaultIBANProvider(baseProducer, dataMaster)
 		then:
 			IbanUtil.validate(iban.get().ibanNumber);
 	}
@@ -77,8 +79,8 @@ class IBANSpec extends Specification {
 
 	def "should set proper country for according to selected language"() {
 		when:
-			String number = Fairy.create(Locale.ENGLISH).iban().ibanNumber
+			String number = Fairy.create(new Locale('SV')).iban().ibanNumber
 		then:
-			number.startsWith('GB')
+			number.startsWith('SE')
 	}
 }

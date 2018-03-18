@@ -12,15 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.util.LanguageCode;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class MapBasedDataMaster implements DataMaster {
 
+	public static final String LANGUAGE_TAG = "language";
 	private final BaseProducer baseProducer;
 	private Map<String, Object> dataSource = new CaseInsensitiveMap();
 
@@ -66,6 +69,11 @@ public class MapBasedDataMaster implements DataMaster {
 	@Override
 	public String getRandomValue(String key) {
 		return baseProducer.randomElement(getStringList(key));
+	}
+
+	@Override
+	public LanguageCode getLanguage() {
+		return EnumUtils.getEnum(LanguageCode.class, getString(LANGUAGE_TAG).toUpperCase());
 	}
 
 	@SuppressWarnings({"unchecked", "ConstantConditions"}) // checked by checkArgument

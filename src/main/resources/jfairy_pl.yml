@@ -27,4 +27,4 @@ data:
 
   country: ['Polska']
 
-  defaultCountryCode: 'PL'
+  language: 'PL'

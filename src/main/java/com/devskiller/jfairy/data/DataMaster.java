@@ -2,6 +2,8 @@ package com.devskiller.jfairy.data;
 
 import java.util.List;
 
+import com.devskiller.jfairy.producer.util.LanguageCode;
+
 /**
  * @author Olga Maciaszek-Sharma
  * @since 23.04.15
@@ -15,6 +17,8 @@ public interface DataMaster {
 	<T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass);
 
 	String getRandomValue(String key);
+
+	LanguageCode getLanguage();
 
 
 }
