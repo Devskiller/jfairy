@@ -8,6 +8,10 @@ Java fake data generator. Based on Wikipedia:
 
 > Fairyland, in folklore, is the fabulous land or abode of fairies or fays.
 
+## Try jFairy online!
+
+https://devskiller.com/datafairy/
+
 ## Usage
 
 Creating simple objects:
