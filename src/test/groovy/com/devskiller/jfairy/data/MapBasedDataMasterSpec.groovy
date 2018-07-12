@@ -49,7 +49,7 @@ class MapBasedDataMasterSpec extends Specification {
 			String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female", String.class)
 
 		then:
-			female == "Ana" || "Ivon"
+			(female == "Ana") || (female == "Ivon")
 	}
 
 }
