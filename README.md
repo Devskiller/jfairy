@@ -1,4 +1,4 @@
-# jFairy by Codearte
+# jFairy by Devskiller
 
 [![Build Status](https://travis-ci.org/Devskiller/jfairy.svg?branch=master)](https://travis-ci.org/Devskiller/jfairy) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.devskiller/jfairy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.devskiller/jfairy) [![Javadocs](http://www.javadoc.io/badge/com.devskiller/jfairy.svg)](http://www.javadoc.io/doc/com.devskiller/jfairy) [![Coverage Status](https://img.shields.io/coveralls/Devskiller/jfairy.svg)](https://coveralls.io/r/Codearte/jfairy)
 [![Stack Overflow](https://img.shields.io/badge/stack%20overflow-jfairy-4183C4.svg)](https://stackoverflow.com/questions/tagged/jfairy)
@@ -62,7 +62,7 @@ Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
 
 ## Other samples
 
-Look into [code samples](https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/)
+Look into [code samples](https://github.com/Devskiller/jfairy/tree/master/src/test/groovy/snippets/)
 
 ## Building
 
