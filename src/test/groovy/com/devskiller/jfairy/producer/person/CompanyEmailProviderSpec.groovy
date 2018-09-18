@@ -29,4 +29,16 @@ class CompanyEmailProviderSpec extends Specification {
 		then:
 			email == "aaoeaacelnsozz.aaoeaacelnsozz@aaoeaacelnsozz.com"
 	}
+
+	def "should strip sharp s from company email"() {
+		given:
+			Company company = new Company(null, "companymail.com", null, null);
+			CompanyEmailProvider companyEmailProvider = new CompanyEmailProvider("Thieß", "Weißmann", company);
+
+		when:
+			String email = companyEmailProvider.get();
+
+		then:
+			email == "thiess.weissmann@companymail.com"
+	}
 }

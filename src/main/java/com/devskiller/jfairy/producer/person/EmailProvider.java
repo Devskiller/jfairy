@@ -39,6 +39,7 @@ public class EmailProvider implements Provider<String> {
 				prefix = StringUtils.replace(lastName, " ", "");
 				break;
 		}
-		return TextUtils.stripAccents(lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL)));
+		String email = lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL));
+		return TextUtils.stripSharpS(TextUtils.stripAccents(email));
 	}
 }
