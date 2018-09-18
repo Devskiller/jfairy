@@ -21,4 +21,8 @@ public final class TextUtils {
 		return org.apache.commons.lang3.StringUtils.stripAccents(s).replaceAll("ł", "l").replaceAll("Ł", "L");
 	}
 
+	public static String stripSharpS(String s) {
+		return s.replace("\u00DF", "ss");
+	}
+
 }

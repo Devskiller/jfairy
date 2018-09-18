@@ -63,4 +63,16 @@ class EmailProviderSpec extends Specification {
 		then:
 			email == "aaoeaacelnsozz.aaoeaacelnsozz@mail.com"
 	}
+
+	def "should strip sharp s from email"() {
+		given:
+			baseProducer.randomBetween(1, 3) >> 2
+			EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "Thieß", "Weißmann");
+
+		when:
+			String email = emailProvider.get();
+
+		then:
+			email == "thiess.weissmann@mail.com"
+	}
 }
