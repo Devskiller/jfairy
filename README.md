@@ -20,17 +20,17 @@ Creating simple objects:
 Fairy fairy = Fairy.create();
 Person person = fairy.person();
 
-System.out.println(person.fullName());            
+System.out.println(person.getFirstName());            
 // Chloe Barker
-System.out.println(person.email());               
+System.out.println(person.getEmail());               
 // barker@yahoo.com
-System.out.println(person.telephoneNumber());     
+System.out.println(person.getTelephoneNumber());     
 // 690-950-802
 
-Person adultMale = fairy.person(male(), minAge(21));
+Person adultMale = fairy.person(PersonProperties.male(), PersonProperties.minAge(21));
 System.out.println(adultMale.isMale());           
 // true
-System.out.println(adultMale.dateOfBirth());      
+System.out.println(adultMale.getDateOfBirth());      
 // at least 21 years earlier
 ```
 
@@ -39,15 +39,15 @@ Creating related objects:
 ```java
 Fairy fairy = Fairy.create();
 Company company = fairy.company();
-System.out.println(company.name());          
+System.out.println(company.getName());          
 // Robuten Associates
-System.out.println(company.url());           
+System.out.println(company.getUrl());           
 // http://www.robuteniaassociates.com
 
-Person salesman = fairy.person(withCompany(company));
-System.out.println(salesman.fullName());     
+Person salesman = fairy.person(PersonProperties.withCompany(company));
+System.out.println(salesman.getFullName());     
 // Juan Camacho
-System.out.println(salesman.companyEmail()); 
+System.out.println(salesman.getCompanyEmail()); 
 // juan.camacho@robuteniaassociates.com
 ```
 
