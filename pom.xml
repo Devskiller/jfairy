@@ -36,6 +36,10 @@
 			<id>olga.maciaszek</id>
 			<name>Olga Maciaszek-Sharma</name>
 		</developer>
+		<developer>
+			<id>kdebski85</id>
+			<name>Krzysztof Dębski</name>
+		</developer>
 	</developers>
 
 	<scm>
@@ -77,9 +81,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.20</version>
+			<groupId>org.snakeyaml</groupId>
+			<artifactId>snakeyaml-engine</artifactId>
+			<version>2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
