@@ -6,6 +6,7 @@ package com.devskiller.jfairy.data;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -13,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.EnumUtils;
-import org.yaml.snakeyaml.Yaml;
-
+import org.snakeyaml.engine.v2.api.Load;
+import org.snakeyaml.engine.v2.api.LoadSettings;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.util.LanguageCode;
 
@@ -98,33 +99,20 @@ public class MapBasedDataMaster implements DataMaster {
 			throw new IllegalArgumentException(String.format("File %s was not found on classpath", path));
 		}
 
-		Yaml yaml = new Yaml();
+		final LoadSettings loadSettings = LoadSettings.builder().build();
+
 		while (resources.hasMoreElements()) {
-			appendData(yaml.loadAs(resources.nextElement().openStream(), Data.class));
+			final Load load = new Load(loadSettings);
+			final URL url = resources.nextElement();
+			try (InputStream is = url.openStream()) {
+				final Map<String, Object> data = (Map<String, Object>) load.loadFromInputStream(is);
+				appendData(data);
+			}
 		}
 	}
 
-	private void appendData(Data dataMaster) {
-		dataSource.putAll(dataMaster.getData());
-	}
-
-	public static class Data {
-
-		private Map<String, Object> data;
-
-		/**
-		 * This method is used by YAML decoder
-		 *
-		 * @param data fetched from yaml document
-		 */
-		@SuppressWarnings("unused")
-		public void setData(Map<String, Object> data) {
-			this.data = data;
-		}
-
-		private Map<String, Object> getData() {
-			return data;
-		}
+	private void appendData(Map<String, Object> data) {
+		dataSource.putAll(data);
 	}
 
 	private static class CaseInsensitiveMap extends HashMap<String, Object> {
