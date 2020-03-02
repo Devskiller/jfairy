@@ -18,17 +18,17 @@ class EnAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Aster Court"
+			address.street == "Washington Walk"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "157"
+			address.streetNumber == "42"
 	}
 
     def "should generate random apartmentNumber"() {
         expect:
-            address.apartmentNumber == ""
+            address.apartmentNumber == "86"
     }
 
 	def "should generate random postalCode"() {
@@ -43,7 +43,7 @@ class EnAddressSpec extends Specification {
 
 	def "should return addressLine1 in en locale format"() {
 		expect:
-			address.addressLine1 == "157 Aster Court"
+			address.addressLine1 == "42 Washington Walk APT 86"
 	}
 
 	def "should return addressLine2 in en locale format"() {
@@ -53,7 +53,7 @@ class EnAddressSpec extends Specification {
 
 	def "should return address in en locale format"() {
 		expect:
-            address.toString() == "157 Aster Court" + System.lineSeparator() + "San Francisco 86645"
+            address.toString() == "42 Washington Walk APT 86" + System.lineSeparator() + "San Francisco 86645"
 	}
 
 }
