@@ -48,7 +48,8 @@ public class DateProducer {
 	}
 
 	public LocalDate randomDateBetweenTwoDates(LocalDate from, LocalDate to) {
-		return randomDateBetweenTwoDates(from.atStartOfDay(), to.atStartOfDay()).toLocalDate();
+		long epochDay = baseProducer.randomBetween(from.toEpochDay(), to.toEpochDay());
+		return LocalDate.ofEpochDay(epochDay);
 	}
 
 	public LocalDateTime randomDateBetweenTwoDates(LocalDateTime from, LocalDateTime to) {

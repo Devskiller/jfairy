@@ -12,7 +12,7 @@ import com.devskiller.jfairy.producer.person.Person
  * @since 2017/3/2
  */
 class FairyZhSpec extends Specification {
-	private final int SEED = 0
+	private final int SEED = 1
 	private Fairy fairy = Fairy.builder().withRandomSeed(SEED).withLocale(Locale.CHINA).build()
 
 	/********************
@@ -22,7 +22,7 @@ class FairyZhSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.fullName == '正宇 郑'
+		person.fullName == '国富 钱'
 	}
 
 	def "Should create Chinese id card"() {
@@ -43,14 +43,14 @@ class FairyZhSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.addressLine1 == '南京市外环西路85号'
+		person.address.addressLine1 == '杭州市内环路45号'
 	}
 
 	def "Should create Chinese city"() {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.city == '南京'
+		person.address.city == '杭州'
 	}
 
 	/********************
@@ -60,14 +60,14 @@ class FairyZhSpec extends Specification {
 		when:
 		Company company = fairy.company()
 		then:
-		company.name == "数说故事 金融投资有限公司"
+		company.name == "后海金融"
 	}
 
 	def "Should create Chinese company url"() {
 		when:
 		Company company = fairy.company()
 		then:
-		company.url == "http://www.65708BF465.net"
+		company.url == "http://www.540E6D7791.cn"
 	}
 
 	def "Should create Chinese company vat"() {
