@@ -18,12 +18,12 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Trångsund"
+			address.street == "Sandåsgatan"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "70"
+			address.streetNumber == "107"
 	}
 
 	def "should generate random apartmentNumber"() {
@@ -33,27 +33,27 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "915 28"
+			address.postalCode == "745 69"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == "Brätte"
+			address.city == "Lödöse"
 	}
 
 	def "should return addressLine1 in sv locale format"() {
 		expect:
-			address.addressLine1 == "Trångsund 70"
+			address.addressLine1 == "Sandåsgatan 107"
 	}
 
 	def "should return addressLine2 in sv locale format"() {
 		expect:
-			address.addressLine2 == "915 28 Brätte"
+			address.addressLine2 == "745 69 Lödöse"
 	}
 
 	def "should return address in sv locale format"() {
 		expect:
-			address.toString() == "Trångsund 70" + System.lineSeparator() + "915 28 Brätte"
+			address.toString() == "Sandåsgatan 107" + System.lineSeparator() + "745 69 Lödöse"
 	}
 
 }

@@ -212,8 +212,11 @@ public class DefaultPersonProvider implements PersonProvider {
 		if (password != null) {
 			return;
 		}
-		// FIXME: Replace this with baseProducer
-		password = RandomStringUtils.randomAlphanumeric(8);
+		StringBuilder passwordPattern = new StringBuilder();
+		for (int i = baseProducer.randomBetween(6, 14); i > 0; i--) {
+			passwordPattern.append(baseProducer.randomElement("?", "#"));
+		}
+		password = baseProducer.bothify(passwordPattern.toString());
 	}
 
 	@Override

@@ -18,42 +18,42 @@ class DeAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == 'Sautterweg'
+			address.street == 'Sonnenburger Weg'
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == '21'
+			address.streetNumber == '99'
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == '50'
+			address.apartmentNumber == ''
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == '71138'
+			address.postalCode == '98126'
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == 'Maxhütte Haidhof'
+			address.city == 'Wetschen'
 	}
 
 	def "should return addressLine1 in de locale format"() {
 		expect:
-			address.addressLine1 == 'Sautterweg 21, 50'
+			address.addressLine1 == 'Sonnenburger Weg 99'
 	}
 
 	def "should return addressLine2 in de locale format"() {
 		expect:
-			address.addressLine2 == '71138 Maxhütte Haidhof'
+			address.addressLine2 == '98126 Wetschen'
 	}
 
 	def "should return address in de locale format"() {
 		expect:
-			address.toString() == "Sautterweg 21, 50${System.lineSeparator()}71138 Maxhütte Haidhof"
+			address.toString() == "Sonnenburger Weg 99${System.lineSeparator()}98126 Wetschen"
 	}
 
 }
