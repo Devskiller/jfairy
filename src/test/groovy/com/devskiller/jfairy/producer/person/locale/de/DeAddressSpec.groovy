@@ -7,7 +7,7 @@ import com.devskiller.jfairy.producer.person.Address
 
 class DeAddressSpec extends Specification {
 
-	private final int SEED = 8
+	private final int SEED = 7
 	private Fairy fairy;
 	private Address address
 
@@ -18,42 +18,42 @@ class DeAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == 'Sonnenburger Weg'
+			address.street == 'Unter dem Ahorn'
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == '99'
+			address.streetNumber == '19'
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == ''
+			address.apartmentNumber == '277'
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == '98126'
+			address.postalCode == '45692'
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == 'Wetschen'
+			address.city == 'Hainsbach'
 	}
 
 	def "should return addressLine1 in de locale format"() {
 		expect:
-			address.addressLine1 == 'Sonnenburger Weg 99'
+			address.addressLine1 == 'Unter dem Ahorn 19, 277'
 	}
 
 	def "should return addressLine2 in de locale format"() {
 		expect:
-			address.addressLine2 == '98126 Wetschen'
+			address.addressLine2 == '45692 Hainsbach'
 	}
 
 	def "should return address in de locale format"() {
 		expect:
-			address.toString() == "Sonnenburger Weg 99${System.lineSeparator()}98126 Wetschen"
+			address.toString() == "Unter dem Ahorn 19, 277${System.lineSeparator()}45692 Hainsbach"
 	}
 
 }
