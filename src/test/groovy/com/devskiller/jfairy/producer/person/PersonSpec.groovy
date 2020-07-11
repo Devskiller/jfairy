@@ -34,6 +34,7 @@ import static com.devskiller.jfairy.producer.person.PersonProperties.withNationa
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassportNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassword
 import static com.devskiller.jfairy.producer.person.PersonProperties.withTelephoneNumber
+import static com.devskiller.jfairy.producer.person.PersonProperties.withMobileTelephoneNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withUsername
 
 class PersonSpec extends Specification {
@@ -300,6 +301,20 @@ class PersonSpec extends Specification {
 	def "withTelephoneNumberFormat and telephoneFormat used together should create person with specific telephoneNumber"() {
 		when:
 			Person person = fairy.person(telephoneFormat("###--###"), withTelephoneNumber("01234556789"))
+		then:
+			person.telephoneNumber == "01234556789"
+	}
+
+	def "withMobileTelephoneNumber should create person with specific telephoneNumber"() {
+		when:
+			Person person = fairy.person(withMobileTelephoneNumber("01234556789"))
+		then:
+			person.telephoneNumber == "01234556789"
+	}
+
+	def "withMobileTelephoneNumberFormat and mobileTelephoneFormat used together should create person with specific telephoneNumber"() {
+		when:
+			Person person = fairy.person(mobileTelephoneFormat("###--###"), withMobileTelephoneNumber("01234556789"))
 		then:
 			person.telephoneNumber == "01234556789"
 	}
