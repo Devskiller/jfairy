@@ -22,6 +22,7 @@ public class Person {
 	private final String password;
 	private final Sex sex;
 	private final String telephoneNumber;
+	private final String mobileTelephoneNumber;
 	private final LocalDate dateOfBirth;
 	private final Integer age;
 	private final Company company;
@@ -32,9 +33,10 @@ public class Person {
 	private final Country nationality;
 
 	public Person(String firstName, String middleName, String lastName, Address address, String email, String username,
-	              String password, Sex sex, String telephoneNumber, LocalDate dateOfBirth, Integer age,
-	              String nationalIdentityCardNumber, String nationalIdentificationNumber, String passportNumber,
-	              Company company, String companyEmail, Country nationality) {
+	              String password, Sex sex, String telephoneNumber, String mobileTelephoneNumber,
+				  LocalDate dateOfBirth, Integer age, String nationalIdentityCardNumber,
+				  String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail,
+				  Country nationality) {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.address = address;
 		this.firstName = firstName;
@@ -45,6 +47,7 @@ public class Person {
 		this.password = password;
 		this.sex = sex;
 		this.telephoneNumber = telephoneNumber;
+		this.mobileTelephoneNumber = mobileTelephoneNumber;
 		this.dateOfBirth = dateOfBirth;
 		this.age = age;
 		this.nationalIdentificationNumber = nationalIdentificationNumber;
@@ -100,6 +103,10 @@ public class Person {
 
 	public String getTelephoneNumber() {
 		return telephoneNumber;
+	}
+
+	public String getMobileTelephoneNumber() {
+		return mobileTelephoneNumber;
 	}
 
 	public LocalDate getDateOfBirth() {

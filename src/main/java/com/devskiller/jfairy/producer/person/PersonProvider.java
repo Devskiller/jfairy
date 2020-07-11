@@ -39,6 +39,8 @@ public interface PersonProvider extends Provider<Person> {
 
 	void generateTelephoneNumber();
 
+	void generateMobileTelephoneNumber();
+
 	void generateAge();
 
 	void generateDateOfBirth();
@@ -57,6 +59,8 @@ public interface PersonProvider extends Provider<Person> {
 
 	void setTelephoneNumberFormat(String telephoneFormat);
 
+	void setMobileTelephoneNumberFormat(String telephoneFormat);
+
 	void setSex(Person.Sex sex);
 
 	void setAge(int age);
@@ -74,6 +78,8 @@ public interface PersonProvider extends Provider<Person> {
 	void setUsername(String username);
 
 	void setTelephoneNumber(String telephoneNumber);
+
+	void setMobileTelephoneNumber(String telephoneNumber);
 
 	void setDateOfBirth(LocalDate dateOfBirth);
 
