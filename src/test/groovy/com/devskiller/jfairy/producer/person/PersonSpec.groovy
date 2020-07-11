@@ -18,6 +18,7 @@ import static com.devskiller.jfairy.producer.person.PersonProperties.female
 import static com.devskiller.jfairy.producer.person.PersonProperties.male
 import static com.devskiller.jfairy.producer.person.PersonProperties.maxAge
 import static com.devskiller.jfairy.producer.person.PersonProperties.minAge
+import static com.devskiller.jfairy.producer.person.PersonProperties.mobileTelephoneFormat
 import static com.devskiller.jfairy.producer.person.PersonProperties.telephoneFormat
 import static com.devskiller.jfairy.producer.person.PersonProperties.withAddress
 import static com.devskiller.jfairy.producer.person.PersonProperties.withAge
@@ -143,6 +144,20 @@ class PersonSpec extends Specification {
 			Person person = fairy.person(telephoneFormat("###--###"))
 		then:
 			person.telephoneNumber ==~ /\d\d\d--\d\d\d/
+	}
+
+	def "should create mobile telephone number"() {
+		when:
+			Person person = fairy.person()
+		then:
+			person.mobileTelephoneNumber
+	}
+
+	def "should create mobile telephone number in defined format"() {
+		when:
+			Person person = fairy.person(mobileTelephoneFormat("###--###"))
+		then:
+			person.mobileTelephoneNumber ==~ /\d\d\d--\d\d\d/
 	}
 
 	def "should create birth date"() {

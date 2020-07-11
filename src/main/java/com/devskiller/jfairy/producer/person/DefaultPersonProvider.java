@@ -23,6 +23,7 @@ public class DefaultPersonProvider implements PersonProvider {
 
 	protected Person.Sex sex;
 	protected String telephoneNumberFormat;
+	protected String mobileTelephoneNumberFormat;
 	protected Integer age;
 	protected LocalDate dateOfBirth;
 	protected Company company;
@@ -33,6 +34,7 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected String email;
 	protected String username;
 	protected String telephoneNumber;
+	protected String mobileTelephoneNumber;
 	protected String password;
 	protected String companyEmail;
 	protected String nationalIdentityCardNumber;
@@ -97,9 +99,10 @@ public class DefaultPersonProvider implements PersonProvider {
 		generatePassportNumber();
 		generateAddress();
 		generateNationality();
+		generateMobileTelephoneNumber();
 
 		return new Person(firstName, middleName, lastName, address, email,
-			username, password, sex, telephoneNumber, dateOfBirth, age,
+			username, password, sex, telephoneNumber, mobileTelephoneNumber, dateOfBirth, age,
 			nationalIdentityCardNumber, nationalIdentificationNumber, passportNumber,
 			company, companyEmail, nationality);
 	}
@@ -174,6 +177,17 @@ public class DefaultPersonProvider implements PersonProvider {
 			telephoneNumberFormat = dataMaster.getRandomValue(TELEPHONE_NUMBER_FORMATS);
 		}
 		telephoneNumber = baseProducer.numerify(telephoneNumberFormat);
+	}
+
+	@Override
+	public void generateMobileTelephoneNumber() {
+		if (mobileTelephoneNumber != null) {
+			return;
+		}
+		if (mobileTelephoneNumberFormat == null) {
+			mobileTelephoneNumberFormat = dataMaster.getRandomValue(TELEPHONE_NUMBER_FORMATS);
+		}
+		mobileTelephoneNumber = baseProducer.numerify(mobileTelephoneNumberFormat);
 	}
 
 	@Override
@@ -261,6 +275,11 @@ public class DefaultPersonProvider implements PersonProvider {
 	}
 
 	@Override
+	public void setMobileTelephoneNumberFormat(String mobileTelephoneNumberFormat) {
+		this.mobileTelephoneNumberFormat = mobileTelephoneNumberFormat;
+	}
+
+	@Override
 	public void setSex(Person.Sex sex) {
 		this.sex = sex;
 	}
@@ -302,6 +321,11 @@ public class DefaultPersonProvider implements PersonProvider {
 
 	@Override
 	public void setTelephoneNumber(String telephoneNumber) {
+		this.telephoneNumber = telephoneNumber;
+	}
+
+	@Override
+	public void setMobileTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
 	}
 

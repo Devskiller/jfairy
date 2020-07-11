@@ -73,6 +73,15 @@ public final class PersonProperties {
 		};
 	}
 
+	public static PersonProperty mobileTelephoneFormat(final String mobileTelephoneNumberFormat) {
+		return new PersonProperty() {
+			@Override
+			public void apply(PersonProvider person, BaseProducer baseProducer) {
+				person.setMobileTelephoneNumberFormat(mobileTelephoneNumberFormat);
+			}
+		};
+	}
+
 	public static PersonProperty withCompany(final Company company) {
 		return new PersonProperty() {
 			@Override
@@ -141,6 +150,15 @@ public final class PersonProperties {
 			@Override
 			public void apply(PersonProvider personProvider, BaseProducer baseProducer) {
 				personProvider.setTelephoneNumber(telephoneNumber);
+			}
+		};
+	}
+
+	public static PersonProperty withMobileTelephoneNumber(final String mobileTelephoneNumber) {
+		return new PersonProperty() {
+			@Override
+			public void apply(PersonProvider personProvider, BaseProducer baseProducer) {
+				personProvider.setMobileTelephoneNumber(mobileTelephoneNumber);
 			}
 		};
 	}
