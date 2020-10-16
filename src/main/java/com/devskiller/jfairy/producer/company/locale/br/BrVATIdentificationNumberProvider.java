@@ -32,9 +32,7 @@ public class BrVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	@Override
 	public String get() {
-		char[] ein = new char[EIN_LENGTH];
-
-		return valueOf(ein);
+		return cnpj();
 	}
 
 	private int randomiza(int n) {
@@ -46,7 +44,7 @@ public class BrVATIdentificationNumberProvider implements VATIdentificationNumbe
 		return (int) Math.round(dividendo - (Math.floor(dividendo / divisor) * divisor));
 	}
 
-	public String cnpj() {
+	private String cnpj() {
 		int n = 9;
 		int n1 = randomiza(n);
 		int n2 = randomiza(n);
