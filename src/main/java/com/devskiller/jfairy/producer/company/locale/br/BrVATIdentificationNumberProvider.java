@@ -78,7 +78,7 @@ public class BrVATIdentificationNumberProvider implements VATIdentificationNumbe
 	}
 
 	public boolean isValid(String cnpj) {
-		cnpj = cnpj.trim().replace(".", "").replace("-", "");
+		cnpj = cnpj.trim().replace(".", "").replace("/", "").replace("-", "");
 		if ((cnpj==null)||(cnpj.length()!=14)) return false;
 
 		Integer digito1 = calcularDigito(cnpj.substring(0,12), pesoCNPJ);
