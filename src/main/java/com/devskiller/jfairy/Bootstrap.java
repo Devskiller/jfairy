@@ -137,6 +137,8 @@ public class Bootstrap {
 				return new EsFairyModule(dataMaster, randomGenerator);
 			case FR:
 				return new EsFairyModule(dataMaster, randomGenerator);
+			case SK:
+				return new SkFairyModule(dataMaster, randomGenerator);
 			case SV:
 				return new SvFairyModule(dataMaster, randomGenerator);
 			case ZH:
