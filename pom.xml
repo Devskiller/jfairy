@@ -115,6 +115,7 @@
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
 			<version>4.2.0</version>
+			<classifier>no_aop</classifier>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
