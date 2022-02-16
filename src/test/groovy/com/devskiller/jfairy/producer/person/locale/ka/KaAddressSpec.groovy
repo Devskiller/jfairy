@@ -8,7 +8,7 @@ import com.devskiller.jfairy.producer.person.Address
 import static java.lang.System.lineSeparator
 
 class KaAddressSpec extends Specification {
-	private final int SEED = 8
+	private final int SEED = 7
 
 	private Fairy fairy
 	private Address address
@@ -21,41 +21,41 @@ class KaAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-		address.street == "ნინოშვილის ქუჩა"
+		address.street == "ვაჟა–ფშაველას გამზირი"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-		address.streetNumber == "179"
+		address.streetNumber == "79"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-		address.apartmentNumber == ""
+		address.apartmentNumber == "87"
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-		address.postalCode == "6981"
+		address.postalCode == "7681"
 	}
 
 	def "should generate random city"() {
 		expect:
-		address.city == "წყალტუბო"
+		address.city == "ზუგდიდი"
  	}
 
 	def "should return addressLine1 in GE locale format"() {
 		expect:
-		address.addressLine1 == "6981, წყალტუბო"  // ZIP, city
+		address.addressLine1 == "7681, ზუგდიდი"  // ZIP, city
 	}
 
 	def "should return addressLine2 in GE locale format"() {
 		expect:
-		address.addressLine2 == "ნინოშვილის ქუჩა №179"  // street & number & appartment
+		address.addressLine2 == "ვაჟა–ფშაველას გამზირი №79, ბინა 87"  // street & number & appartment
 	}
 
 	def "should return address in GE locale format"() {
 		expect:
-		address.toString() == "6981, წყალტუბო${lineSeparator()}ნინოშვილის ქუჩა №179"
+		address.toString() == "7681, ზუგდიდი${lineSeparator()}ვაჟა–ფშაველას გამზირი №79, ბინა 87"
 	}
 }

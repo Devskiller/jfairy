@@ -74,6 +74,28 @@ class FairySpec extends Specification {
 			!firstPerson.fullName.equals(secondPerson.fullName)
 	}
 
+	def "Second person should have the same password with the same random seed"() {
+		given:
+			Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
+			Fairy secondFairy = Fairy.builder().withRandomSeed(10).build()
+
+			Person firstPerson = firstFairy.person()
+			Person secondPerson = secondFairy.person()
+		expect:
+			firstPerson.getPassword().equals(secondPerson.getPassword())
+	}
+
+	def "Second person should not have the same password with the different random seeds"() {
+		given:
+			Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
+			Fairy secondFairy = Fairy.builder().withRandomSeed(20).build()
+
+			Person firstPerson = firstFairy.person()
+			Person secondPerson = secondFairy.person()
+		expect:
+			!firstPerson.getPassword().equals(secondPerson.getPassword())
+	}
+
 	def "should use default DataMaster when custom not provided"() {
 		given:
 			Fairy fairy = Fairy.create();
