@@ -17,6 +17,7 @@ public enum Country {
 	Georgia("GE", LanguageCode.KA),
 	Italy("IT", LanguageCode.IT),
 	Germany("DE", LanguageCode.DE),
+	Slovak("SK", LanguageCode.SK),
 	Sweden("SE", LanguageCode.SV),
 	China("CN", LanguageCode.ZH);
 
